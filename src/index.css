@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-neu-bg text-gray-700 transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-dark-bg text-gray-200;
+  }
+}
+
+@layer components {
+  /* Neumorphic card */
+  .neu-card {
+    @apply rounded-3xl bg-neu-bg p-6 shadow-neu-flat transition-all duration-300;
+  }
+  .dark .neu-card {
+    @apply bg-dark-surface shadow-neu-dark-flat;
+  }
+
+  /* Raised card (more prominent) */
+  .neu-card-raised {
+    @apply rounded-3xl bg-neu-bg p-8 shadow-neu-raised transition-all duration-300;
+  }
+  .dark .neu-card-raised {
+    @apply bg-dark-surface shadow-neu-dark-raised;
+  }
+
+  /* Pressed/inset card */
+  .neu-card-pressed {
+    @apply rounded-3xl bg-neu-bg p-6 shadow-neu-pressed transition-all duration-300;
+  }
+  .dark .neu-card-pressed {
+    @apply bg-dark-surface shadow-neu-dark-pressed;
+  }
+
+  /* Primary button - neumorphic */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-sage-400 px-7 py-3.5 font-semibold tracking-wide text-white transition-all duration-200;
+    box-shadow: 4px 4px 8px #C8CCD0, -4px -4px 8px #FFFFFF,
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .btn-primary:hover {
+    @apply bg-sage-500;
+    transform: translateY(-1px);
+    box-shadow: 6px 6px 12px #C8CCD0, -6px -6px 12px #FFFFFF,
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.1);
+  }
+  .dark .btn-primary {
+    box-shadow: 4px 4px 8px #14171A, -4px -4px 8px #2E333A;
+  }
+  .dark .btn-primary:hover {
+    box-shadow: 6px 6px 12px #14171A, -6px -6px 12px #2E333A;
+  }
+
+  /* Secondary button - neumorphic outline */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sage-300 bg-neu-bg px-7 py-3.5 font-semibold tracking-wide text-sage-600 shadow-neu-button transition-all duration-200;
+  }
+  .btn-secondary:hover {
+    @apply border-sage-400 bg-sage-50 text-sage-700;
+    transform: translateY(-1px);
+  }
+  .dark .btn-secondary {
+    @apply border-sage-600 bg-dark-surface text-sage-300 shadow-neu-dark-subtle;
+  }
+  .dark .btn-secondary:hover {
+    @apply border-sage-500 bg-dark-elevated text-sage-200;
+  }
+
+  /* Neumorphic input */
+  .input-field {
+    @apply w-full rounded-2xl border-0 bg-neu-bg px-5 py-3.5 text-gray-700 shadow-neu-pressed transition-all duration-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sage-400/40;
+  }
+  .dark .input-field {
+    @apply bg-dark-surface text-gray-200 shadow-neu-dark-pressed placeholder:text-gray-500 focus:ring-sage-400/30;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply px-4 py-16 sm:px-6 md:py-24 lg:px-8;
+  }
+
+  /* Container */
+  .container-main {
+    @apply mx-auto max-w-7xl;
+  }
+
+  /* Washer display panel - LCD look */
+  .washer-display {
+    @apply rounded-2xl border border-washer-chrome/30 bg-washer-display p-5 font-display shadow-neu-pressed;
+  }
+  .dark .washer-display {
+    @apply border-dark-border bg-dark-elevated shadow-neu-dark-pressed;
+  }
+
+  /* Status indicator dot */
+  .status-dot {
+    @apply h-2 w-2 rounded-full bg-sage-400;
+  }
+  .status-dot.active {
+    @apply bg-sage-400 animate-pulse-dot;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-neu-bg;
+}
+.dark ::-webkit-scrollbar-track {
+  @apply bg-dark-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-washer-chrome;
+}
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-dark-border;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neu-deeper;
+}

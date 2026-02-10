@@ -1,0 +1,42 @@
+export const testimonials = [
+  {
+    id: 1,
+    name: "Sarah M.",
+    location: "Toronto, ON",
+    rating: 5,
+    text: "Fantastic service from start to finish! The team arrived on time, set up our new washer and dryer in under an hour, and even showed us how everything works. Highly recommend!",
+    avatar: "https://i.pravatar.cc/150?img=32",
+  },
+  {
+    id: 2,
+    name: "James K.",
+    location: "Mississauga, ON",
+    rating: 5,
+    text: "We were so stressed about getting our laundry room set up in our new home. Pro Appliance Install made it completely painless. Professional, fast, and very reasonably priced.",
+    avatar: "https://i.pravatar.cc/150?img=53",
+  },
+  {
+    id: 3,
+    name: "Priya D.",
+    location: "Markham, ON",
+    rating: 5,
+    text: "Called on Monday, they came on Wednesday. The installers were polite, wore shoe covers, and cleaned up after themselves. My new Samsung set is running perfectly!",
+    avatar: "https://i.pravatar.cc/150?img=47",
+  },
+  {
+    id: 4,
+    name: "Mike T.",
+    location: "Vaughan, ON",
+    rating: 4,
+    text: "Great experience overall. They even took away our old machines. The only reason for 4 stars is the scheduling wait was a bit longer than expected, but the actual install was flawless.",
+    avatar: "https://i.pravatar.cc/150?img=12",
+  },
+  {
+    id: 5,
+    name: "Linda W.",
+    location: "Richmond Hill, ON",
+    rating: 5,
+    text: "I've used other services before but Pro Appliance Install is on another level. They answered all my questions, made sure everything was leveled perfectly, and the price was fair. Will use again!",
+    avatar: "https://i.pravatar.cc/150?img=26",
+  },
+];
