@@ -1,32 +1,34 @@
-import { useEffect } from "react";
 import Header from "./components/Header";
 import Welcome from "./components/Welcome";
-import BookingForm from "./components/BookingForm";
-import Testimonials from "./components/Testimonials";
+import Machines from "./components/Machines";
+import HowItWorks from "./components/HowItWorks";
+import Prices from "./components/Prices";
+import ServiceArea from "./components/ServiceArea";
 import FAQ from "./components/FAQ";
+import BookingForm from "./components/BookingForm";
 import Footer from "./components/Footer";
-import { useDarkMode } from "./hooks/useDarkMode";
-import { useLocalStorage } from "./hooks/useLocalStorage";
+import FloatingCall from "./components/FloatingCall";
 
+// Light theme only. Testimonials stay off the page until there are real customer reviews
+// (src/content/testimonials.js); the dark-mode hook files are kept but unused.
 export default function App() {
-  const [darkMode, toggleDarkMode] = useDarkMode();
-  const [visitCount, setVisitCount] = useLocalStorage("visitCount", 0);
-
-  // Track visits
-  useEffect(() => {
-    setVisitCount((prev) => prev + 1);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
-    <div className="min-h-screen bg-white transition-colors duration-300 dark:bg-gray-900">
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <main>
+    <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <Header />
+      <main id="main">
         <Welcome />
-        <BookingForm />
-        <Testimonials />
+        <Machines />
+        <HowItWorks />
+        <Prices />
+        <ServiceArea />
         <FAQ />
+        <BookingForm />
       </main>
       <Footer />
-    </div>
+      <FloatingCall />
+    </>
   );
 }

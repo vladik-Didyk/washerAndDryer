@@ -1,242 +1,115 @@
-import {
-  ShieldCheck,
-  Clock,
-  Wrench,
-  Truck,
-  ArrowRight,
-  CheckCircle2,
-  Droplets,
-  Wind,
-  PlugZap,
-} from "lucide-react";
+import { Check, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
 
-const features = [
-  {
-    icon: ShieldCheck,
-    title: "Licensed & Insured",
-    description: "Fully insured professionals you can trust with your home.",
-  },
-  {
-    icon: Clock,
-    title: "Same-Week Booking",
-    description: "Quick turnaround — most installs booked within days.",
-  },
-  {
-    icon: Wrench,
-    title: "Expert Hookup",
-    description: "Hoses, vents, leveling, and a full test cycle included.",
-  },
-  {
-    icon: Truck,
-    title: "Old Unit Removal",
-    description: "We can haul away your old machines on the same visit.",
-  },
-];
+const included = ["Repairs included", "Old machine haul-away included"];
 
-const checklist = [
-  { text: "Water hose connection", icon: Droplets },
-  { text: "Drain hose placement", icon: Droplets },
-  { text: "Dryer vent attachment", icon: Wind },
-  { text: "Machine leveling", icon: Wrench },
-  { text: "Full test cycle", icon: PlugZap },
-  { text: "Usage walkthrough", icon: CheckCircle2 },
-];
-
-/* Animated washer drum SVG */
-function WasherDrum() {
-  return (
-    <div className="relative mx-auto h-64 w-64 sm:h-80 sm:w-80">
-      {/* Outer shell - neumorphic */}
-      <div className="absolute inset-0 rounded-full bg-neu-bg shadow-neu-raised dark:bg-dark-surface dark:shadow-neu-dark-raised" />
-      {/* Chrome ring */}
-      <div className="absolute inset-3 rounded-full bg-gradient-to-br from-washer-chrome to-neu-dark dark:from-dark-border dark:to-dark-bg" />
-      {/* Glass door */}
-      <div className="absolute inset-6 rounded-full bg-gradient-to-br from-washer-display via-washer-glass to-washer-display shadow-neu-pressed dark:from-dark-elevated dark:via-dark-surface dark:to-dark-elevated dark:shadow-neu-dark-pressed">
-        {/* Inner drum pattern */}
-        <div className="absolute inset-4 flex items-center justify-center rounded-full">
-          <div className="animate-drum-spin">
-            {/* Drum holes pattern */}
-            <svg viewBox="0 0 100 100" className="h-32 w-32 sm:h-40 sm:w-40 text-sage-400/30 dark:text-sage-400/20">
-              <circle cx="50" cy="15" r="3" fill="currentColor" />
-              <circle cx="85" cy="50" r="3" fill="currentColor" />
-              <circle cx="50" cy="85" r="3" fill="currentColor" />
-              <circle cx="15" cy="50" r="3" fill="currentColor" />
-              <circle cx="73" cy="23" r="2.5" fill="currentColor" />
-              <circle cx="77" cy="73" r="2.5" fill="currentColor" />
-              <circle cx="27" cy="77" r="2.5" fill="currentColor" />
-              <circle cx="23" cy="27" r="2.5" fill="currentColor" />
-              <circle cx="50" cy="35" r="2" fill="currentColor" />
-              <circle cx="65" cy="50" r="2" fill="currentColor" />
-              <circle cx="50" cy="65" r="2" fill="currentColor" />
-              <circle cx="35" cy="50" r="2" fill="currentColor" />
-            </svg>
-          </div>
-        </div>
-      </div>
-      {/* Power indicator */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2">
-        <div className="h-2 w-2 rounded-full bg-sage-400 shadow-[0_0_6px_2px_rgba(107,154,107,0.5)] animate-pulse-dot" />
-      </div>
-    </div>
-  );
-}
-
-/* Washer control panel display */
-function ControlPanel() {
-  return (
-    <div className="washer-display">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-sage-400 animate-pulse-dot" />
-          <span className="text-[10px] font-medium tracking-widest text-gray-400 uppercase">
-            Power
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-washer-chrome" />
-          <span className="text-[10px] font-medium tracking-widest text-gray-400 uppercase">
-            Ready
-          </span>
-        </div>
-      </div>
-      <div className="flex items-baseline justify-center gap-2 py-3">
-        <span className="font-display text-4xl font-bold tracking-wider text-gray-600 dark:text-gray-300">
-          500+
-        </span>
-        <span className="text-xs font-medium text-gray-400">installs</span>
-      </div>
-      <div className="mt-2 grid grid-cols-3 gap-3 border-t border-washer-chrome/20 pt-3 dark:border-dark-border">
-        <div className="text-center">
-          <p className="font-display text-sm font-semibold text-gray-600 dark:text-gray-300">24h</p>
-          <p className="text-[10px] text-gray-400">Response</p>
-        </div>
-        <div className="text-center">
-          <p className="font-display text-sm font-semibold text-gray-600 dark:text-gray-300">GTA</p>
-          <p className="text-[10px] text-gray-400">Coverage</p>
-        </div>
-        <div className="text-center">
-          <p className="font-display text-sm font-semibold text-gray-600 dark:text-gray-300">4.9</p>
-          <p className="text-[10px] text-gray-400">Rating</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+// Hero: the monthly price is the headline fact; the drawing shows the usual condo-closet machine.
 export default function Welcome() {
+  const { phone, prices } = siteConfig;
+
   return (
-    <section id="home" className="relative overflow-hidden">
-      {/* Hero */}
-      <div className="relative bg-neu-bg dark:bg-dark-bg">
-        <div className="container-main relative px-4 pt-28 pb-16 sm:px-6 md:pt-36 md:pb-24 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left: Content */}
-            <div className="text-center lg:text-left">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-sage-50 px-4 py-2 text-sm font-medium text-sage-600 shadow-neu-subtle dark:bg-dark-elevated dark:text-sage-300 dark:shadow-neu-dark-subtle">
-                <div className="h-1.5 w-1.5 rounded-full bg-sage-400 animate-pulse-dot" />
-                Trusted by 500+ GTA homeowners
-              </div>
+    <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
+      <div className="container-page grid items-center gap-12 pb-16 pt-10 sm:pt-14 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-16">
+        <div className="lg:col-span-7">
+          <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
+            <MapPin className="h-4 w-4" aria-hidden="true" />
+            Toronto &amp; the GTA
+          </p>
+          <h1
+            id="hero-title"
+            className="mt-3 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-tight text-ink sm:text-[3.25rem] lg:text-[3.5rem]"
+          >
+            Washer &amp; dryer rental
+          </h1>
 
-              <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-800 dark:text-white sm:text-5xl md:text-6xl">
-                Professional{" "}
-                <span className="text-sage-400">Washer & Dryer</span>{" "}
-                Installation
-              </h1>
-
-              <p className="mb-10 text-lg leading-relaxed text-gray-500 dark:text-gray-400 sm:text-xl">
-                We deliver, connect, level, and test your new washer and dryer —
-                so you don&apos;t have to lift a finger. Serving{" "}
-                {siteConfig.serviceAreas.slice(0, 3).join(", ")} and more across
-                the GTA.
-              </p>
-
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-                <a href="#booking" className="btn-primary text-lg">
-                  Book Installation
-                  <ArrowRight className="h-5 w-5" />
-                </a>
-                <a href="#faq" className="btn-secondary text-lg">
-                  How It Works
-                </a>
-              </div>
-
-              {/* Control Panel - visible under hero text */}
-              <div className="mt-12 hidden lg:block">
-                <ControlPanel />
-              </div>
+          <div className="mt-5 sm:mt-7">
+            <p className="sr-only">
+              ${prices.set} a month for the set, or ${prices.single} a month for
+              one machine.
+            </p>
+            {/* Price tag: small "$", big figure, label hung from the top of the digits. */}
+            <div
+              aria-hidden="true"
+              className="flex items-start font-display text-[7rem] font-extrabold leading-none text-brand sm:text-[9rem]"
+            >
+              <span className="mt-[0.34em] text-[0.36em] leading-none">$</span>
+              <span className="tracking-[-0.05em]">{prices.set}</span>
+              <span className="ml-[0.55em] mt-[0.7em] flex flex-col text-[0.165em] font-bold leading-[1.15] text-ink">
+                <span>a month</span>
+                <span>for the set</span>
+              </span>
             </div>
-
-            {/* Right: Washer Drum Visual */}
-            <div className="flex flex-col items-center gap-8">
-              <WasherDrum />
-              {/* Mobile control panel */}
-              <div className="w-full max-w-xs lg:hidden">
-                <ControlPanel />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Features */}
-      <div id="services" className="section-padding bg-neu-bg dark:bg-dark-bg">
-        <div className="container-main">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 font-display text-2xl font-bold tracking-wide text-gray-800 uppercase dark:text-white sm:text-3xl">
-              Why Choose Us
-            </h2>
-            <p className="mx-auto max-w-2xl text-gray-500 dark:text-gray-400">
-              Everything you need for a hassle-free washer & dryer installation.
+            <p aria-hidden="true" className="mt-3 text-lg text-ink-soft sm:text-xl">
+              or{" "}
+              <span className="font-semibold text-ink">
+                ${prices.single} a month
+              </span>{" "}
+              for one machine
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature) => (
-              <div
-                key={feature.title}
-                className="neu-card group cursor-default hover:shadow-neu-raised dark:hover:shadow-neu-dark-raised"
+          <ul className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-7">
+            {included.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-2.5 font-semibold text-ink"
               >
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sage-50 text-sage-400 shadow-neu-subtle transition-all group-hover:bg-sage-400 group-hover:text-white group-hover:shadow-none dark:bg-dark-elevated dark:shadow-neu-dark-subtle dark:group-hover:bg-sage-500">
-                  <feature.icon className="h-5 w-5" strokeWidth={1.5} />
-                </div>
-                <h3 className="mb-2 text-base font-semibold text-gray-800 dark:text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                  {feature.description}
-                </p>
-              </div>
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold">
+                  <Check
+                    className="h-4 w-4 text-brand-dark"
+                    strokeWidth={3}
+                    aria-hidden="true"
+                  />
+                </span>
+                {item}
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* Checklist */}
-          <div className="neu-card-raised mt-16">
-            <div className="grid items-center gap-8 md:grid-cols-2">
-              <div>
-                <h3 className="mb-4 font-display text-xl font-bold tracking-wide text-gray-800 uppercase dark:text-white">
-                  Every Install Includes
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400">
-                  Every installation comes with a complete setup so your
-                  machines are ready to use the moment we leave.
-                </p>
+          <p className="mt-4 text-ink-soft">
+            No credit check · Same-week delivery · English &amp; Spanish
+          </p>
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href="#request" className="btn btn-primary">
+              Check availability
+            </a>
+            <a href={phone.tel} className="btn btn-secondary">
+              <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
+              Call or text {phone.display}
+            </a>
+          </div>
+        </div>
+
+        <div className="lg:col-span-5">
+          <div className="relative mx-auto w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-none">
+            <div className="relative aspect-square">
+              <div
+                aria-hidden="true"
+                className="absolute inset-[7%] rounded-full bg-gold motion-safe:animate-disc-in"
+              />
+              <div className="absolute inset-0 flex justify-center motion-safe:animate-rise-in">
+                <img
+                  src={`${import.meta.env.BASE_URL}types/one-piece.svg`}
+                  alt="Drawing of a one-piece laundry centre, 24″ or 27″ wide: a dryer above a top-load washer in one cabinet"
+                  width="400"
+                  height="480"
+                  fetchPriority="high"
+                  className="h-full w-auto"
+                />
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {checklist.map(({ text, icon: Icon }) => (
-                  <div
-                    key={text}
-                    className="flex items-center gap-3 rounded-xl p-2"
-                  >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sage-50 text-sage-400 dark:bg-dark-elevated">
-                      <Icon className="h-4 w-4" strokeWidth={1.5} />
-                    </div>
-                    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                      {text}
-                    </span>
-                  </div>
-                ))}
+            </div>
+            {/* Width callout under the machine, drawn like a dimension line. */}
+            <div
+              aria-hidden="true"
+              className="mx-auto mt-1 w-[41.7%] motion-safe:animate-fade-in"
+            >
+              <div className="relative h-3.5 border-x-2 border-brand">
+                <div className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 bg-brand" />
               </div>
+              <p className="mt-2 whitespace-nowrap text-center font-display text-sm font-semibold text-brand">
+                24″ or 27″ wide
+              </p>
             </div>
           </div>
         </div>

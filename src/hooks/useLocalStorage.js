@@ -1,12 +1,16 @@
 import { useState, useCallback } from "react";
 
+// initialValue may be a value or a function that returns one (like useState).
+const resolveInitial = (initialValue) =>
+  initialValue instanceof Function ? initialValue() : initialValue;
+
 export function useLocalStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      return item ? JSON.parse(item) : resolveInitial(initialValue);
     } catch {
-      return initialValue;
+      return resolveInitial(initialValue);
     }
   });
 
@@ -28,7 +32,7 @@ export function useLocalStorage(key, initialValue) {
   const removeValue = useCallback(() => {
     try {
       window.localStorage.removeItem(key);
-      setStoredValue(initialValue);
+      setStoredValue(resolveInitial(initialValue));
     } catch {
       // Storage unavailable
     }

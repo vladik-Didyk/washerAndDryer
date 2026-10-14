@@ -1,12 +1,10 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# NOT the real deploy. deploy.yml builds the site (pnpm build) and deploys dist/ on every push to main.
+# This workflow uploads the repository as-is, without building, so it would publish a broken site.
+# It used to run on push too and raced deploy.yml; it now runs only when started by hand.
+name: Deploy static content to Pages (manual only, unbuilt)
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  # Manual runs only, from the Actions tab
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages

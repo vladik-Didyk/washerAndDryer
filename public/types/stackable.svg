@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="480" viewBox="0 0 400 480" fill="none">
+<title>Stackable pair: front-load washer with the dryer stacked on top</title>
+<ellipse cx="200" cy="453" rx="118" ry="7" fill="#0B5B47" fill-opacity="0.12"/>
+<rect x="118" y="442" width="22" height="10" rx="3" fill="#0B5B47"/>
+<rect x="260" y="442" width="22" height="10" rx="3" fill="#0B5B47"/>
+<path d="M112 248 H288 A12 12 0 0 1 300 260 V432 A12 12 0 0 1 288 444 H112 A12 12 0 0 1 100 432 V260 A12 12 0 0 1 112 248 Z" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6" stroke-linejoin="round"/>
+<path d="M100 294H300" fill="none" stroke="#0B5B47" stroke-width="5" stroke-linecap="round"/>
+<rect x="114" y="260" width="58" height="22" rx="5" fill="#FFFFFF" stroke="#0B5B47" stroke-width="4"/>
+<circle cx="226" cy="271" r="4" fill="#0B5B47"/>
+<circle cx="242" cy="271" r="4" fill="#0B5B47"/>
+<circle cx="270" cy="271" r="12" fill="#F2B33D" stroke="#0B5B47" stroke-width="4"/>
+<path d="M270 271V263" stroke="#0B5B47" stroke-width="4" stroke-linecap="round"/>
+<circle cx="200" cy="369" r="57" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6"/>
+<circle cx="200" cy="369" r="48" fill="none" stroke="#F2B33D" stroke-width="7"/>
+<circle cx="200" cy="369" r="38" fill="#DDECE5"/>
+<path d="M162.3 373.6Q171.7 363.6 181.1 373.6Q190.6 383.6 200 373.6Q209.4 363.6 218.9 373.6Q228.3 383.6 237.7 373.6A38 38 0 0 1 162.3 373.6Z" fill="#BFDACD"/>
+<circle cx="200" cy="369" r="38" fill="none" stroke="#0B5B47" stroke-width="4"/>
+<path d="M172.7 359.1A29 29 0 0 1 187.7 342.7" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+<path d="M100 42L112 20H288L300 42Z" fill="#DDECE5" stroke="#0B5B47" stroke-width="6" stroke-linejoin="round"/>
+<path d="M100 42 H300  V226 A12 12 0 0 1 288 238 H112 A12 12 0 0 1 100 226 V42  Z" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6" stroke-linejoin="round"/>
+<path d="M100 88H300" fill="none" stroke="#0B5B47" stroke-width="5" stroke-linecap="round"/>
+<rect x="114" y="56" width="50" height="18" rx="4" fill="#DDECE5" stroke="#0B5B47" stroke-width="4"/>
+<circle cx="226" cy="65" r="4" fill="#0B5B47"/>
+<circle cx="242" cy="65" r="4" fill="#0B5B47"/>
+<circle cx="270" cy="65" r="12" fill="#F2B33D" stroke="#0B5B47" stroke-width="4"/>
+<path d="M270 65V57" stroke="#0B5B47" stroke-width="4" stroke-linecap="round"/>
+<circle cx="200" cy="163" r="57" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6"/>
+<circle cx="200" cy="163" r="48" fill="none" stroke="#F2B33D" stroke-width="7"/>
+<circle cx="200" cy="163" r="38" fill="#DDECE5"/>
+<circle cx="200" cy="163" r="38" fill="none" stroke="#0B5B47" stroke-width="4"/>
+<path d="M172.7 153.1A29 29 0 0 1 187.7 136.7" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+</svg>

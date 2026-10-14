@@ -1,77 +1,69 @@
 export const faqs = [
   {
-    question: "What do I need before you bring the washer and dryer?",
+    question: "What do I need in my laundry space?",
     answer:
-      "You need finished water hookups, a drain for the washer, a dryer vent to outside, and working electrical outlets already installed by pros.",
+      "Water hookups (hot and cold), a drain, and the right outlet. Most electric dryers need a 240V outlet, 3- or 4-prong. A vented dryer also needs a vent to the outside. Send us a photo and we'll check.",
   },
   {
-    question: "What voltage does the dryer outlet need?",
+    question: "Is there a deposit?",
     answer:
-      "An electric dryer needs a special 240-volt outlet on its own breaker.",
+      "Yes, $200. You get it back when the machine comes back in working condition.",
   },
   {
-    question: "What voltage does the washer outlet need?",
+    question: "How long is the rental?",
     answer:
-      "The washer uses a normal home outlet: 120 volts on its own circuit.",
+      "12 months minimum. After that it continues month to month, and either side can end it with 30 days' notice. We pick the machine up.",
   },
   {
-    question: "Do you install or fix electrical outlets?",
+    question: "What if the machine breaks?",
     answer:
-      "No. An electrician must install or repair all outlets and wiring.",
+      "Call or text us. We arrange a repair or a replacement machine at no charge.",
   },
   {
-    question: "Do you install or fix plumbing pipes?",
+    question: "How much are delivery and installation?",
     answer:
-      "No. A plumber must install all valves, pipes, and drains in the wall.",
+      "We quote it before you pay. It depends on the distance, the floor, stairs or elevator, and the hookups.",
   },
   {
-    question: "What exactly will your team do on delivery day?",
-    answer:
-      "We bring the machines, put them in place, hook up hoses and vent, plug them in, level them, and run a test cycle.",
+    question: "Do you take my old machine?",
+    answer: "Yes, at no charge, when we deliver yours.",
   },
   {
-    question: "Do you connect the water for the washer?",
+    question: "Are the machines new?",
     answer:
-      "Yes. We connect the hot and cold hoses to the valves that are already there.",
+      "No. They are pre-owned machines in good working order. Each one is checked before it goes out.",
   },
   {
-    question: "Do you connect the drain for the washer?",
+    question: "Which brands do you have?",
     answer:
-      "Yes. We place the drain hose into the standpipe or drain opening that's already installed.",
+      "Whatever fits your space and is available: GE, Whirlpool, Samsung, LG, Frigidaire, Maytag, Kenmore and others.",
   },
   {
-    question: "Do you connect the dryer vent?",
+    question: "How soon can you deliver?",
     answer:
-      "Yes. We attach the dryer vent hose from the dryer to your existing wall vent.",
+      "Usually the same week. We confirm the date when we send the quote.",
   },
   {
-    question: "Can you run new wires or add new breakers?",
-    answer:
-      "No. Any new wiring or breakers must be done by a licensed electrician.",
+    question: "Do you check credit?",
+    answer: "No. There is no credit check.",
   },
   {
-    question: "Can you add new pipes or move the taps?",
-    answer:
-      "No. Any new pipes, taps, or drain changes must be done by a licensed plumber.",
+    question: "Do you speak Spanish?",
+    answer: "Yes. We speak English and Spanish.",
   },
   {
-    question: "Can you take away my old washer and dryer?",
+    question: "Do you have a referral offer?",
     answer:
-      "Yes, we can remove the old units if you ask when you book. Extra fees may apply.",
+      "Yes. Refer a friend who signs up for 12 months or more and you get $100.",
   },
   {
-    question: "Will you show me how to use the machines?",
+    question: "Can you deliver to a condo?",
     answer:
-      "Yes. We quickly explain the main buttons and how to run a normal load.",
+      "Yes. Tell us the closet size and whether the building has a service elevator, and we plan the delivery.",
   },
   {
-    question: "What if my hookups are not finished when you arrive?",
+    question: "How do I pay?",
     answer:
-      "If plumbing or electrical work is not done, we can't install the machines and you'll need to reschedule after a plumber/electrician finishes.",
-  },
-  {
-    question: "Who should I call to get the space ready?",
-    answer:
-      "Call a licensed electrician for outlets and power, and a licensed plumber for water lines and drains. After they're done, call us to deliver and hook up the machines.",
+      "By e-Transfer or card. Monthly rent can be charged to your card automatically.",
   },
 ];

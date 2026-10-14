@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="480" viewBox="0 0 400 480" fill="none">
+<title>One-piece laundry centre: dryer above a top-load washer in one cabinet</title>
+<ellipse cx="200" cy="453" rx="118" ry="7" fill="#0B5B47" fill-opacity="0.12"/>
+<rect x="118" y="442" width="22" height="10" rx="3" fill="#0B5B47"/>
+<rect x="260" y="442" width="22" height="10" rx="3" fill="#0B5B47"/>
+<path d="M100 42L112 20H288L300 42Z" fill="#DDECE5" stroke="#0B5B47" stroke-width="6" stroke-linejoin="round"/>
+<path d="M100 42 H300  V432 A12 12 0 0 1 288 444 H112 A12 12 0 0 1 100 432 V42  Z" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6" stroke-linejoin="round"/>
+<path d="M100 92H300" fill="none" stroke="#0B5B47" stroke-width="5" stroke-linecap="round"/>
+<circle cx="130" cy="67" r="12" fill="#F2B33D" stroke="#0B5B47" stroke-width="4"/>
+<path d="M130 67V59" stroke="#0B5B47" stroke-width="4" stroke-linecap="round"/>
+<rect x="172" y="58" width="56" height="18" rx="4" fill="#DDECE5" stroke="#0B5B47" stroke-width="4"/>
+<circle cx="270" cy="67" r="12" fill="#F2B33D" stroke="#0B5B47" stroke-width="4"/>
+<path d="M270 67V59" stroke="#0B5B47" stroke-width="4" stroke-linecap="round"/>
+<rect x="120" y="106" width="160" height="140" rx="20" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6"/>
+<rect x="136" y="121" width="128" height="100" rx="13" fill="#DDECE5" stroke="#0B5B47" stroke-width="4"/>
+<path d="M150 155L168 137M150 175L188 137" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+<rect x="182" y="229" width="36" height="8" rx="4" fill="#F2B33D" stroke="#0B5B47" stroke-width="3"/>
+<rect x="118" y="262" width="164" height="50" rx="10" fill="#BFDACD" stroke="#0B5B47" stroke-width="5"/>
+<path d="M130 302L144 274H256L270 302Z" fill="#FFFFFF" stroke="#0B5B47" stroke-width="4" stroke-linejoin="round"/>
+<rect x="182" y="298" width="36" height="8" rx="4" fill="#F2B33D" stroke="#0B5B47" stroke-width="3"/>
+<path d="M116 418H284" fill="none" stroke="#0B5B47" stroke-width="4" stroke-linecap="round"/>
+</svg>

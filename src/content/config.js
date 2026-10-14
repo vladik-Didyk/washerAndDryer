@@ -1,28 +1,40 @@
+// Business facts used across the site. Change them here, not in the components.
+// Only verified facts belong in this file: no invented numbers, claims or reviews.
 export const siteConfig = {
-  companyName: "Pro Appliance Install",
-  tagline: "Professional Washer & Dryer Installation",
-  phone: "(416) 555-0100",
-  email: "info@proapplianceinstall.com",
+  companyName: "GTA Washer & Dryer Rentals",
+  tagline: "Washer & dryer rental in Toronto & the GTA",
+  location: "Toronto · serving the GTA",
+  phone: {
+    display: "(437) 907-6955",
+    tel: "tel:+14379076955",
+    sms: "sms:+14379076955",
+  },
+  hours: [
+    { days: "Mon–Sat", time: "9 am – 7 pm" },
+    { days: "Sunday", time: "Closed" },
+  ],
+  facebook: "https://www.facebook.com/profile.php?id=61588384887072",
+  prices: {
+    set: 50, // washer + dryer set, per month
+    single: 25, // one machine, per month
+    deposit: 200, // refundable
+  },
   serviceAreas: [
-    "Toronto",
-    "Mississauga",
-    "Markham",
-    "Vaughan",
-    "Richmond Hill",
-    "Brampton",
+    {
+      name: "Toronto",
+      districts: ["North York", "Etobicoke", "Scarborough", "East York", "York"],
+    },
+    { name: "Mississauga" },
+    { name: "Brampton" },
+    { name: "Vaughan" },
+    { name: "Markham" },
+    { name: "Richmond Hill" },
   ],
   web3formsKey: "b1731368-a27c-491d-a5a3-c3783ebd926c",
-  socialLinks: {
-    facebook: "#",
-    instagram: "#",
-    twitter: "#",
-  },
   navigation: [
-    { label: "Home", href: "#home" },
-    { label: "Services", href: "#services" },
-    { label: "Book Now", href: "#booking" },
-    { label: "Testimonials", href: "#testimonials" },
+    { label: "Machines", href: "#machines" },
+    { label: "Prices", href: "#prices" },
+    { label: "How it works", href: "#how" },
     { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
   ],
 };

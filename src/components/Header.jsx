@@ -1,107 +1,124 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon, WashingMachine } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Menu, MessageSquare, Phone, X } from "lucide-react";
 import { siteConfig } from "../content/config";
+import Logo from "./Logo";
 
-export default function Header({ darkMode, toggleDarkMode }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const { phone, navigation } = siteConfig;
 
+  // Close the mobile menu on Escape, and when the window grows to the desktop layout.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth >= 768) setMobileOpen(false);
+    if (!menuOpen) return undefined;
+    const onKey = (event) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      menuButtonRef.current?.focus(); // focus would otherwise be lost inside the hidden menu
     };
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [menuOpen]);
 
-  const handleNavClick = () => setMobileOpen(false);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-neu-bg/80 shadow-neu-subtle backdrop-blur-xl dark:bg-dark-bg/80 dark:shadow-neu-dark-subtle"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="container-main flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Logo */}
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md">
+      <div className="container-page flex h-[4.5rem] items-center justify-between gap-4">
         <a
-          href="#home"
-          className="flex items-center gap-2.5"
-          aria-label={`${siteConfig.companyName} - Home`}
+          href="#top"
+          onClick={closeMenu}
+          className="flex min-w-0 items-center gap-3 rounded-xl"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sage-400 shadow-neu-subtle dark:shadow-neu-dark-subtle">
-            <WashingMachine className="h-5 w-5 text-white" />
-          </div>
-          <span className="hidden font-display text-sm font-semibold tracking-wider text-gray-700 uppercase dark:text-gray-200 sm:inline">
-            {siteConfig.companyName}
+          <Logo className="h-11 w-11" />
+          {/* The logo's alt text already names the business for screen readers. */}
+          <span
+            aria-hidden="true"
+            className="hidden font-display text-[1.0625rem] font-bold leading-tight tracking-tight text-ink sm:block"
+          >
+            GTA Washer &amp; Dryer Rentals
           </span>
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden items-center gap-1 md:flex">
-          {siteConfig.navigation.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="rounded-xl px-4 py-2 text-sm font-medium text-gray-500 transition-all hover:bg-neu-dark/30 hover:text-sage-600 dark:text-gray-400 dark:hover:bg-dark-elevated dark:hover:text-sage-300"
-            >
-              {link.label}
-            </a>
-          ))}
-          <button
-            onClick={toggleDarkMode}
-            className="ml-2 rounded-xl p-2.5 text-gray-500 shadow-neu-subtle transition-all hover:shadow-neu-pressed dark:text-gray-400 dark:shadow-neu-dark-subtle dark:hover:shadow-neu-dark-pressed"
-            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </button>
-        </div>
-
-        {/* Mobile Controls */}
-        <div className="flex items-center gap-2 md:hidden">
-          <button
-            onClick={toggleDarkMode}
-            className="rounded-xl p-2.5 text-gray-500 shadow-neu-subtle dark:text-gray-400 dark:shadow-neu-dark-subtle"
-            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </button>
-          <button
-            onClick={() => setMobileOpen((v) => !v)}
-            className="rounded-xl p-2.5 text-gray-500 shadow-neu-subtle dark:text-gray-400 dark:shadow-neu-dark-subtle"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="animate-slide-down bg-neu-bg dark:bg-dark-surface md:hidden">
-          <div className="flex flex-col gap-1 px-4 py-4">
-            {siteConfig.navigation.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={handleNavClick}
-                className="rounded-xl px-4 py-3 text-sm font-medium text-gray-600 transition-all hover:bg-neu-dark/30 hover:text-sage-600 dark:text-gray-300 dark:hover:bg-dark-elevated dark:hover:text-sage-300"
-              >
-                {link.label}
-              </a>
+        <nav aria-label="Main" className="hidden lg:block">
+          <ul className="flex items-center gap-1">
+            {navigation.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="rounded-full px-4 py-2 text-[15px] font-medium text-ink-soft transition-colors hover:bg-brand-mint hover:text-brand-dark"
+                >
+                  {link.label}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
+        </nav>
+
+        <div className="flex shrink-0 items-center gap-2">
+          <a href={phone.tel} className="btn btn-primary hidden md:inline-flex">
+            <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
+            Call {phone.display}
+          </a>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink transition-colors hover:bg-brand-mint lg:hidden"
+          >
+            {menuOpen ? (
+              <X className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            )}
+          </button>
         </div>
-      )}
+      </div>
+
+      <div
+        id="mobile-menu"
+        hidden={!menuOpen}
+        className="border-t border-line bg-paper lg:hidden"
+      >
+        <nav aria-label="Main" className="container-page py-3">
+          <ul>
+            {navigation.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={closeMenu}
+                  className="block border-b border-line py-3.5 font-display text-lg font-semibold text-ink transition-colors hover:text-brand"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="grid grid-cols-2 gap-3 pb-3 pt-5">
+            <a href={phone.tel} className="btn btn-primary">
+              <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
+              Call
+            </a>
+            <a href={phone.sms} className="btn btn-secondary">
+              <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
+              Text
+            </a>
+          </div>
+          <p className="pb-2 text-center text-sm text-ink-muted">
+            {phone.display}, Mon–Sat 9 am – 7 pm
+          </p>
+        </nav>
+      </div>
     </header>
   );
 }
