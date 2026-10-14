@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vladik-didyk.github.io/washerAndDryer/sitemap.xml
+Sitemap: https://washerrent.com/sitemap.xml
