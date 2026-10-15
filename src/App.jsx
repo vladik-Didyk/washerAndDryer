@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Welcome from "./components/Welcome";
 import Machines from "./components/Machines";
 import HowItWorks from "./components/HowItWorks";
+import InstallVideos from "./components/InstallVideos";
 import Prices from "./components/Prices";
 import ServiceArea from "./components/ServiceArea";
 import FAQ from "./components/FAQ";
@@ -22,6 +23,7 @@ export default function App() {
         <Welcome />
         <Machines />
         <HowItWorks />
+        <InstallVideos />
         <Prices />
         <ServiceArea />
         <FAQ />
