@@ -1,35 +1,28 @@
 import { Form, useNavigation } from "react-router";
-import { useI18n } from "~/shared/i18n";
-import type { FormActionData } from "~/shared/lib";
+import { pagePaths } from "~/shared/config";
 import {
-  ChoiceTiles,
+  FormFields,
   Honeypot,
   RequiredNote,
-  SelectField,
   SendError,
   SentPanel,
   SubmitButton,
-  TextAreaField,
-  TextField,
-} from "~/shared/ui";
-import { emptyLandlordQuote, quoteChoices, type LandlordQuoteValues } from "./model";
+  emptyValues,
+  type FormActionData,
+} from "~/shared/forms";
+import { useI18n } from "~/shared/i18n";
 
-// Landlord quote request. A plain form posted to the page's server action, so it works with
-// JavaScript off; with JavaScript on, React Router submits it without a page reload.
-export function LandlordQuoteForm({ result }: { result?: FormActionData<LandlordQuoteValues> }) {
-  const navigation = useNavigation();
-  const sending = navigation.state === "submitting";
+// Landlord quote request: the fields of the "landlordQuote" form (shared/forms registry),
+// posted to the page's server action, so it works with JavaScript off; with JavaScript on,
+// React Router submits it without a page reload.
+export function LandlordQuoteForm({ result }: { result?: FormActionData }) {
+  const sending = useNavigation().state === "submitting";
   const i18n = useI18n();
-  const { forms, landlords } = i18n.d;
-  const { quote } = landlords;
-  const choices = quoteChoices(i18n);
+  const { quote } = i18n.d.landlords;
 
   if (result?.status === "sent") {
-    return <SentPanel title={quote.sent} resetHref="/landlords/quote/#landlord-quote" />;
+    return <SentPanel title={quote.sent} resetHref={`${pagePaths.landlordQuote}#landlord-quote`} />;
   }
-
-  const values = result ? result.values : emptyLandlordQuote(i18n);
-  const errors = result?.status === "invalid" ? result.errors : {};
 
   return (
     <Form
@@ -46,80 +39,10 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData<Landlord
       </div>
 
       <div className="mt-5 grid gap-5 sm:grid-cols-2">
-        <TextField id="quote-name" name="name" label={forms.name} required autoComplete="name" defaultValue={values.name} error={errors.name} />
-        <TextField
-          id="quote-phone"
-          name="phone"
-          label={forms.phone}
-          required
-          type="tel"
-          inputMode="tel"
-          autoComplete="tel"
-          defaultValue={values.phone}
-          error={errors.phone}
-        />
-        <TextField
-          id="quote-email"
-          name="email"
-          label={forms.email}
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          defaultValue={values.email}
-          error={errors.email}
-          className="sm:col-span-2"
-        />
-        <TextField
-          id="quote-address"
-          name="address"
-          label={quote.address}
-          required
-          autoComplete="street-address"
-          defaultValue={values.address}
-          error={errors.address}
-        />
-        <TextField
-          id="quote-units"
-          name="units"
-          label={quote.units}
-          required
-          type="number"
-          inputMode="numeric"
-          min={1}
-          defaultValue={values.units}
-          error={errors.units}
-        />
-        <ChoiceTiles
-          id="quote-setup"
-          name="setup"
-          legend={quote.setup}
-          choices={choices.setup}
-          defaultValue={values.setup}
-          error={errors.setup}
-        />
-        <SelectField
-          id="quote-machine"
-          name="machineType"
-          label={quote.machineType}
-          options={choices.machine}
-          defaultValue={values.machineType}
-          className="sm:col-span-2"
-        />
-        <ChoiceTiles
-          id="quote-option"
-          name="option"
-          legend={quote.option}
-          choices={choices.option}
-          defaultValue={values.option}
-          error={errors.option}
-        />
-        <TextAreaField
-          id="quote-notes"
-          name="notes"
-          label={forms.notes}
-          defaultValue={values.notes}
-          className="sm:col-span-2"
-          hint={quote.notesHint}
+        <FormFields
+          form="landlordQuote"
+          values={result ? result.values : emptyValues("landlordQuote", i18n)}
+          errors={result?.status === "invalid" ? result.errors : {}}
         />
       </div>
 

@@ -1388,12 +1388,17 @@ const en = {
       address: "Building address or city",
       units: "Number of units",
       setup: "What's there now",
-      setupOptions: ["No machines", "Old machines to replace", "Hookups only"],
+      // Option labels; the English text is also what the form posts (shared/forms).
+      setupOptions: { none: "No machines", replace: "Old machines to replace", hookupsOnly: "Hookups only" },
       machineType: "Machine type",
       notSure: "Not sure",
       differentEachUnit: "Different in each unit",
       option: "How you'd like to do it",
-      optionChoices: ["My tenants rent directly", "I rent the machines for my units", "Not sure yet"],
+      optionChoices: {
+        tenants: "My tenants rent directly",
+        landlord: "I rent the machines for my units",
+        notSure: "Not sure yet",
+      },
       notesHint:
         "For example: where the laundry is in each unit, stairs or elevator, a good time to see the building.",
       submit: "Send quote request",
@@ -1472,9 +1477,16 @@ const en = {
     formTitle: "What's wrong?",
     address: "Address or postal code",
     machine: "Machine",
-    machineOptions: ["Washer", "Dryer", "Stackable pair", "One-piece laundry centre", "Not sure"],
+    // Option labels; the English text is also what the form posts (shared/forms).
+    machineOptions: {
+      washer: "Washer",
+      dryer: "Dryer",
+      stackable: "Stackable pair",
+      laundryCentre: "One-piece laundry centre",
+      notSure: "Not sure",
+    },
     bestTime: "Best time to reach you",
-    timeOptions: ["Any time", "Morning", "Afternoon", "Evening"],
+    timeOptions: { any: "Any time", morning: "Morning", afternoon: "Afternoon", evening: "Evening" },
     problem: "What's wrong",
     problemHint: "For example: won't start, won't drain, leaks, doesn't heat, an error code on the display.",
     submit: "Send repair request",

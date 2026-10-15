@@ -6,7 +6,8 @@ import { data, redirect, type ActionFunctionArgs } from "react-router";
 import { requestI18n } from "~/entities/offer";
 import { submitToWeb3Forms } from "~/shared/api/web3forms.server";
 import { envOf, requestTimeOf } from "~/shared/config";
-import { isBot, torontoDate } from "~/shared/lib";
+import { isBot } from "~/shared/forms";
+import { torontoDate } from "~/shared/lib";
 import {
   STEP_PATHS,
   firstOpenStep,

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { machineSlugs } from "~/entities/machine";
 import { testI18n } from "~/test/context";
-import { firstOpenStep, rentalRequestFields, validateContactStep, validateDetailsStep, validateMachineStep } from "./model";
+import { firstOpenStep, machineChoices, rentalRequestFields, validateContactStep, validateDetailsStep, validateMachineStep } from "./model";
 
 const i18n = await testI18n();
 
@@ -38,12 +39,12 @@ describe("step 2: your space", () => {
 
   it("formats the postal code and finds the city", () => {
     const result = validateDetailsStep(form(valid), i18n);
-    expect(result).toMatchObject({ ok: true, fields: { postal: "M5V 2T6", city: "Toronto", postalStatus: "yes" } });
+    expect(result).toMatchObject({ ok: true, fields: { postal: "M5V 2T6", postalStatus: "yes" } });
   });
 
   it("accepts a code outside the known areas, to confirm by text", () => {
     const result = validateDetailsStep(form({ ...valid, postal: "K1A 0B1" }), i18n);
-    expect(result).toMatchObject({ ok: true, fields: { city: null, postalStatus: "unsure" } });
+    expect(result).toMatchObject({ ok: true, fields: { postalStatus: "unsure" } });
   });
 
   it("checks the outlet and the way in", () => {
@@ -87,12 +88,13 @@ describe("progress and the email", () => {
     const fields = rentalRequestFields(
       {
         machine: { machine: "washer-only" },
-        details: { postal: "L5B 1M2", closetWidth: "27 in", outlet: "not-sure", access: "stairs", floor: "", city: "Mississauga", postalStatus: "yes" },
+        details: { postal: "L5B 1M2", closetWidth: "27 in", outlet: "not-sure", access: "stairs", floor: "", postalStatus: "yes" },
       },
       { name: "Alex", phone: "416-555-0123", email: "", preferredDay: "", notes: "" },
       i18n,
     );
     expect(fields).toEqual({
+      language: "English",
       subject: "New rental request — Alex",
       name: "Alex",
       phone: "416-555-0123",
@@ -106,6 +108,34 @@ describe("progress and the email", () => {
       floor: "Not given",
       preferred_day: "Not given",
       notes: "None",
+    });
+  });
+});
+
+describe("the forms registry and the machine types", () => {
+  it("offers the four sets in the order of entities/machine, then one machine and not sure", () => {
+    const sets = machineSlugs.filter((slug) => slug !== "single-machine");
+    expect(machineChoices(i18n).map((choice) => choice.value)).toEqual([...sets, "washer-only", "dryer-only", "not-sure"]);
+  });
+
+  it("writes the email in English from a Spanish page, with the language first", async () => {
+    const spanish = await testI18n("es");
+    const fields = rentalRequestFields(
+      {
+        machine: { machine: "stackable" },
+        details: { postal: "M5V 2T6", closetWidth: "61 cm", outlet: "4-prong", access: "elevator", floor: "", postalStatus: "yes" },
+      },
+      { name: "Ana", phone: "416-555-0123", email: "", preferredDay: "", notes: "" },
+      spanish,
+    );
+    expect(Object.keys(fields)[0]).toBe("language");
+    expect(fields).toMatchObject({
+      language: "Spanish",
+      subject: "New rental request — Ana",
+      machine_type: "Stackable pair",
+      area: "Toronto",
+      access: "Elevator",
+      email: "Not given",
     });
   });
 });

@@ -46,6 +46,7 @@ describe("repair action", () => {
     expect(web3.calls[0].body).toEqual({
       access_key: TEST_KEY,
       from_name: "GTA Washer & Dryer Rentals website",
+      language: "English",
       subject: "Repair request — Sam Renter",
       name: "Sam Renter",
       phone: "437 555 0100",

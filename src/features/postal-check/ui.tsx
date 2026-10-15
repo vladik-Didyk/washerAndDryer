@@ -1,5 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
-import { siteConfig } from "~/shared/config";
+import { pagePaths, siteConfig } from "~/shared/config";
+import { Field } from "~/shared/forms";
 import { useI18n } from "~/shared/i18n";
 import { CircleAlert, CircleCheck, CircleHelp, LangLink, MessageSquare } from "~/shared/ui";
 import { checkPostalCode, type PostalCheck } from "./model";
@@ -17,7 +18,7 @@ const TONES = {
 // `requestHref` is where "Start your rental" goes after a yes (the rental request).
 // `label` names the field; `compact` makes the field a little shorter (home hero).
 export function PostalCodeChecker({
-  requestHref = "/start/",
+  requestHref = pagePaths.start,
   label,
   compact = false,
   className = "",
@@ -45,32 +46,28 @@ export function PostalCodeChecker({
 
   return (
     <form noValidate onSubmit={onSubmit} className={className}>
-      <label htmlFor={inputId} className="label">
-        {label ?? d.postalCheck.label}
-      </label>
-      <div className="mt-2 flex gap-2">
-        <input
-          id={inputId}
-          name="postal"
-          type="text"
-          autoComplete="postal-code"
-          autoCapitalize="characters"
-          spellCheck={false}
-          maxLength={8}
-          placeholder={d.postalCheck.placeholder}
-          value={value}
-          onChange={(event) => {
+      <Field
+        form="postalCheck"
+        name="postal"
+        id={inputId}
+        label={label}
+        bare
+        control={{
+          value,
+          onChange: (event) => {
             setValue(event.target.value);
             setResult(null);
-          }}
-          aria-invalid={result?.status === "invalid" ? "true" : undefined}
-          aria-describedby={resultId}
-          className={`field min-w-0 flex-1 uppercase placeholder:normal-case ${compact ? "min-h-[3rem] py-2.5" : ""}`}
-        />
-        <button type="submit" className="btn btn-primary shrink-0 px-5">
-          {d.postalCheck.check}
-        </button>
-      </div>
+          },
+          "aria-invalid": result?.status === "invalid" ? "true" : undefined,
+          "aria-describedby": resultId,
+          className: compact ? "min-h-[3rem] py-2.5" : undefined,
+        }}
+        after={
+          <button type="submit" className="btn btn-primary shrink-0 px-5">
+            {d.postalCheck.check}
+          </button>
+        }
+      />
 
       {/* Always in the page, so screen readers announce the answer when it appears. */}
       <div id={resultId} role="status" className="mt-3">

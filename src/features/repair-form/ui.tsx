@@ -1,33 +1,27 @@
 import { Form, useNavigation } from "react-router";
-import { useI18n } from "~/shared/i18n";
-import type { FormActionData } from "~/shared/lib";
+import { pagePaths } from "~/shared/config";
 import {
+  FormFields,
   Honeypot,
   RequiredNote,
-  SelectField,
   SendError,
   SentPanel,
   SubmitButton,
-  TextAreaField,
-  TextField,
-} from "~/shared/ui";
-import { emptyRepair, repairChoices, type RepairValues } from "./model";
+  emptyValues,
+  type FormActionData,
+} from "~/shared/forms";
+import { useI18n } from "~/shared/i18n";
 
-// Repair request for a machine rented from us. A plain form posted to the page's server
-// action: it works with JavaScript off.
-export function RepairForm({ result }: { result?: FormActionData<RepairValues> }) {
-  const navigation = useNavigation();
-  const sending = navigation.state === "submitting";
+// Repair request for a machine rented from us: the fields of the "repair" form (shared/forms
+// registry), posted to the page's server action. It works with JavaScript off.
+export function RepairForm({ result }: { result?: FormActionData }) {
+  const sending = useNavigation().state === "submitting";
   const i18n = useI18n();
-  const { forms, repair } = i18n.d;
-  const choices = repairChoices(i18n);
+  const { repair } = i18n.d;
 
   if (result?.status === "sent") {
-    return <SentPanel title={repair.sent} note={repair.sentNote} resetHref="/repair/#repair-request" />;
+    return <SentPanel title={repair.sent} note={repair.sentNote} resetHref={`${pagePaths.repair}#repair-request`} />;
   }
-
-  const values = result ? result.values : emptyRepair(i18n);
-  const errors = result?.status === "invalid" ? result.errors : {};
 
   return (
     <Form
@@ -44,46 +38,10 @@ export function RepairForm({ result }: { result?: FormActionData<RepairValues> }
       </div>
 
       <div className="mt-5 grid gap-5 sm:grid-cols-2">
-        <TextField id="repair-name" name="name" label={forms.name} required autoComplete="name" defaultValue={values.name} error={errors.name} />
-        <TextField
-          id="repair-phone"
-          name="phone"
-          label={forms.phone}
-          required
-          type="tel"
-          inputMode="tel"
-          autoComplete="tel"
-          defaultValue={values.phone}
-          error={errors.phone}
-        />
-        <TextField
-          id="repair-address"
-          name="address"
-          label={repair.address}
-          required
-          autoComplete="street-address"
-          defaultValue={values.address}
-          error={errors.address}
-          className="sm:col-span-2"
-        />
-        <SelectField id="repair-machine" name="machine" label={repair.machine} options={choices.machines} defaultValue={values.machine} />
-        <SelectField
-          id="repair-time"
-          name="bestTime"
-          label={repair.bestTime}
-          options={choices.times}
-          defaultValue={values.bestTime}
-        />
-        <TextAreaField
-          id="repair-problem"
-          name="problem"
-          label={repair.problem}
-          required
-          rows={5}
-          defaultValue={values.problem}
-          error={errors.problem}
-          className="sm:col-span-2"
-          hint={repair.problemHint}
+        <FormFields
+          form="repair"
+          values={result ? result.values : emptyValues("repair", i18n)}
+          errors={result?.status === "invalid" ? result.errors : {}}
         />
       </div>
 

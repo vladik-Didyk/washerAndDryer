@@ -7,7 +7,12 @@
 // to that city. They are not complete on purpose: an FSA we weren't sure about is left out, and
 // any code that isn't listed gets "not sure, text us your address". The checker never says no.
 import { cityPath, findCity } from "~/entities/area";
+import { formatPostalCode, isPostalCode, normalizePostalCode } from "~/shared/forms";
 import type { I18n } from "~/shared/i18n";
+
+// The format check is the postal field's (shared/forms), the same for this checker and the
+// rental request.
+export { formatPostalCode, normalizePostalCode };
 
 // By city (its slug in entities/area).
 export const cityFsas: Record<string, string[]> = {
@@ -25,16 +30,6 @@ const cityByFsa = new Map<string, string>(
   Object.entries(cityFsas).flatMap(([city, fsas]) => fsas.map((fsa): [string, string] => [fsa, city])),
 );
 
-// Letter-digit-letter digit-letter-digit. D, F, I, O, Q and U are never used, and W and Z
-// never come first. The second half is optional: "M5V" on its own is enough to answer.
-const POSTAL_CODE = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z](\d[ABCEGHJ-NPRSTV-Z]\d)?$/;
-
-// "m5v 2t6", " M5V-2T6 " -> "M5V2T6"
-export const normalizePostalCode = (input: unknown) =>
-  String(input ?? "")
-    .toUpperCase()
-    .replace(/[\s-]+/g, "");
-
 export type PostalStatus = "yes" | "unsure" | "invalid";
 
 export interface PostalCheck {
@@ -44,17 +39,11 @@ export interface PostalCheck {
   path?: string;
 }
 
-// "M5V2T6" -> "M5V 2T6" (a full code); anything else unchanged.
-export const formatPostalCode = (input: unknown) => {
-  const code = normalizePostalCode(input);
-  return code.length === 6 ? `${code.slice(0, 3)} ${code.slice(3)}` : code;
-};
-
 // status is "yes", "unsure" or "invalid"; the message and the city name are in the language
 // of `i18n`.
 export function checkPostalCode(input: unknown, { d, format }: I18n): PostalCheck {
   const code = normalizePostalCode(input);
-  if (!POSTAL_CODE.test(code)) return { status: "invalid", message: d.postalCheck.invalid };
+  if (!isPostalCode(code)) return { status: "invalid", message: d.postalCheck.invalid };
   const slug = code.startsWith("M") ? "toronto" : cityByFsa.get(code.slice(0, 3));
   const city = slug ? findCity(d, slug) : undefined;
   if (city) {

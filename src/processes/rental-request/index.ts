@@ -3,10 +3,8 @@
 export {
   STEPS,
   STEP_PATHS,
-  accessChoices,
   firstOpenStep,
   machineChoices,
-  outletChoices,
   rentalRequestFields,
   validateContactStep,
   validateDetailsStep,
