@@ -126,10 +126,10 @@ export const routes = [
     path: "/about/",
     kind: "about",
     lang: "en",
-    llmsNote: "who runs the business and how he works",
+    llmsNote: "who we are and how we work",
     metaTitle: "About Us | GTA Washer & Dryer Rentals, Toronto",
     metaDescription:
-      "GTA Washer & Dryer Rentals is run by Vlad in Toronto, who has more than 3 years of experience installing and fixing washers and dryers.",
+      "GTA Washer & Dryer Rentals is a local Toronto business with more than 3 years of hands-on experience installing and fixing washers and dryers.",
     breadcrumbs: [HOME, { name: "About", path: "/about/" }],
   },
   {

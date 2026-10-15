@@ -8,7 +8,7 @@ import { siteConfig } from "./config";
 import { includeDrafts } from "./drafts";
 import { firstWeekFreeActive, firstWeekFreeOffer, referralOffer } from "./offers";
 
-const { companyName, owner, phone, prices } = siteConfig;
+const { companyName, phone, prices } = siteConfig;
 const analyticsOn = Boolean(siteConfig.cloudflareAnalyticsToken);
 
 const privacy = {
@@ -26,7 +26,7 @@ const privacy = {
     {
       heading: "Who we are",
       blocks: [
-        `${companyName} is run by ${owner} in Toronto, Ontario. You can reach us by phone or text at ${phone.display}.`,
+        `${companyName} is a business based in Toronto, Ontario. You can reach us by phone or text at ${phone.display}.`,
       ],
     },
     {

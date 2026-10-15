@@ -1,12 +1,12 @@
 import { MapPin, MessageSquare, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
-import { howVladWorks } from "../content/about";
+import { howWeWork } from "../content/about";
 import PageIntro from "../components/PageIntro";
 import LinkList from "../components/LinkList";
 
-// /about/: who runs the business and how he works. Confirmed facts only: no photo, no history.
+// /about/: who we are and how we work. Confirmed facts only: no names, photos of people or history.
 export default function AboutPage() {
-  const { phone, prices, owner, companyName, hours } = siteConfig;
+  const { phone, prices, companyName, hours } = siteConfig;
 
   const whatWeDo = [
     `We rent washers and dryers in Toronto and the GTA: stackable pairs, one-piece laundry centres, side-by-side pairs, or a single washer or dryer.`,
@@ -19,8 +19,8 @@ export default function AboutPage() {
     <>
       <PageIntro icon={MapPin} eyebrow="About us" title={`About ${companyName}`}>
         <p className="lead mt-5">
-          {companyName} is run by {owner} in Toronto. He has more than 3 years of
-          experience installing and fixing washers and dryers.
+          {companyName} is a local Toronto business. We bring more than 3 years of
+          hands-on experience installing and fixing washers and dryers.
         </p>
       </PageIntro>
 
@@ -28,10 +28,10 @@ export default function AboutPage() {
         <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:col-span-5 lg:self-start">
             <h2 id="how-title" className="font-display text-2xl font-bold text-ink">
-              How {owner} works
+              How we work
             </h2>
             <ul className="mt-5 space-y-4">
-              {howVladWorks.map((item) => (
+              {howWeWork.map((item) => (
                 <li key={item} className="flex gap-3 text-ink-soft">
                   <span aria-hidden="true" className="mt-2 h-2 w-2 shrink-0 rounded-full bg-gold" />
                   {item}
@@ -68,7 +68,7 @@ export default function AboutPage() {
           <div className="grid gap-6 rounded-3xl bg-brand-mint px-5 py-8 sm:p-10 lg:grid-cols-12 lg:items-center lg:gap-10">
             <div className="lg:col-span-6">
               <h2 id="about-contact-title" className="h2">
-                Talk to {owner}
+                Talk to us
               </h2>
               <p className="lead mt-3">
                 {phone.display}.{" "}

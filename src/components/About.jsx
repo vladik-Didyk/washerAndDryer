@@ -1,12 +1,12 @@
 import { Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
-import { howVladWorks } from "../content/about";
+import { howWeWork } from "../content/about";
 
-// Facts about the owner only: no photo, no numbers beyond what he has confirmed.
+// About the business: confirmed facts only, no names or photos of people.
 // The full version is the /about/ page.
 
 export default function About() {
-  const { phone, owner, companyName } = siteConfig;
+  const { phone, companyName } = siteConfig;
 
   return (
     <section id="about" aria-labelledby="about-title" className="section">
@@ -16,8 +16,8 @@ export default function About() {
             About us
           </h2>
           <p className="lead mt-4">
-            {companyName} is run by {owner} in Toronto. He has more than 3 years
-            of experience installing and fixing washers and dryers.
+            {companyName} is a local Toronto business. We bring more than 3 years
+            of hands-on experience installing and fixing washers and dryers.
           </p>
           <p className="mt-4 text-ink-soft">
             Questions about a machine or your hookups? Call or text{" "}
@@ -35,10 +35,10 @@ export default function About() {
 
         <div className="rounded-3xl border border-line bg-white p-6 sm:p-8 lg:col-span-7">
           <h3 className="font-display text-xl font-bold text-ink">
-            How {owner} works
+            How we work
           </h3>
           <ul className="mt-5 space-y-4">
-            {howVladWorks.map((item) => (
+            {howWeWork.map((item) => (
               <li key={item} className="flex gap-3 text-ink-soft">
                 <span
                   aria-hidden="true"

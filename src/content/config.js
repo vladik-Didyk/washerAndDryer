@@ -5,7 +5,6 @@ export const siteConfig = {
   siteUrl: "https://washerrent.com", // no trailing slash
   // The date the page content last changed; used as <lastmod> in the generated sitemap.xml.
   lastUpdated: "2026-10-15",
-  owner: "Vlad",
   languages: "English, Spanish & Russian",
   tagline: "Washer & dryer rental in Toronto & the GTA",
   location: "Toronto · serving the GTA",

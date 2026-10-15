@@ -8,7 +8,7 @@ import { hookupChecklist } from "../content/machines";
 import { firstWeekFreeActive, firstWeekFreeOffer, referralOffer } from "../content/offers";
 import { routes } from "../content/routes";
 
-const { companyName, siteUrl, phone, prices, owner, languages, facebook } = siteConfig;
+const { companyName, siteUrl, phone, prices, languages, facebook } = siteConfig;
 const absolute = (path) => `${siteUrl}${path}`;
 
 const PAGE_GROUPS = [
@@ -46,7 +46,7 @@ export function llmsTxt() {
 
   return `# ${companyName}
 
-> Washer and dryer rental in Toronto and the GTA, Ontario, Canada. $${prices.setText} a week for a washer + dryer set, $${prices.singleText} a week for one machine. Repairs and old-machine haul-away included. Run by ${owner} in Toronto.
+> Washer and dryer rental in Toronto and the GTA, Ontario, Canada. $${prices.setText} a week for a washer + dryer set, $${prices.singleText} a week for one machine. Repairs and old-machine haul-away included. A local Toronto business.
 
 ## Contact
 
@@ -101,7 +101,7 @@ Toronto (North York, Etobicoke, Scarborough, East York, York), Mississauga, Bram
 
 ## About
 
-Run by ${owner} in Toronto, who has more than 3 years of experience installing and fixing washers and dryers. He checks each machine before it goes out, connects the water, drain, power and vent, and runs a test cycle before leaving.
+A local Toronto business with more than 3 years of hands-on experience installing and fixing washers and dryers. We check each machine before it goes out, connect the water, drain, power and vent, and run a test cycle before we leave.
 
 ## Pages
 

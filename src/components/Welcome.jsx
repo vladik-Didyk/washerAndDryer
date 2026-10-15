@@ -45,7 +45,7 @@ function HeroPhoto({ className = "" }) {
 // form or a call) and the postal-code check. Phones: photo on top, text below it, never over it.
 // From 1024px the text keeps to the page's left edge and the photo takes the other half.
 export default function Welcome() {
-  const { phone, prices, owner } = siteConfig;
+  const { phone, prices } = siteConfig;
 
   return (
     <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
@@ -55,7 +55,7 @@ export default function Welcome() {
         <div className="container-page pb-12 pt-8 sm:pb-14 sm:pt-10 lg:col-[2/3] lg:row-start-1 lg:mx-0 lg:max-w-none lg:self-center lg:px-0 lg:py-14 lg:pr-10">
           <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
             <MapPin className="h-4 w-4" aria-hidden="true" />
-            Run by {owner} in Toronto
+            Local Toronto business
           </p>
           <h1
             id="hero-title"

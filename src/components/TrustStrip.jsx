@@ -4,13 +4,13 @@ import { siteConfig } from "../content/config";
 // Five short facts in a band under the hero of the home, machine type, city and district pages.
 // One row from 1280px, three columns on tablets, two on phones.
 export default function TrustStrip() {
-  const { owner, languages } = siteConfig;
+  const { languages } = siteConfig;
   const items = [
     { Icon: Wrench, label: "Repairs included" },
     { Icon: BadgeCheck, label: "No credit check" },
     { Icon: Truck, label: "Same-week delivery" },
     { Icon: Languages, label: languages },
-    { Icon: MapPin, label: `Run by ${owner} in Toronto` },
+    { Icon: MapPin, label: "Local Toronto business" },
   ];
 
   return (
