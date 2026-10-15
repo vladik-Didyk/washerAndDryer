@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build",
-    "preview": "pnpm run build && vite preview --port 8790 --strictPort",
+    "preview": "pnpm run build && wrangler dev -c build/server/wrangler.json --port 8790 --ip 127.0.0.1",
     "deploy": "pnpm run build && wrangler deploy",
     "cf-typegen": "wrangler types && react-router typegen",
     "typecheck": "wrangler types && react-router typegen && tsc -b",
