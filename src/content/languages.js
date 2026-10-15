@@ -6,7 +6,7 @@ export const languagePages = [
     path: "/es/",
     locale: "es_LA",
     languageName: "Español",
-    metaTitle: "Alquiler de lavadora y secadora en Toronto | $12.50 a la semana",
+    metaTitle: "Alquiler de lavadora y secadora, Toronto | $12.50/semana",
     metaDescription:
       "Alquiler de lavadora y secadora en Toronto y el GTA: $12.50 a la semana el juego, $6.25 una sola máquina. Reparaciones incluidas. Hablamos español.",
     skipLink: "Ir al contenido",
