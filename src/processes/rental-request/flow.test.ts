@@ -74,7 +74,7 @@ describe("rental request flow", () => {
       subject: "New rental request — Alex",
       machine_type: "Stackable pair",
       postal_code: "M2N 6K1",
-      area: "Toronto",
+      area: "North York, Toronto",
       dryer_outlet: "3-prong",
       access: "Elevator",
       preferred_day: "2026-10-20",

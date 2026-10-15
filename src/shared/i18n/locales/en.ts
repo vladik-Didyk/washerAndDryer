@@ -351,6 +351,7 @@ const en = {
     check: "Check",
     invalid: "Enter a valid Canadian postal code, like M5V 2T6.",
     yes: "Yes, we deliver in {city}.",
+    outside: "{place} is outside our usual area. Call or text {phone} and we'll check.",
     unsure: "Not sure from the postal code. Text us your address at {phone} and we'll confirm.",
     textUs: "Text {phone}",
   },

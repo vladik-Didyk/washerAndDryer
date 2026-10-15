@@ -118,8 +118,9 @@ export const machineLabel = (i18n: I18n, value: string | undefined) => optionLab
 export const outletLabel = (i18n: I18n, value: string | undefined) => optionLabel("startDetails", "outlet", value, i18n);
 export const accessLabel = (i18n: I18n, value: string | undefined) => optionLabel("startDetails", "access", value, i18n);
 
-// The city of a postal code, in the language of `i18n` (null when we can't tell).
-export const postalCity = (i18n: I18n, postal: string) => checkPostalCode(postal, i18n).city ?? null;
+// Where a postal code is, in the language of `i18n`: "North York, Toronto" in our cities,
+// "Oakville" outside them, null when we can't tell.
+export const postalCity = (i18n: I18n, postal: string) => checkPostalCode(postal, i18n).place ?? null;
 
 // The email the business gets (through Web3Forms), one line per answer, in English whatever
 // the language of the page (with that language on the first line).

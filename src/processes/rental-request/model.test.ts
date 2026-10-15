@@ -42,9 +42,11 @@ describe("step 2: your space", () => {
     expect(result).toMatchObject({ ok: true, fields: { postal: "M5V 2T6", postalStatus: "yes" } });
   });
 
-  it("accepts a code outside the known areas, to confirm by text", () => {
+  it("accepts a code outside our cities, to confirm by phone", () => {
     const result = validateDetailsStep(form({ ...valid, postal: "K1A 0B1" }), i18n);
-    expect(result).toMatchObject({ ok: true, fields: { postalStatus: "unsure" } });
+    expect(result).toMatchObject({ ok: true, fields: { postalStatus: "outside" } });
+    const rural = validateDetailsStep(form({ ...valid, postal: "L0J 1C0" }), i18n);
+    expect(rural).toMatchObject({ ok: true, fields: { postalStatus: "unsure" } });
   });
 
   it("checks the outlet and the way in", () => {
@@ -101,7 +103,7 @@ describe("progress and the email", () => {
       email: "Not given",
       machine_type: "Washer only",
       postal_code: "L5B 1M2",
-      area: "Mississauga",
+      area: "West Cooksville, Mississauga",
       closet_width: "27 in",
       dryer_outlet: "Not sure",
       access: "Stairs",
@@ -133,7 +135,7 @@ describe("the forms registry and the machine types", () => {
       language: "Spanish",
       subject: "New rental request — Ana",
       machine_type: "Stackable pair",
-      area: "Toronto",
+      area: "Downtown Toronto",
       access: "Elevator",
       email: "Not given",
     });

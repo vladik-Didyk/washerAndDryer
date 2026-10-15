@@ -2,57 +2,72 @@
 // pages (./ui.tsx), and for the postal code in the rental request (processes/rental-request).
 // The checker runs in the browser; nothing is sent anywhere.
 //
-// Every postal code starting with "M" is in the City of Toronto. For the other cities, the
-// lists below cover the main FSAs (the first 3 characters of a postal code) that clearly belong
-// to that city. They are not complete on purpose: an FSA we weren't sure about is left out, and
-// any code that isn't listed gets "not sure, text us your address". The checker never says no.
+// The place of a code comes from its FSA (the first 3 characters), in ./fsa-data.ts: every
+// Ontario FSA, generated from the published FSA lists (scripts/postal-fsas.mjs). Outside
+// Ontario, the first letter names the province. The checker never says no:
+//   yes      the FSA is in one of our cities: "Yes, we deliver in North York, Toronto."
+//   outside  any other place: "Oakville is outside our usual area. Call or text us."
+//   unsure   a valid code we can't place (a rural route): "Text us your address."
+//   invalid  not a Canadian postal code.
 import { cityPath, findCity } from "~/entities/area";
 import { formatPostalCode, isPostalCode, normalizePostalCode } from "~/shared/forms";
 import type { I18n } from "~/shared/i18n";
+import { DELIVERY_FSAS, FSA_PLACES } from "./fsa-data";
 
 // The format check is the postal field's (shared/forms), the same for this checker and the
 // rental request.
 export { formatPostalCode, normalizePostalCode };
 
-// By city (its slug in entities/area).
-export const cityFsas: Record<string, string[]> = {
-  mississauga: [
-    "L4T", "L4V", "L4W", "L4X", "L4Y", "L4Z", "L5A", "L5B", "L5C", "L5E", "L5G", "L5H",
-    "L5J", "L5K", "L5L", "L5M", "L5N", "L5P", "L5R", "L5S", "L5T", "L5V", "L5W",
-  ],
-  brampton: ["L6P", "L6R", "L6S", "L6T", "L6V", "L6W", "L6X", "L6Y", "L6Z", "L7A"],
-  vaughan: ["L4H", "L4J", "L4K", "L4L", "L6A"],
-  markham: ["L3P", "L3R", "L3S", "L3T", "L6B", "L6C", "L6E"],
-  "richmond-hill": ["L4B", "L4C", "L4E", "L4S"],
+// Outside Ontario, the first letter of a postal code is the province or territory.
+const PROVINCES: Record<string, string> = {
+  A: "Newfoundland and Labrador",
+  B: "Nova Scotia",
+  C: "Prince Edward Island",
+  E: "New Brunswick",
+  G: "Quebec",
+  H: "Quebec",
+  J: "Quebec",
+  R: "Manitoba",
+  S: "Saskatchewan",
+  T: "Alberta",
+  V: "British Columbia",
+  X: "the Northwest Territories or Nunavut",
+  Y: "Yukon",
 };
 
-const cityByFsa = new Map<string, string>(
-  Object.entries(cityFsas).flatMap(([city, fsas]) => fsas.map((fsa): [string, string] => [fsa, city])),
-);
-
-export type PostalStatus = "yes" | "unsure" | "invalid";
+export type PostalStatus = "yes" | "outside" | "unsure" | "invalid";
 
 export interface PostalCheck {
   status: PostalStatus;
   message: string;
+  /** yes: the city, in the language of the page. */
   city?: string;
+  /** yes: the city's page. */
   path?: string;
+  /** yes: "North York, Toronto"; outside: "Oakville". */
+  place?: string;
 }
 
-// status is "yes", "unsure" or "invalid"; the message and the city name are in the language
-// of `i18n`.
-export function checkPostalCode(input: unknown, { d, format }: I18n): PostalCheck {
+// The message and the names are in the language of `i18n` (place names stay English, the
+// cities as the dictionary writes them).
+export function checkPostalCode(input: unknown, i18n: I18n): PostalCheck {
+  const { d, format } = i18n;
   const code = normalizePostalCode(input);
   if (!isPostalCode(code)) return { status: "invalid", message: d.postalCheck.invalid };
-  const slug = code.startsWith("M") ? "toronto" : cityByFsa.get(code.slice(0, 3));
-  const city = slug ? findCity(d, slug) : undefined;
-  if (city) {
-    return {
-      status: "yes",
-      city: city.name,
-      path: cityPath(city),
-      message: format(d.postalCheck.yes, { city: city.name }),
-    };
+  const fsa = code.slice(0, 3);
+
+  const delivery = DELIVERY_FSAS[fsa];
+  const city = delivery ? findCity(d, delivery[0]) : undefined;
+  if (delivery && city) {
+    const [, area, namesCity] = delivery;
+    // "Downtown Toronto" already names the city; "North York" gets ", Toronto".
+    const place = !area ? city.name : namesCity ? area : `${area}, ${city.name}`;
+    return { status: "yes", city: city.name, path: cityPath(city), place, message: format(d.postalCheck.yes, { city: place }) };
+  }
+
+  const elsewhere = FSA_PLACES[fsa] ?? PROVINCES[fsa[0]];
+  if (elsewhere) {
+    return { status: "outside", place: elsewhere, message: format(d.postalCheck.outside, { place: elsewhere }) };
   }
   return { status: "unsure", message: d.postalCheck.unsure };
 }

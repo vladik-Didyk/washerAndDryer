@@ -67,7 +67,7 @@ export async function contactLoader(args: LoaderFunctionArgs) {
       { label: labels.outlet, value: outletLabel(i18n, details.outlet) },
       { label: labels.access, value: [accessLabel(i18n, details.access), details.floor].filter(Boolean).join(", ") },
     ],
-    postalUnsure: details.postalStatus === "unsure",
+    postalUnsure: details.postalStatus === "unsure" || details.postalStatus === "outside",
     values: emptyValues("startContact", i18n),
   };
 }

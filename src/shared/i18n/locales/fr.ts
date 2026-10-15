@@ -317,6 +317,7 @@ const fr: DeepPartial<Dictionary> = {
     check: "Vérifier",
     invalid: "Entrez un code postal canadien valide, comme M5V 2T6.",
     yes: "Oui, nous livrons à {city}.",
+    outside: "{place} est hors de notre secteur habituel. Appelez ou textez le {phone} et nous vérifierons.",
     unsure:
       "Le code postal ne suffit pas pour le savoir. Envoyez-nous votre adresse par texto au {phone} et nous vous le confirmerons.",
     textUs: "Texto au {phone}",

@@ -5,16 +5,18 @@ import { useI18n } from "~/shared/i18n";
 import { Button, CircleAlert, CircleCheck, CircleHelp, LangLink, PhoneButton } from "~/shared/ui";
 import { checkPostalCode, type PostalCheck } from "./model";
 
-const ICONS = { yes: CircleCheck, unsure: CircleHelp, invalid: CircleAlert };
+const ICONS = { yes: CircleCheck, outside: CircleHelp, unsure: CircleHelp, invalid: CircleAlert };
 const TONES = {
   yes: "text-brand-dark",
+  outside: "text-ink",
   unsure: "text-ink",
   invalid: "text-red-700",
 };
 
 // "Do we deliver to you?" by postal code (logic and FSA lists in ./model.ts).
 // Works in the browser after hydration; nothing is sent anywhere. The answer is never "no":
-// a code we can't place gets "text us your address".
+// a place outside our cities gets "call or text us", a code we can't place "text us your
+// address".
 // `requestHref` is where "Start your rental" goes after a yes (the rental request).
 // `label` names the field; `compact` makes the field a little shorter (home hero).
 export function PostalCodeChecker({
@@ -83,6 +85,9 @@ export function PostalCodeChecker({
         )}
         {result?.status === "unsure" && (
           <PhoneButton kind="text" label={d.postalCheck.textUs} className="mt-3" />
+        )}
+        {result?.status === "outside" && (
+          <PhoneButton kind="call" label={d.common.callOrText} className="mt-3" />
         )}
       </div>
     </form>

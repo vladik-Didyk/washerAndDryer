@@ -328,6 +328,7 @@ const es: DeepPartial<Dictionary> = {
     check: "Verificar",
     invalid: "Escriba un código postal canadiense válido, como M5V 2T6.",
     yes: "Sí, entregamos en {city}.",
+    outside: "{place} está fuera de nuestra zona habitual. Llame o escriba al {phone} y lo verificamos.",
     unsure: "No podemos saberlo por el código postal. Envíenos su dirección por mensaje al {phone} y le confirmamos.",
     textUs: "Escribir al {phone}",
   },

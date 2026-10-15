@@ -1,6 +1,5 @@
 export {
   checkPostalCode,
-  cityFsas,
   formatPostalCode,
   normalizePostalCode,
   type PostalCheck,
