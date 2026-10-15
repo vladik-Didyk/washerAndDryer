@@ -10,10 +10,13 @@ import { cities } from "./cities";
 import { districts } from "./districts";
 import { machineTypes } from "./machines";
 import { languagePages } from "./languages";
+import { guides } from "./guides";
+import { legalPages } from "./legal";
 
 export const cityPath = (city) => `/${city.slug}/`;
 export const districtPath = (district) => `/toronto/${district.slug}/`;
 export const machinePath = (machine) => `/machines/${machine.slug}/`;
+export const guidePath = (guide) => `/guides/${guide.slug}/`;
 
 // Where "Check availability" goes on pages without the request form.
 export const requestFormHref = "/contact/#request";
@@ -22,6 +25,7 @@ const HOME = { name: "Home", path: "/" };
 const MACHINES = { name: "Machines", path: "/machines/" };
 const AREAS = { name: "Areas", path: "/areas/" };
 const LANDLORDS = { name: "Landlords", path: "/landlords/" };
+const GUIDES = { name: "Guides", path: "/guides/" };
 const TORONTO = { name: "Toronto", path: "/toronto/" };
 
 const cityRoute = (city) => ({
@@ -163,6 +167,43 @@ export const routes = [
         },
       ]
     : []),
+  // Guides, and the /guides/ list once at least one guide is built. The list counts as a
+  // draft while every guide in it is one.
+  ...(guides.length
+    ? [
+        {
+          path: "/guides/",
+          kind: "guides",
+          lang: "en",
+          draft: guides.every((guide) => guide.draft),
+          llmsNote: "practical guides for renting a washer and dryer",
+          metaTitle: "Washer & Dryer Rental Guides | GTA Washer & Dryer Rentals",
+          metaDescription:
+            "Practical guides for renting a washer and dryer in Toronto and the GTA: what to measure, check and ask before delivery day.",
+          breadcrumbs: [HOME, GUIDES],
+        },
+      ]
+    : []),
+  ...guides.map((guide) => ({
+    path: guidePath(guide),
+    kind: "guide",
+    lang: "en",
+    draft: guide.draft,
+    guide,
+    metaTitle: guide.metaTitle,
+    metaDescription: guide.metaDescription,
+    breadcrumbs: [HOME, GUIDES, { name: guide.title, path: guidePath(guide) }],
+  })),
+  ...legalPages.map((page) => ({
+    path: page.path,
+    kind: page.kind,
+    lang: "en",
+    draft: page.draft,
+    page,
+    metaTitle: page.metaTitle,
+    metaDescription: page.metaDescription,
+    breadcrumbs: [HOME, { name: page.title, path: page.path }],
+  })),
   ...languagePages.map((content) => ({
     path: content.path,
     kind: "language",

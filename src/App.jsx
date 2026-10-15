@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FloatingCall from "./components/FloatingCall";
 import Breadcrumbs from "./components/Breadcrumbs";
+import DraftRibbon from "./components/DraftRibbon";
 import HomePage from "./pages/HomePage";
 import CityPage from "./pages/CityPage";
 import DistrictPage from "./pages/DistrictPage";
@@ -13,6 +14,9 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import RepairPage from "./pages/RepairPage";
 import AccountPage from "./pages/AccountPage";
+import GuidesPage from "./pages/GuidesPage";
+import GuidePage from "./pages/GuidePage";
+import LegalPage from "./pages/LegalPage";
 import MachinePage from "./pages/MachinePage";
 import MachinesPage from "./pages/MachinesPage";
 import LanguagePage from "./pages/LanguagePage";
@@ -50,6 +54,13 @@ function Page({ route }) {
       return <RepairPage />;
     case "account":
       return <AccountPage />;
+    case "guides":
+      return <GuidesPage />;
+    case "guide":
+      return <GuidePage guide={route.guide} />;
+    case "privacy":
+    case "terms":
+      return <LegalPage page={route.page} />;
     case "language":
       return <LanguagePage content={route.content} />;
     default:
@@ -66,6 +77,7 @@ export default function App({ path }) {
       <a href="#main" className="skip-link">
         {skipLabel}
       </a>
+      {route.draft && <DraftRibbon />}
       <Header />
       <main id="main">
         {route.breadcrumbs && <Breadcrumbs items={route.breadcrumbs} />}

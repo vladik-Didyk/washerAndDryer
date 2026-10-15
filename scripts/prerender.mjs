@@ -110,8 +110,15 @@ if (!includeDrafts && draftMarkers.length) {
   const bundle = (
     await Promise.all(scripts.map((name) => fs.readFile(path.join(assetsDir, name), "utf8")))
   ).join("\n");
+  // The bundler may write non-ASCII characters as \uXXXX escapes, so look for both forms.
+  const escaped = (text) =>
+    JSON.stringify(text)
+      .slice(1, -1)
+      .replace(/[\u007f-\uffff]/g, (char) => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`);
   for (const { path: draftPath, text } of draftMarkers) {
-    if (bundle.includes(text)) problems.push(`the JS bundle contains text from the draft ${draftPath}`);
+    if (bundle.includes(text) || bundle.includes(escaped(text))) {
+      problems.push(`the JS bundle contains text from the draft ${draftPath}`);
+    }
   }
 }
 

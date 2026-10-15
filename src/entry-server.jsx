@@ -6,8 +6,9 @@ import { findRoute, notFoundRoute, routes } from "./content/routes";
 import { renderHead, sitemapXml } from "./seo/head";
 import { llmsTxt } from "./seo/llms";
 import { includeDrafts } from "./content/drafts";
+import { draftMarkers } from "./content/draftMarkers";
 
-export { routes, notFoundRoute, sitemapXml, llmsTxt, includeDrafts };
+export { routes, notFoundRoute, sitemapXml, llmsTxt, includeDrafts, draftMarkers };
 
 export function render(url) {
   const route = findRoute(url);

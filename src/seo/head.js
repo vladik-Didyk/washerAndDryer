@@ -7,7 +7,8 @@ import { cities } from "../content/cities";
 import { districts } from "../content/districts";
 import { languagePages } from "../content/languages";
 import { machineTypes } from "../content/machines";
-import { machinePath, routes } from "../content/routes";
+import { guides } from "../content/guides";
+import { guidePath, machinePath, routes } from "../content/routes";
 
 const SITE = siteConfig.siteUrl;
 const BUSINESS_ID = `${SITE}/#business`;
@@ -270,6 +271,44 @@ function contactPage(route) {
   };
 }
 
+// A guide. The author and publisher are the business itself: no author bios.
+function guideArticle(route) {
+  const { guide } = route;
+  const url = absolute(route.path);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: route.metaDescription,
+    url,
+    mainEntityOfPage: url,
+    datePublished: guide.published,
+    dateModified: guide.updated,
+    inLanguage: "en-CA",
+    image: `${SITE}/og-image.jpg`,
+    author: providerRef(),
+    publisher: {
+      ...providerRef(),
+      logo: { "@type": "ImageObject", url: `${SITE}/brand/logo.png` },
+    },
+  };
+}
+
+function guidesList(route) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Guides for renting a washer and dryer",
+    url: absolute(route.path),
+    itemListElement: guides.map((guide, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: guide.title,
+      url: absolute(guidePath(guide)),
+    })),
+  };
+}
+
 function machineService(route) {
   const { machine } = route;
   const offer =
@@ -325,6 +364,10 @@ function mainJsonLd(route) {
       return [landlordService(route)];
     case "about":
       return [aboutPage(route)];
+    case "guides":
+      return [guidesList(route)];
+    case "guide":
+      return [guideArticle(route)];
     case "contact":
       return [contactPage(route)];
     case "language":
