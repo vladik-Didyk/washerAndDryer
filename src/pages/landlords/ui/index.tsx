@@ -1,6 +1,6 @@
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { ArrowRight, Building2, Check, Phone } from "~/shared/ui";
+import { ArrowRight, Building2, Check, LangLink, Phone } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { PageIntro } from "~/widgets/page-intro";
 
@@ -51,9 +51,9 @@ export default function LandlordsPage() {
       >
         <p className="lead mt-5 max-w-2xl">{text.lead}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a href={QUOTE_PATH} className="btn btn-primary">
+          <LangLink href={QUOTE_PATH} className="btn btn-primary">
             {d.common.getQuote}
-          </a>
+          </LangLink>
           <a href={phone.tel} className="btn btn-secondary">
             <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
             {d.common.callOrText}
@@ -115,10 +115,10 @@ export default function LandlordsPage() {
               </li>
             ))}
           </ol>
-          <a href={QUOTE_PATH} className="btn btn-gold mt-12">
+          <LangLink href={QUOTE_PATH} className="btn btn-gold mt-12">
             {text.startWithQuote}
             <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
-          </a>
+          </LangLink>
         </div>
       </section>
 
@@ -148,9 +148,9 @@ export default function LandlordsPage() {
             <p className="mt-6 text-ink-soft">
               {rich(text.moreAnswers, {
                 faqLink: (
-                  <a href="/faq/" className="text-link">
+                  <LangLink href="/faq/" className="text-link">
                     {text.faqLink}
-                  </a>
+                  </LangLink>
                 ),
               })}
             </p>

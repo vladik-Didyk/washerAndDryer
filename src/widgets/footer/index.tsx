@@ -3,7 +3,7 @@ import { getMachineTypes, machinePath } from "~/entities/machine";
 import { siteConfig } from "~/shared/config";
 import { LANGUAGES, useI18n, type Dictionary } from "~/shared/i18n";
 import { useSite, type Site } from "~/shared/lib";
-import { Clock, Facebook, Logo, MapPin, MessageSquare, Phone } from "~/shared/ui";
+import { Clock, Facebook, LangLink, Logo, MapPin, MessageSquare, Phone } from "~/shared/ui";
 
 const footerLink =
   "text-white/85 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white";
@@ -48,9 +48,16 @@ function LinkGroup({
       <ul className="mt-3 space-y-2">
         {links.map((link) => (
           <li key={link.href}>
-            <a href={link.href} lang={link.lang} hrefLang={link.lang} className={footerLink}>
-              {link.label}
-            </a>
+            {link.lang ? (
+              // A language's home page: its own address, not this page's language.
+              <a href={link.href} lang={link.lang} hrefLang={link.lang} className={footerLink}>
+                {link.label}
+              </a>
+            ) : (
+              <LangLink href={link.href} className={footerLink}>
+                {link.label}
+              </LangLink>
+            )}
           </li>
         ))}
       </ul>
@@ -66,10 +73,10 @@ export function Footer() {
   const [toronto, ...otherCities] = getCities(d);
 
   return (
-    <footer lang="en" className="on-dark bg-brand-dark text-white/85">
+    <footer className="on-dark bg-brand-dark text-white/85">
       <div className="container-page grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div className="col-span-2 lg:col-span-4">
-          <a href="/" className="inline-flex items-center gap-3 rounded-xl">
+          <LangLink href="/" className="inline-flex items-center gap-3 rounded-xl">
             {/* White tile keeps the green logo visible on the dark footer. */}
             <span className="rounded-xl bg-white p-1">
               <Logo className="h-11 w-11" />
@@ -80,7 +87,7 @@ export function Footer() {
             >
               {companyName}
             </span>
-          </a>
+          </LangLink>
           <p className="mt-5">{common.tagline}</p>
           <p className="mt-2 flex items-center gap-2 text-white/70">
             <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -146,30 +153,30 @@ export function Footer() {
           </h2>
           <ul className="mt-3 space-y-2">
             <li>
-              <a href={cityPath(toronto)} className={footerLink}>
+              <LangLink href={cityPath(toronto)} className={footerLink}>
                 {toronto.name}
-              </a>
+              </LangLink>
               <ul aria-label={footer.torontoDistricts} className="mt-2 space-y-2 border-l border-white/20 pl-3">
                 {getDistricts(d).map((district) => (
                   <li key={district.slug}>
-                    <a href={districtPath(district)} className={footerLink}>
+                    <LangLink href={districtPath(district)} className={footerLink}>
                       {district.name}
-                    </a>
+                    </LangLink>
                   </li>
                 ))}
               </ul>
             </li>
             {otherCities.map((city) => (
               <li key={city.slug}>
-                <a href={cityPath(city)} className={footerLink}>
+                <LangLink href={cityPath(city)} className={footerLink}>
                   {city.name}
-                </a>
+                </LangLink>
               </li>
             ))}
             <li>
-              <a href="/areas/" className={footerLink}>
+              <LangLink href="/areas/" className={footerLink}>
                 {common.allAreas}
-              </a>
+              </LangLink>
             </li>
           </ul>
           <p className="mt-3 text-white/70">{common.fartherAwayAsk}</p>

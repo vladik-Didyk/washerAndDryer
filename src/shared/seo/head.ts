@@ -2,40 +2,44 @@
 // JSON-LD. Pages build a PageHead in their loader (pageHead) and export `meta = seoMeta`.
 import type { MetaDescriptor } from "react-router";
 import { siteConfig } from "../config/site";
-import { LANGUAGES, languageOf } from "../i18n";
+import { DEFAULT_LANG, LANGUAGES, isEnglishOnly, localizePath, type I18n } from "../i18n";
 import { photoFiles } from "../lib/photos";
 import { breadcrumbList } from "./json-ld";
-import type { Crumb, JsonLd, Lang, PageHead, PageKind, Preload } from "./types";
+import type { Crumb, JsonLd, PageHead, PageKind, Preload } from "./types";
 
 export const absoluteUrl = (path: string) => `${siteConfig.siteUrl}${path}`;
 
-// The home page and the Spanish and Russian pages are language versions of each other.
-export const languageAlternates: Array<{ lang: string; path: string }> = LANGUAGES.map((language) => ({
-  lang: language.code,
-  path: language.path,
-}));
+// The language versions of a page: every page exists in every language (src/app/routes.ts),
+// except the English-only policies and the 404 page. `path` is the English path.
+export function languageVersions(path: string, kind: PageKind): Array<{ lang: string; path: string }> {
+  if (kind === "not-found" || isEnglishOnly(path)) return [];
+  return LANGUAGES.map((language) => ({ lang: language.code, path: localizePath(path, language.code) }));
+}
 
 export interface PageHeadInput {
+  /** The English path ("/faq/"): the page's own language prefix is added here. */
   path: string;
   kind: PageKind;
   title: string;
   description: string;
-  lang?: Lang;
   draft?: boolean;
   noindex?: boolean;
+  /** English paths, like `path`. */
   breadcrumbs?: Crumb[];
   ogType?: "website" | "article";
   jsonLd?: JsonLd[];
   preloads?: Array<Preload | null>;
 }
 
-// The page's own JSON-LD nodes, then its BreadcrumbList (every inner page has one).
-export function pageHead(input: PageHeadInput): PageHead {
-  const breadcrumbs = input.breadcrumbs ?? null;
+// The page's own JSON-LD nodes, then its BreadcrumbList (every inner page has one). Paths come
+// in English and go out in the page's language (`i18n`): canonical, og:url, breadcrumbs,
+// hreflang alternates.
+export function pageHead(i18n: I18n, input: PageHeadInput): PageHead {
+  const breadcrumbs = input.breadcrumbs?.map((crumb) => ({ ...crumb, path: i18n.href(crumb.path) })) ?? null;
   return {
-    path: input.path,
+    path: i18n.href(input.path),
     kind: input.kind,
-    lang: input.lang ?? "en",
+    lang: i18n.lang,
     title: input.title,
     description: input.description,
     draft: input.draft ?? false,
@@ -43,8 +47,8 @@ export function pageHead(input: PageHeadInput): PageHead {
     noindex: Boolean(input.noindex || input.draft || input.kind === "not-found"),
     breadcrumbs,
     ogType: input.ogType ?? "website",
-    ogLocale: languageOf(input.lang ?? "en").ogLocale,
-    alternates: languageAlternates.some((alt) => alt.path === input.path) ? languageAlternates : [],
+    ogLocale: i18n.language.ogLocale,
+    alternates: languageVersions(input.path, input.kind),
     jsonLd: [...(input.jsonLd ?? []), ...(breadcrumbs ? [breadcrumbList(breadcrumbs)] : [])],
     preloads: (input.preloads ?? []).filter((preload): preload is Preload => Boolean(preload)),
   };
@@ -98,7 +102,8 @@ export function headMeta(head: PageHead): MetaDescriptor[] {
     for (const alt of head.alternates) {
       tags.push({ tagName: "link", rel: "alternate", hrefLang: alt.lang, href: absoluteUrl(alt.path) });
     }
-    tags.push({ tagName: "link", rel: "alternate", hrefLang: "x-default", href: `${siteConfig.siteUrl}/` });
+    const english = head.alternates.find((alt) => alt.lang === DEFAULT_LANG);
+    if (english) tags.push({ tagName: "link", rel: "alternate", hrefLang: "x-default", href: absoluteUrl(english.path) });
   }
   for (const data of head.jsonLd) tags.push({ "script:ld+json": data });
   return tags;

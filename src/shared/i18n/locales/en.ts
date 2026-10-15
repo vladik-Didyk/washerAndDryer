@@ -60,6 +60,8 @@ const en = {
     measureGuide: "How to measure your laundry space",
     howItWorks: "How it works",
     opensInNewTab: "(opens in a new tab)",
+    // Beside a link from a Spanish or Russian page to an English-only page (the policies).
+    availableInEnglish: "Available in English",
     // The hookups every machine needs: machine pages, /machines/, landlords, guides, llms.txt.
     hookups: [
       "Hot and cold water taps for the washer",
@@ -91,8 +93,6 @@ const en = {
       getQuote: "Get a quote",
       repairForm: "Repair form",
       textUs: "Text us",
-      // The second button on the Spanish and Russian pages (a text message).
-      text: "Text",
     },
     draft: {
       label: "Draft notice",
@@ -123,6 +123,8 @@ const en = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     menuContact: "{phone}, Mon–Sat {opens} – {closes}",
+    // The EN · ES · RU switcher.
+    language: "Language",
   },
 
   footer: {
@@ -626,6 +628,8 @@ const en = {
   // Home page sections and the shared bands (widgets).
   home: {
     hero: {
+      // The line above the heading (the Spanish and Russian home pages: "We speak Spanish").
+      eyebrow: "Local Toronto business",
       title: "Washer & dryer rental in Toronto & the GTA",
       priceSummary: "{setPrice} a week for the set, or {singlePrice} a week for one machine.",
       aWeek: "a week",
@@ -1636,67 +1640,6 @@ const en = {
       subject: "New rental request — {name}",
       areaUnsure: "Not sure from the postal code: confirm by text",
     },
-  },
-
-  // The Spanish and Russian pages (/es/, /ru/): a short version of the offer. The English
-  // text here is the fallback for a missing translation; no English page uses it.
-  language: {
-    metaTitle: "Washer & Dryer Rental Toronto & GTA | {setPrice}/week",
-    metaDescription:
-      "Washer & dryer rental in Toronto and the GTA: {setPrice} a week for a set, {singlePrice} for one machine. Repairs included. We speak English, Spanish & Russian.",
-    eyebrow: "We speak English, Spanish & Russian",
-    h1: "Washer & dryer rental in Toronto & the GTA",
-    priceSet: "{price} a week for a washer and dryer set",
-    priceSingle: "or {price} a week for one machine",
-    priceNote: "Prices in Canadian dollars. No HST charged.",
-    firstWeekFree:
-      "New customers who start a rental by {firstWeekFreeEnd} pay no rent for the first week. The deposit and delivery are still paid.",
-    includedTitle: "Included",
-    included: [
-      "Repairs, or a replacement machine, at no charge",
-      "Old machine haul-away at no charge",
-      "No credit check",
-      "Same-week delivery",
-    ],
-    termsTitle: "Terms",
-    terms: [
-      "{deposit} refundable deposit, returned when the machine comes back working.",
-      "{minWeeks}-week minimum, then week to week with {noticeDays} days' notice.",
-      "Delivery and installation quoted per job, before you pay.",
-      "Machines are pre-owned, checked before they go out, in good working order. Brand and model depend on availability.",
-      "Pay by Interac e-Transfer or credit card.",
-      "You get {referralAmount} when a friend you refer signs up for {referralMonths} months or more.",
-    ],
-    machinesTitle: "Machine types",
-    machines: {
-      stackable: "Stackable pair",
-      "laundry-centre": "One-piece laundry centre",
-      "side-by-side-front-load": "Side-by-side front-load",
-      "side-by-side-top-load": "Side-by-side top-load",
-      "single-machine": "Washer or dryer only",
-    },
-    machinePrice: "{price} {perWeek}",
-    perWeek: "a week",
-    needsTitle: "What every machine needs",
-    needs:
-      "Water hookups (hot and cold), a drain, and the right outlet. Most electric dryers need a 240V outlet, 3- or 4-prong. A vented dryer also needs a vent to the outside. Send us a photo and we'll check.",
-    areaTitle: "Service area",
-    area: [
-      "Toronto (North York, Etobicoke, Scarborough, East York, York)",
-      "Mississauga",
-      "Brampton",
-      "Vaughan",
-      "Markham",
-      "Richmond Hill",
-    ],
-    areaFar: "Farther away? Ask us.",
-    contactTitle: "Call or text",
-    call: "Call",
-    callPhone: "{call}: {phone}",
-    text: "Text",
-    hours: "Mon–Sat {opens} – {closes}. Sunday closed.",
-    languagesLine: "We speak English, Spanish & Russian.",
-    englishLink: "English",
   },
 };
 

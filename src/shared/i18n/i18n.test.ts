@@ -4,7 +4,16 @@ import { describe, expect, it } from "vitest";
 import en from "./locales/en";
 import es from "./locales/es";
 import ru from "./locales/ru";
-import { LANGUAGES, createI18n, loadAllDictionaries, placeholdersOf } from "./index";
+import {
+  LANGUAGES,
+  createI18n,
+  langFromPath,
+  loadAllDictionaries,
+  localizePath,
+  pathInLanguage,
+  placeholdersOf,
+  splitLangPath,
+} from "./index";
 
 type Tree = Record<string, unknown>;
 
@@ -73,6 +82,37 @@ describe("every language", () => {
       const { d } = createI18n(language.code, { ...facts });
       expect(d.pages.home.title).toContain("$12.50");
     }
+  });
+});
+
+describe("paths", () => {
+  it("reads the language from the URL prefix", () => {
+    expect(langFromPath("/es/")).toBe("es");
+    expect(langFromPath("/ru/machines/stackable/")).toBe("ru");
+    expect(langFromPath("/machines/")).toBe("en");
+    expect(langFromPath("/estate/")).toBe("en");
+    expect(splitLangPath("/es/faq/")).toEqual({ lang: "es", path: "/faq/" });
+    expect(splitLangPath("/es")).toEqual({ lang: "es", path: "/" });
+  });
+
+  it("keeps links in the page's language", () => {
+    expect(localizePath("/faq/", "es")).toBe("/es/faq/");
+    expect(localizePath("/", "ru")).toBe("/ru/");
+    expect(localizePath("/#prices", "es")).toBe("/es/#prices");
+    expect(localizePath("/start/?machine=stackable", "ru")).toBe("/ru/start/?machine=stackable");
+    expect(localizePath("/es/faq/", "es")).toBe("/es/faq/");
+    expect(localizePath("/faq/", "en")).toBe("/faq/");
+    for (const other of ["tel:+14379076955", "sms:+1", "https://example.com/", "#top", "//cdn.example.com/x"]) {
+      expect(localizePath(other, "es")).toBe(other);
+    }
+    // English-only pages keep their English address.
+    expect(localizePath("/terms/#first-week-free", "es")).toBe("/terms/#first-week-free");
+  });
+
+  it("maps the page being shown to its other languages", () => {
+    expect(pathInLanguage("/es/toronto/north-york/", "ru")).toBe("/ru/toronto/north-york/");
+    expect(pathInLanguage("/ru/faq/", "en")).toBe("/faq/");
+    expect(pathInLanguage("/privacy/", "es")).toBe("/es/");
   });
 });
 

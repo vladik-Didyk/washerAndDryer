@@ -14,7 +14,7 @@ const stepText = (i18n: I18n, text: string, step: number) => i18n.format(text, {
 // Step 1 is the page to find and link to; the later steps and the confirmation are noindex.
 export const stepHeads = {
   machine: (i18n: I18n) =>
-    pageHead({
+    pageHead(i18n, {
       path: STEP_PATHS.machine,
       kind: "start",
       title: i18n.d.pages.start.title,
@@ -22,7 +22,7 @@ export const stepHeads = {
       breadcrumbs: crumbs(i18n),
     }),
   details: (i18n: I18n) =>
-    pageHead({
+    pageHead(i18n, {
       path: STEP_PATHS.details,
       kind: "start",
       noindex: true,
@@ -31,7 +31,7 @@ export const stepHeads = {
       breadcrumbs: crumbs(i18n),
     }),
   contact: (i18n: I18n) =>
-    pageHead({
+    pageHead(i18n, {
       path: STEP_PATHS.contact,
       kind: "start",
       noindex: true,
@@ -40,7 +40,7 @@ export const stepHeads = {
       breadcrumbs: crumbs(i18n),
     }),
   done: (i18n: I18n) =>
-    pageHead({
+    pageHead(i18n, {
       path: STEP_PATHS.done,
       kind: "start",
       noindex: true,

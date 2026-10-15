@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useLoaderData } from "react-router";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { CircleCheck, MessageSquare } from "~/shared/ui";
+import { CircleCheck, LangLink, MessageSquare } from "~/shared/ui";
 import type { doneLoader } from "../loaders.server";
 import { StepShell } from "./StepShell";
 
@@ -41,9 +41,9 @@ export function DoneStep() {
             <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
             {text.textPhoto}
           </a>
-          <a href="/" className="btn btn-primary">
+          <LangLink href="/" className="btn btn-primary">
             {text.home}
-          </a>
+          </LangLink>
         </div>
       </div>
     </StepShell>

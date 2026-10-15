@@ -18,6 +18,7 @@
 // Adding a language: write ./locales/xx.ts (typed DeepPartial<Dictionary>), add one entry to
 // LANGUAGES below, and give it pages (a route) if it has its own. README.md has the steps.
 import { createContext, createElement, Fragment, useContext, type ReactNode } from "react";
+import { englishOnlyPaths } from "../config/site";
 import type en from "./locales/en";
 
 export type Dictionary = typeof en;
@@ -36,6 +37,8 @@ interface LanguageEntry {
   code: string;
   /** The language's own name, for language links. */
   name: string;
+  /** Its name in English: the "Language:" line of the form emails. */
+  englishName: string;
   /** Intl locale for dates. */
   locale: string;
   /** Intl locale for money and numbers. The Spanish and Russian pages write prices the
@@ -53,6 +56,7 @@ export const LANGUAGES = [
   {
     code: "en",
     name: "English",
+    englishName: "English",
     locale: "en-CA",
     numberLocale: "en-CA",
     ogLocale: "en_CA",
@@ -63,6 +67,7 @@ export const LANGUAGES = [
   {
     code: "es",
     name: "Español",
+    englishName: "Spanish",
     locale: "es",
     numberLocale: "en-CA",
     ogLocale: "es_LA",
@@ -73,6 +78,7 @@ export const LANGUAGES = [
   {
     code: "ru",
     name: "Русский",
+    englishName: "Russian",
     locale: "ru",
     numberLocale: "en-CA",
     ogLocale: "ru_RU",
@@ -90,10 +96,44 @@ export const languageOf = (lang: Lang): Language =>
   (LANGUAGES as readonly Language[]).find((entry) => entry.code === lang) ?? LANGUAGES[0];
 export const isLang = (value: unknown): value is Lang => LANGUAGES.some((entry) => entry.code === value);
 
+// ---------------------------------------------------------------------------------------
+// Paths: every page exists in every language, at the same slug under the language's prefix
+// (/machines/stackable/, /es/machines/stackable/, /ru/machines/stackable/). English has no
+// prefix. src/app/routes.ts registers each page once per language from this registry.
+
+const PREFIX = /^\/([a-z]{2})(?=\/|$)/;
+
+// "/es/faq/" -> { lang: "es", path: "/faq/" }; "/faq/" -> { lang: "en", path: "/faq/" }.
+export function splitLangPath(pathname: string): { lang: Lang; path: string } {
+  const match = pathname.match(PREFIX);
+  if (match && match[1] !== DEFAULT_LANG && isLang(match[1])) {
+    const rest = pathname.slice(match[0].length);
+    return { lang: match[1], path: rest.startsWith("/") ? rest : `/${rest}` };
+  }
+  return { lang: DEFAULT_LANG, path: pathname };
+}
+
 // The language of a URL: /es/... is Spanish, /ru/... Russian, everything else English.
-export function langFromPath(pathname: string): Lang {
-  const match = LANGUAGES.find((entry) => entry.path !== "/" && pathname.startsWith(entry.path));
-  return match?.code ?? DEFAULT_LANG;
+export const langFromPath = (pathname: string): Lang => splitLangPath(pathname).lang;
+
+// A page that exists in English only (the policies, shared/config englishOnlyPaths).
+export const isEnglishOnly = (href: string) => englishOnlyPaths.includes(href.split(/[?#]/)[0]);
+
+// A site link in a language: "/faq/#deposit" -> "/es/faq/#deposit". Links that are not site
+// paths (tel:, sms:, https:, #anchor), English-only pages and links that already carry a
+// language stay as they are.
+export function localizePath(href: string, lang: Lang): string {
+  if (lang === DEFAULT_LANG || !href.startsWith("/") || href.startsWith("//") || isEnglishOnly(href)) return href;
+  if (splitLangPath(href).lang !== DEFAULT_LANG) return href;
+  return `/${lang}${href}`;
+}
+
+// The same page in another language (the language switcher). An English-only page has no
+// other version: its link goes to that language's home page.
+export function pathInLanguage(pathname: string, lang: Lang): string {
+  const { path } = splitLangPath(pathname);
+  if (lang !== DEFAULT_LANG && isEnglishOnly(path)) return languageOf(lang).path;
+  return localizePath(path, lang);
 }
 
 // ---------------------------------------------------------------------------------------
@@ -163,7 +203,7 @@ export const fill = (template: string, vars: Record<string, string>) =>
 // The {names} in a string, in order.
 export const placeholdersOf = (text: string) => [...text.matchAll(PLACEHOLDER)].map((match) => match[1]);
 
-function deepFill<T>(value: T, vars: Record<string, string>): T {
+export function deepFill<T>(value: T, vars: Record<string, string>): T {
   if (typeof value === "string") return fill(value, vars) as T;
   if (Array.isArray(value)) return value.map((item) => deepFill(item, vars)) as T;
   if (isPlainObject(value)) {
@@ -287,6 +327,8 @@ export interface I18n extends Formatters {
   format: (template: string, vars?: Vars) => string;
   /** Like `format`, but a value may be markup (a link, <strong>): returns React nodes. */
   rich: (template: string, slots: Record<string, ReactNode>) => ReactNode;
+  /** A site link in this language: href("/faq/") -> "/es/faq/" (localizePath). */
+  href: (path: string) => string;
   /** Fills the facts into other (English) text: the server-only text, ./index.server.ts. */
   resolve: <T>(value: T) => T;
   /** A money or number fact as a number (JSON-LD). */
@@ -345,6 +387,7 @@ export function createI18n(lang: Lang, facts: Facts): I18n {
       if (last < template.length) nodes.push(template.slice(last));
       return nodes.map((node, index) => createElement(Fragment, { key: index }, node));
     },
+    href: (path) => localizePath(path, lang),
     // The server-only text is English (./locales/en.server.ts): English formats.
     resolve: (value) => deepFill(value, baseVars),
     amount: (name) => {

@@ -7,7 +7,7 @@ import { localBusiness, pageHead, photoPreload } from "~/shared/seo";
 export async function loader(args: LoaderFunctionArgs) {
   const i18n = await requestI18n(args);
   return {
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.home,
       kind: "home",
       title: i18n.d.pages.home.title,

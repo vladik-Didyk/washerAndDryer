@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { sectionId } from "~/shared/lib";
-import { BookOpen, LinkList, Phone } from "~/shared/ui";
+import { BookOpen, LangLink, LinkList, Phone } from "~/shared/ui";
 import { ArticleBody } from "~/widgets/article-body";
 import { PageIntro } from "~/widgets/page-intro";
 import type { loader } from "../loader";
@@ -62,9 +62,9 @@ export default function GuidePage() {
               </h2>
               <p className="mt-2 text-ink-soft">{d.guides.ctaText}</p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href="/start/" className="btn btn-primary">
+                <LangLink href="/start/" className="btn btn-primary">
                   {d.common.startRental}
-                </a>
+                </LangLink>
                 <a href={phone.tel} className="btn btn-secondary">
                   <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
                   {d.common.callOrText}

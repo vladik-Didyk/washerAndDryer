@@ -8,11 +8,12 @@
 // Pure functions only: the tests call them directly.
 import { getMachineTypes } from "~/entities/machine";
 import { checkPostalCode, formatPostalCode, type PostalStatus } from "~/features/postal-check";
+import { pagePaths } from "~/shared/config";
 import type { I18n } from "~/shared/i18n";
 import { EMAIL_PATTERN, PHONE_PATTERN, field, type FieldErrorMap, type Validation } from "~/shared/lib/form-data";
 
 export const STEP_PATHS = {
-  machine: "/start/",
+  machine: pagePaths.start,
   details: "/start/details/",
   contact: "/start/contact/",
   done: "/start/done/",

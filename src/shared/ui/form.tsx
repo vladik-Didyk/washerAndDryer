@@ -1,3 +1,4 @@
+import { LangLink } from "./LangLink";
 import { useEffect, useRef, type ReactNode } from "react";
 import { ChevronDown, CircleAlert, CircleCheck, LoaderCircle } from "./icons";
 import { siteConfig } from "../config/site";
@@ -129,9 +130,9 @@ export function SentPanel({
       <p id="form-sent-note" className="lead mt-2">
         {note ?? d.forms.sentNote}
       </p>
-      <a href={resetHref} className="btn btn-secondary mt-8">
+      <LangLink href={resetHref} className="btn btn-secondary mt-8">
         {d.forms.sendAnother}
-      </a>
+      </LangLink>
     </div>
   );
 }

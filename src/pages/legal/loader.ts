@@ -12,15 +12,15 @@ export const legalContextOf = (context: LoaderFunctionArgs["context"]): LegalCon
   analyticsOn: Boolean(flagsOf(context).analyticsToken),
 });
 
-export const legalHead = ({ d }: I18n, page: LegalPage) =>
-  pageHead({
+export const legalHead = (i18n: I18n, page: LegalPage) =>
+  pageHead(i18n, {
     path: page.path,
     kind: page.kind,
     title: page.metaTitle,
     description: page.metaDescription,
     draft: page.draft,
     breadcrumbs: [
-      { name: d.pages.home.name, path: "/" },
+      { name: i18n.d.pages.home.name, path: "/" },
       { name: page.title, path: page.path },
     ],
   });

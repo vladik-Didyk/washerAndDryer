@@ -8,7 +8,7 @@ export async function loader(args: LoaderFunctionArgs) {
   const { d } = i18n;
   const text = d.jsonLd.landlords;
   return {
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.landlords,
       kind: "landlords",
       title: d.pages.landlords.title,

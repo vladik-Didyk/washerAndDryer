@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { heroPhoto } from "~/shared/lib";
-import { KeepWordsWhole, Phone, Photo } from "~/shared/ui";
+import { KeepWordsWhole, LangLink, Phone, Photo } from "~/shared/ui";
 
 // A closing band near the bottom of the main pages: the home page's laundry-room photo under a
 // dark green overlay, one short line, and the two ways to start. By default "Start your
@@ -46,9 +46,9 @@ export function CtaBand({
           </h2>
           <p className="lead mt-4 text-white/90">{text ?? d.common.readyToRentText}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href={button.href} className="btn btn-gold">
+            <LangLink href={button.href} className="btn btn-gold">
               {button.label}
-            </a>
+            </LangLink>
             <a href={phone.tel} className="btn btn-outline-light">
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               {d.common.callOrText}

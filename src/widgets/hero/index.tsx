@@ -3,7 +3,7 @@ import { PostalCodeChecker } from "~/features/postal-check";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { heroPhoto, photoFiles } from "~/shared/lib";
-import { MapPin, Phone, WasPrice } from "~/shared/ui";
+import { LangLink, MapPin, Phone, WasPrice } from "~/shared/ui";
 
 // The laundry-room photo. Phones get the portrait crop as a band above the text; from 640px the
 // wide photo; from 1024px it fills the right half of the hero, out to the edge of the window.
@@ -63,7 +63,7 @@ export function Hero() {
         <div className="container-page pb-12 pt-8 sm:pb-14 sm:pt-10 lg:col-[2/3] lg:row-start-1 lg:mx-0 lg:max-w-none lg:self-center lg:px-0 lg:py-14 lg:pr-10">
           <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
             <MapPin className="h-4 w-4" aria-hidden="true" />
-            {d.common.localBusiness}
+            {hero.eyebrow}
           </p>
           <h1
             id="hero-title"
@@ -95,9 +95,9 @@ export function Hero() {
           </div>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href="/start/" className="btn btn-primary sm:px-5">
+            <LangLink href="/start/" className="btn btn-primary sm:px-5">
               {d.common.startRental}
-            </a>
+            </LangLink>
             <a href={phone.tel} className="btn btn-secondary sm:px-5">
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               {d.common.callOrText}

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { ChevronLeft, Check, MessageSquare, Phone } from "~/shared/ui";
+import { Check, ChevronLeft, LangLink, MessageSquare, Phone } from "~/shared/ui";
 import { STEPS, type StepId } from "../model";
 
 // The frame of every step: the heading, a progress line (3 steps), the step's form, a link
@@ -72,10 +72,10 @@ export function StepShell({
 
           {backHref && (
             <p className="mt-6">
-              <a href={backHref} className="text-link inline-flex items-center gap-1">
+              <LangLink href={backHref} className="text-link inline-flex items-center gap-1">
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                 {text.back}
-              </a>
+              </LangLink>
             </p>
           )}
         </div>

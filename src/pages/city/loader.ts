@@ -7,7 +7,7 @@ import { pageHead, serviceNode } from "~/shared/seo";
 
 export const cityHead = (i18n: I18n, city: City) => {
   const { d, format } = i18n;
-  return pageHead({
+  return pageHead(i18n, {
     path: cityPath(city),
     kind: "city",
     title: city.metaTitle,

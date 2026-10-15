@@ -1,7 +1,7 @@
 import { activePromotions, promotionText } from "~/entities/offer";
 import type { I18n } from "~/shared/i18n";
 import { sectionId, useSite, type ArticleBlock, type ArticleSection, type RenderedBlock } from "~/shared/lib";
-import { ArrowRight, Info } from "~/shared/ui";
+import { ArrowRight, Info, LangLink } from "~/shared/ui";
 
 // The per-request blocks of an article's text (shared/i18n locales/en.server.ts), filled in by
 // the page loader: { include: "hookups" } is the hookup checklist; { offer: "promotions" } one
@@ -84,10 +84,10 @@ function Block({ block }: { block: RenderedBlock }) {
     if (!site.has(block.link.href)) return null;
     return (
       <p className="mt-4">
-        <a href={block.link.href} className="text-link inline-flex items-center gap-1.5">
+        <LangLink href={block.link.href} className="text-link inline-flex items-center gap-1.5">
           {block.link.label}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </a>
+        </LangLink>
       </p>
     );
   }

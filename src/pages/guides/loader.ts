@@ -13,7 +13,7 @@ export async function loader(args: LoaderFunctionArgs) {
   if (!guides.length) throw data("Not found", { status: 404 });
   return {
     guides: guides.map((guide) => ({ slug: guide.slug, title: guide.title, summary: guide.summary, path: guidePath(guide) })),
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.guides,
       kind: "guides",
       title: d.pages.guides.title,
@@ -25,6 +25,7 @@ export async function loader(args: LoaderFunctionArgs) {
       ],
       jsonLd: [
         itemList(
+          i18n,
           d.jsonLd.guidesList,
           pagePaths.guides,
           guides.map((guide) => ({ name: guide.title, path: guidePath(guide) })),

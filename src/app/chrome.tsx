@@ -1,9 +1,9 @@
 // The frame around every page: skip link, draft ribbon, offer bar, header, breadcrumbs,
 // footer and the phone bar. What changes per page comes from the page loader's `head`
-// (kind, breadcrumbs, draft, lang) and its `chrome` (the rental request asks for "Text us" in
-// the phone bar). Words come from the page's language (shared/i18n).
+// (kind, breadcrumbs, draft) and its `chrome` (the rental request asks for "Text us" in
+// the phone bar). Words and links follow the page's language (shared/i18n), all of it.
 import type { ReactNode } from "react";
-import { siteConfig } from "~/shared/config";
+import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n, type Dictionary } from "~/shared/i18n";
 import type { PageHead } from "~/shared/seo";
 import { Breadcrumbs } from "~/widgets/breadcrumbs";
@@ -26,16 +26,14 @@ function mobileActionFor(
 ): MobileAction {
   if (chrome?.mobileAction === "textUs") return { label: bar.textUs, href: siteConfig.phone.sms, icon: "sms" };
   switch (kind) {
-    case "language":
-      return { label: bar.text, href: siteConfig.phone.sms, icon: "sms" };
     case "landlords":
-      return { label: bar.getQuote, href: "/landlords/quote/" };
+      return { label: bar.getQuote, href: pagePaths.landlordQuote };
     case "landlord-quote":
       return { label: bar.getQuote, href: "#landlord-quote" };
     case "repair":
       return { label: bar.repairForm, href: "#repair-request" };
     default:
-      return { label: bar.startRental, href: "/start/" };
+      return { label: bar.startRental, href: pagePaths.start };
   }
 }
 
@@ -51,7 +49,6 @@ export function SiteChrome({
   children: ReactNode;
 }) {
   const { d } = useI18n();
-  const otherLanguage = head && head.lang !== "en";
   return (
     <>
       <a href="#main" className="skip-link">
@@ -65,10 +62,7 @@ export function SiteChrome({
         {children}
       </main>
       <Footer />
-      <MobileActionBar
-        action={mobileActionFor(head?.kind, chrome, d.chrome.mobileBar)}
-        lang={otherLanguage ? head.lang : "en"}
-      />
+      <MobileActionBar action={mobileActionFor(head?.kind, chrome, d.chrome.mobileBar)} />
     </>
   );
 }

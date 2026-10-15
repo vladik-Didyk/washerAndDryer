@@ -5,7 +5,7 @@
 import { getMachineTypes } from "~/entities/machine";
 import { activePromotions, getPrice, promotionText } from "~/entities/offer";
 import { siteConfig } from "~/shared/config";
-import type { I18n } from "~/shared/i18n";
+import { DEFAULT_LANG, LANGUAGES, type I18n } from "~/shared/i18n";
 import { serverText } from "~/shared/i18n/index.server";
 import type { CatalogEntry } from "../catalog";
 
@@ -21,7 +21,6 @@ const PAGE_GROUPS: Array<{ title: keyof ReturnType<typeof serverText>["llms"]["g
   { title: "areas", kinds: ["city", "district"] },
   { title: "guides", kinds: ["guides", "guide"] },
   { title: "policies", kinds: ["privacy", "terms"] },
-  { title: "languages", kinds: ["language"] },
 ];
 
 // `now` decides the prices and the running promotions (the request time).
@@ -37,10 +36,20 @@ export function llmsTxt(entries: CatalogEntry[], i18n: I18n, now: number): strin
       draft: entry.draft ? llms.draft : "",
     });
 
-  const pages = PAGE_GROUPS.map((group) => {
-    const lines = entries.filter((entry) => group.kinds.includes(entry.kind)).map(pageLine);
-    return lines.length ? `${format(llms.groupHeading, { title: llms.groups[group.title] })}\n\n${lines.join("\n")}` : null;
-  }).filter(Boolean);
+  const group = (title: keyof typeof llms.groups, lines: string[]) =>
+    lines.length ? `${format(llms.groupHeading, { title: llms.groups[title] })}\n\n${lines.join("\n")}` : null;
+  const pages = [
+    ...PAGE_GROUPS.map(({ title, kinds }) =>
+      group(title, entries.filter((entry) => kinds.includes(entry.kind)).map(pageLine)),
+    ),
+    // Every page is in each language too (/es/faq/, ...); the list links their home pages.
+    group(
+      "languages",
+      LANGUAGES.filter((language) => language.code !== DEFAULT_LANG).map((language) =>
+        format(llms.pageLine, { name: language.name, url: absolute(language.path), note: "", draft: "" }),
+      ),
+    ),
+  ].filter(Boolean);
 
   const offers = [
     ...activePromotions(now).map((promotion) => format(llms.offerLine, promotionText(promotion, i18n))),

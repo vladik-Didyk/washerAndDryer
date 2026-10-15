@@ -1,4 +1,4 @@
-export { absoluteUrl, headMeta, languageAlternates, pageHead, photoPreload, seoMeta, type PageHeadInput } from "./head";
+export { absoluteUrl, headMeta, languageVersions, pageHead, photoPreload, seoMeta, type PageHeadInput } from "./head";
 export {
   PHONE_E164,
   areaServed,

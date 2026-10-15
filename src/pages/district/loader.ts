@@ -8,7 +8,7 @@ import { pageHead, serviceNode, torontoPlace } from "~/shared/seo";
 export const districtHead = (i18n: I18n, district: District) => {
   const { d, format } = i18n;
   const toronto = d.areas.cities.toronto;
-  return pageHead({
+  return pageHead(i18n, {
     path: districtPath(district),
     kind: "district",
     title: district.metaTitle,

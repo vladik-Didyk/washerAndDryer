@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { loadAllDictionaries } from "~/shared/i18n";
 import { TEST_NOW, testI18n } from "~/test/context";
+import { LANGUAGES } from "~/shared/i18n";
+import { headMeta, pageHead } from "~/shared/seo";
 import { siteCatalog, optionalPages as optionalPagesOf, type CatalogOptions } from "./catalog";
+import routes from "./routes";
 import { sitemapXml } from "./resources/sitemap";
 import { llmsTxt as llmsTxtOf } from "./resources/llms.server";
 
@@ -68,5 +71,60 @@ describe("site catalog", () => {
       allLegalPages(i18n, { now, analyticsOn: false })[1].sections.map((section) => section.id);
     expect(ids(TEST_NOW)).toContain("first-week-free");
     expect(ids(AFTER_OFFER)).not.toContain("first-week-free");
+  });
+});
+
+describe("languages", () => {
+  // Every route path, as React Router matches it ("es/faq", "" for the English home page).
+  const paths = new Set(routes.map((entry) => entry.path ?? ""));
+
+  it("registers every page for every language, and the policies in English only", () => {
+    const english = routes.filter((entry) => !entry.id?.includes(".")).map((entry) => entry.path ?? "");
+    const perLanguage = english.filter((path) => !["privacy", "terms", "sitemap.xml", "robots.txt", "llms.txt", "*"].includes(path));
+    expect(perLanguage).toContain("start/details");
+    for (const { code } of LANGUAGES.filter((language) => language.code !== "en")) {
+      for (const path of perLanguage) expect(paths, `${code}/${path}`).toContain([code, path].filter(Boolean).join("/"));
+      expect(paths).not.toContain(`${code}/privacy`);
+    }
+  });
+
+  it("has a route for every page of the catalog, in each of its languages", () => {
+    const routeOf = (path: string) =>
+      [...paths].some((route) => {
+        const parts = route.split("/").filter(Boolean);
+        const wanted = path.split("/").filter(Boolean);
+        return parts.length === wanted.length && parts.every((part, index) => part.startsWith(":") || part === wanted[index]);
+      });
+    for (const entry of catalog(preview)) {
+      for (const lang of entry.languages) {
+        const localized = lang === "en" ? entry.path : `/${lang}${entry.path}`;
+        expect(routeOf(localized), localized).toBe(true);
+      }
+    }
+  });
+
+  it("lists every page in all three languages in the sitemap, with alternates", () => {
+    const xml = sitemapXml(catalog(live));
+    for (const loc of ["/machines/stackable/", "/es/machines/stackable/", "/ru/machines/stackable/", "/es/", "/ru/start/"]) {
+      expect(xml).toContain(`<loc>https://washerrent.com${loc}</loc>`);
+    }
+    expect(xml).toContain('<xhtml:link rel="alternate" hreflang="es" href="https://washerrent.com/es/faq/"/>');
+    expect(xml).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://washerrent.com/faq/"/>');
+    expect(xml.match(/<loc>/g)?.length).toBe(catalog(live).length * 3);
+  });
+
+  it("gives each page hreflang links to its three versions, and a canonical in its own language", async () => {
+    const spanish = await testI18n("es");
+    const tags = headMeta(pageHead(spanish, { path: "/faq/", kind: "faq", title: "t", description: "d" }));
+    const links = tags.filter((tag) => "tagName" in tag && tag.tagName === "link") as Array<Record<string, string>>;
+    expect(links.find((link) => link.rel === "canonical")?.href).toBe("https://washerrent.com/es/faq/");
+    expect(links.filter((link) => link.rel === "alternate").map((link) => `${link.hrefLang} ${link.href}`)).toEqual([
+      "en https://washerrent.com/faq/",
+      "es https://washerrent.com/es/faq/",
+      "ru https://washerrent.com/ru/faq/",
+      "x-default https://washerrent.com/faq/",
+    ]);
+    const policy = headMeta(pageHead(spanish, { path: "/terms/", kind: "terms", title: "t", description: "d" }));
+    expect(policy.some((tag) => "rel" in tag && tag.rel === "alternate")).toBe(false);
   });
 });

@@ -25,7 +25,6 @@ export type PageKind =
   | "guide"
   | "privacy"
   | "terms"
-  | "language"
   | "start"
   | "not-found";
 
@@ -53,7 +52,7 @@ export interface PageHead {
   breadcrumbs: Crumb[] | null;
   ogType: "website" | "article";
   ogLocale: string;
-  /** hreflang alternates, when the page is one language version of another. */
+  /** hreflang alternates: the page in every language (none for English-only pages). */
   alternates: Array<{ lang: string; path: string }>;
   jsonLd: JsonLd[];
   preloads: Preload[];

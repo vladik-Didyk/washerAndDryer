@@ -1,6 +1,6 @@
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { LinkList, MapPin, MessageSquare, Phone } from "~/shared/ui";
+import { LangLink, LinkList, MapPin, MessageSquare, Phone } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 
 // /about/: who we are and how we work. Confirmed facts only: no names, photos of people or history.
@@ -72,9 +72,9 @@ export default function AboutPage() {
                 <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
                 {d.common.text}
               </a>
-              <a href="/contact/" className="btn btn-secondary">
+              <LangLink href="/contact/" className="btn btn-secondary">
                 {text.contactPage}
-              </a>
+              </LangLink>
             </div>
           </div>
         </div>

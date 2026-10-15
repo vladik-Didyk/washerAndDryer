@@ -4,9 +4,10 @@ import { pagePaths } from "~/shared/config";
 import { pageHead } from "~/shared/seo";
 
 export async function loader(args: LoaderFunctionArgs) {
-  const { d } = await requestI18n(args);
+  const i18n = await requestI18n(args);
+  const { d } = i18n;
   return {
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.landlordQuote,
       kind: "landlord-quote",
       title: d.pages.landlordQuote.title,

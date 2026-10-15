@@ -1,7 +1,7 @@
 import { FaqAccordion, homeFaqs, type Faq } from "~/entities/faq";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { ArrowRight } from "~/shared/ui";
+import { ArrowRight, LangLink } from "~/shared/ui";
 
 // Accordion of a few common questions; the full list is on /faq/ (pages/faq).
 export function FaqSection({ items, moreHref = "/faq/" }: { items?: Faq[]; moreHref?: string | null }) {
@@ -26,10 +26,10 @@ export function FaqSection({ items, moreHref = "/faq/" }: { items?: Faq[]; moreH
             })}
           </p>
           {moreHref && (
-            <a href={moreHref} className="btn btn-secondary mt-6">
+            <LangLink href={moreHref} className="btn btn-secondary mt-6">
               {d.home.faq.all}
               <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
-            </a>
+            </LangLink>
           )}
         </div>
 

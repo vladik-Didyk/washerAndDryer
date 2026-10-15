@@ -2,7 +2,7 @@ import { useActionData } from "react-router";
 import { LandlordQuoteForm } from "~/features/landlord-quote-form";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { Building2, MessageSquare, Phone } from "~/shared/ui";
+import { Building2, LangLink, MessageSquare, Phone } from "~/shared/ui";
 import type { action } from "../action";
 
 // /landlords/quote/: the landlord quote form, with what happens after sending it.
@@ -28,9 +28,9 @@ export default function LandlordQuotePage() {
           </h1>
           <p className="lead mt-5">
             {quote.lead}{" "}
-            <a href="/landlords/" className="text-link">
+            <LangLink href="/landlords/" className="text-link">
               {quote.howOptionsWork}
-            </a>
+            </LangLink>
           </p>
 
           <h2 className="mt-10 font-display text-xl font-bold text-ink">{quote.nextTitle}</h2>

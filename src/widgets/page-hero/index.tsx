@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { findMachinePhoto } from "~/entities/machine";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { MapPin, Phone, Photo } from "~/shared/ui";
+import { LangLink, MapPin, Phone, Photo } from "~/shared/ui";
 
 // Header for the city and district pages: the home hero's facts, smaller, beside an example
 // photo of one machine type (`photo`, a file from entities/machine). `price` is the
@@ -59,9 +59,9 @@ export function PageHero({
           <p className="mt-2 text-sm text-ink-muted">{d.common.pricesNote}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href="/start/" className="btn btn-primary">
+            <LangLink href="/start/" className="btn btn-primary">
               {d.common.startRental}
-            </a>
+            </LangLink>
             <a href={phone.tel} className="btn btn-secondary">
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               {d.common.callOrText}

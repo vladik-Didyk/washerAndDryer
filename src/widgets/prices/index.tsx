@@ -1,6 +1,6 @@
 import { promotionText, useActivePromotions, usePrices, type PriceInfo } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
-import { Check, WasPrice } from "~/shared/ui";
+import { Check, LangLink, WasPrice } from "~/shared/ui";
 
 function PriceCard({ title, price, highlighted = false }: { title: string; price: PriceInfo; highlighted?: boolean }) {
   const { d, moneyParts } = useI18n();
@@ -35,9 +35,9 @@ function PriceCard({ title, price, highlighted = false }: { title: string; price
         ))}
       </ul>
 
-      <a href="/start/" className={`btn mt-8 w-full ${highlighted ? "btn-primary" : "btn-secondary"}`}>
+      <LangLink href="/start/" className={`btn mt-8 w-full ${highlighted ? "btn-primary" : "btn-secondary"}`}>
         {d.common.startRental}
-      </a>
+      </LangLink>
     </article>
   );
 }

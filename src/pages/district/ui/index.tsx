@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 import { YORK_REGION, cityPath, districtPath, findDistrict, getCities, getDistricts } from "~/entities/area";
 import { usePrices } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
-import { LinkList, WasPrice } from "~/shared/ui";
+import { LangLink, LinkList, WasPrice } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { DeliveryCheck } from "~/widgets/delivery-check";
 import { LocalLaundry } from "~/widgets/local-laundry";
@@ -56,9 +56,9 @@ export default function DistrictPage() {
               cities: yorkRegion.map((city, index) => (
                 <span key={city.slug}>
                   {index > 0 && (index === yorkRegion.length - 1 ? text.listAnd : text.listComma)}
-                  <a href={cityPath(city)} className="text-link">
+                  <LangLink href={cityPath(city)} className="text-link">
                     {city.name}
-                  </a>
+                  </LangLink>
                 </span>
               )),
             })}

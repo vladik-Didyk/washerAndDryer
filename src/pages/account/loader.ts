@@ -7,10 +7,11 @@ import { pageHead } from "~/shared/seo";
 export async function loader(args: LoaderFunctionArgs) {
   const { stripePortalUrl } = flagsOf(args.context);
   if (!stripePortalUrl) throw data("Not found", { status: 404 });
-  const { d } = await requestI18n(args);
+  const i18n = await requestI18n(args);
+  const { d } = i18n;
   return {
     stripePortalUrl,
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.account,
       kind: "account",
       title: d.pages.account.title,

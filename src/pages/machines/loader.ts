@@ -8,7 +8,7 @@ export async function loader(args: LoaderFunctionArgs) {
   const i18n = await requestI18n(args);
   const { d } = i18n;
   return {
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.machines,
       kind: "machines",
       title: d.pages.machines.title,
@@ -20,6 +20,7 @@ export async function loader(args: LoaderFunctionArgs) {
       // The five types as a list, and the two weekly prices.
       jsonLd: [
         itemList(
+          i18n,
           d.jsonLd.machinesList,
           pagePaths.machines,
           getMachineTypes(d).map((machine) => ({ name: machine.title, path: machinePath(machine) })),

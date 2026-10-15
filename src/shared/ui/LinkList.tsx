@@ -1,3 +1,4 @@
+import { LangLink } from "./LangLink";
 export interface LinkItem {
   href: string;
   label: string;
@@ -23,12 +24,12 @@ export function LinkList({
       <ul className="mt-4 flex flex-wrap gap-2.5">
         {links.map((link) => (
           <li key={link.href}>
-            <a
+            <LangLink
               href={link.href}
               className="inline-flex min-h-[2.75rem] items-center rounded-full border border-line bg-white px-4 py-2 font-medium text-ink transition-colors hover:border-brand hover:bg-brand-mint hover:text-brand-dark"
             >
               {link.label}
-            </a>
+            </LangLink>
           </li>
         ))}
       </ul>

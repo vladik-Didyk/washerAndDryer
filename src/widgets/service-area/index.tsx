@@ -2,7 +2,7 @@ import { cityPath, districtPath, getCities, getDistricts } from "~/entities/area
 import { PostalCodeChecker } from "~/features/postal-check";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { MapPin } from "~/shared/ui";
+import { LangLink, MapPin } from "~/shared/ui";
 
 const cityLink =
   "underline decoration-brand/30 decoration-2 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand";
@@ -42,16 +42,16 @@ export function ServiceArea({ title }: { title?: string }) {
               <li className="sm:col-span-2">
                 <span className="flex items-center gap-2 font-display text-2xl font-bold text-ink">
                   <MapPin className="h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
-                  <a href={cityPath(toronto)} className={cityLink}>
+                  <LangLink href={cityPath(toronto)} className={cityLink}>
                     {toronto.name}
-                  </a>
+                  </LangLink>
                 </span>
                 <ul aria-label={d.areas.districtsLabel} className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 pl-7">
                   {getDistricts(d).map((district) => (
                     <li key={district.slug}>
-                      <a href={districtPath(district)} className={`font-medium text-ink-soft ${cityLink}`}>
+                      <LangLink href={districtPath(district)} className={`font-medium text-ink-soft ${cityLink}`}>
                         {district.name}
-                      </a>
+                      </LangLink>
                     </li>
                   ))}
                 </ul>
@@ -62,16 +62,16 @@ export function ServiceArea({ title }: { title?: string }) {
                   className="flex items-center gap-2 border-t border-brand-mint-strong pt-4 font-display text-xl font-bold text-ink"
                 >
                   <MapPin className="h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
-                  <a href={cityPath(city)} className={cityLink}>
+                  <LangLink href={cityPath(city)} className={cityLink}>
                     {city.name}
-                  </a>
+                  </LangLink>
                 </li>
               ))}
             </ul>
             <p className="mt-6">
-              <a href="/areas/" className="text-link">
+              <LangLink href="/areas/" className="text-link">
                 {d.home.serviceArea.allAreas}
-              </a>
+              </LangLink>
             </p>
           </div>
         </div>

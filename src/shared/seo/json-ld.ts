@@ -59,7 +59,7 @@ export function localBusiness(i18n: I18n): JsonLd {
     "@id": BUSINESS_ID,
     name: siteConfig.companyName,
     description: business.description,
-    url: `${SITE}/`,
+    url: absolute(i18n.href("/")),
     telephone: PHONE_E164,
     logo: `${SITE}/brand/logo.png`,
     image: `${SITE}/og-image.jpg`,
@@ -105,6 +105,7 @@ export function breadcrumbList(items: Crumb[]): JsonLd {
 }
 
 // A "Service" node for a page: washer and dryer rental, somewhere, at the weekly prices.
+// `path` is the English path; the url is the page in the language of `i18n`.
 export function serviceNode(
   i18n: I18n,
   input: {
@@ -123,7 +124,7 @@ export function serviceNode(
     name: input.name,
     serviceType: input.serviceType ?? i18n.d.jsonLd.serviceType,
     description: input.description,
-    url: absolute(input.path),
+    url: absolute(i18n.href(input.path)),
     provider: providerRef(),
     areaServed: input.areaServed ?? areaServed(i18n),
     ...input.extra,
@@ -131,17 +132,23 @@ export function serviceNode(
   };
 }
 
-export function itemList(name: string, path: string, items: Array<{ name: string; path: string }>): JsonLd {
+// A list of pages; English paths, written out in the language of `i18n`.
+export function itemList(
+  i18n: I18n,
+  name: string,
+  path: string,
+  items: Array<{ name: string; path: string }>,
+): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name,
-    url: absolute(path),
+    url: absolute(i18n.href(path)),
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      url: absolute(item.path),
+      url: absolute(i18n.href(item.path)),
     })),
   };
 }

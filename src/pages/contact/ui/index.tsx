@@ -1,17 +1,7 @@
 import { cityPath, getCities } from "~/entities/area";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import {
-  Building2,
-  CircleHelp,
-  Clock,
-  Languages,
-  MapPin,
-  MessageSquare,
-  Phone,
-  Wrench,
-  type LucideIcon,
-} from "~/shared/ui";
+import { Building2, CircleHelp, Clock, LangLink, Languages, type LucideIcon, MapPin, MessageSquare, Phone, Wrench } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 import { StartRental } from "~/widgets/start-rental";
 
@@ -81,17 +71,17 @@ export default function ContactPage() {
               {getCities(d).map((city) => (
                 <li key={city.slug} className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
-                  <a href={cityPath(city)} className="text-link">
+                  <LangLink href={cityPath(city)} className="text-link">
                     {city.name}
-                  </a>
+                  </LangLink>
                 </li>
               ))}
             </ul>
             <p className="mt-3 text-ink-soft">
               {d.common.fartherAwayAsk}{" "}
-              <a href="/areas/" className="text-link">
+              <LangLink href="/areas/" className="text-link">
                 {d.common.allAreas}
-              </a>
+              </LangLink>
             </p>
           </div>
 
@@ -103,12 +93,12 @@ export default function ContactPage() {
                   <item.icon className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
                   <div>
                     <p className="text-ink-soft">{item.title}</p>
-                    <a
+                    <LangLink
                       href={item.href}
                       className="font-semibold text-brand underline decoration-brand/30 decoration-2 underline-offset-4 after:absolute after:inset-0 after:rounded-2xl"
                     >
                       {item.label}
-                    </a>
+                    </LangLink>
                   </div>
                 </li>
               ))}

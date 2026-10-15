@@ -1,7 +1,7 @@
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
 import { useI18n } from "~/shared/i18n";
 import type { FieldErrorMap } from "~/shared/lib";
-import { ArrowRight, ChoiceTiles } from "~/shared/ui";
+import { ArrowRight, ChoiceTiles, LangLink } from "~/shared/ui";
 import type { machineAction } from "../actions.server";
 import type { machineLoader } from "../loaders.server";
 import { machineChoices } from "../model";
@@ -26,9 +26,9 @@ export function MachineStep() {
         <p>
           {rich(text.intro, {
             link: (
-              <a href="/machines/" className="text-link">
+              <LangLink href="/machines/" className="text-link">
                 {d.common.compareTypes}
-              </a>
+              </LangLink>
             ),
           })}
         </p>

@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { offerFacts } from "~/entities/offer";
-import LanguagePage from "~/pages/language/ui";
 import HomePage from "~/pages/home/ui";
 import { pricing, promotions, type Promotion } from "~/shared/config";
 import { I18nProvider, createI18n, loadAllDictionaries, type Lang } from "~/shared/i18n";
@@ -62,16 +61,17 @@ describe("changing a base price", () => {
     weekly.set = 13.75;
     weekly.single = 7;
     const home = render(<HomePage />);
-    const spanish = render(<LanguagePage />, { lang: "es" });
-    const russian = render(<LanguagePage />, { lang: "ru" });
+    const spanish = render(<HomePage />, { lang: "es" });
+    const russian = render(<HomePage />, { lang: "ru" });
     const server = serverOutput();
     for (const output of [home, spanish, russian, server]) {
       expect(output).not.toMatch(/12\.50|6\.25/);
     }
     expect(home).toContain("$13.75");
     expect(home).toContain("$7 a week");
-    expect(spanish).toContain("$13.75 a la semana por una lavadora y una secadora");
-    expect(russian).toContain("$7 в неделю");
+    expect(spanish).toContain("Depósito reembolsable de $200");
+    expect(spanish).toContain("$13.75");
+    expect(russian).toContain("$7");
     expect(server).toContain("Washer & Dryer Rental Toronto & GTA | $13.75/week");
     expect(server).toContain('"price":"13.75"');
   });
@@ -111,8 +111,11 @@ describe("the first week free", () => {
   it("shows until the end of November 30 in Toronto, then disappears", () => {
     expect(render(<HomePage />, { now: end - 1 })).toContain("First week free until Nov 30");
     expect(render(<HomePage />, { now: end })).not.toContain("First week free");
-    expect(render(<LanguagePage />, { lang: "es", now: end - 1 })).toContain("hasta el 30 de noviembre de 2026");
-    expect(render(<LanguagePage />, { lang: "es", now: end })).not.toContain("Primera semana gratis");
+    expect(render(<HomePage />, { lang: "es", now: end - 1 })).toContain("First week free");
+    expect(render(<HomePage />, { lang: "es", now: end })).not.toContain("First week free");
+    expect(createI18n("es", offerFacts(end - 1)).d.offers.promotions["first-week-free"].note).toContain(
+      "hasta el 30 de noviembre de 2026",
+    );
     const llms = (now: number) => {
       const i18n = createI18n("en", offerFacts(now));
       const options = { previewDrafts: false, stripePortalUrl: null, now, analyticsOn: false };

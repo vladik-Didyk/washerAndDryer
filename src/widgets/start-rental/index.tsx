@@ -1,6 +1,6 @@
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { ArrowRight, MessageSquare, Phone } from "~/shared/ui";
+import { ArrowRight, LangLink, MessageSquare, Phone } from "~/shared/ui";
 
 // The "Start your rental" band near the bottom of the main pages (id="request", where the old
 // request form stood, so links to #request still land here). The request itself is the
@@ -56,10 +56,10 @@ export function StartRental() {
                 </li>
               ))}
             </ol>
-            <a href="/start/" className="btn btn-primary mt-8 w-full">
+            <LangLink href="/start/" className="btn btn-primary mt-8 w-full">
               {d.common.startRental}
               <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
-            </a>
+            </LangLink>
             <p className="mt-4 text-center text-sm text-ink-muted">{startRental.nothingToPay}</p>
           </div>
         </div>

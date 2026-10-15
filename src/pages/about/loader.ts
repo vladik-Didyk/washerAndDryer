@@ -4,9 +4,10 @@ import { pagePaths } from "~/shared/config";
 import { absoluteUrl, pageHead, providerRef } from "~/shared/seo";
 
 export async function loader(args: LoaderFunctionArgs) {
-  const { d } = await requestI18n(args);
+  const i18n = await requestI18n(args);
+  const { d } = i18n;
   return {
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.about,
       kind: "about",
       title: d.pages.about.title,
@@ -21,7 +22,7 @@ export async function loader(args: LoaderFunctionArgs) {
           "@type": "AboutPage",
           name: d.pages.about.title,
           description: d.pages.about.description,
-          url: absoluteUrl(pagePaths.about),
+          url: absoluteUrl(i18n.href(pagePaths.about)),
           about: providerRef(),
         },
       ],

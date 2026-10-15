@@ -1,5 +1,5 @@
 import { useI18n } from "~/shared/i18n";
-import { ArrowRight, Building2 } from "~/shared/ui";
+import { ArrowRight, Building2, LangLink } from "~/shared/ui";
 
 // Home page: a short pointer to /landlords/. It sits between Prices and About, which bring
 // their own padding.
@@ -20,10 +20,10 @@ export function LandlordsTeaser() {
               <p className="mt-2 max-w-2xl text-ink-soft">{landlordsTeaser.text}</p>
             </div>
           </div>
-          <a href="/landlords/" className="btn btn-secondary shrink-0">
+          <LangLink href="/landlords/" className="btn btn-secondary shrink-0">
             {landlordsTeaser.link}
             <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
-          </a>
+          </LangLink>
         </div>
       </div>
     </section>

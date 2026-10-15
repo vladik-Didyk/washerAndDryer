@@ -3,7 +3,7 @@ import { usePrices } from "~/entities/offer";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
-import { Check, KeepWordsWhole, LinkList, Phone, Ruler, WasPrice } from "~/shared/ui";
+import { Check, KeepWordsWhole, LangLink, LinkList, Phone, Ruler, WasPrice } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { MachineShowcase } from "~/widgets/machine-showcase";
 import { PageIntro } from "~/widgets/page-intro";
@@ -46,9 +46,9 @@ function Compare() {
           {machineTypes.map((machine) => (
             <li key={machine.slug} className="rounded-2xl border border-line bg-white p-5">
               <div className="flex items-baseline justify-between gap-3">
-                <a href={machinePath(machine)} className="text-link font-display text-lg">
+                <LangLink href={machinePath(machine)} className="text-link font-display text-lg">
                   <KeepWordsWhole text={machine.title} />
-                </a>
+                </LangLink>
                 <span className="shrink-0 font-display font-bold text-brand">
                   <TypePrice machine={machine} />
                 </span>
@@ -86,9 +86,9 @@ function Compare() {
               {machineTypes.map((machine) => (
                 <tr key={machine.slug}>
                   <th scope="row" className="px-6 py-4 font-medium">
-                    <a href={machinePath(machine)} className="text-link">
+                    <LangLink href={machinePath(machine)} className="text-link">
                       <KeepWordsWhole text={machine.title} />
-                    </a>
+                    </LangLink>
                   </th>
                   {COLUMNS.map((column) => (
                     <td key={column} className="px-6 py-4 text-ink-soft">
@@ -125,9 +125,9 @@ export default function MachinesPage() {
         <p className="lead mt-5 max-w-2xl">{text.lead}</p>
         <p className="mt-2 text-sm text-ink-muted">{d.common.pricesNote}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a href="/start/" className="btn btn-primary">
+          <LangLink href="/start/" className="btn btn-primary">
             {d.common.startRental}
-          </a>
+          </LangLink>
           <a href={phone.tel} className="btn btn-secondary">
             <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
             {d.common.callOrText}

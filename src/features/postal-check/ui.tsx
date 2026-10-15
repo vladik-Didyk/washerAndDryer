@@ -1,7 +1,7 @@
 import { useId, useState, type FormEvent } from "react";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { CircleAlert, CircleCheck, CircleHelp, MessageSquare } from "~/shared/ui";
+import { CircleAlert, CircleCheck, CircleHelp, LangLink, MessageSquare } from "~/shared/ui";
 import { checkPostalCode, type PostalCheck } from "./model";
 
 const ICONS = { yes: CircleCheck, unsure: CircleHelp, invalid: CircleAlert };
@@ -81,9 +81,9 @@ export function PostalCodeChecker({
           </div>
         )}
         {result?.status === "yes" && (
-          <a href={requestHref} className="text-link mt-2 inline-block">
+          <LangLink href={requestHref} className="text-link mt-2 inline-block">
             {d.common.startRental}
-          </a>
+          </LangLink>
         )}
         {result?.status === "unsure" && (
           <a href={phone.sms} className="btn btn-secondary mt-3">

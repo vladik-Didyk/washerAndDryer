@@ -17,7 +17,7 @@ export function machineHead(i18n: I18n, machine: MachineType, now: number) {
           format(d.jsonLd.machineOffer.description, { title: machine.title }),
         )
       : singleOffer(i18n);
-  return pageHead({
+  return pageHead(i18n, {
     path: machinePath(machine),
     kind: "machine",
     title: machine.page.metaTitle,

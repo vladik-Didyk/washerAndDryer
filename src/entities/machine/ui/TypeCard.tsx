@@ -1,5 +1,5 @@
 import { useI18n } from "~/shared/i18n";
-import { ArrowRight, KeepWordsWhole, WasPrice } from "~/shared/ui";
+import { ArrowRight, KeepWordsWhole, LangLink, WasPrice } from "~/shared/ui";
 import { machinePath, type MachineType } from "../data";
 import { MachineImage } from "./MachineImage";
 
@@ -39,12 +39,12 @@ export function TypeCard({
       />
       <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
         <h3 className="font-display text-lg font-bold leading-snug text-ink">
-          <a
+          <LangLink
             href={machinePath(machine)}
             className="transition-colors after:absolute after:inset-0 after:rounded-2xl group-hover:text-brand focus-visible:outline-none focus-visible:after:ring-[3px] focus-visible:after:ring-inset focus-visible:after:ring-brand"
           >
             <KeepWordsWhole text={machine.title} />
-          </a>
+          </LangLink>
         </h3>
         <p className="mt-1.5 text-[15px] leading-snug text-ink-soft">{note ?? machine.description}</p>
         <p className="mt-auto pt-3 leading-tight">

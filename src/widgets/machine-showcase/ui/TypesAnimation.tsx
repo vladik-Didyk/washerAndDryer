@@ -1,6 +1,6 @@
 import { machinePath } from "~/entities/machine";
 import { useI18n } from "~/shared/i18n";
-import { Pause, Play } from "~/shared/ui";
+import { LangLink, Pause, Play } from "~/shared/ui";
 import {
   MOVE_EASING,
   MOVE_MS,
@@ -126,12 +126,12 @@ export function TypesAnimation({ className = "" }: { className?: string }) {
       </div>
 
       <div className="mt-2 flex items-center justify-center motion-safe:animate-fade-in">
-        <a
+        <LangLink
           href={machinePath(current.machine)}
           className="font-display text-[15px] font-bold text-ink underline decoration-brand/30 decoration-2 underline-offset-4 hover:text-brand"
         >
           {current.machine.title}
-        </a>
+        </LangLink>
       </div>
 
       <div className="mt-3 flex items-center justify-center gap-2 motion-safe:animate-fade-in">

@@ -66,3 +66,7 @@ export const pagePaths = {
 } as const;
 
 export type FixedPage = keyof typeof pagePaths;
+
+// Pages that exist in English only (the policies): the Spanish and Russian pages link to the
+// English version, with a short note (shared/ui LangLink). /es/privacy/ is a 404.
+export const englishOnlyPaths: readonly string[] = ["/privacy/", "/terms/"];

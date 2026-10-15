@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 import { FaqList } from "~/entities/faq";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { CircleHelp, MessageSquare, Phone } from "~/shared/ui";
+import { CircleHelp, LangLink, MessageSquare, Phone } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 import type { loader } from "../loader";
 
@@ -58,9 +58,9 @@ export default function FaqPage() {
               <p className="lead mt-3">{d.common.readyToRentText}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
-              <a href="/start/" className="btn btn-primary">
+              <LangLink href="/start/" className="btn btn-primary">
                 {d.common.startRental}
-              </a>
+              </LangLink>
               <a href={phone.tel} className="btn btn-secondary">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
                 {d.common.call}

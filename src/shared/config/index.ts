@@ -1,4 +1,4 @@
-export { siteConfig, pagePaths, type FixedPage, type SiteConfig } from "./site";
+export { englishOnlyPaths, siteConfig, pagePaths, type FixedPage, type SiteConfig } from "./site";
 export { experienceYears, pricing, promotions, type PriceItem, type Promotion } from "./pricing";
 export {
   envOf,

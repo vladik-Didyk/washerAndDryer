@@ -8,7 +8,7 @@ export async function loader(args: LoaderFunctionArgs) {
   const i18n = await requestI18n(args);
   const { d } = i18n;
   return {
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.areas,
       kind: "areas",
       title: d.pages.areas.title,

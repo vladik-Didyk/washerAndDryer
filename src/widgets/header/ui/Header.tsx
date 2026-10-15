@@ -1,10 +1,11 @@
-import { siteConfig } from "~/shared/config";
-import { LANGUAGES, useI18n, type Dictionary } from "~/shared/i18n";
+import { pagePaths, siteConfig } from "~/shared/config";
+import { LANGUAGES, pathInLanguage, useI18n, type Dictionary } from "~/shared/i18n";
 import { useSite, type Site } from "~/shared/lib";
 import {
   BookOpen,
   Clock,
   CreditCard,
+  LangLink,
   Logo,
   Menu,
   MessageSquare,
@@ -15,8 +16,8 @@ import {
 } from "~/shared/ui";
 import { isCurrent, useMobileMenu } from "../model";
 
-// Secondary links: in a thin row above the header on wide screens (with the Spanish and
-// Russian pages), and in the mobile menu. Guides and Pay / manage appear only when their pages
+// Secondary links: in a thin row above the header on wide screens (with the language
+// switcher), and in the mobile menu. Guides and Pay / manage appear only when their pages
 // exist in this deployment. The main row keeps to the menu, the phone and "Start your rental".
 function utilityLinks(site: Site, nav: Dictionary["nav"]) {
   const links: Array<{ label: string; href: string; Icon: LucideIcon }> = [
@@ -27,24 +28,55 @@ function utilityLinks(site: Site, nav: Dictionary["nav"]) {
   return links;
 }
 
-// The other languages' pages (shared/i18n LANGUAGES).
-const languageLinks = LANGUAGES.filter((language) => language.code !== "en").map((language) => ({
-  label: language.name,
-  lang: language.code,
-  href: language.path,
-}));
+// EN · ES · RU: the same page in each language (shared/i18n pathInLanguage), the current one
+// marked. Plain links: the new language loads with the page.
+function LanguageSwitch({
+  currentPath,
+  className,
+  linkClassName,
+  onNavigate,
+}: {
+  currentPath: string;
+  className: string;
+  linkClassName: string;
+  onNavigate?: () => void;
+}) {
+  const { lang, d } = useI18n();
+  return (
+    <ul aria-label={d.header.language} className={className}>
+      {LANGUAGES.map((language, index) => (
+        <li key={language.code} className="flex items-center gap-2">
+          {index > 0 && <span aria-hidden="true">·</span>}
+          <a
+            href={pathInLanguage(currentPath, language.code)}
+            lang={language.code}
+            hrefLang={language.code}
+            aria-current={language.code === lang ? "page" : undefined}
+            onClick={onNavigate}
+            className={linkClassName}
+          >
+            <span aria-hidden="true">{language.code.toUpperCase()}</span>
+            <span className="sr-only">{language.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 // `requestHref` is where "Start your rental" goes: the rental request (/start/).
-export function Header({ currentPath = "/", requestHref = "/start/" }: { currentPath?: string; requestHref?: string }) {
+export function Header({ currentPath = "/", requestHref = pagePaths.start }: { currentPath?: string; requestHref?: string }) {
   const { menuOpen, menuButtonRef, toggleMenu, closeMenu } = useMobileMenu();
   const { phone, navigation } = siteConfig;
-  const { d, format } = useI18n();
+  const { d, format, href: localize } = useI18n();
+  // Is this link the page being shown? (currentPath carries the language prefix.)
+  const here = (href: string) => (localize(href) === currentPath ? "page" : undefined);
   const utility = utilityLinks(useSite(), d.nav);
 
   return (
     <>
       {/* Utility row: scrolls away; only the main header below it stays on screen. */}
-      <div lang="en" className="hidden border-b border-line bg-white lg:block">
+      <div className="hidden border-b border-line bg-white lg:block">
         <div className="container-page flex h-9 items-center justify-between gap-6 text-[13px] text-ink-muted">
           <p className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" aria-hidden="true" />
@@ -54,39 +86,33 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
             <ul className="flex items-center gap-5">
               {utility.map(({ label, href, Icon }) => (
                 <li key={href}>
-                  <a
+                  <LangLink
                     href={href}
-                    aria-current={href === currentPath ? "page" : undefined}
+                    aria-current={here(href)}
                     className="inline-flex items-center gap-1.5 font-medium text-ink-soft transition-colors hover:text-brand aria-[current=page]:text-brand-dark"
                   >
                     <Icon className="h-3.5 w-3.5" aria-hidden="true" />
                     {label}
-                  </a>
+                  </LangLink>
                 </li>
               ))}
-              {languageLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    lang={link.lang}
-                    hrefLang={link.lang}
-                    className="font-medium text-ink-soft transition-colors hover:text-brand"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <LanguageSwitch
+                  currentPath={currentPath}
+                  className="flex items-center gap-2"
+                  linkClassName="font-medium text-ink-soft transition-colors hover:text-brand aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
+                />
+              </li>
             </ul>
           </nav>
         </div>
       </div>
 
       <header
-        lang="en"
         className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md"
       >
         <div className="container-page flex h-[4.5rem] items-center justify-between gap-4">
-          <a
+          <LangLink
             href="/"
             onClick={closeMenu}
             className="flex min-w-0 items-center gap-3 rounded-xl"
@@ -100,15 +126,15 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
             >
               {siteConfig.companyName}
             </span>
-          </a>
+          </LangLink>
 
           <nav aria-label={d.nav.main} className="hidden lg:block">
             <ul className="flex items-center gap-0.5 xl:gap-1">
               {navigation.map((link) => {
-                const current = isCurrent(link.href, currentPath);
+                const current = isCurrent(localize(link.href), currentPath);
                 return (
                   <li key={link.href}>
-                    <a
+                    <LangLink
                       href={link.href}
                       aria-current={current}
                       className={`whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium transition-colors hover:bg-brand-mint hover:text-brand-dark ${
@@ -116,7 +142,7 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
                       }`}
                     >
                       {d.nav[link.key]}
-                    </a>
+                    </LangLink>
                   </li>
                 );
               })}
@@ -134,9 +160,9 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               <span className="hidden whitespace-nowrap lg:inline">{phone.display}</span>
             </a>
-            <a href={requestHref} className="btn btn-primary hidden whitespace-nowrap px-5 md:inline-flex">
+            <LangLink href={requestHref} className="btn btn-primary hidden whitespace-nowrap px-5 md:inline-flex">
               {d.common.startRental}
-            </a>
+            </LangLink>
             <button
               ref={menuButtonRef}
               type="button"
@@ -165,50 +191,41 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
             <ul>
               {navigation.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <LangLink
                     href={link.href}
                     onClick={closeMenu}
-                    aria-current={link.href === currentPath ? "page" : undefined}
+                    aria-current={here(link.href)}
                     className="block border-b border-line py-3.5 font-display text-lg font-semibold text-ink transition-colors hover:text-brand"
                   >
                     {d.nav[link.key]}
-                  </a>
+                  </LangLink>
                 </li>
               ))}
             </ul>
             <ul className="border-b border-line py-2">
               {utility.map(({ label, href, Icon }) => (
                 <li key={href}>
-                  <a
+                  <LangLink
                     href={href}
                     onClick={closeMenu}
                     className="flex items-center gap-2.5 py-2.5 font-medium text-ink-soft transition-colors hover:text-brand"
                   >
                     <Icon className="h-[18px] w-[18px] text-brand" aria-hidden="true" />
                     {label}
-                  </a>
+                  </LangLink>
                 </li>
               ))}
             </ul>
-            <ul className="flex gap-6 border-b border-line py-3.5">
-              {languageLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    lang={link.lang}
-                    hrefLang={link.lang}
-                    onClick={closeMenu}
-                    className="font-display text-lg font-semibold text-ink transition-colors hover:text-brand"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <LanguageSwitch
+              currentPath={currentPath}
+              onNavigate={closeMenu}
+              className="flex gap-2 border-b border-line py-3.5 font-display text-lg"
+              linkClassName="px-1 font-semibold text-ink transition-colors hover:text-brand aria-[current=page]:text-brand aria-[current=page]:underline aria-[current=page]:underline-offset-4"
+            />
             <div className="grid grid-cols-2 gap-3 pb-3 pt-5">
-              <a href={requestHref} onClick={closeMenu} className="btn btn-primary col-span-2">
+              <LangLink href={requestHref} onClick={closeMenu} className="btn btn-primary col-span-2">
                 {d.common.startRental}
-              </a>
+              </LangLink>
               <a href={phone.tel} className="btn btn-secondary">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
                 {d.common.call}

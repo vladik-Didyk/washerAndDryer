@@ -16,7 +16,7 @@ export async function loader(args: LoaderFunctionArgs) {
   };
   return {
     groups: faqGroupsFor(i18n, offers),
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.faq,
       kind: "faq",
       title: d.pages.faq.title,

@@ -22,14 +22,6 @@ export function Section({ className = "", children, ...rest }: ComponentPropsWit
   );
 }
 
-// Button looks, as class names (defined in src/app/app.css), for <a> and <button> alike.
-export const buttonClass = {
-  primary: "btn btn-primary",
-  secondary: "btn btn-secondary",
-  gold: "btn btn-gold",
-  outlineLight: "btn btn-outline-light",
-} as const;
-
 export const textLinkClass = "text-link";
 
 // A small dot used as a bullet in lists (gold, like the logo's accent).

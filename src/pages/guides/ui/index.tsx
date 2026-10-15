@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router";
 import { useI18n } from "~/shared/i18n";
-import { ArrowRight, BookOpen } from "~/shared/ui";
+import { ArrowRight, BookOpen, LangLink } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 import type { loader } from "../loader";
 
@@ -23,12 +23,12 @@ export default function GuidesPage() {
                 className="relative flex flex-col rounded-3xl border border-line bg-paper p-6 transition-colors hover:border-brand sm:p-8"
               >
                 <h2 className="font-display text-xl font-bold leading-snug text-ink sm:text-2xl">
-                  <a
+                  <LangLink
                     href={guide.path}
                     className="underline decoration-brand/30 decoration-2 underline-offset-4 after:absolute after:inset-0 after:rounded-3xl hover:text-brand"
                   >
                     {guide.title}
-                  </a>
+                  </LangLink>
                 </h2>
                 <p className="mt-3 leading-relaxed text-ink-soft">{guide.summary}</p>
                 <p

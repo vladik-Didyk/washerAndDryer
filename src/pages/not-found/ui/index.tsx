@@ -1,6 +1,6 @@
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { Phone } from "~/shared/ui";
+import { LangLink, Phone } from "~/shared/ui";
 
 // The 404 page: rendered by the root error boundary for any unknown URL (and for drafts in a
 // normal deployment), with the status 404.
@@ -15,9 +15,9 @@ export function NotFoundPage() {
         </h1>
         <p className="lead mt-4">{d.notFound.text}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="/" className="btn btn-primary">
+          <LangLink href="/" className="btn btn-primary">
             {d.notFound.home}
-          </a>
+          </LangLink>
           <a href={phone.tel} className="btn btn-secondary">
             <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
             {d.common.callPhone}

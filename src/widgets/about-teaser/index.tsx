@@ -1,6 +1,6 @@
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { Phone } from "~/shared/ui";
+import { LangLink, Phone } from "~/shared/ui";
 
 // About the business: confirmed facts only, no names or photos of people.
 // The full version is the /about/ page.
@@ -28,9 +28,9 @@ export function AboutTeaser() {
             })}
           </p>
           <p className="mt-4">
-            <a href="/about/" className="text-link">
+            <LangLink href="/about/" className="text-link">
               {about.more}
-            </a>
+            </LangLink>
           </p>
         </div>
 

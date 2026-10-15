@@ -4,9 +4,10 @@ import { pagePaths } from "~/shared/config";
 import { PHONE_E164, absoluteUrl, pageHead, providerRef } from "~/shared/seo";
 
 export async function loader(args: LoaderFunctionArgs) {
-  const { d } = await requestI18n(args);
+  const i18n = await requestI18n(args);
+  const { d } = i18n;
   return {
-    head: pageHead({
+    head: pageHead(i18n, {
       path: pagePaths.contact,
       kind: "contact",
       title: d.pages.contact.title,
@@ -21,7 +22,7 @@ export async function loader(args: LoaderFunctionArgs) {
           "@type": "ContactPage",
           name: d.pages.contact.title,
           description: d.pages.contact.description,
-          url: absoluteUrl(pagePaths.contact),
+          url: absoluteUrl(i18n.href(pagePaths.contact)),
           about: {
             ...providerRef(),
             contactPoint: {

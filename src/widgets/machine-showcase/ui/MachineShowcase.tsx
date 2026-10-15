@@ -3,6 +3,7 @@ import { usePrices } from "~/entities/offer";
 import { ViewSwitch, useMachineView } from "~/features/view-switch";
 import { useI18n } from "~/shared/i18n";
 import { TypesAnimation } from "./TypesAnimation";
+import { LangLink } from "~/shared/ui";
 
 // The five types as photo cards, each linking to its page. A Drawings/Photos switch swaps every
 // card to its drawing; Photos is the default, so the server HTML shows the photos (a type
@@ -45,9 +46,9 @@ export function MachineShowcase({ showAllLink = true }: { showAllLink?: boolean 
             {showcase.availabilityNote}
           </p>
           {showAllLink && (
-            <a href="/machines/" className="text-link shrink-0">
+            <LangLink href="/machines/" className="text-link shrink-0">
               {d.common.compareAllTypes}
-            </a>
+            </LangLink>
           )}
         </div>
       </div>

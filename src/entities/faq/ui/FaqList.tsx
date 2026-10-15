@@ -1,4 +1,4 @@
-import { ArrowRight } from "~/shared/ui";
+import { ArrowRight, LangLink } from "~/shared/ui";
 import { useSite } from "~/shared/lib";
 import type { FaqGroup } from "../data";
 
@@ -7,10 +7,10 @@ function AnswerLink({ link }: { link?: { href: string; label: string } }) {
   const site = useSite();
   if (!link || !site.has(link.href)) return null;
   return (
-    <a href={link.href} className="text-link mt-3 inline-flex items-center gap-1.5">
+    <LangLink href={link.href} className="text-link mt-3 inline-flex items-center gap-1.5">
       {link.label}
       <ArrowRight className="h-4 w-4" aria-hidden="true" />
-    </a>
+    </LangLink>
   );
 }
 

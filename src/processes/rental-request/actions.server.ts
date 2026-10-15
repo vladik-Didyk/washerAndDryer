@@ -18,38 +18,39 @@ import {
 } from "./model";
 import { openRentalSession } from "./session.server";
 
+// Every redirect stays in the page's language (/es/start/ -> /es/start/details/).
 const goTo = async (path: string, commit: () => Promise<string>) =>
   redirect(path, { headers: { "Set-Cookie": await commit() } });
 
 export async function machineAction(args: ActionFunctionArgs) {
   const { request, context } = args;
   const i18n = await requestI18n(args);
-  const rental = await openRentalSession(request, context);
+  const rental = await openRentalSession(request, context, i18n.lang);
   const checked = validateMachineStep(await request.formData(), i18n);
   if (!checked.ok) return data({ errors: checked.errors, values: checked.values }, { status: 400 });
   rental.saveDraft({ ...rental.draft(), machine: checked.fields });
-  return goTo(STEP_PATHS.details, rental.commit);
+  return goTo(i18n.href(STEP_PATHS.details), rental.commit);
 }
 
 export async function detailsAction(args: ActionFunctionArgs) {
   const { request, context } = args;
   const i18n = await requestI18n(args);
-  const rental = await openRentalSession(request, context);
+  const rental = await openRentalSession(request, context, i18n.lang);
   const draft = rental.draft();
-  if (!draft.machine) return redirect(STEP_PATHS.machine);
+  if (!draft.machine) return redirect(i18n.href(STEP_PATHS.machine));
   const checked = validateDetailsStep(await request.formData(), i18n);
   if (!checked.ok) return data({ errors: checked.errors, values: checked.values }, { status: 400 });
   rental.saveDraft({ ...draft, details: checked.fields });
-  return goTo(STEP_PATHS.contact, rental.commit);
+  return goTo(i18n.href(STEP_PATHS.contact), rental.commit);
 }
 
 export async function contactAction(args: ActionFunctionArgs) {
   const { request, context } = args;
   const i18n = await requestI18n(args);
-  const rental = await openRentalSession(request, context);
+  const rental = await openRentalSession(request, context, i18n.lang);
   const draft = rental.draft();
   const open = firstOpenStep(draft);
-  if (open !== "contact") return redirect(STEP_PATHS[open]);
+  if (open !== "contact") return redirect(i18n.href(STEP_PATHS[open]));
 
   const form = await request.formData();
   const checked = validateContactStep(form, torontoDate(requestTimeOf(context)), i18n);
@@ -68,5 +69,5 @@ export async function contactAction(args: ActionFunctionArgs) {
     }
   }
   rental.finish(checked.fields);
-  return goTo(STEP_PATHS.done, rental.commit);
+  return goTo(i18n.href(STEP_PATHS.done), rental.commit);
 }

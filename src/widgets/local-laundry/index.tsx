@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { MapPin } from "~/shared/ui";
+import { LangLink, MapPin } from "~/shared/ui";
 
 // Local detail for a city or district page: what homes are like there, the neighbourhoods we
 // deliver to, and what to check before calling. `neighbourhoodLinks` maps a neighbourhood name
@@ -44,9 +44,9 @@ export function LocalLaundry({
               <li key={name} className="flex items-center gap-1.5">
                 <MapPin className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
                 {neighbourhoodLinks[name] ? (
-                  <a href={neighbourhoodLinks[name]} className="text-link">
+                  <LangLink href={neighbourhoodLinks[name]} className="text-link">
                     {name}
-                  </a>
+                  </LangLink>
                 ) : (
                   name
                 )}

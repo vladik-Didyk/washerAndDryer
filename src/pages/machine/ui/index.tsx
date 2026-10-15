@@ -7,7 +7,7 @@ import { MachineGallery } from "~/features/machine-gallery";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
-import { Check, Gift, KeepWordsWhole, LinkList, MapPin, Phone, WasPrice } from "~/shared/ui";
+import { Check, Gift, KeepWordsWhole, LangLink, LinkList, MapPin, Phone, WasPrice } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { HowItWorks } from "~/widgets/how-it-works";
 import { StartRental } from "~/widgets/start-rental";
@@ -61,9 +61,9 @@ function RentalSummary({ machine, className = "" }: { machine: MachineType; clas
       </ul>
 
       <div className="mt-6 grid gap-3">
-        <a href={`/start/?machine=${machine.slug}`} className="btn btn-primary w-full">
+        <LangLink href={`/start/?machine=${machine.slug}`} className="btn btn-primary w-full">
           {d.common.startRental}
-        </a>
+        </LangLink>
         <a href={phone.tel} className="btn btn-secondary w-full">
           <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
           {d.common.callOrText}
@@ -211,9 +211,9 @@ export default function MachinePage() {
               })}
             </p>
             {site.has(MEASURE_GUIDE) && (
-              <a href={MEASURE_GUIDE} className="text-link mt-4 inline-block">
+              <LangLink href={MEASURE_GUIDE} className="text-link mt-4 inline-block">
                 {d.common.measureGuide}
-              </a>
+              </LangLink>
             )}
           </div>
         </div>
@@ -258,9 +258,9 @@ export default function MachinePage() {
             <h2 id="other-types-title" className="h2">
               {text.otherTypes}
             </h2>
-            <a href="/machines/" className="text-link shrink-0">
+            <LangLink href="/machines/" className="text-link shrink-0">
               {d.common.compareAllTypes}
-            </a>
+            </LangLink>
           </div>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {otherTypes.map((other) => (

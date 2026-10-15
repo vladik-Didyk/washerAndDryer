@@ -23,7 +23,7 @@ const smsChrome = { mobileAction: "textUs" as const };
 export async function machineLoader(args: LoaderFunctionArgs) {
   const { request, context } = args;
   const i18n = await requestI18n(args);
-  const rental = await openRentalSession(request, context);
+  const rental = await openRentalSession(request, context, i18n.lang);
   // "Start your rental" on a machine type page preselects that type (/start/?machine=stackable).
   const asked = new URL(request.url).searchParams.get("machine") ?? "";
   const preselect = machineChoices(i18n).some((choice) => choice.value === asked) ? asked : "";
@@ -37,9 +37,9 @@ export async function machineLoader(args: LoaderFunctionArgs) {
 export async function detailsLoader(args: LoaderFunctionArgs) {
   const { request, context } = args;
   const i18n = await requestI18n(args);
-  const rental = await openRentalSession(request, context);
+  const rental = await openRentalSession(request, context, i18n.lang);
   const draft = rental.draft();
-  if (!draft.machine) throw redirect(STEP_PATHS.machine);
+  if (!draft.machine) throw redirect(i18n.href(STEP_PATHS.machine));
   const { city: _city, postalStatus: _status, ...values } = draft.details ?? { ...EMPTY_DETAILS, city: null, postalStatus: "invalid" };
   return {
     head: stepHeads.details(i18n),
@@ -53,10 +53,10 @@ export async function contactLoader(args: LoaderFunctionArgs) {
   const { request, context } = args;
   const i18n = await requestI18n(args);
   const { summary: labels } = i18n.d.start.contact;
-  const rental = await openRentalSession(request, context);
+  const rental = await openRentalSession(request, context, i18n.lang);
   const draft = rental.draft();
   const open = firstOpenStep(draft);
-  if (open !== "contact") throw redirect(STEP_PATHS[open]);
+  if (open !== "contact") throw redirect(i18n.href(STEP_PATHS[open]));
   const details = draft.details!;
   return {
     head: stepHeads.contact(i18n),
@@ -83,9 +83,9 @@ export async function contactLoader(args: LoaderFunctionArgs) {
 export async function doneLoader(args: LoaderFunctionArgs) {
   const { request, context } = args;
   const i18n = await requestI18n(args);
-  const rental = await openRentalSession(request, context);
+  const rental = await openRentalSession(request, context, i18n.lang);
   const sent = rental.session.get("sent");
-  if (!sent) throw redirect(STEP_PATHS.machine);
+  if (!sent) throw redirect(i18n.href(STEP_PATHS.machine));
   return data(
     { head: stepHeads.done(i18n), chrome: smsChrome, sent },
     { headers: { "Set-Cookie": await rental.commit() } },
