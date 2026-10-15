@@ -28,14 +28,15 @@ export default function Welcome() {
               ${prices.setText} a week for the set, or ${prices.singleText} a week for
               one machine.
             </p>
-            {/* Price tag: small "$", big figure, label hung from the top of the digits. */}
+            {/* Price tag: small "$", big figure, label hung from the top of the digits.
+                Phones have no room beside the figure, so there the label sits under it. */}
             <div
               aria-hidden="true"
-              className="flex items-start font-display text-[7rem] font-extrabold leading-none text-brand sm:text-[9rem]"
+              className="flex flex-wrap items-start font-display text-[7rem] font-extrabold leading-none text-brand sm:flex-nowrap sm:text-[9rem]"
             >
               <span className="mt-[0.34em] text-[0.36em] leading-none">$</span>
               <span className="tracking-[-0.05em]">{prices.setText}</span>
-              <span className="ml-[0.55em] mt-[0.7em] flex flex-col text-[0.165em] font-bold leading-[1.15] text-ink">
+              <span className="mt-2 flex w-full gap-[0.3em] text-[0.165em] font-bold leading-[1.15] text-ink sm:ml-[0.55em] sm:mt-[0.7em] sm:w-auto sm:flex-col sm:gap-0">
                 <span>a week</span>
                 <span>for the set</span>
               </span>
