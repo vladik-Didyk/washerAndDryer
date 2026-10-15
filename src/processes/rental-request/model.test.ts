@@ -1,0 +1,107 @@
+import { describe, expect, it } from "vitest";
+import { firstOpenStep, rentalRequestFields, validateContactStep, validateDetailsStep, validateMachineStep } from "./model";
+
+const form = (fields: Record<string, string>) => {
+  const data = new FormData();
+  for (const [name, value] of Object.entries(fields)) data.set(name, value);
+  return data;
+};
+
+describe("step 1: machine type", () => {
+  it("requires one of the choices", () => {
+    expect(validateMachineStep(form({}))).toMatchObject({ ok: false, errors: { machine: expect.any(String) } });
+    expect(validateMachineStep(form({ machine: "fridge" })).ok).toBe(false);
+    expect(validateMachineStep(form({ machine: "stackable" }))).toMatchObject({ ok: true, fields: { machine: "stackable" } });
+    expect(validateMachineStep(form({ machine: "not-sure" })).ok).toBe(true);
+  });
+});
+
+describe("step 2: your space", () => {
+  const valid = { postal: "m5v2t6", closetWidth: '24"', outlet: "4-prong", access: "elevator", floor: "12th floor" };
+
+  it("lists every missing field", () => {
+    const result = validateDetailsStep(form({}));
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(Object.keys(result.errors).sort()).toEqual(["access", "closetWidth", "outlet", "postal"]);
+      expect(result.errors.postal).toBe("Enter your postal code.");
+    }
+  });
+
+  it("rejects a postal code that isn't Canadian, with the checker's message", () => {
+    const result = validateDetailsStep(form({ ...valid, postal: "12345" }));
+    expect(result).toMatchObject({ ok: false, errors: { postal: "Enter a valid Canadian postal code, like M5V 2T6." } });
+  });
+
+  it("formats the postal code and finds the city", () => {
+    const result = validateDetailsStep(form(valid));
+    expect(result).toMatchObject({ ok: true, fields: { postal: "M5V 2T6", city: "Toronto", postalStatus: "yes" } });
+  });
+
+  it("accepts a code outside the known areas, to confirm by text", () => {
+    const result = validateDetailsStep(form({ ...valid, postal: "K1A 0B1" }));
+    expect(result).toMatchObject({ ok: true, fields: { city: null, postalStatus: "unsure" } });
+  });
+
+  it("checks the outlet and the way in", () => {
+    const result = validateDetailsStep(form({ ...valid, outlet: "5-prong", access: "crane" }));
+    expect(result).toMatchObject({ ok: false, errors: { outlet: expect.any(String), access: expect.any(String) } });
+  });
+});
+
+describe("step 3: how to reach you", () => {
+  const today = "2026-10-15";
+  const valid = { name: "Alex", phone: "416-555-0123", email: "", preferredDay: "", notes: "" };
+
+  it("requires a name and a phone number", () => {
+    const result = validateContactStep(form({}), today);
+    expect(result).toMatchObject({
+      ok: false,
+      errors: { name: "Enter your name.", phone: "Enter your phone number." },
+    });
+  });
+
+  it("checks the optional email and the preferred day", () => {
+    const result = validateContactStep(form({ ...valid, email: "alex@", preferredDay: "2026-10-14" }), today);
+    expect(result).toMatchObject({
+      ok: false,
+      errors: {
+        email: "Enter a valid email address, or leave it empty.",
+        preferredDay: "Choose today or a later date.",
+      },
+    });
+    expect(validateContactStep(form({ ...valid, preferredDay: today }), today).ok).toBe(true);
+  });
+});
+
+describe("progress and the email", () => {
+  it("sends a visitor to the first step not done", () => {
+    expect(firstOpenStep({})).toBe("machine");
+    expect(firstOpenStep({ machine: { machine: "stackable" } })).toBe("details");
+  });
+
+  it("builds the Web3Forms fields from all three steps", () => {
+    const fields = rentalRequestFields(
+      {
+        machine: { machine: "washer-only" },
+        details: { postal: "L5B 1M2", closetWidth: "27 in", outlet: "not-sure", access: "stairs", floor: "", city: "Mississauga", postalStatus: "yes" },
+      },
+      { name: "Alex", phone: "416-555-0123", email: "", preferredDay: "", notes: "" },
+    );
+    expect(fields).toEqual({
+      subject: "New rental request — Alex",
+      name: "Alex",
+      phone: "416-555-0123",
+      email: "Not given",
+      machine_type: "Washer only",
+      postal_code: "L5B 1M2",
+      area: "Mississauga",
+      closet_width: "27 in",
+      dryer_outlet: "Not sure",
+      access: "Stairs",
+      floor: "Not given",
+      preferred_day: "Not given",
+      notes: "None",
+    });
+  });
+});
