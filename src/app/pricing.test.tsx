@@ -111,8 +111,8 @@ describe("the first week free", () => {
   it("shows until the end of November 30 in Toronto, then disappears", () => {
     expect(render(<HomePage />, { now: end - 1 })).toContain("First week free until Nov 30");
     expect(render(<HomePage />, { now: end })).not.toContain("First week free");
-    expect(render(<HomePage />, { lang: "es", now: end - 1 })).toContain("First week free");
-    expect(render(<HomePage />, { lang: "es", now: end })).not.toContain("First week free");
+    expect(render(<HomePage />, { lang: "es", now: end - 1 })).toContain("Primera semana gratis");
+    expect(render(<HomePage />, { lang: "es", now: end })).not.toContain("Primera semana gratis");
     expect(createI18n("es", offerFacts(end - 1)).d.offers.promotions["first-week-free"].note).toContain(
       "hasta el 30 de noviembre de 2026",
     );
