@@ -1,7 +1,8 @@
 # GTA Washer & Dryer Rentals — washerrent.com (branch `remix-ssr`)
 
-Status: server-rendered rebuild of the live site, not deployed. `main` is still the live
-static site (Vite + prerender, GitHub Pages) and is unchanged.
+Status: live at washerrent.com since 2026-10-15, served by the Cloudflare Worker
+`washerrent` and deployed from this branch. `main` is an archive of the old static site
+(Vite + prerender); GitHub Pages is off.
 
 This branch renders every page on Cloudflare Workers with React Router v7 (framework mode,
 the successor of Remix), in strict TypeScript, organised with Feature-Sliced Design. Same
@@ -253,24 +254,38 @@ its own at its dates (decided on the server, so the HTML and the hydrated page a
 Locally these go in `.dev.vars` (gitignored). Without them, drafts, `/account/` and analytics
 stay off.
 
-## Deploy — steps for the owner
+## Deploy
 
-Nothing has been deployed. When you are ready:
+washerrent.com is live. The Worker `washerrent` (Cloudflare account
+`06277ccde592d58901541d66461eae53`) answers on `washerrent.com`; `www.washerrent.com`
+redirects to it. Both are custom domains in `wrangler.jsonc`, and the DNS zone is on Cloudflare
+(nameservers moved from Namecheap on 2026-10-15). The secrets `WEB3FORMS_KEY` and
+`SESSION_SECRET` are set on the Worker; optional settings go in the same way
+(`pnpm exec wrangler secret put NAME`) or in the dashboard (Workers → washerrent → Settings →
+Variables).
 
-1. `pnpm exec wrangler login` (opens the Cloudflare login in the browser).
-2. Set the secrets (each command asks for the value):
-   ```bash
-   pnpm exec wrangler secret put WEB3FORMS_KEY
-   pnpm exec wrangler secret put SESSION_SECRET
-   ```
-   Optional settings can be added the same way or in the dashboard (Workers → washerrent →
-   Settings → Variables).
-3. `pnpm run deploy` — builds and deploys the Worker `washerrent`; it answers on
-   `washerrent.<your-subdomain>.workers.dev`. Check the pages and send one real test request.
-4. Custom domain, once the `washerrent.com` DNS zone is on Cloudflare: Workers → washerrent →
-   Settings → Domains & Routes → Add custom domain → `washerrent.com` (and `www` if wanted).
-   Then retire the GitHub Pages deployment (`.github/workflows/deploy.yml` on `main`; it still
-   builds the old static site and is untouched on this branch).
+Ask the owner before anything goes live. Two ways to release:
 
-Do not merge this branch into `main` while GitHub Pages is the live host: `deploy.yml` would
-try to publish `dist/`, which this toolchain no longer produces.
+- **Check first, then publish** (preferred). Upload a version without sending traffic to it:
+  ```bash
+  pnpm run build && pnpm exec wrangler versions upload
+  ```
+  It prints a version id and a preview URL
+  (`https://<first 8 of id>-washerrent.vladik-didyk.workers.dev`). Once the owner has checked
+  it, publish it:
+  ```bash
+  pnpm exec wrangler versions deploy <version-id>@100% -y
+  ```
+- **Straight to live**: `pnpm run deploy` (build + deploy).
+
+After a release, check a few pages on washerrent.com in each language (for example `/`,
+`/es/machines/stackable/`, `/ru/faq/`; `/es/privacy/` should be a 404). Live forms send real
+email; test them with `FORMS_DRY_RUN` locally, or tell the owner before submitting one on the
+live site. To roll back, `pnpm exec wrangler versions list`, then `versions deploy` the
+previous id.
+
+Releases: 2026-10-15, version `b338f0e8` (Spanish and Russian site, the EN · ES · RU switcher,
+the forms registry), up to commit `8fba2f2`.
+
+`main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
+before merging this branch into `main`.
