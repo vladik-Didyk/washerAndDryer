@@ -35,6 +35,10 @@ function canonicalRedirect(url: URL): Response | null {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    // www.washerrent.com -> washerrent.com, same path (every method: forms post to the apex).
+    if (url.hostname === "www.washerrent.com") {
+      return Response.redirect(`https://washerrent.com${url.pathname}${url.search}`, 301);
+    }
     if (request.method === "GET" || request.method === "HEAD") {
       const redirect = canonicalRedirect(url);
       if (redirect) return redirect;

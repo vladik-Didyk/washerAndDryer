@@ -9,5 +9,11 @@
   "compatibility_date": "2026-09-30",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
-  "upload_source_maps": true
+  "upload_source_maps": true,
+  // washerrent.com and www (www redirects to the apex in workers/app.ts). The workers.dev
+  // address stays on as a preview; its pages carry the washerrent.com canonical.
+  "routes": [
+    { "pattern": "washerrent.com", "custom_domain": true },
+    { "pattern": "www.washerrent.com", "custom_domain": true }
+  ]
 }
