@@ -110,7 +110,7 @@ export default function MachinesPage() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a href="#request" className="btn btn-primary">
-            Check availability
+            Start your rental
           </a>
           <a href={phone.tel} className="btn btn-secondary">
             <Phone className="h-[18px] w-[18px]" aria-hidden="true" />

@@ -86,7 +86,7 @@ export default function FaqPage() {
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
               <a href={requestFormHref} className="btn btn-primary">
-                Check availability
+                Start your rental
               </a>
               <a href={phone.tel} className="btn btn-secondary">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />

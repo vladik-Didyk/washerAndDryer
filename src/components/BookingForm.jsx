@@ -160,7 +160,7 @@ export default function BookingForm() {
       <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <h2 id="request-title" className="h2">
-            Check availability
+            Start your rental
           </h2>
           <p className="lead mt-4">
             Tell us what you need. We reply with the machine, the total and the

@@ -70,8 +70,9 @@ function Page({ route }) {
   }
 }
 
-// Pages that carry the request form (#request); the others send "Check availability" to it.
+// Pages that carry the request form (#request); the others send "Start your rental" to it.
 const FORM_PAGES = new Set(["home", "machines", "machine", "areas", "city", "district", "contact"]);
+const requestHrefFor = (route) => (FORM_PAGES.has(route.kind) ? "#request" : requestFormHref);
 
 // The phone bar's second button, after Call: what this page is for.
 function mobileAction(route) {
@@ -85,10 +86,7 @@ function mobileAction(route) {
     case "repair":
       return { label: "Repair form", href: "#repair-request" };
     default:
-      return {
-        label: "Check availability",
-        href: FORM_PAGES.has(route.kind) ? "#request" : requestFormHref,
-      };
+      return { label: "Start rental", href: requestHrefFor(route) };
   }
 }
 
@@ -103,7 +101,7 @@ export default function App({ path }) {
       </a>
       {route.draft && <DraftRibbon />}
       <OfferBar />
-      <Header currentPath={route.path} />
+      <Header currentPath={route.path} requestHref={requestHrefFor(route)} />
       <main id="main">
         {route.breadcrumbs && <Breadcrumbs items={route.breadcrumbs} />}
         <Page route={route} />

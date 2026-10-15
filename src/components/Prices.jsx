@@ -47,7 +47,7 @@ function PriceCard({ title, price, highlighted = false }) {
         href="#request"
         className={`btn mt-8 w-full ${highlighted ? "btn-primary" : "btn-secondary"}`}
       >
-        Check availability
+        Start your rental
       </a>
     </article>
   );

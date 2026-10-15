@@ -18,7 +18,7 @@ export const districtPath = (district) => `/toronto/${district.slug}/`;
 export const machinePath = (machine) => `/machines/${machine.slug}/`;
 export const guidePath = (guide) => `/guides/${guide.slug}/`;
 
-// Where "Check availability" goes on pages without the request form.
+// Where "Start your rental" goes on pages without the request form.
 export const requestFormHref = "/contact/#request";
 
 const HOME = { name: "Home", path: "/" };

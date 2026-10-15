@@ -63,7 +63,7 @@ export default function GuidePage({ guide }) {
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a href={requestFormHref} className="btn btn-primary">
-                  Check availability
+                  Start your rental
                 </a>
                 <a href={phone.tel} className="btn btn-secondary">
                   <Phone className="h-[18px] w-[18px]" aria-hidden="true" />

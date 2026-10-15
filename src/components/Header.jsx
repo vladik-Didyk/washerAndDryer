@@ -4,8 +4,9 @@ import { siteConfig } from "../content/config";
 import { hasRoute } from "../content/routes";
 import Logo from "./Logo";
 
-// Secondary links: in a thin row above the header on wide screens, and in the mobile menu.
-// Guides and Pay / manage appear only when their pages are part of the build.
+// Secondary links: in a thin row above the header on wide screens (with the Spanish and
+// Russian pages), and in the mobile menu. Guides and Pay / manage appear only when their pages
+// are part of the build. The main row keeps to the menu, the phone and "Start your rental".
 function utilityLinks() {
   return [
     { label: "Request a repair", href: "/repair/", Icon: Wrench },
@@ -21,7 +22,8 @@ function isCurrent(href, currentPath) {
   return undefined;
 }
 
-export default function Header({ currentPath = "/" }) {
+// `requestHref` is where "Start your rental" goes: the form on this page, or the contact page's.
+export default function Header({ currentPath = "/", requestHref = "#request" }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef(null);
   const { phone, hours, navigation, languageLinks, languages } = siteConfig;
@@ -72,6 +74,18 @@ export default function Header({ currentPath = "/" }) {
                   </a>
                 </li>
               ))}
+              {languageLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    lang={link.lang}
+                    hrefLang={link.lang}
+                    className="font-medium text-ink-soft transition-colors hover:text-brand"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>
@@ -89,9 +103,10 @@ export default function Header({ currentPath = "/" }) {
           >
             <Logo className="h-11 w-11" />
             {/* The logo's alt text already names the business for screen readers. */}
+            {/* Hidden from 1024 to 1279px, where the menu and both buttons need the room. */}
             <span
               aria-hidden="true"
-              className="hidden font-display text-[1.0625rem] font-bold leading-tight tracking-tight text-ink sm:block"
+              className="hidden font-display text-[1.0625rem] font-bold leading-tight tracking-tight text-ink sm:block lg:hidden xl:block"
             >
               GTA Washer &amp; Dryer Rentals
             </span>
@@ -106,7 +121,7 @@ export default function Header({ currentPath = "/" }) {
                     <a
                       href={link.href}
                       aria-current={current}
-                      className={`whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium transition-colors hover:bg-brand-mint hover:text-brand-dark xl:px-4 ${
+                      className={`whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium transition-colors hover:bg-brand-mint hover:text-brand-dark ${
                         current ? "bg-brand-mint text-brand-dark" : "text-ink-soft"
                       }`}
                     >
@@ -115,26 +130,22 @@ export default function Header({ currentPath = "/" }) {
                   </li>
                 );
               })}
-              {languageLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    lang={link.lang}
-                    hrefLang={link.lang}
-                    aria-label={link.label}
-                    className="rounded-full px-2.5 py-2 text-[15px] font-semibold text-ink-soft transition-colors hover:bg-brand-mint hover:text-brand-dark"
-                  >
-                    {link.short}
-                  </a>
-                </li>
-              ))}
             </ul>
           </nav>
 
+          {/* Phones have the call bar at the bottom instead (MobileActionBar.jsx). From 768px:
+              the phone (an icon, then the number from 1024px) and the main call to action. */}
           <div className="flex shrink-0 items-center gap-2">
-            <a href={phone.tel} className="btn btn-primary hidden md:inline-flex">
+            <a
+              href={phone.tel}
+              aria-label={`Call ${phone.display}`}
+              className="hidden h-11 min-w-[2.75rem] items-center justify-center gap-2 rounded-full border border-line bg-white px-3 font-display text-[15px] font-semibold text-brand transition-colors hover:bg-brand-mint md:inline-flex lg:border-transparent lg:bg-transparent"
+            >
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-              Call {phone.display}
+              <span className="hidden whitespace-nowrap lg:inline">{phone.display}</span>
+            </a>
+            <a href={requestHref} className="btn btn-primary hidden whitespace-nowrap px-5 md:inline-flex">
+              Start your rental
             </a>
             <button
               ref={menuButtonRef}
@@ -205,7 +216,10 @@ export default function Header({ currentPath = "/" }) {
               ))}
             </ul>
             <div className="grid grid-cols-2 gap-3 pb-3 pt-5">
-              <a href={phone.tel} className="btn btn-primary">
+              <a href={requestHref} onClick={closeMenu} className="btn btn-primary col-span-2">
+                Start your rental
+              </a>
+              <a href={phone.tel} className="btn btn-secondary">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
                 Call
               </a>

@@ -6,8 +6,9 @@ const isTextField = (element) =>
   element instanceof Element &&
   element.matches("input:not([type=checkbox]):not([type=radio]), select, textarea");
 
-// Phones only (the header shows the full Call button from 768px up): a bar fixed to the
-// bottom with Call and one more action, set per page in App.jsx. The footer keeps room for it
+// Phones only (from 768px the header has the phone and "Start your rental"): a bar fixed to
+// the bottom with Call and one more action, set per page in App.jsx ("Start rental" unless the
+// page has its own, such as "Get a quote" for landlords). The footer keeps room for it
 // at the end of every page, so it never covers content there. It steps aside while a form
 // field has focus, so it can't sit over the field being typed in.
 export default function MobileActionBar({ action, callLabel = "Call", label = "Quick actions", lang = "en" }) {
