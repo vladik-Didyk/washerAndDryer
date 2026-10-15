@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["tailwind.config.ts", "vite.config.ts", "react-router.config.ts", "scripts/*.mjs"],
+  "compilerOptions": {
+    "composite": true,
+    "strict": true,
+    "allowJs": true,
+    "checkJs": false,
+    "types": ["node", "vitest/config"],
+    "lib": ["ES2023"],
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler"
+  }
+}

@@ -1,6 +1,7 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss";
+
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ["./src/**/*.{ts,tsx}"],
   // Light theme only. "class" keeps the OS dark-mode setting from switching any styles.
   darkMode: "class",
   theme: {
@@ -49,7 +50,7 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-        // Machine drawing changing type (MachineTypesAnimation.jsx): turns edge-on, the drawing
+        // Machine drawing changing type (widgets/machine-showcase): turns edge-on, the drawing
         // swaps, turns back to face front.
         "machine-flip": {
           "0%": { transform: "rotateY(0deg)", animationTimingFunction: "ease-in" },
@@ -59,7 +60,7 @@ export default {
         },
       },
       animation: {
-        // The type drawing animates in on load; MachineTypesAnimation then moves the machines
+        // The type drawing animates in on load; the machine-showcase animation then moves the machines
         // between the five types.
         "disc-in": "disc-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both",
         "rise-in": "rise-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.12s both",
@@ -69,4 +70,4 @@ export default {
     },
   },
   plugins: [],
-};
+} satisfies Config;

@@ -1,0 +1,13 @@
+// Cloudflare Worker for washerrent.com: React Router SSR (workers/app.ts) plus the static
+// files in public/ (photos, drawings, icons), served by Workers Assets.
+// Secrets and per-environment settings are NOT here: see README.md ("Environment variables")
+// and .dev.vars.example. Local values go in .dev.vars (gitignored).
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "washerrent",
+  "main": "./workers/app.ts",
+  "compatibility_date": "2026-09-30",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "upload_source_maps": true
+}

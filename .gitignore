@@ -43,3 +43,12 @@ coverage/
 
 # Prerender server bundle (deleted after each build)
 dist-ssr/
+
+# React Router / Cloudflare Workers
+.react-router/
+.wrangler/
+worker-configuration.d.ts
+# Local secrets for wrangler dev / vite preview (copy .dev.vars.example)
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
