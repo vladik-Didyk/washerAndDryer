@@ -1,26 +1,27 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { aboutPage } from "~/shared/config";
-import { pageHead, providerRef } from "~/shared/seo";
-import { absoluteUrl } from "~/shared/seo";
+import { requestI18n } from "~/entities/offer";
+import { pagePaths } from "~/shared/config";
+import { absoluteUrl, pageHead, providerRef } from "~/shared/seo";
 
-export function loader(_args: LoaderFunctionArgs) {
+export async function loader(args: LoaderFunctionArgs) {
+  const { d } = await requestI18n(args);
   return {
     head: pageHead({
-      path: aboutPage.path,
+      path: pagePaths.about,
       kind: "about",
-      title: aboutPage.metaTitle,
-      description: aboutPage.metaDescription,
+      title: d.pages.about.title,
+      description: d.pages.about.description,
       breadcrumbs: [
-        { name: "Home", path: "/" },
-        { name: "About", path: aboutPage.path },
+        { name: d.pages.home.name, path: "/" },
+        { name: d.pages.about.name, path: pagePaths.about },
       ],
       jsonLd: [
         {
           "@context": "https://schema.org",
           "@type": "AboutPage",
-          name: aboutPage.metaTitle,
-          description: aboutPage.metaDescription,
-          url: absoluteUrl(aboutPage.path),
+          name: d.pages.about.title,
+          description: d.pages.about.description,
+          url: absoluteUrl(pagePaths.about),
           about: providerRef(),
         },
       ],

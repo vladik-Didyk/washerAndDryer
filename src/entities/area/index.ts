@@ -1,3 +1,12 @@
-export { cities, cityPath, findCity, type City } from "./cities";
-export { districtPath, districts, findDistrict, type District } from "./districts";
+export {
+  YORK_REGION,
+  cityPath,
+  districtPath,
+  findCity,
+  findDistrict,
+  getCities,
+  getDistricts,
+  type City,
+  type District,
+} from "./data";
 export { AreaCard } from "./ui/AreaCard";

@@ -1,33 +1,35 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { contactPage } from "~/shared/config";
+import { requestI18n } from "~/entities/offer";
+import { pagePaths } from "~/shared/config";
 import { PHONE_E164, absoluteUrl, pageHead, providerRef } from "~/shared/seo";
 
-export function loader(_args: LoaderFunctionArgs) {
+export async function loader(args: LoaderFunctionArgs) {
+  const { d } = await requestI18n(args);
   return {
     head: pageHead({
-      path: contactPage.path,
+      path: pagePaths.contact,
       kind: "contact",
-      title: contactPage.metaTitle,
-      description: contactPage.metaDescription,
+      title: d.pages.contact.title,
+      description: d.pages.contact.description,
       breadcrumbs: [
-        { name: "Home", path: "/" },
-        { name: "Contact", path: contactPage.path },
+        { name: d.pages.home.name, path: "/" },
+        { name: d.pages.contact.name, path: pagePaths.contact },
       ],
       jsonLd: [
         {
           "@context": "https://schema.org",
           "@type": "ContactPage",
-          name: contactPage.metaTitle,
-          description: contactPage.metaDescription,
-          url: absoluteUrl(contactPage.path),
+          name: d.pages.contact.title,
+          description: d.pages.contact.description,
+          url: absoluteUrl(pagePaths.contact),
           about: {
             ...providerRef(),
             contactPoint: {
               "@type": "ContactPoint",
               telephone: PHONE_E164,
-              contactType: "customer service",
+              contactType: d.jsonLd.contact.contactType,
               areaServed: "CA-ON",
-              availableLanguage: ["English", "Spanish", "Russian"],
+              availableLanguage: d.jsonLd.contact.languages,
             },
           },
         },

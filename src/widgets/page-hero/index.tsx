@@ -1,16 +1,20 @@
+import type { ReactNode } from "react";
 import { findMachinePhoto } from "~/entities/machine";
 import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { MapPin, Phone, Photo } from "~/shared/ui";
 
 // Header for the city and district pages: the home hero's facts, smaller, beside an example
 // photo of one machine type (`photo`, a file from entities/machine). `price` is the
-// headline figure; `priceLabel` and `otherPrice` explain it. Phones: text, then the photo.
+// headline figure (written out, e.g. "$12.50", with `wasPrice` beside it while a promotion
+// lowers it); `priceLabel` and `otherPrice` explain it. Phones: text, then the photo.
 // The trust strip follows it on the page.
 export function PageHero({
   eyebrow,
   title,
   intro,
   price,
+  wasPrice,
   priceLabel,
   otherPrice,
   photo,
@@ -19,12 +23,14 @@ export function PageHero({
   title: string;
   intro?: string;
   price: string;
+  wasPrice?: ReactNode;
   priceLabel: string;
   otherPrice?: string;
   photo?: string;
 }) {
   const { phone } = siteConfig;
-  const shown = photo ? findMachinePhoto(photo) : null;
+  const { d, format } = useI18n();
+  const shown = photo ? findMachinePhoto(d, photo) : null;
 
   return (
     <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
@@ -45,21 +51,20 @@ export function PageHero({
           {intro && <p className="lead mt-5 max-w-2xl">{intro}</p>}
 
           <p className="mt-6 flex flex-wrap items-baseline gap-x-2">
-            <span className="font-display text-6xl font-extrabold tracking-tight text-brand">
-              ${price}
-            </span>
+            <span className="font-display text-6xl font-extrabold tracking-tight text-brand">{price}</span>
             <span className="font-display text-lg font-bold text-ink">{priceLabel}</span>
+            {wasPrice}
           </p>
           {otherPrice && <p className="mt-2 text-lg text-ink-soft">{otherPrice}</p>}
-          <p className="mt-2 text-sm text-ink-muted">Prices in Canadian dollars. No HST charged.</p>
+          <p className="mt-2 text-sm text-ink-muted">{d.common.pricesNote}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a href="/start/" className="btn btn-primary">
-              Start your rental
+              {d.common.startRental}
             </a>
             <a href={phone.tel} className="btn btn-secondary">
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-              Call or text {phone.display}
+              {d.common.callOrText}
             </a>
           </div>
         </div>
@@ -76,7 +81,7 @@ export function PageHero({
               />
             </div>
             <figcaption className="mt-3 text-center text-sm text-ink-muted lg:text-left">
-              Example photo: {shown.machine.title}. Your machine may be a different brand.
+              {format(d.areas.page.photoCaption, { title: shown.machine.title })}
             </figcaption>
           </figure>
         )}

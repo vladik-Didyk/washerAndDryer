@@ -1,7 +1,10 @@
 // The document: <html>, the shared <head> tags, the site frame (./chrome.tsx) and the 404 /
-// error page. The root loader decides, once per request, everything the pages share: whether
-// the first-week offer still runs (server clock, Toronto dates), which optional pages exist
-// (drafts, /account/), the footer year, and the analytics/verification settings.
+// error page. The root loader decides, once per request, everything the pages share: the
+// language (from the URL) and the facts its text needs (prices and promotions at the request
+// time, entities/offer), which optional pages exist (drafts, /account/), the footer year, and
+// the analytics/verification settings.
+// The dictionary itself is not sent: the browser loads the same language before hydrating
+// (./entry.client.tsx), from <html lang>.
 import {
   Links,
   Meta,
@@ -18,31 +21,51 @@ import {
   type MetaFunction,
 } from "react-router";
 import type { ReactNode } from "react";
-import { isFirstWeekFreeActive } from "~/entities/offer";
+import { offerFacts } from "~/entities/offer";
 import { NotFoundPage, notFoundHead } from "~/pages/not-found";
-import { flagsOf, requestTimeOf } from "~/shared/config";
+import { flagsOf, requestTimeOf, siteConfig } from "~/shared/config";
+import {
+  DEFAULT_LANG,
+  I18nProvider,
+  createI18n,
+  isDictionaryLoaded,
+  langFromPath,
+  loadAllDictionaries,
+  type Facts,
+  type I18n,
+  type Lang,
+} from "~/shared/i18n";
 import { SiteProvider, torontoYear, type SiteState } from "~/shared/lib";
 import { headMeta, type PageHead } from "~/shared/seo";
 import { optionalPages } from "./catalog";
 import { SiteChrome, fontStylesheet, ogImage, type PageChrome } from "./chrome";
 import appStylesHref from "./app.css?url";
 
-export function loader({ context }: LoaderFunctionArgs) {
+export async function loader({ request, context }: LoaderFunctionArgs) {
   const flags = flagsOf(context);
   const now = requestTimeOf(context);
-  const offerActive = isFirstWeekFreeActive(now);
+  const lang = langFromPath(new URL(request.url).pathname);
+  // Every language: the catalog of pages below lists them all (and the server keeps them).
+  await loadAllDictionaries();
+  const facts = offerFacts(now);
   const site: SiteState = {
-    offerActive,
+    now,
     year: torontoYear(now),
     stripePortalUrl: flags.stripePortalUrl,
-    ...optionalPages({
-      previewDrafts: flags.previewDrafts,
-      stripePortalUrl: flags.stripePortalUrl,
-      offerActive,
-      analyticsOn: Boolean(flags.analyticsToken),
-    }),
+    ...optionalPages(
+      {
+        previewDrafts: flags.previewDrafts,
+        stripePortalUrl: flags.stripePortalUrl,
+        now,
+        analyticsOn: Boolean(flags.analyticsToken),
+      },
+      createI18n(DEFAULT_LANG, facts),
+    ),
   };
   return {
+    lang,
+    // Small: prices, dates and the like. The words come from the dictionary.
+    facts,
     site,
     analyticsToken: flags.analyticsToken,
     googleVerification: flags.googleVerification,
@@ -50,7 +73,13 @@ export function loader({ context }: LoaderFunctionArgs) {
   };
 }
 
-type RootData = ReturnType<typeof loader>;
+type RootData = Awaited<ReturnType<typeof loader>>;
+
+// The text of this page: the root loader's language and facts (same on server and browser).
+function i18nOf(root: { lang: Lang; facts: Facts } | undefined): I18n {
+  const lang = root && isDictionaryLoaded(root.lang) ? root.lang : DEFAULT_LANG;
+  return createI18n(lang, root?.facts ?? offerFacts(Date.now()));
+}
 
 export const links: LinksFunction = () => [
   { rel: "icon", type: "image/png", href: "/favicon.png" },
@@ -62,9 +91,10 @@ export const links: LinksFunction = () => [
 ];
 
 // Only shown for errors: every page has its own meta. A 404 gets the "Page not found" head.
-export const meta: MetaFunction = ({ error }) => {
-  if (!error || (isRouteErrorResponse(error) && error.status === 404)) return headMeta(notFoundHead());
-  return [{ title: "Something went wrong | GTA Washer & Dryer Rentals" }, { name: "robots", content: "noindex" }];
+export const meta: MetaFunction<typeof loader> = ({ error, data }) => {
+  const i18n = i18nOf(data);
+  if (!error || (isRouteErrorResponse(error) && error.status === 404)) return headMeta(notFoundHead(i18n));
+  return [{ title: i18n.d.pages.error.title }, { name: "robots", content: "noindex" }];
 };
 
 interface LeafData {
@@ -79,17 +109,17 @@ function useLeafData(): LeafData {
 
 export function Layout({ children }: { children: ReactNode }) {
   const root = useRouteLoaderData<RootData>("root");
-  const { head } = useLeafData();
+  const i18n = i18nOf(root);
   return (
-    <html lang={head?.lang ?? "en"}>
+    <html lang={i18n.lang} dir={i18n.language.dir === "rtl" ? "rtl" : undefined}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Meta />
         <meta name="theme-color" content="#FAF8F2" />
-        <meta property="og:site_name" content="GTA Washer &amp; Dryer Rentals" />
+        <meta property="og:site_name" content={siteConfig.companyName} />
         <meta property="og:image" content={ogImage} />
-        <meta property="og:image:alt" content="GTA Washer & Dryer Rentals: washer and dryer rental in Toronto and the GTA" />
+        <meta property="og:image:alt" content={i18n.d.chrome.ogImageAlt} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImage} />
         {root?.googleVerification && <meta name="google-site-verification" content={root.googleVerification} />}
@@ -117,12 +147,21 @@ function Frame({ children }: { children: ReactNode }) {
   const root = useRouteLoaderData<RootData>("root");
   const { head, chrome } = useLeafData();
   const location = useLocation();
+  const site = root?.site ?? {
+    now: Date.now(),
+    year: torontoYear(Date.now()),
+    optionalPages: {},
+    draftPages: [],
+    stripePortalUrl: null,
+  };
   return (
-    <SiteProvider value={root?.site ?? { offerActive: false, year: 2026, optionalPages: {}, draftPages: [], stripePortalUrl: null }}>
-      <SiteChrome head={head} chrome={chrome} currentPath={location.pathname}>
-        {children}
-      </SiteChrome>
-    </SiteProvider>
+    <I18nProvider value={i18nOf(root)}>
+      <SiteProvider value={site}>
+        <SiteChrome head={head} chrome={chrome} currentPath={location.pathname}>
+          {children}
+        </SiteChrome>
+      </SiteProvider>
+    </I18nProvider>
   );
 }
 
@@ -140,22 +179,29 @@ export function ErrorBoundary() {
   const error = useRouteError();
   const notFound = isRouteErrorResponse(error) && error.status === 404;
   if (!notFound) console.error(error);
+  return <Frame>{notFound ? <NotFoundPage /> : <ErrorMessage />}</Frame>;
+}
+
+function ErrorMessage() {
+  const root = useRouteLoaderData<RootData>("root");
+  const { d, rich } = i18nOf(root);
+  const { phone } = siteConfig;
   return (
-    <Frame>
-      {notFound ? (
-        <NotFoundPage />
-      ) : (
-        <section aria-labelledby="hero-title" className="section">
-          <div className="container-page max-w-3xl">
-            <h1 id="hero-title" className="h2">
-              Something went wrong
-            </h1>
-            <p className="lead mt-4">
-              Please try again, or call or text <a href="tel:+14379076955" className="text-link">(437) 907-6955</a>.
-            </p>
-          </div>
-        </section>
-      )}
-    </Frame>
+    <section aria-labelledby="hero-title" className="section">
+      <div className="container-page max-w-3xl">
+        <h1 id="hero-title" className="h2">
+          {d.error.title}
+        </h1>
+        <p className="lead mt-4">
+          {rich(d.error.text, {
+            phoneLink: (
+              <a href={phone.tel} className="text-link">
+                {phone.display}
+              </a>
+            ),
+          })}
+        </p>
+      </div>
+    </section>
   );
 }

@@ -1,11 +1,19 @@
 // Helpers for server tests: a load context like the Worker's (workers/app.ts), and form posts.
 import type { AppLoadContext } from "react-router";
+import { i18nAt } from "~/entities/offer";
 import type { SiteEnv } from "~/shared/config";
+import type { Lang } from "~/shared/i18n";
+
+// The request time of every test context: October 15, 2026, 11:00 in Toronto.
+export const TEST_NOW = Date.parse("2026-10-15T15:00:00Z");
+
+// The text of a request at `now` (prices and offers filled in), as the loaders get it.
+export const testI18n = (lang: Lang = "en", now = TEST_NOW) => i18nAt(lang, now);
 
 export const TEST_KEY = "test-web3forms-key-not-real";
 export const TEST_SECRET = "test-session-secret";
 
-export function testContext(env: SiteEnv = {}, requestTime = Date.parse("2026-10-15T15:00:00Z")): AppLoadContext {
+export function testContext(env: SiteEnv = {}, requestTime = TEST_NOW): AppLoadContext {
   return {
     cloudflare: {
       env: { WEB3FORMS_KEY: TEST_KEY, SESSION_SECRET: TEST_SECRET, ...env },

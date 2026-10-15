@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router";
+import { useI18n } from "~/shared/i18n";
 import { ArrowRight, BookOpen } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 import type { loader } from "../loader";
@@ -6,15 +7,14 @@ import type { loader } from "../loader";
 // /guides/: every guide this deployment shows. Exists only while at least one guide is shown.
 export default function GuidesPage() {
   const { guides } = useLoaderData<typeof loader>();
+  const { d } = useI18n();
   return (
     <>
-      <PageIntro icon={BookOpen} eyebrow="Guides" title="Guides for renting a washer and dryer">
-        <p className="lead mt-5">
-          Short, practical guides for renting a washer and dryer in Toronto and the GTA.
-        </p>
+      <PageIntro icon={BookOpen} eyebrow={d.guides.eyebrow} title={d.guides.title}>
+        <p className="lead mt-5">{d.guides.lead}</p>
       </PageIntro>
 
-      <section aria-label="All guides" className="border-t border-line bg-white py-14 sm:py-16 lg:py-20">
+      <section aria-label={d.guides.listLabel} className="border-t border-line bg-white py-14 sm:py-16 lg:py-20">
         <div className="container-page">
           <ul className="grid gap-5 md:grid-cols-2 md:gap-6">
             {guides.map((guide) => (
@@ -35,7 +35,7 @@ export default function GuidesPage() {
                   aria-hidden="true"
                   className="mt-auto flex items-center gap-1.5 pt-5 font-display font-semibold text-brand"
                 >
-                  Read the guide
+                  {d.guides.read}
                   <ArrowRight className="h-4 w-4" />
                 </p>
               </li>

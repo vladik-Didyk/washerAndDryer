@@ -1,4 +1,5 @@
 import { siteConfig } from "~/shared/config";
+import { LANGUAGES, useI18n, type Dictionary } from "~/shared/i18n";
 import { useSite, type Site } from "~/shared/lib";
 import {
   BookOpen,
@@ -17,21 +18,28 @@ import { isCurrent, useMobileMenu } from "../model";
 // Secondary links: in a thin row above the header on wide screens (with the Spanish and
 // Russian pages), and in the mobile menu. Guides and Pay / manage appear only when their pages
 // exist in this deployment. The main row keeps to the menu, the phone and "Start your rental".
-function utilityLinks(site: Site) {
+function utilityLinks(site: Site, nav: Dictionary["nav"]) {
   const links: Array<{ label: string; href: string; Icon: LucideIcon }> = [
-    { label: "Request a repair", href: "/repair/", Icon: Wrench },
+    { label: nav.repair, href: "/repair/", Icon: Wrench },
   ];
-  if (site.has("/guides/")) links.push({ label: "Guides", href: "/guides/", Icon: BookOpen });
-  if (site.has("/account/")) links.push({ label: "Pay / manage", href: "/account/", Icon: CreditCard });
+  if (site.has("/guides/")) links.push({ label: nav.guides, href: "/guides/", Icon: BookOpen });
+  if (site.has("/account/")) links.push({ label: nav.account, href: "/account/", Icon: CreditCard });
   return links;
 }
+
+// The other languages' pages (shared/i18n LANGUAGES).
+const languageLinks = LANGUAGES.filter((language) => language.code !== "en").map((language) => ({
+  label: language.name,
+  lang: language.code,
+  href: language.path,
+}));
 
 // `requestHref` is where "Start your rental" goes: the rental request (/start/).
 export function Header({ currentPath = "/", requestHref = "/start/" }: { currentPath?: string; requestHref?: string }) {
   const { menuOpen, menuButtonRef, toggleMenu, closeMenu } = useMobileMenu();
-  const { phone, hours, navigation, languageLinks, languages } = siteConfig;
-  const utility = utilityLinks(useSite());
-  const weekdayHours = hours[0];
+  const { phone, navigation } = siteConfig;
+  const { d, format } = useI18n();
+  const utility = utilityLinks(useSite(), d.nav);
 
   return (
     <>
@@ -40,9 +48,9 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
         <div className="container-page flex h-9 items-center justify-between gap-6 text-[13px] text-ink-muted">
           <p className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-            {weekdayHours.days} {weekdayHours.time} · We speak {languages}
+            {format(d.header.utilityLine, { languages: d.common.languages })}
           </p>
-          <nav aria-label="More">
+          <nav aria-label={d.nav.more}>
             <ul className="flex items-center gap-5">
               {utility.map(({ label, href, Icon }) => (
                 <li key={href}>
@@ -90,11 +98,11 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
               aria-hidden="true"
               className="hidden font-display text-[1.0625rem] font-bold leading-tight tracking-tight text-ink sm:block lg:hidden xl:block"
             >
-              GTA Washer &amp; Dryer Rentals
+              {siteConfig.companyName}
             </span>
           </a>
 
-          <nav aria-label="Main" className="hidden lg:block">
+          <nav aria-label={d.nav.main} className="hidden lg:block">
             <ul className="flex items-center gap-0.5 xl:gap-1">
               {navigation.map((link) => {
                 const current = isCurrent(link.href, currentPath);
@@ -107,7 +115,7 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
                         current ? "bg-brand-mint text-brand-dark" : "text-ink-soft"
                       }`}
                     >
-                      {link.label}
+                      {d.nav[link.key]}
                     </a>
                   </li>
                 );
@@ -120,14 +128,14 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
           <div className="flex shrink-0 items-center gap-2">
             <a
               href={phone.tel}
-              aria-label={`Call ${phone.display}`}
+              aria-label={d.header.callAria}
               className="hidden h-11 min-w-[2.75rem] items-center justify-center gap-2 rounded-full border border-line bg-white px-3 font-display text-[15px] font-semibold text-brand transition-colors hover:bg-brand-mint md:inline-flex lg:border-transparent lg:bg-transparent"
             >
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               <span className="hidden whitespace-nowrap lg:inline">{phone.display}</span>
             </a>
             <a href={requestHref} className="btn btn-primary hidden whitespace-nowrap px-5 md:inline-flex">
-              Start your rental
+              {d.common.startRental}
             </a>
             <button
               ref={menuButtonRef}
@@ -135,7 +143,7 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
               onClick={toggleMenu}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-label={menuOpen ? d.header.closeMenu : d.header.openMenu}
               className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink transition-colors hover:bg-brand-mint lg:hidden"
             >
               {menuOpen ? (
@@ -153,7 +161,7 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
           className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-paper lg:hidden"
         >
           {/* Bottom padding on phones keeps the last items clear of the fixed Call bar. */}
-          <nav aria-label="Main" className="container-page pb-24 pt-3 md:pb-3">
+          <nav aria-label={d.nav.main} className="container-page pb-24 pt-3 md:pb-3">
             <ul>
               {navigation.map((link) => (
                 <li key={link.href}>
@@ -163,7 +171,7 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
                     aria-current={link.href === currentPath ? "page" : undefined}
                     className="block border-b border-line py-3.5 font-display text-lg font-semibold text-ink transition-colors hover:text-brand"
                   >
-                    {link.label}
+                    {d.nav[link.key]}
                   </a>
                 </li>
               ))}
@@ -199,19 +207,19 @@ export function Header({ currentPath = "/", requestHref = "/start/" }: { current
             </ul>
             <div className="grid grid-cols-2 gap-3 pb-3 pt-5">
               <a href={requestHref} onClick={closeMenu} className="btn btn-primary col-span-2">
-                Start your rental
+                {d.common.startRental}
               </a>
               <a href={phone.tel} className="btn btn-secondary">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-                Call
+                {d.common.call}
               </a>
               <a href={phone.sms} className="btn btn-secondary">
                 <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-                Text
+                {d.common.text}
               </a>
             </div>
             <p className="pb-2 text-center text-sm text-ink-muted">
-              {phone.display}, {weekdayHours.days} {weekdayHours.time}
+              {d.header.menuContact}
             </p>
           </nav>
         </div>

@@ -1,2 +1,2 @@
-export { allGuides, findGuide, visibleGuides } from "./guides.server";
-export { guidePath, guidesIndex, type Guide } from "./model";
+export { allGuides, findGuide, guideSlugs, visibleGuides } from "./guides.server";
+export { guidePath, type Guide } from "./model";

@@ -1,9 +1,10 @@
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
+import { useI18n } from "~/shared/i18n";
 import type { FieldErrorMap } from "~/shared/lib";
 import { ArrowRight, ChoiceTiles } from "~/shared/ui";
 import type { machineAction } from "../actions.server";
 import type { machineLoader } from "../loaders.server";
-import { MACHINE_CHOICES } from "../model";
+import { machineChoices } from "../model";
 import { StepShell } from "./StepShell";
 
 // Step 1 of 3: the machine type.
@@ -13,17 +14,23 @@ export function MachineStep() {
   const busy = useNavigation().state !== "idle";
   const values = result?.values ?? saved;
   const errors: FieldErrorMap = result?.errors ?? {};
+  const i18n = useI18n();
+  const { d, rich } = i18n;
+  const text = d.start.machine;
 
   return (
     <StepShell
       step="machine"
-      title="Which machine do you need?"
+      title={text.title}
       intro={
         <p>
-          Not sure? Choose "Not sure yet": we help you pick from your closet size and hookups.{" "}
-          <a href="/machines/" className="text-link">
-            Compare the machine types
-          </a>
+          {rich(text.intro, {
+            link: (
+              <a href="/machines/" className="text-link">
+                {d.common.compareTypes}
+              </a>
+            ),
+          })}
         </p>
       }
     >
@@ -31,15 +38,15 @@ export function MachineStep() {
         <ChoiceTiles
           id="machine"
           name="machine"
-          legend="Machine type"
-          choices={MACHINE_CHOICES}
+          legend={text.legend}
+          choices={machineChoices(i18n)}
           defaultValue={values.machine}
           error={errors.machine}
           columns="sm:grid-cols-2"
           className=""
         />
         <button type="submit" disabled={busy} className="btn btn-primary mt-6 w-full disabled:opacity-70">
-          Next: your space
+          {text.next}
           <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
         </button>
       </Form>

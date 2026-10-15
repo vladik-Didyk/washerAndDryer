@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import { FaqList } from "~/entities/faq";
 import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { CircleHelp, MessageSquare, Phone } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 import type { loader } from "../loader";
@@ -10,19 +11,22 @@ import type { loader } from "../loader";
 export default function FaqPage() {
   const { groups: faqGroups } = useLoaderData<typeof loader>();
   const { phone } = siteConfig;
+  const { d, rich } = useI18n();
+  const text = d.faq.page;
 
   return (
     <>
-      <PageIntro icon={CircleHelp} eyebrow="FAQ" title="Questions and answers" textWidth="max-w-5xl">
+      <PageIntro icon={CircleHelp} eyebrow={text.eyebrow} title={text.title} textWidth="max-w-5xl">
         <p className="lead mt-5 max-w-2xl">
-          Renting, prices, delivery, repairs and landlords. Another question? Call or
-          text{" "}
-          <a href={phone.tel} className="text-link whitespace-nowrap">
-            {phone.display}
-          </a>
-          .
+          {rich(text.lead, {
+            phoneLink: (
+              <a href={phone.tel} className="text-link whitespace-nowrap">
+                {phone.display}
+              </a>
+            ),
+          })}
         </p>
-        <nav aria-label="Topics" className="mt-8">
+        <nav aria-label={text.topics} className="mt-8">
           <ul className="flex flex-wrap gap-2.5">
             {faqGroups.map((group) => (
               <li key={group.id}>
@@ -49,24 +53,21 @@ export default function FaqPage() {
           <div className="grid gap-6 rounded-3xl bg-brand-mint px-5 py-8 sm:p-10 lg:grid-cols-12 lg:items-center lg:gap-10">
             <div className="lg:col-span-7">
               <h2 id="faq-cta-title" className="h2">
-                Ready to rent?
+                {d.common.readyToRent}
               </h2>
-              <p className="lead mt-3">
-                Tell us your area and your laundry space. We reply with the machine,
-                the total and the start date.
-              </p>
+              <p className="lead mt-3">{d.common.readyToRentText}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
               <a href="/start/" className="btn btn-primary">
-                Start your rental
+                {d.common.startRental}
               </a>
               <a href={phone.tel} className="btn btn-secondary">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-                Call
+                {d.common.call}
               </a>
               <a href={phone.sms} className="btn btn-secondary">
                 <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-                Text
+                {d.common.text}
               </a>
             </div>
           </div>

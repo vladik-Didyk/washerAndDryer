@@ -1,5 +1,36 @@
-import { sectionId, useSite, type ArticleSection, type RenderedBlock } from "~/shared/lib";
+import { activePromotions, promotionText } from "~/entities/offer";
+import type { I18n } from "~/shared/i18n";
+import { sectionId, useSite, type ArticleBlock, type ArticleSection, type RenderedBlock } from "~/shared/lib";
 import { ArrowRight, Info } from "~/shared/ui";
+
+// The per-request blocks of an article's text (shared/i18n locales/en.server.ts), filled in by
+// the page loader: { include: "hookups" } is the hookup checklist; { offer: "promotions" } one
+// paragraph per running promotion (none once they end); { offer: "referral" } the referral
+// offer; `includes` holds any other text a page includes (the privacy policy's statistics line).
+export function prepareArticle(
+  sections: ArticleSection[],
+  i18n: I18n,
+  now: number,
+  paragraphs: { promotionParagraph: string; referralParagraph: string },
+  includes: Record<string, string> = {},
+): ArticleSection<RenderedBlock>[] {
+  const { d, format } = i18n;
+  const render = (block: ArticleBlock): RenderedBlock[] => {
+    if (typeof block === "string") return [block];
+    if ("include" in block) {
+      if (block.include === "hookups") return [{ list: d.common.hookups }];
+      return block.include in includes ? [includes[block.include]] : [];
+    }
+    if ("offer" in block) {
+      if (block.offer === "referral") return [format(paragraphs.referralParagraph, d.offers.referral)];
+      return activePromotions(now).map((promotion) =>
+        format(paragraphs.promotionParagraph, promotionText(promotion, i18n)),
+      );
+    }
+    return [block];
+  };
+  return sections.map((section) => ({ ...section, blocks: section.blocks.flatMap(render) }));
+}
 
 const text = "text-[17px] leading-relaxed text-ink-soft";
 

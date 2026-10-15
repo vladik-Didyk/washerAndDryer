@@ -1,11 +1,13 @@
+import { useI18n } from "~/shared/i18n";
 import type { Crumb } from "~/shared/seo";
 import { ChevronRight } from "~/shared/ui";
 
 // The trail at the top of inner pages. The same items (the page loader's head.breadcrumbs)
 // feed the BreadcrumbList JSON-LD, so the two always match.
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
+  const { d } = useI18n();
   return (
-    <nav aria-label="Breadcrumb" className="container-page pt-5 sm:pt-6">
+    <nav aria-label={d.chrome.breadcrumb} className="container-page pt-5 sm:pt-6">
       <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-ink-muted">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;

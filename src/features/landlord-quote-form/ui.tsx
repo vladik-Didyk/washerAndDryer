@@ -1,4 +1,5 @@
 import { Form, useNavigation } from "react-router";
+import { useI18n } from "~/shared/i18n";
 import type { FormActionData } from "~/shared/lib";
 import {
   ChoiceTiles,
@@ -11,25 +12,23 @@ import {
   TextAreaField,
   TextField,
 } from "~/shared/ui";
-import {
-  EMPTY_VALUES,
-  MACHINE_OPTIONS,
-  OPTION_CHOICES,
-  SETUP_OPTIONS,
-  type LandlordQuoteValues,
-} from "./model";
+import { emptyLandlordQuote, quoteChoices, type LandlordQuoteValues } from "./model";
 
 // Landlord quote request. A plain form posted to the page's server action, so it works with
 // JavaScript off; with JavaScript on, React Router submits it without a page reload.
 export function LandlordQuoteForm({ result }: { result?: FormActionData<LandlordQuoteValues> }) {
   const navigation = useNavigation();
   const sending = navigation.state === "submitting";
+  const i18n = useI18n();
+  const { forms, landlords } = i18n.d;
+  const { quote } = landlords;
+  const choices = quoteChoices(i18n);
 
   if (result?.status === "sent") {
-    return <SentPanel title="Quote request sent." resetHref="/landlords/quote/#landlord-quote" />;
+    return <SentPanel title={quote.sent} resetHref="/landlords/quote/#landlord-quote" />;
   }
 
-  const values = result ? result.values : EMPTY_VALUES;
+  const values = result ? result.values : emptyLandlordQuote(i18n);
   const errors = result?.status === "invalid" ? result.errors : {};
 
   return (
@@ -40,18 +39,18 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData<Landlord
       className="rounded-3xl border border-line bg-white p-5 sm:p-8"
     >
       <h2 id="quote-form-title" className="font-display text-2xl font-bold text-ink">
-        Your building
+        {quote.formTitle}
       </h2>
       <div className="mt-2">
         <RequiredNote />
       </div>
 
       <div className="mt-5 grid gap-5 sm:grid-cols-2">
-        <TextField id="quote-name" name="name" label="Name" required autoComplete="name" defaultValue={values.name} error={errors.name} />
+        <TextField id="quote-name" name="name" label={forms.name} required autoComplete="name" defaultValue={values.name} error={errors.name} />
         <TextField
           id="quote-phone"
           name="phone"
-          label="Phone"
+          label={forms.phone}
           required
           type="tel"
           inputMode="tel"
@@ -62,7 +61,7 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData<Landlord
         <TextField
           id="quote-email"
           name="email"
-          label="Email"
+          label={forms.email}
           type="email"
           inputMode="email"
           autoComplete="email"
@@ -73,7 +72,7 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData<Landlord
         <TextField
           id="quote-address"
           name="address"
-          label="Building address or city"
+          label={quote.address}
           required
           autoComplete="street-address"
           defaultValue={values.address}
@@ -82,7 +81,7 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData<Landlord
         <TextField
           id="quote-units"
           name="units"
-          label="Number of units"
+          label={quote.units}
           required
           type="number"
           inputMode="numeric"
@@ -93,40 +92,40 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData<Landlord
         <ChoiceTiles
           id="quote-setup"
           name="setup"
-          legend="What's there now"
-          choices={SETUP_OPTIONS}
+          legend={quote.setup}
+          choices={choices.setup}
           defaultValue={values.setup}
           error={errors.setup}
         />
         <SelectField
           id="quote-machine"
           name="machineType"
-          label="Machine type"
-          options={MACHINE_OPTIONS}
+          label={quote.machineType}
+          options={choices.machine}
           defaultValue={values.machineType}
           className="sm:col-span-2"
         />
         <ChoiceTiles
           id="quote-option"
           name="option"
-          legend="How you'd like to do it"
-          choices={OPTION_CHOICES}
+          legend={quote.option}
+          choices={choices.option}
           defaultValue={values.option}
           error={errors.option}
         />
         <TextAreaField
           id="quote-notes"
           name="notes"
-          label="Notes"
+          label={forms.notes}
           defaultValue={values.notes}
           className="sm:col-span-2"
-          hint="For example: where the laundry is in each unit, stairs or elevator, a good time to see the building."
+          hint={quote.notesHint}
         />
       </div>
 
       <Honeypot />
       {result?.status === "error" && <SendError />}
-      <SubmitButton sending={sending}>Send quote request</SubmitButton>
+      <SubmitButton sending={sending}>{quote.submit}</SubmitButton>
     </Form>
   );
 }

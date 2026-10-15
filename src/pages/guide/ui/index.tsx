@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import { siteConfig } from "~/shared/config";
-import { formatDate, sectionId } from "~/shared/lib";
+import { useI18n } from "~/shared/i18n";
+import { sectionId } from "~/shared/lib";
 import { BookOpen, LinkList, Phone } from "~/shared/ui";
 import { ArticleBody } from "~/widgets/article-body";
 import { PageIntro } from "~/widgets/page-intro";
@@ -9,25 +10,29 @@ import type { loader } from "../loader";
 // One guide (entities/guide). The author is the business; there are no author bios.
 export default function GuidePage() {
   const { guide, otherGuides } = useLoaderData<typeof loader>();
-  const { phone, prices, companyName } = siteConfig;
+  const { phone } = siteConfig;
+  const { d, rich, date } = useI18n();
 
   return (
     <>
-      <PageIntro icon={BookOpen} eyebrow="Guide" title={guide.title}>
+      <PageIntro icon={BookOpen} eyebrow={d.guides.guideEyebrow} title={guide.title}>
         <p className="lead mt-5">{guide.summary}</p>
         <p className="mt-4 text-sm text-ink-muted">
-          By {companyName} · Updated{" "}
-          <time dateTime={guide.updated} className="whitespace-nowrap">
-            {formatDate(guide.updated)}
-          </time>
+          {rich(d.guides.byline, {
+            date: (
+              <time dateTime={guide.updated} className="whitespace-nowrap">
+                {date(guide.updated)}
+              </time>
+            ),
+          })}
         </p>
       </PageIntro>
 
       <div className="border-t border-line bg-white">
         <div className="container-page grid gap-10 py-12 sm:py-14 lg:grid-cols-12 lg:gap-12 lg:py-16">
-          <nav aria-label="On this page" className="hidden lg:col-span-4 lg:block">
+          <nav aria-label={d.guides.onThisPage} className="hidden lg:col-span-4 lg:block">
             <div className="sticky top-28 rounded-3xl border border-line bg-paper p-6">
-              <p className="font-display text-sm font-semibold text-ink-muted">On this page</p>
+              <p className="font-display text-sm font-semibold text-ink-muted">{d.guides.onThisPage}</p>
               <ol className="mt-3 space-y-2.5">
                 {guide.sections.map((section) => (
                   <li key={sectionId(section)}>
@@ -53,19 +58,16 @@ export default function GuidePage() {
               className="mt-14 max-w-[46rem] rounded-3xl bg-brand-mint p-6 sm:p-8"
             >
               <h2 id="guide-cta-title" className="font-display text-2xl font-bold text-ink">
-                Ready to rent?
+                {d.common.readyToRent}
               </h2>
-              <p className="mt-2 text-ink-soft">
-                ${prices.setText} a week for a washer and dryer set, ${prices.singleText} for
-                one machine. Repairs and old-machine haul-away included.
-              </p>
+              <p className="mt-2 text-ink-soft">{d.guides.ctaText}</p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a href="/start/" className="btn btn-primary">
-                  Start your rental
+                  {d.common.startRental}
                 </a>
                 <a href={phone.tel} className="btn btn-secondary">
                   <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-                  Call or text {phone.display}
+                  {d.common.callOrText}
                 </a>
               </div>
             </aside>
@@ -74,9 +76,9 @@ export default function GuidePage() {
       </div>
 
       {otherGuides.length > 0 && (
-        <section aria-label="More guides" className="section">
+        <section aria-label={d.guides.more} className="section">
           <div className="container-page">
-            <LinkList id="more-guides-title" title="More guides" links={otherGuides} />
+            <LinkList id="more-guides-title" title={d.guides.more} links={otherGuides} />
           </div>
         </section>
       )}

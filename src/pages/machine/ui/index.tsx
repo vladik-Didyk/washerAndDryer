@@ -1,19 +1,13 @@
 import type { ReactNode } from "react";
 import { useLoaderData } from "react-router";
-import { cities, cityPath } from "~/entities/area";
-import {
-  TYPE_CARD_SIZES_4UP,
-  TypeCard,
-  findMachine,
-  hookupChecklist,
-  machineTypes,
-  type MachineType,
-} from "~/entities/machine";
-import { firstWeekFreeOffer } from "~/entities/offer";
+import { cityPath, getCities } from "~/entities/area";
+import { TYPE_CARD_SIZES_4UP, TypeCard, findMachine, getMachineTypes, type MachineType } from "~/entities/machine";
+import { promotionText, useActivePromotions, usePrices } from "~/entities/offer";
 import { MachineGallery } from "~/features/machine-gallery";
 import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
-import { Check, Gift, KeepWordsWhole, LinkList, MapPin, Phone } from "~/shared/ui";
+import { Check, Gift, KeepWordsWhole, LinkList, MapPin, Phone, WasPrice } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { HowItWorks } from "~/widgets/how-it-works";
 import { StartRental } from "~/widgets/start-rental";
@@ -34,17 +28,15 @@ function CheckItem({ children }: { children: ReactNode }) {
 }
 
 // The price box beside the gallery: weekly price, what's included, the two ways to start, and
-// the first-week offer while it runs (decided per request, entities/offer).
+// the running promotions (decided per request, entities/offer).
 function RentalSummary({ machine, className = "" }: { machine: MachineType; className?: string }) {
-  const { prices, phone } = siteConfig;
-  const { offerActive } = useSite();
-  const isSet = machine.price === prices.set;
-  const included = [
-    "Delivery and installation quoted before you pay",
-    "Repairs included",
-    "Your old machine taken away at no charge",
-    "No credit check",
-  ];
+  const { phone } = siteConfig;
+  const i18n = useI18n();
+  const { d, money } = i18n;
+  const text = d.machines.page;
+  const price = usePrices()[machine.item];
+  const promotions = useActivePromotions().filter((promotion) => promotion.appliesTo.includes(machine.item));
+  const isSet = machine.item === "set";
 
   return (
     <section
@@ -52,50 +44,49 @@ function RentalSummary({ machine, className = "" }: { machine: MachineType; clas
       className={`rounded-3xl border border-line bg-white p-6 shadow-[0_18px_40px_-28px_rgba(7,63,50,0.45)] sm:p-8 ${className}`}
     >
       <h2 id="summary-title" className="sr-only">
-        Price and what's included
+        {text.summaryTitle}
       </h2>
       <p className="flex flex-wrap items-baseline gap-x-2">
-        <span className="font-display text-5xl font-extrabold tracking-tight text-brand">
-          ${machine.price.toFixed(2)}
-        </span>
-        <span className="font-display text-lg font-bold text-ink">a week</span>
+        <span className="font-display text-5xl font-extrabold tracking-tight text-brand">{money(price.current)}</span>
+        <span className="font-display text-lg font-bold text-ink">{d.common.aWeek}</span>
+        <WasPrice price={price} className="font-display text-lg font-bold text-ink-muted" />
       </p>
-      <p className="mt-1.5 text-ink-soft">
-        {isSet ? "For the washer and dryer set." : "For one machine: a washer or a dryer."}
-      </p>
-      <p className="mt-1 text-sm font-medium text-ink-muted">No HST charged · Prices in CAD</p>
+      <p className="mt-1.5 text-ink-soft">{isSet ? text.forSet : text.forSingle}</p>
+      <p className="mt-1 text-sm font-medium text-ink-muted">{d.common.priceTagNote}</p>
 
       <ul className="mt-5 space-y-2.5 border-t border-line pt-5 text-ink-soft">
-        {included.map((item) => (
+        {text.included.map((item) => (
           <CheckItem key={item}>{item}</CheckItem>
         ))}
       </ul>
 
       <div className="mt-6 grid gap-3">
         <a href={`/start/?machine=${machine.slug}`} className="btn btn-primary w-full">
-          Start your rental
+          {d.common.startRental}
         </a>
         <a href={phone.tel} className="btn btn-secondary w-full">
           <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-          Call or text {phone.display}
+          {d.common.callOrText}
         </a>
       </div>
 
-      {offerActive && (
-        <p className="mt-5 flex gap-2.5 rounded-2xl bg-gold/20 px-4 py-3 text-sm leading-relaxed text-ink">
-          <Gift className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
-          <span>
-            <strong className="font-semibold">{firstWeekFreeOffer.title}.</strong>{" "}
-            {firstWeekFreeOffer.note}
-          </span>
-        </p>
-      )}
+      {promotions.map((promotion) => {
+        const offer = promotionText(promotion, i18n);
+        return (
+          <p
+            key={promotion.id}
+            className="mt-5 flex gap-2.5 rounded-2xl bg-gold/20 px-4 py-3 text-sm leading-relaxed text-ink"
+          >
+            <Gift className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+            <span>
+              <strong className="font-semibold">{offer.title}.</strong> {offer.note}
+            </span>
+          </p>
+        );
+      })}
 
       <p className="mt-4 text-sm leading-relaxed text-ink-muted">
-        ${prices.deposit} refundable deposit. 52-week minimum, then week to week.{" "}
-        {isSet
-          ? `Need only one machine? $${prices.singleText} a week.`
-          : `Need both? A washer + dryer set is $${prices.setText} a week.`}
+        {text.terms} {isSet ? text.needOne : text.needBoth}
       </p>
     </section>
   );
@@ -103,16 +94,18 @@ function RentalSummary({ machine, className = "" }: { machine: MachineType; clas
 
 // Typical sizes (in inches and centimetres, entities/machine) and the hookups needed.
 function SpecsTable({ machine }: { machine: MachineType }) {
+  const { d, format } = useI18n();
+  const text = d.machines.page;
   const rows = [
     ...machine.sizes,
-    { label: "Washer loads from", value: machine.compare.loads },
-    { label: "Good for", value: machine.compare.goodFor },
+    { label: text.loadsFrom, value: machine.compare.loads },
+    { label: text.goodFor, value: machine.compare.goodFor },
   ];
   const label = "w-[38%] py-4 pr-4 text-left align-top font-display font-semibold text-ink sm:w-[34%]";
 
   return (
     <table className="w-full text-[15px] sm:text-base">
-      <caption className="sr-only">Typical sizes and hookups: {machine.title}</caption>
+      <caption className="sr-only">{format(text.specsCaption, { title: machine.title })}</caption>
       <tbody className="divide-y divide-line">
         {rows.map((row) => (
           <tr key={row.label}>
@@ -124,11 +117,11 @@ function SpecsTable({ machine }: { machine: MachineType }) {
         ))}
         <tr>
           <th scope="row" className={label}>
-            Hookups needed
+            {text.hookupsNeeded}
           </th>
           <td className="py-4 text-ink-soft">
             <ul className="space-y-1.5">
-              {hookupChecklist.map((item) => (
+              {d.common.hookups.map((item) => (
                 <li key={item} className="flex gap-2">
                   <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
                   <span>
@@ -148,14 +141,17 @@ function SpecsTable({ machine }: { machine: MachineType }) {
 // the other types, and the way to start a rental.
 export default function MachinePage() {
   const { slug } = useLoaderData<typeof loader>();
-  const machine = findMachine(slug)!;
+  const { d, format, money, rich } = useI18n();
+  const text = d.machines.page;
+  const machine = findMachine(d, slug)!;
   const site = useSite();
+  const prices = usePrices();
   const { phone } = siteConfig;
   const { page } = machine;
-  const otherTypes = machineTypes.filter((other) => other.slug !== machine.slug);
+  const otherTypes = getMachineTypes(d).filter((other) => other.slug !== machine.slug);
   const cityLinks = [
-    ...cities.map((city) => ({ href: cityPath(city), label: city.name })),
-    { href: "/areas/", label: "All areas" },
+    ...getCities(d).map((city) => ({ href: cityPath(city), label: city.name })),
+    { href: "/areas/", label: d.common.allAreas },
   ];
 
   return (
@@ -166,7 +162,7 @@ export default function MachinePage() {
           <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1">
             <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
               <MapPin className="h-4 w-4" aria-hidden="true" />
-              Toronto &amp; the GTA
+              {d.common.torontoAndGta}
             </p>
             <h1
               id="hero-title"
@@ -194,12 +190,9 @@ export default function MachinePage() {
       <section id="specs" aria-labelledby="specs-title" className="section">
         <div className="container-page">
           <h2 id="specs-title" className="h2">
-            Sizes and hookups
+            {text.specsTitle}
           </h2>
-          <p className="lead mt-4 max-w-2xl">
-            Typical sizes. The exact size depends on the machine we have for you, so we
-            check your measurements first.
-          </p>
+          <p className="lead mt-4 max-w-2xl">{text.specsLead}</p>
         </div>
         <div className="container-page mt-8 grid gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="rounded-3xl border border-line bg-white px-5 sm:px-8 lg:col-span-7">
@@ -207,17 +200,19 @@ export default function MachinePage() {
           </div>
 
           <div className="rounded-3xl bg-brand-mint p-6 sm:p-8 lg:col-span-5 lg:self-start">
-            <h2 className="font-display text-xl font-bold text-ink">Not sure it fits?</h2>
+            <h2 className="font-display text-xl font-bold text-ink">{text.fitTitle}</h2>
             <p className="mt-3 text-ink-soft">
-              Text a photo of the space to{" "}
-              <a href={phone.sms} className="text-link whitespace-nowrap">
-                {phone.display}
-              </a>{" "}
-              and we'll check.
+              {rich(text.fitText, {
+                phoneLink: (
+                  <a href={phone.sms} className="text-link whitespace-nowrap">
+                    {phone.display}
+                  </a>
+                ),
+              })}
             </p>
             {site.has(MEASURE_GUIDE) && (
               <a href={MEASURE_GUIDE} className="text-link mt-4 inline-block">
-                How to measure your laundry space
+                {d.common.measureGuide}
               </a>
             )}
           </div>
@@ -232,7 +227,7 @@ export default function MachinePage() {
         <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
             <h2 id="details-title" className="h2">
-              What it is
+              {text.whatItIs}
             </h2>
             {page.whatItIs.map((paragraph) => (
               <p key={paragraph} className="lead mt-4">
@@ -240,12 +235,12 @@ export default function MachinePage() {
               </p>
             ))}
 
-            <h2 className="mt-12 font-display text-2xl font-bold text-ink">Size</h2>
+            <h2 className="mt-12 font-display text-2xl font-bold text-ink">{text.size}</h2>
             <p className="mt-4 leading-relaxed text-ink-soft">{page.size}</p>
           </div>
 
           <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:col-span-5 lg:self-start">
-            <h2 className="font-display text-xl font-bold text-ink">Who it fits</h2>
+            <h2 className="font-display text-xl font-bold text-ink">{text.whoItFits}</h2>
             <ul className="mt-4 space-y-3 text-ink-soft">
               {page.fits.map((item) => (
                 <CheckItem key={item}>{item}</CheckItem>
@@ -261,24 +256,21 @@ export default function MachinePage() {
         <div className="container-page">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <h2 id="other-types-title" className="h2">
-              Other machine types
+              {text.otherTypes}
             </h2>
             <a href="/machines/" className="text-link shrink-0">
-              Compare all machine types
+              {d.common.compareAllTypes}
             </a>
           </div>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {otherTypes.map((other) => (
-              <TypeCard key={other.slug} machine={other} sizes={TYPE_CARD_SIZES_4UP} />
+              <TypeCard key={other.slug} machine={other} price={prices[other.item]} sizes={TYPE_CARD_SIZES_4UP} />
             ))}
           </ul>
-          <p className="mt-6 text-sm text-ink-muted">
-            Photos are examples of each type, not our machines. Brand and model depend on
-            what's available.
-          </p>
+          <p className="mt-6 text-sm text-ink-muted">{d.common.examplePhotosNote}</p>
           <LinkList
             id="areas-links-title"
-            title="Where we deliver"
+            title={text.whereWeDeliver}
             links={cityLinks}
             className="mt-12"
           />
@@ -286,8 +278,8 @@ export default function MachinePage() {
       </section>
 
       <CtaBand
-        title={`${machine.title}: $${machine.price.toFixed(2)} a week`}
-        text="Delivery and installation quoted before you pay. Repairs included while you rent."
+        title={format(text.ctaTitle, { title: machine.title, price: money(prices[machine.item].current) })}
+        text={text.ctaText}
       />
       <StartRental />
     </>

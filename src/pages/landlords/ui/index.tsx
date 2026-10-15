@@ -1,8 +1,8 @@
-import { hookupChecklist, siteConfig } from "~/shared/config";
+import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { ArrowRight, Building2, Check, Phone } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { PageIntro } from "~/widgets/page-intro";
-import { landlordFaqs, landlordIncluded, landlordOptions, landlordSteps } from "../content";
 
 const QUOTE_PATH = "/landlords/quote/";
 
@@ -22,21 +22,26 @@ function CheckList({ items, className = "mt-5" }: { items: string[]; className?:
 }
 
 // /landlords/: the two ways landlords work with us, what's included, how it goes for a
-// building, and landlord questions. Content in ../content.ts. No income claims.
+// building, and landlord questions. Facts only: no income claims and no numbers beyond the
+// list price.
 export default function LandlordsPage() {
   const { phone } = siteConfig;
+  const { d, format, number, rich } = useI18n();
+  const text = d.landlords;
 
   return (
     <>
       <PageIntro
         icon={Building2}
-        eyebrow="For landlords"
-        title="Washers and dryers for your rental units"
+        eyebrow={text.eyebrow}
+        title={text.title}
         aside={
           <ol className="space-y-3">
-            {landlordOptions.map((option, index) => (
+            {text.options.map((option, index) => (
               <li key={option.title} className="rounded-3xl bg-brand-mint p-6">
-                <p className="font-display text-sm font-semibold text-brand">Option {index + 1}</p>
+                <p className="font-display text-sm font-semibold text-brand">
+                  {format(text.option, { number: index + 1 })}
+                </p>
                 <p className="mt-1 font-display text-xl font-bold text-ink">{option.title}</p>
                 <p className="mt-2 font-display text-lg font-bold text-brand">{option.headline}</p>
               </li>
@@ -44,17 +49,14 @@ export default function LandlordsPage() {
           </ol>
         }
       >
-        <p className="lead mt-5 max-w-2xl">
-          Two ways to put laundry in your units. Either way, we install the machines,
-          take the old ones away, and repairs are included.
-        </p>
+        <p className="lead mt-5 max-w-2xl">{text.lead}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a href={QUOTE_PATH} className="btn btn-primary">
-            Get a quote
+            {d.common.getQuote}
           </a>
           <a href={phone.tel} className="btn btn-secondary">
             <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-            Call or text {phone.display}
+            {d.common.callOrText}
           </a>
         </div>
       </PageIntro>
@@ -62,12 +64,14 @@ export default function LandlordsPage() {
       <section aria-labelledby="options-title" className="section border-y border-line bg-white">
         <div className="container-page">
           <h2 id="options-title" className="h2">
-            Two ways to work with us
+            {text.optionsTitle}
           </h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2 md:gap-6">
-            {landlordOptions.map((option, index) => (
+            {text.options.map((option, index) => (
               <article key={option.title} className="flex flex-col rounded-3xl border border-line bg-paper p-6 sm:p-8">
-                <p className="font-display text-sm font-semibold text-brand">Option {index + 1}</p>
+                <p className="font-display text-sm font-semibold text-brand">
+                  {format(text.option, { number: index + 1 })}
+                </p>
                 <h3 className="mt-1 font-display text-2xl font-bold text-ink">{option.title}</h3>
                 <CheckList items={option.points} />
               </article>
@@ -80,29 +84,27 @@ export default function LandlordsPage() {
         <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
             <h2 id="included-title" className="h2">
-              Included either way
+              {text.includedTitle}
             </h2>
-            <p className="lead mt-4">
-              Delivery and installation are quoted per job, before anyone pays.
-            </p>
+            <p className="lead mt-4">{text.includedLead}</p>
           </div>
-          <CheckList items={landlordIncluded} className="lg:col-span-7 lg:pt-2" />
+          <CheckList items={text.included} className="lg:col-span-7 lg:pt-2" />
         </div>
       </section>
 
       <section aria-labelledby="steps-title" className="on-dark section bg-brand text-white">
         <div className="container-page">
           <h2 id="steps-title" className="h2 text-white">
-            How it works for a building
+            {text.stepsTitle}
           </h2>
           <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-10">
-            {landlordSteps.map((step, index) => (
+            {text.steps.map((step, index) => (
               <li key={step.title} className="flex gap-4">
                 <span
                   aria-hidden="true"
                   className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold font-display text-xl font-extrabold text-ink"
                 >
-                  {index + 1}
+                  {number(index + 1)}
                 </span>
                 <div className="pt-2.5">
                   <h3 className="font-display text-xl font-bold leading-snug text-white">
@@ -114,7 +116,7 @@ export default function LandlordsPage() {
             ))}
           </ol>
           <a href={QUOTE_PATH} className="btn btn-gold mt-12">
-            Start with a quote
+            {text.startWithQuote}
             <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
           </a>
         </div>
@@ -124,19 +126,17 @@ export default function LandlordsPage() {
         <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
             <div className="rounded-3xl border border-line bg-white p-6 sm:p-8">
-              <h2 className="font-display text-xl font-bold text-ink">What each unit needs</h2>
-              <CheckList items={hookupChecklist} />
-              <p className="mt-6 text-ink-soft">
-                Tell us what each unit has, and we'll tell you what fits.
-              </p>
+              <h2 className="font-display text-xl font-bold text-ink">{text.unitNeedsTitle}</h2>
+              <CheckList items={d.common.hookups} />
+              <p className="mt-6 text-ink-soft">{text.unitNeedsNote}</p>
             </div>
           </div>
           <div className="lg:col-span-7">
             <h2 id="landlord-faq-title" className="h2">
-              Landlord questions
+              {text.faqTitle}
             </h2>
             <div className="mt-6 divide-y divide-line rounded-3xl border border-line bg-white px-5 sm:px-8">
-              {landlordFaqs.map((faq) => (
+              {text.faqs.map((faq) => (
                 <div key={faq.question} className="py-6">
                   <h3 className="font-display text-[17px] font-semibold leading-snug text-ink sm:text-lg">
                     {faq.question}
@@ -146,21 +146,19 @@ export default function LandlordsPage() {
               ))}
             </div>
             <p className="mt-6 text-ink-soft">
-              More answers on the{" "}
-              <a href="/faq/" className="text-link">
-                FAQ page
-              </a>
-              .
+              {rich(text.moreAnswers, {
+                faqLink: (
+                  <a href="/faq/" className="text-link">
+                    {text.faqLink}
+                  </a>
+                ),
+              })}
             </p>
           </div>
         </div>
       </section>
 
-      <CtaBand
-        title="Get a quote for your building"
-        text="Tell us the address, the number of units and what's there now."
-        action={{ label: "Get a quote", href: QUOTE_PATH }}
-      />
+      <CtaBand title={text.ctaTitle} text={text.ctaText} action={{ label: d.common.getQuote, href: QUOTE_PATH }} />
     </>
   );
 }

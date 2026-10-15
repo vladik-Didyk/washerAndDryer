@@ -1,40 +1,38 @@
-import { AreaCard, cities, cityPath, districtPath, districts } from "~/entities/area";
+import { AreaCard, cityPath, districtPath, getCities, getDistricts } from "~/entities/area";
 import { PostalCodeChecker } from "~/features/postal-check";
 import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { MapPin, MessageSquare } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 import { StartRental } from "~/widgets/start-rental";
 
 // /areas/: every city and Toronto district we deliver to, with the postal-code checker.
 export default function AreasPage() {
-  const { phone, prices } = siteConfig;
-  const [toronto, ...otherCities] = cities;
+  const { phone } = siteConfig;
+  const { d, rich } = useI18n();
+  const text = d.areas.index;
+  const [toronto, ...otherCities] = getCities(d);
 
   return (
     <>
       <PageIntro
         icon={MapPin}
-        eyebrow="Toronto & the GTA"
-        title="Where we deliver"
+        eyebrow={text.eyebrow}
+        title={text.title}
         aside={
           <div className="rounded-3xl bg-brand-mint p-6 sm:p-8">
-            <h2 className="font-display text-2xl font-bold text-ink">Do we deliver to you?</h2>
+            <h2 className="font-display text-2xl font-bold text-ink">{text.checkTitle}</h2>
             <PostalCodeChecker className="mt-5" />
           </div>
         }
       >
-        <p className="lead mt-5 max-w-2xl">
-          We deliver rental washers and dryers across Toronto and five cities around
-          it. Type your postal code to check, or find your area below.
-        </p>
-        <p className="mt-4 font-display text-lg font-bold text-brand">
-          {`Same price in every area: $${prices.setText} a week for a set, $${prices.singleText} for one machine.`}
-        </p>
-        <p className="mt-1 text-sm text-ink-muted">Prices in Canadian dollars. No HST charged.</p>
-        <p className="mt-3 text-ink-soft">Farther away? Text us your address and we'll tell you.</p>
+        <p className="lead mt-5 max-w-2xl">{text.lead}</p>
+        <p className="mt-4 font-display text-lg font-bold text-brand">{text.samePrice}</p>
+        <p className="mt-1 text-sm text-ink-muted">{d.common.pricesNote}</p>
+        <p className="mt-3 text-ink-soft">{text.fartherText}</p>
         <a href={phone.sms} className="btn btn-secondary mt-6">
           <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-          Text {phone.display}
+          {d.common.textPhone}
         </a>
       </PageIntro>
 
@@ -44,20 +42,17 @@ export default function AreasPage() {
       >
         <div className="container-page">
           <h2 id="toronto-title" className="h2">
-            Toronto
+            {text.torontoTitle}
           </h2>
-          <p className="lead mt-4 max-w-3xl">
-            All of the City of Toronto. North York, Etobicoke, Scarborough, East
-            York and York each have their own page.
-          </p>
+          <p className="lead mt-4 max-w-3xl">{text.torontoLead}</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <AreaCard href={cityPath(toronto)} name={toronto.name} label="Whole city" teaser={toronto.teaser} />
-            {districts.map((district) => (
+            <AreaCard href={cityPath(toronto)} name={toronto.name} label={text.wholeCity} teaser={toronto.teaser} />
+            {getDistricts(d).map((district) => (
               <AreaCard
                 key={district.slug}
                 href={districtPath(district)}
                 name={district.name}
-                label="Toronto district"
+                label={text.district}
                 teaser={district.teaser}
               />
             ))}
@@ -68,22 +63,22 @@ export default function AreasPage() {
       <section aria-labelledby="gta-title" className="section">
         <div className="container-page">
           <h2 id="gta-title" className="h2">
-            Around Toronto
+            {text.aroundTitle}
           </h2>
-          <p className="lead mt-4 max-w-3xl">
-            West into Peel Region and north into York Region.
-          </p>
+          <p className="lead mt-4 max-w-3xl">{text.aroundLead}</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {otherCities.map((city) => (
               <AreaCard key={city.slug} href={cityPath(city)} name={city.name} teaser={city.teaser} />
             ))}
           </ul>
           <p className="mt-6 text-ink-soft">
-            Farther away? Call or text{" "}
-            <a href={phone.tel} className="text-link whitespace-nowrap">
-              {phone.display}
-            </a>{" "}
-            and ask.
+            {rich(d.common.fartherAwayCall, {
+              phoneLink: (
+                <a href={phone.tel} className="text-link whitespace-nowrap">
+                  {phone.display}
+                </a>
+              ),
+            })}
           </p>
         </div>
       </section>

@@ -1,9 +1,10 @@
 // The frame around every page: skip link, draft ribbon, offer bar, header, breadcrumbs,
 // footer and the phone bar. What changes per page comes from the page loader's `head`
-// (kind, breadcrumbs, draft, lang) and, for pages in another language or the rental request,
-// its `chrome` texts.
+// (kind, breadcrumbs, draft, lang) and its `chrome` (the rental request asks for "Text us" in
+// the phone bar). Words come from the page's language (shared/i18n).
 import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
+import { useI18n, type Dictionary } from "~/shared/i18n";
 import type { PageHead } from "~/shared/seo";
 import { Breadcrumbs } from "~/widgets/breadcrumbs";
 import { DraftRibbon } from "~/widgets/draft-ribbon";
@@ -13,23 +14,28 @@ import { MobileActionBar, type MobileAction } from "~/widgets/mobile-action-bar"
 import { OfferBar } from "~/widgets/offer-bar";
 
 export interface PageChrome {
-  skipLink?: string;
-  callLabel?: string;
-  barLabel?: string;
-  mobileAction?: MobileAction;
+  /** The phone bar's second button: "textUs" (a text message) instead of the page's default. */
+  mobileAction?: "textUs";
 }
 
 // The phone bar's second button, after Call: what this page is for.
-function mobileActionFor(kind: PageHead["kind"] | undefined): MobileAction {
+function mobileActionFor(
+  kind: PageHead["kind"] | undefined,
+  chrome: PageChrome | undefined,
+  bar: Dictionary["chrome"]["mobileBar"],
+): MobileAction {
+  if (chrome?.mobileAction === "textUs") return { label: bar.textUs, href: siteConfig.phone.sms, icon: "sms" };
   switch (kind) {
+    case "language":
+      return { label: bar.text, href: siteConfig.phone.sms, icon: "sms" };
     case "landlords":
-      return { label: "Get a quote", href: "/landlords/quote/" };
+      return { label: bar.getQuote, href: "/landlords/quote/" };
     case "landlord-quote":
-      return { label: "Get a quote", href: "#landlord-quote" };
+      return { label: bar.getQuote, href: "#landlord-quote" };
     case "repair":
-      return { label: "Repair form", href: "#repair-request" };
+      return { label: bar.repairForm, href: "#repair-request" };
     default:
-      return { label: "Start rental", href: "/start/" };
+      return { label: bar.startRental, href: "/start/" };
   }
 }
 
@@ -44,11 +50,12 @@ export function SiteChrome({
   currentPath: string;
   children: ReactNode;
 }) {
+  const { d } = useI18n();
   const otherLanguage = head && head.lang !== "en";
   return (
     <>
       <a href="#main" className="skip-link">
-        {chrome?.skipLink ?? "Skip to content"}
+        {d.chrome.skipLink}
       </a>
       {head?.draft && <DraftRibbon />}
       <OfferBar />
@@ -59,9 +66,7 @@ export function SiteChrome({
       </main>
       <Footer />
       <MobileActionBar
-        action={chrome?.mobileAction ?? mobileActionFor(head?.kind)}
-        callLabel={chrome?.callLabel}
-        label={chrome?.barLabel}
+        action={mobileActionFor(head?.kind, chrome, d.chrome.mobileBar)}
         lang={otherLanguage ? head.lang : "en"}
       />
     </>

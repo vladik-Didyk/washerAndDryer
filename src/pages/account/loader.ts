@@ -1,22 +1,23 @@
 import { data, type LoaderFunctionArgs } from "react-router";
-import { accountPage } from "~/shared/config";
-import { flagsOf } from "~/shared/config";
+import { requestI18n } from "~/entities/offer";
+import { flagsOf, pagePaths } from "~/shared/config";
 import { pageHead } from "~/shared/seo";
 
 // Exists only once the Stripe customer portal does (STRIPE_PORTAL_URL); otherwise a 404.
-export function loader({ context }: LoaderFunctionArgs) {
-  const { stripePortalUrl } = flagsOf(context);
+export async function loader(args: LoaderFunctionArgs) {
+  const { stripePortalUrl } = flagsOf(args.context);
   if (!stripePortalUrl) throw data("Not found", { status: 404 });
+  const { d } = await requestI18n(args);
   return {
     stripePortalUrl,
     head: pageHead({
-      path: accountPage.path,
+      path: pagePaths.account,
       kind: "account",
-      title: accountPage.metaTitle,
-      description: accountPage.metaDescription,
+      title: d.pages.account.title,
+      description: d.pages.account.description,
       breadcrumbs: [
-        { name: "Home", path: "/" },
-        { name: "Pay or manage", path: accountPage.path },
+        { name: d.pages.home.name, path: "/" },
+        { name: d.pages.account.name, path: pagePaths.account },
       ],
     }),
   };

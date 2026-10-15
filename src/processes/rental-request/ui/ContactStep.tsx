@@ -1,4 +1,5 @@
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
+import { useI18n } from "~/shared/i18n";
 import type { FieldErrorMap } from "~/shared/lib";
 import { Honeypot, RequiredNote, SendError, SubmitButton, TextAreaField, TextField } from "~/shared/ui";
 import type { contactAction } from "../actions.server";
@@ -13,16 +14,18 @@ export function ContactStep() {
   const sending = useNavigation().state === "submitting";
   const values = result?.values ?? saved;
   const errors: FieldErrorMap = result?.errors ?? {};
+  const { forms, start } = useI18n().d;
+  const text = start.contact;
 
   return (
     <StepShell
       step="contact"
-      title="How can we reach you?"
-      intro={<p>We reply with the machine, the total and the start date.</p>}
+      title={text.title}
+      intro={<p>{text.intro}</p>}
       backHref={STEP_PATHS.details}
     >
       <div className="mb-6 rounded-3xl border border-brand-mint-strong bg-white/70 p-5 sm:p-6">
-        <h2 className="font-display text-lg font-bold text-ink">Your request so far</h2>
+        <h2 className="font-display text-lg font-bold text-ink">{text.summaryTitle}</h2>
         <dl className="mt-3 grid gap-x-6 gap-y-1.5 text-[15px] sm:grid-cols-[auto_1fr]">
           {summary.map((row) => (
             <div key={row.label} className="contents">
@@ -32,20 +35,18 @@ export function ContactStep() {
           ))}
         </dl>
         {postalUnsure && (
-          <p className="mt-3 text-sm text-ink-soft">
-            We can't tell your area from the postal code alone. We'll confirm by text.
-          </p>
+          <p className="mt-3 text-sm text-ink-soft">{text.postalUnsure}</p>
         )}
       </div>
 
       <Form method="post" noValidate className="rounded-3xl border border-line bg-white p-5 sm:p-8">
         <RequiredNote />
         <div className="mt-5 grid gap-5 sm:grid-cols-2">
-          <TextField id="name" name="name" label="Name" required autoComplete="name" defaultValue={values.name} error={errors.name} />
+          <TextField id="name" name="name" label={forms.name} required autoComplete="name" defaultValue={values.name} error={errors.name} />
           <TextField
             id="phone"
             name="phone"
-            label="Phone"
+            label={forms.phone}
             required
             type="tel"
             inputMode="tel"
@@ -56,38 +57,38 @@ export function ContactStep() {
           <TextField
             id="email"
             name="email"
-            label="Email"
+            label={forms.email}
             type="email"
             inputMode="email"
             autoComplete="email"
             defaultValue={values.email}
             error={errors.email}
-            hint="Optional."
+            hint={forms.optional}
           />
           <TextField
             id="preferredDay"
             name="preferredDay"
-            label="Preferred delivery day"
+            label={text.preferredDay}
             type="date"
             min={today}
             defaultValue={values.preferredDay}
             error={errors.preferredDay}
-            hint="Optional. We confirm the date with the quote."
+            hint={text.preferredDayHint}
             inputClassName="text-left [&::-webkit-date-and-time-value]:text-left"
           />
           <TextAreaField
             id="notes"
             name="notes"
-            label="Notes"
+            label={forms.notes}
             defaultValue={values.notes}
             error={errors.notes}
             className="sm:col-span-2"
-            hint="For example: stairs or tight turns, the old machine to take away, a good time to call."
+            hint={text.notesHint}
           />
         </div>
         <Honeypot />
         {result && "status" in result && result.status === "error" && <SendError />}
-        <SubmitButton sending={sending}>Send request</SubmitButton>
+        <SubmitButton sending={sending}>{text.submit}</SubmitButton>
       </Form>
     </StepShell>
   );

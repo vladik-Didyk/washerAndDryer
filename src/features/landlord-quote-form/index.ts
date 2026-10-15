@@ -1,8 +1,6 @@
 export {
-  EMPTY_VALUES as EMPTY_LANDLORD_QUOTE,
-  MACHINE_OPTIONS as LANDLORD_MACHINE_OPTIONS,
-  OPTION_CHOICES,
-  SETUP_OPTIONS,
+  emptyLandlordQuote,
+  quoteChoices,
   readLandlordQuote,
   validateLandlordQuote,
   type LandlordQuoteValues,

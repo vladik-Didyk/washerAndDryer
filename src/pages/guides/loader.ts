@@ -1,35 +1,32 @@
 import { data, type LoaderFunctionArgs } from "react-router";
-import { guidePath, guidesIndex, visibleGuides } from "~/entities/guide/index.server";
-import { flagsOf } from "~/shared/config";
+import { guidePath, visibleGuides } from "~/entities/guide/index.server";
+import { requestI18n } from "~/entities/offer";
+import { flagsOf, pagePaths } from "~/shared/config";
 import { itemList, pageHead } from "~/shared/seo";
-
-const guidesPage = {
-  ...guidesIndex,
-  name: "Guides",
-  llmsNote: "practical guides for renting a washer and dryer",
-};
 
 // /guides/ exists once at least one guide is shown; it counts as a draft while every guide
 // in it is one (so in a normal deployment, with every guide a draft, it is a 404).
-export function loader({ context }: LoaderFunctionArgs) {
-  const guides = visibleGuides(flagsOf(context).previewDrafts);
+export async function loader(args: LoaderFunctionArgs) {
+  const i18n = await requestI18n(args);
+  const { d } = i18n;
+  const guides = visibleGuides(i18n, flagsOf(args.context).previewDrafts);
   if (!guides.length) throw data("Not found", { status: 404 });
   return {
     guides: guides.map((guide) => ({ slug: guide.slug, title: guide.title, summary: guide.summary, path: guidePath(guide) })),
     head: pageHead({
-      path: guidesPage.path,
+      path: pagePaths.guides,
       kind: "guides",
-      title: guidesPage.metaTitle,
-      description: guidesPage.metaDescription,
+      title: d.pages.guides.title,
+      description: d.pages.guides.description,
       draft: guides.every((guide) => guide.draft),
       breadcrumbs: [
-        { name: "Home", path: "/" },
-        { name: "Guides", path: guidesPage.path },
+        { name: d.pages.home.name, path: "/" },
+        { name: d.pages.guides.name, path: pagePaths.guides },
       ],
       jsonLd: [
         itemList(
-          "Guides for renting a washer and dryer",
-          guidesPage.path,
+          d.jsonLd.guidesList,
+          pagePaths.guides,
           guides.map((guide) => ({ name: guide.title, path: guidePath(guide) })),
         ),
       ],

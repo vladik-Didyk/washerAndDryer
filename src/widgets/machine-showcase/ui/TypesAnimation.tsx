@@ -1,9 +1,11 @@
 import { machinePath } from "~/entities/machine";
+import { useI18n } from "~/shared/i18n";
 import { Pause, Play } from "~/shared/ui";
 import {
   MOVE_EASING,
   MOVE_MS,
-  SLIDES,
+  SLIDE_COUNT,
+  slidesFor,
   pctX,
   pctY,
   toBox,
@@ -66,15 +68,18 @@ function Slot({ target, reducedMotion, front = false }: { target: SlotBox; reduc
 // `className` sets the width (the drawing is square, plus the width line and the dots).
 export function TypesAnimation({ className = "" }: { className?: string }) {
   const reducedMotion = useReducedMotion();
-  const { active, setActive, playing, setPlaying, setHovered, rootRef } = useSlideshow(SLIDES.length, reducedMotion);
-  const current = SLIDES[active];
+  const { d, format } = useI18n();
+  const { animation } = d.machines;
+  const slides = slidesFor(d);
+  const { active, setActive, playing, setPlaying, setHovered, rootRef } = useSlideshow(SLIDE_COUNT, reducedMotion);
+  const current = slides[active];
 
   return (
     <div
       ref={rootRef}
       role="group"
       aria-roledescription="carousel"
-      aria-label="Machine types we rent"
+      aria-label={animation.label}
       className={`relative mx-auto w-full ${className}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -85,7 +90,7 @@ export function TypesAnimation({ className = "" }: { className?: string }) {
         <div aria-hidden="true" className="absolute inset-[7%] rounded-full bg-gold motion-safe:animate-disc-in" />
         <div
           role="img"
-          aria-label={`Drawing: ${current.machine.alt}`}
+          aria-label={format(d.machines.drawingAlt, { alt: current.machine.alt })}
           className="absolute inset-y-0 left-[8.33%] w-[83.33%] motion-safe:animate-rise-in"
           style={{ perspective: "1100px" }}
         >
@@ -130,12 +135,12 @@ export function TypesAnimation({ className = "" }: { className?: string }) {
       </div>
 
       <div className="mt-3 flex items-center justify-center gap-2 motion-safe:animate-fade-in">
-        {SLIDES.map((slide, index) => (
+        {slides.map((slide, index) => (
           <button
             key={slide.slug}
             type="button"
             onClick={() => setActive(index)}
-            aria-label={`Show ${slide.machine.title}`}
+            aria-label={format(animation.show, { title: slide.machine.title })}
             aria-current={index === active ? "true" : undefined}
             className="group flex h-8 w-8 items-center justify-center rounded-full"
           >
@@ -150,7 +155,7 @@ export function TypesAnimation({ className = "" }: { className?: string }) {
           <button
             type="button"
             onClick={() => setPlaying((value) => !value)}
-            aria-label={playing ? "Pause machine slideshow" : "Play machine slideshow"}
+            aria-label={playing ? animation.pause : animation.play}
             className="ml-1 flex h-8 w-8 items-center justify-center rounded-full text-brand hover:bg-brand/10"
           >
             {playing ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4" aria-hidden="true" />}

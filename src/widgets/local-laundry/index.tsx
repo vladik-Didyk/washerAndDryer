@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { MapPin } from "~/shared/ui";
 
 // Local detail for a city or district page: what homes are like there, the neighbourhoods we
@@ -15,6 +16,8 @@ export function LocalLaundry({
   children?: ReactNode;
 }) {
   const { phone } = siteConfig;
+  const { d, format, rich } = useI18n();
+  const text = d.areas.page;
 
   return (
     <section
@@ -26,7 +29,7 @@ export function LocalLaundry({
         <div className="lg:col-span-7">
           {children}
           <h2 id="local-title" className="h2">
-            Laundry in {area.name} homes
+            {format(text.localTitle, { place: area.name })}
           </h2>
           {area.homes.map((paragraph) => (
             <p key={paragraph} className="lead mt-4">
@@ -34,7 +37,7 @@ export function LocalLaundry({
             </p>
           ))}
           <h3 className="mt-8 font-display text-lg font-bold text-ink">
-            Areas of {area.name} we deliver to
+            {format(text.localAreas, { place: area.name })}
           </h3>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-ink-soft">
             {area.neighbourhoods.map((name) => (
@@ -54,7 +57,7 @@ export function LocalLaundry({
 
         <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:col-span-5 lg:self-start">
           <h3 className="font-display text-xl font-bold text-ink">
-            Before you call, check
+            {text.beforeYouCall}
           </h3>
           <ul className="mt-5 space-y-3">
             {area.checklist.map((item) => (
@@ -68,11 +71,13 @@ export function LocalLaundry({
             ))}
           </ul>
           <p className="mt-6 text-ink-soft">
-            Not sure? Text a photo to{" "}
-            <a href={phone.sms} className="text-link whitespace-nowrap">
-              {phone.display}
-            </a>{" "}
-            and we'll tell you what fits.
+            {rich(text.notSure, {
+              phoneLink: (
+                <a href={phone.sms} className="text-link whitespace-nowrap">
+                  {phone.display}
+                </a>
+              ),
+            })}
           </p>
         </div>
       </div>

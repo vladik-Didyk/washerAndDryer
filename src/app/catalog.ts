@@ -2,24 +2,13 @@
 // root's list of optional pages, and the page tests. Built per request because some pages
 // depend on the environment (drafts with PREVIEW_DRAFTS=1, /account/ with STRIPE_PORTAL_URL)
 // and on the date (the first-week offer).
-import { cities, cityPath, districtPath, districts } from "~/entities/area";
-import { allGuides, guidePath, guidesIndex } from "~/entities/guide/index.server";
-import { machinePath, machineTypes } from "~/entities/machine";
+import { cityPath, districtPath, getCities, getDistricts } from "~/entities/area";
+import { allGuides, guidePath, guideSlugs } from "~/entities/guide/index.server";
+import { getMachineTypes, machinePath } from "~/entities/machine";
 import { visibleLegalPages } from "~/pages/legal/index.server";
 import { languagePages } from "~/pages/language/index.server";
-import {
-  aboutPage,
-  accountPage,
-  areasPage,
-  contactPage,
-  faqPage,
-  homePage,
-  landlordQuotePage,
-  landlordsPage,
-  machinesPage,
-  repairPage,
-  startPage,
-} from "~/shared/config";
+import { pagePaths, type FixedPage } from "~/shared/config";
+import type { I18n } from "~/shared/i18n";
 import type { Lang, PageKind } from "~/shared/seo";
 
 export interface CatalogEntry {
@@ -37,36 +26,40 @@ export interface CatalogEntry {
 export interface CatalogOptions {
   previewDrafts: boolean;
   stripePortalUrl: string | null;
-  offerActive: boolean;
+  /** The request time (offers). */
+  now: number;
   analyticsOn: boolean;
 }
 
-const fixed = (
-  info: { path: string; name: string; metaTitle: string; metaDescription: string; llmsNote?: string },
-  kind: PageKind,
-): CatalogEntry => ({
-  path: info.path,
-  kind,
-  lang: "en",
-  name: info.name,
-  title: info.metaTitle,
-  description: info.metaDescription,
-  llmsNote: info.llmsNote,
-  draft: false,
-});
-
-export function siteCatalog(options: CatalogOptions): CatalogEntry[] {
-  const guides = allGuides.filter((guide) => options.previewDrafts || !guide.draft);
+// `i18n` is the English text of this request (its prices and offers filled in).
+export function siteCatalog(options: CatalogOptions, i18n: I18n): CatalogEntry[] {
+  const { d } = i18n;
+  const fixed = (page: Exclude<FixedPage, "notFound" | "guides">, kind: PageKind): CatalogEntry => {
+    const text: { name: string; title: string; description: string; llmsNote?: string } = d.pages[page];
+    return {
+      path: pagePaths[page],
+      kind,
+      lang: "en",
+      name: text.name,
+      title: text.title,
+      description: text.description,
+      llmsNote: text.llmsNote,
+      draft: false,
+    };
+  };
+  const guides = allGuides(i18n).filter((guide) => options.previewDrafts || !guide.draft);
   const legal = visibleLegalPages(
-    { offerActive: options.offerActive, analyticsOn: options.analyticsOn },
+    i18n,
+    { now: options.now, analyticsOn: options.analyticsOn },
     options.previewDrafts,
   );
+  const districts = getDistricts(d);
 
   return [
-    fixed(homePage, "home"),
-    fixed(areasPage, "areas"),
+    fixed("home", "home"),
+    fixed("areas", "areas"),
     // Each city, with Toronto's districts right after Toronto.
-    ...cities.flatMap((city): CatalogEntry[] => [
+    ...getCities(d).flatMap((city): CatalogEntry[] => [
       { path: cityPath(city), kind: "city", lang: "en", name: city.name, title: city.metaTitle, description: city.metaDescription, draft: false },
       ...(city.slug === "toronto"
         ? districts.map((district): CatalogEntry => ({
@@ -80,8 +73,8 @@ export function siteCatalog(options: CatalogOptions): CatalogEntry[] {
           }))
         : []),
     ]),
-    fixed(machinesPage, "machines"),
-    ...machineTypes.map((machine): CatalogEntry => ({
+    fixed("machines", "machines"),
+    ...getMachineTypes(d).map((machine): CatalogEntry => ({
       path: machinePath(machine),
       kind: "machine",
       lang: "en",
@@ -90,19 +83,25 @@ export function siteCatalog(options: CatalogOptions): CatalogEntry[] {
       description: machine.page.metaDescription,
       draft: false,
     })),
-    fixed(landlordsPage, "landlords"),
-    fixed(landlordQuotePage, "landlord-quote"),
-    fixed(faqPage, "faq"),
-    fixed(aboutPage, "about"),
-    fixed(contactPage, "contact"),
-    fixed(repairPage, "repair"),
-    fixed(startPage, "start"),
-    ...(options.stripePortalUrl ? [fixed(accountPage, "account")] : []),
+    fixed("landlords", "landlords"),
+    fixed("landlordQuote", "landlord-quote"),
+    fixed("faq", "faq"),
+    fixed("about", "about"),
+    fixed("contact", "contact"),
+    fixed("repair", "repair"),
+    fixed("start", "start"),
+    ...(options.stripePortalUrl ? [fixed("account", "account")] : []),
     // The guides list exists once a guide is shown; it is a draft while every guide is one.
     ...(guides.length
       ? [
           {
-            ...fixed({ ...guidesIndex, name: "Guides", llmsNote: "practical guides for renting a washer and dryer" }, "guides"),
+            path: pagePaths.guides,
+            kind: "guides" as const,
+            lang: "en" as const,
+            name: d.pages.guides.name,
+            title: d.pages.guides.title,
+            description: d.pages.guides.description,
+            llmsNote: d.pages.guides.llmsNote,
             draft: guides.every((guide) => guide.draft),
           },
         ]
@@ -125,13 +124,13 @@ export function siteCatalog(options: CatalogOptions): CatalogEntry[] {
       description: page.metaDescription,
       draft: page.draft,
     })),
-    ...languagePages.map((content): CatalogEntry => ({
-      path: content.path,
+    ...languagePages(i18n.facts).map((page): CatalogEntry => ({
+      path: page.path,
       kind: "language",
-      lang: content.lang,
-      name: content.languageName,
-      title: content.metaTitle,
-      description: content.metaDescription,
+      lang: page.lang,
+      name: page.name,
+      title: page.title,
+      description: page.description,
       draft: false,
     })),
   ];
@@ -139,13 +138,13 @@ export function siteCatalog(options: CatalogOptions): CatalogEntry[] {
 
 // Pages that exist only in some deployments, and whether this one has them: the header,
 // footer and in-text links check this before linking (shared/lib useSite).
-export function optionalPages(options: CatalogOptions) {
-  const catalog = siteCatalog(options);
+export function optionalPages(options: CatalogOptions, i18n: I18n) {
+  const catalog = siteCatalog(options, i18n);
   const present = new Set(catalog.map((entry) => entry.path));
   const candidates = [
-    accountPage.path,
-    guidesIndex.path,
-    ...allGuides.map(guidePath),
+    pagePaths.account,
+    pagePaths.guides,
+    ...guideSlugs.map((slug) => guidePath({ slug })),
     "/privacy/",
     "/terms/",
   ];

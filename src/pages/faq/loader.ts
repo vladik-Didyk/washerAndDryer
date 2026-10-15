@@ -1,32 +1,36 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { faqPage } from "~/shared/config";
 import { faqGroupsFor, faqsFor } from "~/entities/faq";
-import { firstWeekFreeOffer, isFirstWeekFreeActive, referralOffer } from "~/entities/offer";
-import { requestTimeOf } from "~/shared/config";
+import { activePromotions, promotionText, requestI18n } from "~/entities/offer";
+import { pagePaths, requestTimeOf } from "~/shared/config";
 import { pageHead } from "~/shared/seo";
 
-export function loader({ context }: LoaderFunctionArgs) {
+export async function loader(args: LoaderFunctionArgs) {
+  const i18n = await requestI18n(args);
+  const { d } = i18n;
+  const firstWeekFree = activePromotions(requestTimeOf(args.context)).find(
+    (promotion) => promotion.id === "first-week-free",
+  );
   const offers = {
-    firstWeekFree: isFirstWeekFreeActive(requestTimeOf(context)) ? firstWeekFreeOffer.text : null,
-    referral: referralOffer.text,
+    firstWeekFree: firstWeekFree ? promotionText(firstWeekFree, i18n).text : null,
+    referral: d.offers.referral.text,
   };
   return {
-    groups: faqGroupsFor(offers),
+    groups: faqGroupsFor(i18n, offers),
     head: pageHead({
-      path: faqPage.path,
+      path: pagePaths.faq,
       kind: "faq",
-      title: faqPage.metaTitle,
-      description: faqPage.metaDescription,
+      title: d.pages.faq.title,
+      description: d.pages.faq.description,
       breadcrumbs: [
-        { name: "Home", path: "/" },
-        { name: "FAQ", path: faqPage.path },
+        { name: d.pages.home.name, path: "/" },
+        { name: d.pages.faq.name, path: pagePaths.faq },
       ],
       // The only page with FAQPage markup: every question on the site lives on /faq/.
       jsonLd: [
         {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: faqsFor(offers).map((faq) => ({
+          mainEntity: faqsFor(i18n, offers).map((faq) => ({
             "@type": "Question",
             name: faq.question,
             acceptedAnswer: { "@type": "Answer", text: faq.answer },

@@ -1,79 +1,36 @@
 import { data, type LoaderFunctionArgs } from "react-router";
-import { machinePath, machineTypes } from "~/entities/machine";
-import { isFirstWeekFreeActive } from "~/entities/offer";
-import { requestTimeOf, siteConfig } from "~/shared/config";
+import { requestI18n } from "~/entities/offer";
+import type { I18n } from "~/shared/i18n";
 import { absoluteUrl, areaServed, pageHead, providerRef, setOffer, singleOffer } from "~/shared/seo";
-import { languagePages, type LanguageContent } from "./content";
 
-export const languageHead = (content: LanguageContent) =>
-  pageHead({
-    path: content.path,
+export const languageHead = (i18n: I18n) => {
+  const { d, language } = i18n;
+  return pageHead({
+    path: language.path,
     kind: "language",
-    lang: content.lang,
-    title: content.metaTitle,
-    description: content.metaDescription,
-    ogLocale: content.locale,
+    lang: i18n.lang,
+    title: d.language.metaTitle,
+    description: d.language.metaDescription,
     jsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: content.h1,
-        description: content.metaDescription,
-        url: absoluteUrl(content.path),
+        name: d.language.h1,
+        description: d.language.metaDescription,
+        url: absoluteUrl(language.path),
         provider: providerRef(),
-        areaServed: areaServed(),
-        availableLanguage: content.lang,
-        offers: [setOffer(), singleOffer()],
+        areaServed: areaServed(i18n),
+        availableLanguage: i18n.lang,
+        offers: [setOffer(i18n), singleOffer(i18n)],
       },
     ],
   });
+};
 
-// /es/ or /ru/: the offer in Spanish or Russian. The text is resolved here (prices filled in),
-// so the page gets plain strings.
-export function loader({ request, context }: LoaderFunctionArgs) {
-  const path = new URL(request.url).pathname;
-  const content = languagePages.find((page) => page.path === path);
-  if (!content) throw data("Not found", { status: 404 });
-  const { prices, phone } = siteConfig;
-  return {
-    head: languageHead(content),
-    // The root uses these for the skip link and the phone bar, in this language.
-    chrome: {
-      skipLink: content.skipLink,
-      callLabel: content.call,
-      barLabel: content.barLabel,
-      mobileAction: { label: content.text, href: phone.sms, icon: "sms" as const },
-    },
-    page: {
-      lang: content.lang,
-      eyebrow: content.eyebrow,
-      h1: content.h1,
-      priceSet: content.priceSet(prices.setText),
-      priceSingle: content.priceSingle(prices.singleText),
-      priceNote: content.priceNote,
-      firstWeekFree: isFirstWeekFreeActive(requestTimeOf(context)) ? content.firstWeekFree : null,
-      includedTitle: content.includedTitle,
-      included: content.included,
-      termsTitle: content.termsTitle,
-      terms: content.terms(prices.deposit),
-      machinesTitle: content.machinesTitle,
-      machines: machineTypes.map((machine) => ({
-        slug: machine.slug,
-        href: machinePath(machine),
-        label: content.machines[machine.slug],
-        price: `$${machine.price.toFixed(2)} ${content.perWeek}`,
-      })),
-      needsTitle: content.needsTitle,
-      needs: content.needs,
-      areaTitle: content.areaTitle,
-      area: content.area,
-      areaFar: content.areaFar,
-      contactTitle: content.contactTitle,
-      call: content.call,
-      text: content.text,
-      hours: content.hours,
-      languagesLine: content.languagesLine,
-      englishLink: content.englishLink,
-    },
-  };
+// /es/ or /ru/: the offer in Spanish or Russian. The words are the language's dictionary
+// (shared/i18n locales/es.ts, ru.ts), chosen from the URL.
+export async function loader(args: LoaderFunctionArgs) {
+  const i18n = await requestI18n(args);
+  if (i18n.lang === "en") throw data("Not found", { status: 404 });
+  return { head: languageHead(i18n) };
 }

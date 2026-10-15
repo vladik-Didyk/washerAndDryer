@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { DrawingTag, PHOTO_CAPTION, machinePhotos, type MachineType } from "~/entities/machine";
+import { DrawingTag, machinePhotos, type MachineType } from "~/entities/machine";
+import { useI18n } from "~/shared/i18n";
 import { galleryPhotoSizes } from "~/shared/lib";
 import { Photo } from "~/shared/ui";
 
@@ -11,6 +12,7 @@ const frame = "relative aspect-[5/6] overflow-hidden rounded-3xl bg-brand-mint";
 // no photo in the build shows its drawing, tagged and captioned as a drawing.
 // Every photo here is an example, and the caption says so.
 export function MachineGallery({ machine, className = "" }: { machine: MachineType; className?: string }) {
+  const { d, format } = useI18n();
   const photos = machinePhotos(machine);
   const [shown, setShown] = useState(0);
   const photo = photos[shown];
@@ -21,7 +23,7 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
         <div className={frame}>
           <img
             src={`/${machine.drawing}`}
-            alt={`Drawing: ${machine.alt}`}
+            alt={format(d.machines.drawingAlt, { alt: machine.alt })}
             width={400}
             height={480}
             className="mx-auto h-full w-auto"
@@ -29,7 +31,7 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
           <DrawingTag className="left-4 top-4" />
         </div>
         <figcaption className="mt-3 text-sm text-ink-muted">
-          A drawing of this type, not a photo. Brand and model depend on what's available.
+          {d.machines.drawingCaption}
         </figcaption>
       </figure>
     );
@@ -50,20 +52,20 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
             aria-hidden="true"
             className="absolute bottom-3 right-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-semibold text-white"
           >
-            {shown + 1} / {photos.length}
+            {format(d.machines.galleryCounter, { index: shown + 1, count: photos.length })}
           </p>
         )}
       </div>
 
       {photos.length > 1 && (
-        <ul aria-label="Photos of this type" className="mt-3 flex flex-wrap gap-3">
+        <ul aria-label={d.machines.galleryLabel} className="mt-3 flex flex-wrap gap-3">
           {photos.map((thumb, index) => (
             <li key={thumb.src}>
               <button
                 type="button"
                 onClick={() => setShown(index)}
                 aria-current={index === shown ? "true" : undefined}
-                aria-label={`Show photo ${index + 1} of ${photos.length}`}
+                aria-label={format(d.machines.galleryShow, { index: index + 1, count: photos.length })}
                 className={`block w-20 overflow-hidden rounded-xl transition sm:w-24 ${
                   index === shown
                     ? "ring-[3px] ring-brand ring-offset-2 ring-offset-paper"
@@ -78,7 +80,7 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
         </ul>
       )}
 
-      <figcaption className="mt-3 text-sm text-ink-muted">{PHOTO_CAPTION}</figcaption>
+      <figcaption className="mt-3 text-sm text-ink-muted">{d.machines.photoCaption}</figcaption>
     </figure>
   );
 }

@@ -1,15 +1,17 @@
-import { cities, cityPath, districtPath, districts } from "~/entities/area";
+import { cityPath, districtPath, getCities, getDistricts } from "~/entities/area";
 import { PostalCodeChecker } from "~/features/postal-check";
 import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { MapPin } from "~/shared/ui";
 
 const cityLink =
   "underline decoration-brand/30 decoration-2 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand";
 
 // Each city and Toronto district links to its own page; the postal-code checker sits beside them.
-export function ServiceArea({ title = "Service area" }: { title?: string }) {
+export function ServiceArea({ title }: { title?: string }) {
   const { phone } = siteConfig;
-  const [toronto, ...others] = cities;
+  const { d, rich } = useI18n();
+  const [toronto, ...others] = getCities(d);
 
   return (
     <section
@@ -21,14 +23,16 @@ export function ServiceArea({ title = "Service area" }: { title?: string }) {
         <div className="grid gap-8 rounded-3xl bg-brand-mint px-5 py-8 sm:p-10 lg:grid-cols-12 lg:gap-10 lg:p-12">
           <div className="lg:col-span-5">
             <h2 id="areas-title" className="h2">
-              {title}
+              {title ?? d.home.serviceArea.title}
             </h2>
             <p className="lead mt-4">
-              Farther away? Call or text{" "}
-              <a href={phone.tel} className="text-link whitespace-nowrap">
-                {phone.display}
-              </a>{" "}
-              and ask.
+              {rich(d.common.fartherAwayCall, {
+                phoneLink: (
+                  <a href={phone.tel} className="text-link whitespace-nowrap">
+                    {phone.display}
+                  </a>
+                ),
+              })}
             </p>
             <PostalCodeChecker className="mt-6" />
           </div>
@@ -42,8 +46,8 @@ export function ServiceArea({ title = "Service area" }: { title?: string }) {
                     {toronto.name}
                   </a>
                 </span>
-                <ul aria-label="Toronto districts" className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 pl-7">
-                  {districts.map((district) => (
+                <ul aria-label={d.areas.districtsLabel} className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 pl-7">
+                  {getDistricts(d).map((district) => (
                     <li key={district.slug}>
                       <a href={districtPath(district)} className={`font-medium text-ink-soft ${cityLink}`}>
                         {district.name}
@@ -66,7 +70,7 @@ export function ServiceArea({ title = "Service area" }: { title?: string }) {
             </ul>
             <p className="mt-6">
               <a href="/areas/" className="text-link">
-                All areas we deliver to
+                {d.home.serviceArea.allAreas}
               </a>
             </p>
           </div>

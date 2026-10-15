@@ -1,5 +1,6 @@
 import { useId, useState, type FormEvent } from "react";
 import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { CircleAlert, CircleCheck, CircleHelp, MessageSquare } from "~/shared/ui";
 import { checkPostalCode, type PostalCheck } from "./model";
 
@@ -17,7 +18,7 @@ const TONES = {
 // `label` names the field; `compact` makes the field a little shorter (home hero).
 export function PostalCodeChecker({
   requestHref = "/start/",
-  label = "Your postal code",
+  label,
   compact = false,
   className = "",
 }: {
@@ -32,10 +33,12 @@ export function PostalCodeChecker({
   const [value, setValue] = useState("");
   const [result, setResult] = useState<PostalCheck | null>(null);
   const { phone } = siteConfig;
+  const i18n = useI18n();
+  const { d } = i18n;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setResult(checkPostalCode(value));
+    setResult(checkPostalCode(value, i18n));
   };
 
   const Icon = result ? ICONS[result.status] : null;
@@ -43,7 +46,7 @@ export function PostalCodeChecker({
   return (
     <form noValidate onSubmit={onSubmit} className={className}>
       <label htmlFor={inputId} className="label">
-        {label}
+        {label ?? d.postalCheck.label}
       </label>
       <div className="mt-2 flex gap-2">
         <input
@@ -54,7 +57,7 @@ export function PostalCodeChecker({
           autoCapitalize="characters"
           spellCheck={false}
           maxLength={8}
-          placeholder="e.g. M5V 2T6"
+          placeholder={d.postalCheck.placeholder}
           value={value}
           onChange={(event) => {
             setValue(event.target.value);
@@ -65,7 +68,7 @@ export function PostalCodeChecker({
           className={`field min-w-0 flex-1 uppercase placeholder:normal-case ${compact ? "min-h-[3rem] py-2.5" : ""}`}
         />
         <button type="submit" className="btn btn-primary shrink-0 px-5">
-          Check
+          {d.postalCheck.check}
         </button>
       </div>
 
@@ -79,13 +82,13 @@ export function PostalCodeChecker({
         )}
         {result?.status === "yes" && (
           <a href={requestHref} className="text-link mt-2 inline-block">
-            Start your rental
+            {d.common.startRental}
           </a>
         )}
         {result?.status === "unsure" && (
           <a href={phone.sms} className="btn btn-secondary mt-3">
             <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-            Text {phone.display}
+            {d.postalCheck.textUs}
           </a>
         )}
       </div>

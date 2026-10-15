@@ -1,23 +1,8 @@
-const steps = [
-  {
-    title: "Tell us what fits",
-    text: "Send your area, closet width and outlet type (3- or 4-prong). A photo of the closet helps.",
-  },
-  {
-    title: "Get a quote",
-    text: "We confirm the machine, the delivery and installation price and the start date before you pay anything.",
-  },
-  {
-    title: "We deliver and hook it up",
-    text: "Your old machine goes with us at no charge.",
-  },
-  {
-    title: "Repairs on us",
-    text: "If it breaks while you rent it, we repair or replace it.",
-  },
-];
+import { useI18n } from "~/shared/i18n";
 
 export function HowItWorks() {
+  const { d, number } = useI18n();
+  const { steps } = d.home.how;
   return (
     <section
       id="how"
@@ -26,7 +11,7 @@ export function HowItWorks() {
     >
       <div className="container-page">
         <h2 id="how-title" className="h2 text-white">
-          How it works
+          {d.common.howItWorks}
         </h2>
 
         <div className="relative mt-10 lg:mt-12">
@@ -49,7 +34,7 @@ export function HowItWorks() {
                   aria-hidden="true"
                   className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold font-display text-xl font-extrabold text-ink"
                 >
-                  {index + 1}
+                  {number(index + 1)}
                 </span>
                 <div className="pt-2.5 sm:pt-0">
                   <h3 className="font-display text-xl font-bold leading-snug text-white sm:mt-5">

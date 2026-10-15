@@ -1,26 +1,29 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { areasPage } from "~/shared/config";
-import { districts } from "~/entities/area";
+import { getDistricts } from "~/entities/area";
+import { requestI18n } from "~/entities/offer";
+import { pagePaths } from "~/shared/config";
 import { areaServed, pageHead, serviceNode, torontoPlace } from "~/shared/seo";
 
-export function loader(_args: LoaderFunctionArgs) {
+export async function loader(args: LoaderFunctionArgs) {
+  const i18n = await requestI18n(args);
+  const { d } = i18n;
   return {
     head: pageHead({
-      path: areasPage.path,
+      path: pagePaths.areas,
       kind: "areas",
-      title: areasPage.metaTitle,
-      description: areasPage.metaDescription,
+      title: d.pages.areas.title,
+      description: d.pages.areas.description,
       breadcrumbs: [
-        { name: "Home", path: "/" },
-        { name: "Areas", path: areasPage.path },
+        { name: d.pages.home.name, path: "/" },
+        { name: d.pages.areas.name, path: pagePaths.areas },
       ],
       // One service, every city and Toronto district.
       jsonLd: [
-        serviceNode({
-          name: "Washer and dryer rental in Toronto and the GTA",
-          description: areasPage.metaDescription,
-          path: areasPage.path,
-          areaServed: [...areaServed(), ...districts.map((district) => torontoPlace(district.name))],
+        serviceNode(i18n, {
+          name: d.jsonLd.serviceGta,
+          description: d.pages.areas.description,
+          path: pagePaths.areas,
+          areaServed: [...areaServed(i18n), ...getDistricts(d).map((district) => torontoPlace(i18n, district.name))],
         }),
       ],
     }),

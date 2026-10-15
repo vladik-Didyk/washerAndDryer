@@ -1,3 +1,4 @@
+import { useI18n } from "~/shared/i18n";
 import { AboutTeaser } from "~/widgets/about-teaser";
 import { CtaBand } from "~/widgets/cta-band";
 import { FaqSection } from "~/widgets/faq-section";
@@ -13,6 +14,7 @@ import { TrustStrip } from "~/widgets/trust-strip";
 
 // Testimonials stay off the page until there are real customer reviews.
 export default function HomePage() {
+  const { cta } = useI18n().d.home;
   return (
     <>
       <Hero />
@@ -25,10 +27,7 @@ export default function HomePage() {
       <AboutTeaser />
       <ServiceArea />
       <FaqSection />
-      <CtaBand
-        title="A washer and dryer for $12.50 a week"
-        text="Repairs included. Delivery and installation quoted before you pay. Tell us your space, and we reply with the machine, the total and the start date."
-      />
+      <CtaBand title={cta.title} text={cta.text} />
       <StartRental />
     </>
   );

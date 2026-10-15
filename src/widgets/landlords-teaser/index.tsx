@@ -1,8 +1,10 @@
+import { useI18n } from "~/shared/i18n";
 import { ArrowRight, Building2 } from "~/shared/ui";
 
 // Home page: a short pointer to /landlords/. It sits between Prices and About, which bring
 // their own padding.
 export function LandlordsTeaser() {
+  const { landlordsTeaser } = useI18n().d.home;
   return (
     <section aria-labelledby="landlords-teaser-title">
       <div className="container-page">
@@ -13,16 +15,13 @@ export function LandlordsTeaser() {
             </span>
             <div>
               <h2 id="landlords-teaser-title" className="font-display text-2xl font-bold text-ink">
-                Landlord?
+                {landlordsTeaser.title}
               </h2>
-              <p className="mt-2 max-w-2xl text-ink-soft">
-                Your tenants can rent from us directly, with nothing for you to pay, or
-                you can rent machines for your units. Repairs are included either way.
-              </p>
+              <p className="mt-2 max-w-2xl text-ink-soft">{landlordsTeaser.text}</p>
             </div>
           </div>
           <a href="/landlords/" className="btn btn-secondary shrink-0">
-            Laundry for landlords
+            {landlordsTeaser.link}
             <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
           </a>
         </div>

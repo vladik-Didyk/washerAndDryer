@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { machineTypes, type MachineType } from "~/entities/machine";
+import { getMachineTypes, type MachineSlug, type MachineType } from "~/entities/machine";
+import type { Dictionary } from "~/shared/i18n";
 import { MACHINE_PARTS, type PartId } from "./parts";
 
 // The slides of the machine-type animation (./ui/TypesAnimation.tsx): a drawing that changes
@@ -25,9 +26,9 @@ const box = (part: PartId, x: number, y: number): SlotBox => {
   return { part, x, y, w, h };
 };
 
+// The width line's caption is in the dictionary (machines.animation.widths.<slug>).
 interface SlideSpec {
-  slug: string;
-  width: string;
+  slug: MachineSlug;
   bar: { x: number; w: number };
   a: SlotBox;
   b: SlotBox;
@@ -35,50 +36,50 @@ interface SlideSpec {
 
 export interface Slide extends SlideSpec {
   machine: MachineType;
+  width: string;
 }
 
 const SLIDE_SPECS: SlideSpec[] = [
   {
     slug: "laundry-centre",
-    width: "24″ or 27″ wide",
     bar: { x: 100, w: 201 },
     a: box("OP", 96, 16),
     b: { ...box("SD", 96, 16), hidden: true },
   },
   {
     slug: "side-by-side-top-load",
-    width: "About 55″ wide for the pair",
     bar: { x: 27, w: 348 },
     a: box("TW", 22, 144),
     b: box("TD", 202, 144),
   },
   {
     slug: "single-machine",
-    width: "24″ or 27″ wide",
     bar: { x: 27, w: 168 },
     a: box("FW", 22, 178),
     b: box("GH", 202, 178),
   },
   {
     slug: "side-by-side-front-load",
-    width: "About 55″ wide for the pair",
     bar: { x: 27, w: 348 },
     a: box("FW", 22, 178),
     b: box("FD", 202, 178),
   },
   {
     slug: "stackable",
-    width: "24″ or 27″ wide",
     bar: { x: 100, w: 201 },
     a: box("SW", 96, 244),
     b: box("SD", 96, 16),
   },
 ];
 
-export const SLIDES: Slide[] = SLIDE_SPECS.map((slide) => ({
-  ...slide,
-  machine: machineTypes.find((machine) => machine.slug === slide.slug)!,
-}));
+export const SLIDE_COUNT = SLIDE_SPECS.length;
+
+export const slidesFor = (d: Dictionary): Slide[] =>
+  SLIDE_SPECS.map((slide) => ({
+    ...slide,
+    machine: getMachineTypes(d).find((machine) => machine.slug === slide.slug)!,
+    width: d.machines.animation.widths[slide.slug],
+  }));
 
 export const INTERVAL_MS = 3400;
 export const MOVE_MS = 900;

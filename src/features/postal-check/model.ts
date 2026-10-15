@@ -6,18 +6,19 @@
 // lists below cover the main FSAs (the first 3 characters of a postal code) that clearly belong
 // to that city. They are not complete on purpose: an FSA we weren't sure about is left out, and
 // any code that isn't listed gets "not sure, text us your address". The checker never says no.
-import { siteConfig } from "~/shared/config";
-import { cities } from "~/entities/area";
+import { cityPath, findCity } from "~/entities/area";
+import type { I18n } from "~/shared/i18n";
 
+// By city (its slug in entities/area).
 export const cityFsas: Record<string, string[]> = {
-  Mississauga: [
+  mississauga: [
     "L4T", "L4V", "L4W", "L4X", "L4Y", "L4Z", "L5A", "L5B", "L5C", "L5E", "L5G", "L5H",
     "L5J", "L5K", "L5L", "L5M", "L5N", "L5P", "L5R", "L5S", "L5T", "L5V", "L5W",
   ],
-  Brampton: ["L6P", "L6R", "L6S", "L6T", "L6V", "L6W", "L6X", "L6Y", "L6Z", "L7A"],
-  Vaughan: ["L4H", "L4J", "L4K", "L4L", "L6A"],
-  Markham: ["L3P", "L3R", "L3S", "L3T", "L6B", "L6C", "L6E"],
-  "Richmond Hill": ["L4B", "L4C", "L4E", "L4S"],
+  brampton: ["L6P", "L6R", "L6S", "L6T", "L6V", "L6W", "L6X", "L6Y", "L6Z", "L7A"],
+  vaughan: ["L4H", "L4J", "L4K", "L4L", "L6A"],
+  markham: ["L3P", "L3R", "L3S", "L3T", "L6B", "L6C", "L6E"],
+  "richmond-hill": ["L4B", "L4C", "L4E", "L4S"],
 };
 
 const cityByFsa = new Map<string, string>(
@@ -49,24 +50,20 @@ export const formatPostalCode = (input: unknown) => {
   return code.length === 6 ? `${code.slice(0, 3)} ${code.slice(3)}` : code;
 };
 
-// status is "yes", "unsure" or "invalid".
-export function checkPostalCode(input: unknown): PostalCheck {
+// status is "yes", "unsure" or "invalid"; the message and the city name are in the language
+// of `i18n`.
+export function checkPostalCode(input: unknown, { d, format }: I18n): PostalCheck {
   const code = normalizePostalCode(input);
-  if (!POSTAL_CODE.test(code)) {
-    return { status: "invalid", message: "Enter a valid Canadian postal code, like M5V 2T6." };
-  }
-  const cityName = code.startsWith("M") ? "Toronto" : cityByFsa.get(code.slice(0, 3));
-  if (cityName) {
-    const city = cities.find((entry) => entry.name === cityName);
+  if (!POSTAL_CODE.test(code)) return { status: "invalid", message: d.postalCheck.invalid };
+  const slug = code.startsWith("M") ? "toronto" : cityByFsa.get(code.slice(0, 3));
+  const city = slug ? findCity(d, slug) : undefined;
+  if (city) {
     return {
       status: "yes",
-      city: cityName,
-      path: city ? `/${city.slug}/` : undefined,
-      message: `Yes, we deliver in ${cityName}.`,
+      city: city.name,
+      path: cityPath(city),
+      message: format(d.postalCheck.yes, { city: city.name }),
     };
   }
-  return {
-    status: "unsure",
-    message: `Not sure from the postal code. Text us your address at ${siteConfig.phone.display} and we'll confirm.`,
-  };
+  return { status: "unsure", message: d.postalCheck.unsure };
 }

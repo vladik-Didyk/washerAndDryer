@@ -1,7 +1,8 @@
 import { useLoaderData } from "react-router";
-import { cities, cityPath, districtPath, districts } from "~/entities/area";
-import { siteConfig } from "~/shared/config";
-import { LinkList } from "~/shared/ui";
+import { cityPath, districtPath, findCity, getCities, getDistricts } from "~/entities/area";
+import { usePrices } from "~/entities/offer";
+import { useI18n } from "~/shared/i18n";
+import { LinkList, WasPrice } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { DeliveryCheck } from "~/widgets/delivery-check";
 import { HowItWorks } from "~/widgets/how-it-works";
@@ -13,33 +14,35 @@ import { StartRental } from "~/widgets/start-rental";
 import { TrustStrip } from "~/widgets/trust-strip";
 import type { loader } from "../loader";
 
-// Toronto's district names link to their own pages (entities/area).
-const districtLinks = Object.fromEntries(
-  districts.map((district) => [district.name, districtPath(district)]),
-);
-
 // /<city>/: one city we deliver to.
 export default function CityPage() {
-  const { city } = useLoaderData<typeof loader>();
-  const { prices } = siteConfig;
+  const { slug } = useLoaderData<typeof loader>();
+  const { d, format, money } = useI18n();
+  const text = d.areas.page;
+  const city = findCity(d, slug)!;
+  const prices = usePrices();
+  const districts = getDistricts(d);
   const isToronto = city.slug === "toronto";
+  // Toronto's district names link to their own pages (entities/area).
+  const districtLinks = Object.fromEntries(districts.map((district) => [district.name, districtPath(district)]));
   const otherCities = [
-    ...cities
+    ...getCities(d)
       .filter((other) => other.slug !== city.slug)
       .map((other) => ({ href: cityPath(other), label: other.name })),
-    { href: "/areas/", label: "All areas" },
+    { href: "/areas/", label: d.common.allAreas },
   ];
 
   return (
     <>
       <PageHero
-        eyebrow={`${city.name} · ${siteConfig.companyName}`}
-        title={`Washer & dryer rental in ${city.name}`}
+        eyebrow={format(text.cityEyebrow, { place: city.name })}
+        title={format(text.title, { place: city.name })}
         intro={city.intro}
         photo={city.photo}
-        price={prices.setText}
-        priceLabel="a week for a washer + dryer set"
-        otherPrice={`or $${prices.singleText} a week for one machine`}
+        price={money(prices.set.current)}
+        wasPrice={<WasPrice price={prices.set} className="font-display text-lg font-bold text-ink-muted" />}
+        priceLabel={text.priceLabel}
+        otherPrice={text.otherPrice}
       />
       <TrustStrip />
 
@@ -49,26 +52,23 @@ export default function CityPage() {
       <Prices />
       <HowItWorks />
 
-      <section aria-label="Other areas" className="section">
+      <section aria-label={text.otherAreasLabel} className="section">
         <div className="container-page grid gap-10 lg:grid-cols-2">
           {isToronto && (
             <LinkList
               id="districts-title"
-              title="Toronto districts"
-              links={districts.map((district) => ({
-                href: districtPath(district),
-                label: district.name,
-              }))}
+              title={text.torontoDistricts}
+              links={districts.map((district) => ({ href: districtPath(district), label: district.name }))}
             />
           )}
           <div>
-            <LinkList id="other-areas-title" title="Other areas we serve" links={otherCities} />
-            <p className="mt-4 text-ink-soft">Farther away? Ask us.</p>
+            <LinkList id="other-areas-title" title={text.otherAreas} links={otherCities} />
+            <p className="mt-4 text-ink-soft">{d.common.fartherAwayAsk}</p>
           </div>
         </div>
       </section>
 
-      <CtaBand title={`Ready to rent in ${city.name}?`} />
+      <CtaBand title={format(text.ctaTitle, { place: city.name })} />
       <StartRental />
     </>
   );

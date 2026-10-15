@@ -1,31 +1,34 @@
 import { data, type LoaderFunctionArgs } from "react-router";
 import { findMachine, machinePath, machinePhotos, type MachineType } from "~/entities/machine";
-import { siteConfig } from "~/shared/config";
+import { getPrice, requestI18n } from "~/entities/offer";
+import { pagePaths, requestTimeOf } from "~/shared/config";
+import type { I18n } from "~/shared/i18n";
 import { galleryPhotoSizes } from "~/shared/lib";
 import { pageHead, photoPreload, serviceNode, singleOffer, weeklyOffer } from "~/shared/seo";
 
-export function machineHead(machine: MachineType) {
+export function machineHead(i18n: I18n, machine: MachineType, now: number) {
+  const { d, format } = i18n;
   const [mainPhoto] = machinePhotos(machine);
   const offer =
-    machine.price === siteConfig.prices.set
+    machine.item === "set"
       ? weeklyOffer(
-          `${machine.title} rental`,
-          machine.price,
-          `${machine.title}, per week. Repairs and old-machine haul-away included.`,
+          format(d.jsonLd.machineOffer.name, { title: machine.title }),
+          getPrice("set", now).current,
+          format(d.jsonLd.machineOffer.description, { title: machine.title }),
         )
-      : singleOffer();
+      : singleOffer(i18n);
   return pageHead({
     path: machinePath(machine),
     kind: "machine",
     title: machine.page.metaTitle,
     description: machine.page.metaDescription,
     breadcrumbs: [
-      { name: "Home", path: "/" },
-      { name: "Machines", path: "/machines/" },
+      { name: d.pages.home.name, path: "/" },
+      { name: d.pages.machines.name, path: pagePaths.machines },
       { name: machine.title, path: machinePath(machine) },
     ],
     jsonLd: [
-      serviceNode({
+      serviceNode(i18n, {
         name: machine.page.h1,
         description: machine.page.metaDescription,
         path: machinePath(machine),
@@ -36,8 +39,9 @@ export function machineHead(machine: MachineType) {
   });
 }
 
-export function loader({ params }: LoaderFunctionArgs) {
-  const machine = findMachine(params.slug ?? "");
+export async function loader(args: LoaderFunctionArgs) {
+  const i18n = await requestI18n(args);
+  const machine = findMachine(i18n.d, args.params.slug ?? "");
   if (!machine) throw data("Not found", { status: 404 });
-  return { head: machineHead(machine), slug: machine.slug };
+  return { head: machineHead(i18n, machine, requestTimeOf(args.context)), slug: machine.slug };
 }

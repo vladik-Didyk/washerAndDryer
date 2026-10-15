@@ -1,20 +1,21 @@
-import { siteConfig } from "~/shared/config";
+import { useI18n } from "~/shared/i18n";
 import { BadgeCheck, Languages, MapPin, Truck, Wrench } from "~/shared/ui";
 
 // Five short facts in a band under the hero of the home, machine type, city and district pages.
 // One row from 1280px, three columns on tablets, two on phones.
 export function TrustStrip() {
-  const { languages } = siteConfig;
+  const { d } = useI18n();
+  const { trust } = d.home;
   const items = [
-    { Icon: Wrench, label: "Repairs included" },
-    { Icon: BadgeCheck, label: "No credit check" },
-    { Icon: Truck, label: "Same-week delivery" },
-    { Icon: Languages, label: languages },
-    { Icon: MapPin, label: "Local Toronto business" },
+    { Icon: Wrench, label: trust.repairs },
+    { Icon: BadgeCheck, label: trust.noCreditCheck },
+    { Icon: Truck, label: trust.sameWeek },
+    { Icon: Languages, label: d.common.languages },
+    { Icon: MapPin, label: trust.local },
   ];
 
   return (
-    <section aria-label="Why rent from us" className="border-y border-line bg-white">
+    <section aria-label={trust.label} className="border-y border-line bg-white">
       <ul className="container-page grid grid-cols-2 gap-x-4 gap-y-4 py-5 sm:grid-cols-3 sm:gap-x-6 lg:py-6 xl:flex xl:justify-between xl:gap-x-4">
         {items.map(({ Icon, label }, index) => (
           <li

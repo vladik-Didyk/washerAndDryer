@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { testI18n } from "~/test/context";
 import { checkPostalCode, formatPostalCode } from "./model";
+
+const i18n = await testI18n();
 
 const TEXT_US =
   "Not sure from the postal code. Text us your address at (437) 907-6955 and we'll confirm.";
@@ -26,17 +29,17 @@ const samples: Array<[string, string]> = [
 
 describe("checkPostalCode", () => {
   it.each(samples)("%j -> %s", (input, expected) => {
-    expect(checkPostalCode(input).message).toBe(expected);
+    expect(checkPostalCode(input, i18n).message).toBe(expected);
   });
 
   it("links a yes to the city's page", () => {
-    expect(checkPostalCode("L5B 1M2")).toMatchObject({ status: "yes", city: "Mississauga", path: "/mississauga/" });
-    expect(checkPostalCode("M5V 2T6")).toMatchObject({ status: "yes", path: "/toronto/" });
+    expect(checkPostalCode("L5B 1M2", i18n)).toMatchObject({ status: "yes", city: "Mississauga", path: "/mississauga/" });
+    expect(checkPostalCode("M5V 2T6", i18n)).toMatchObject({ status: "yes", path: "/toronto/" });
   });
 
   it("never says no: unknown codes are 'unsure', bad input is 'invalid'", () => {
-    expect(checkPostalCode("K1A 0B1").status).toBe("unsure");
-    expect(checkPostalCode("12345").status).toBe("invalid");
+    expect(checkPostalCode("K1A 0B1", i18n).status).toBe("unsure");
+    expect(checkPostalCode("12345", i18n).status).toBe("invalid");
   });
 });
 

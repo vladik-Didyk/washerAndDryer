@@ -1,13 +1,24 @@
-import { useLoaderData } from "react-router";
+import { getMachineTypes, machinePath } from "~/entities/machine";
+import { useActivePromotions, usePrices } from "~/entities/offer";
 import { siteConfig } from "~/shared/config";
-import { Check, Clock, Gift, MapPin, MessageSquare, Phone } from "~/shared/ui";
-import type { loader } from "../loader";
+import { useI18n } from "~/shared/i18n";
+import { Check, Clock, Gift, MapPin, MessageSquare, Phone, WasPrice } from "~/shared/ui";
 
-// The offer in Spanish or Russian. Text comes from ../content.ts; machine type names link to
-// the English pages, which have the details and the rental request.
+// The offer in Spanish or Russian. Words from the page's dictionary (shared/i18n
+// locales/es.ts, ru.ts); machine type names link to the English pages, which have the details
+// and the rental request.
 export default function LanguagePage() {
-  const { page: content } = useLoaderData<typeof loader>();
+  const { d, format, money } = useI18n();
+  const content = d.language;
   const { phone } = siteConfig;
+  const prices = usePrices();
+  const firstWeekFree = useActivePromotions().some((promotion) => promotion.id === "first-week-free");
+  const machines = getMachineTypes(d).map((machine) => ({
+    slug: machine.slug,
+    href: machinePath(machine),
+    label: content.machines[machine.slug],
+    price: format(content.machinePrice, { price: money(prices[machine.item].current), perWeek: content.perWeek }),
+  }));
 
   return (
     <>
@@ -24,11 +35,12 @@ export default function LanguagePage() {
             {content.h1}
           </h1>
           <p className="mt-6 font-display text-3xl font-extrabold text-brand sm:text-4xl">
-            {content.priceSet}
+            {format(content.priceSet, { price: money(prices.set.current) })}
+            <WasPrice price={prices.set} className="ml-3 text-xl font-bold text-ink-muted" />
           </p>
-          <p className="mt-2 text-lg text-ink-soft">{content.priceSingle}</p>
+          <p className="mt-2 text-lg text-ink-soft">{format(content.priceSingle, { price: money(prices.single.current) })}</p>
           <p className="mt-1 text-sm text-ink-muted">{content.priceNote}</p>
-          {content.firstWeekFree && (
+          {firstWeekFree && (
             <p className="mt-5 flex max-w-3xl gap-3 rounded-2xl bg-gold/20 px-5 py-4 text-ink">
               <Gift className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
               <span>{content.firstWeekFree}</span>
@@ -38,7 +50,7 @@ export default function LanguagePage() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a href={phone.tel} className="btn btn-primary">
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-              {content.call}: {phone.display}
+              {format(content.callPhone, { call: content.call })}
             </a>
             <a href={phone.sms} className="btn btn-secondary">
               <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
@@ -93,7 +105,7 @@ export default function LanguagePage() {
               {content.machinesTitle}
             </h2>
             <ul className="mt-6 divide-y divide-line rounded-3xl border border-line bg-white px-5 sm:px-6">
-              {content.machines.map((machine) => (
+              {machines.map((machine) => (
                 <li key={machine.slug} className="flex items-baseline justify-between gap-4 py-4">
                   <a href={machine.href} className="text-link font-medium">
                     {machine.label}

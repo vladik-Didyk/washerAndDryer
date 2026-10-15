@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { testI18n } from "~/test/context";
 import { firstOpenStep, rentalRequestFields, validateContactStep, validateDetailsStep, validateMachineStep } from "./model";
+
+const i18n = await testI18n();
 
 const form = (fields: Record<string, string>) => {
   const data = new FormData();
@@ -9,10 +12,10 @@ const form = (fields: Record<string, string>) => {
 
 describe("step 1: machine type", () => {
   it("requires one of the choices", () => {
-    expect(validateMachineStep(form({}))).toMatchObject({ ok: false, errors: { machine: expect.any(String) } });
-    expect(validateMachineStep(form({ machine: "fridge" })).ok).toBe(false);
-    expect(validateMachineStep(form({ machine: "stackable" }))).toMatchObject({ ok: true, fields: { machine: "stackable" } });
-    expect(validateMachineStep(form({ machine: "not-sure" })).ok).toBe(true);
+    expect(validateMachineStep(form({}), i18n)).toMatchObject({ ok: false, errors: { machine: expect.any(String) } });
+    expect(validateMachineStep(form({ machine: "fridge" }), i18n).ok).toBe(false);
+    expect(validateMachineStep(form({ machine: "stackable" }), i18n)).toMatchObject({ ok: true, fields: { machine: "stackable" } });
+    expect(validateMachineStep(form({ machine: "not-sure" }), i18n).ok).toBe(true);
   });
 });
 
@@ -20,7 +23,7 @@ describe("step 2: your space", () => {
   const valid = { postal: "m5v2t6", closetWidth: '24"', outlet: "4-prong", access: "elevator", floor: "12th floor" };
 
   it("lists every missing field", () => {
-    const result = validateDetailsStep(form({}));
+    const result = validateDetailsStep(form({}), i18n);
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(Object.keys(result.errors).sort()).toEqual(["access", "closetWidth", "outlet", "postal"]);
@@ -29,22 +32,22 @@ describe("step 2: your space", () => {
   });
 
   it("rejects a postal code that isn't Canadian, with the checker's message", () => {
-    const result = validateDetailsStep(form({ ...valid, postal: "12345" }));
+    const result = validateDetailsStep(form({ ...valid, postal: "12345" }), i18n);
     expect(result).toMatchObject({ ok: false, errors: { postal: "Enter a valid Canadian postal code, like M5V 2T6." } });
   });
 
   it("formats the postal code and finds the city", () => {
-    const result = validateDetailsStep(form(valid));
+    const result = validateDetailsStep(form(valid), i18n);
     expect(result).toMatchObject({ ok: true, fields: { postal: "M5V 2T6", city: "Toronto", postalStatus: "yes" } });
   });
 
   it("accepts a code outside the known areas, to confirm by text", () => {
-    const result = validateDetailsStep(form({ ...valid, postal: "K1A 0B1" }));
+    const result = validateDetailsStep(form({ ...valid, postal: "K1A 0B1" }), i18n);
     expect(result).toMatchObject({ ok: true, fields: { city: null, postalStatus: "unsure" } });
   });
 
   it("checks the outlet and the way in", () => {
-    const result = validateDetailsStep(form({ ...valid, outlet: "5-prong", access: "crane" }));
+    const result = validateDetailsStep(form({ ...valid, outlet: "5-prong", access: "crane" }), i18n);
     expect(result).toMatchObject({ ok: false, errors: { outlet: expect.any(String), access: expect.any(String) } });
   });
 });
@@ -54,7 +57,7 @@ describe("step 3: how to reach you", () => {
   const valid = { name: "Alex", phone: "416-555-0123", email: "", preferredDay: "", notes: "" };
 
   it("requires a name and a phone number", () => {
-    const result = validateContactStep(form({}), today);
+    const result = validateContactStep(form({}), today, i18n);
     expect(result).toMatchObject({
       ok: false,
       errors: { name: "Enter your name.", phone: "Enter your phone number." },
@@ -62,7 +65,7 @@ describe("step 3: how to reach you", () => {
   });
 
   it("checks the optional email and the preferred day", () => {
-    const result = validateContactStep(form({ ...valid, email: "alex@", preferredDay: "2026-10-14" }), today);
+    const result = validateContactStep(form({ ...valid, email: "alex@", preferredDay: "2026-10-14" }), today, i18n);
     expect(result).toMatchObject({
       ok: false,
       errors: {
@@ -70,7 +73,7 @@ describe("step 3: how to reach you", () => {
         preferredDay: "Choose today or a later date.",
       },
     });
-    expect(validateContactStep(form({ ...valid, preferredDay: today }), today).ok).toBe(true);
+    expect(validateContactStep(form({ ...valid, preferredDay: today }), today, i18n).ok).toBe(true);
   });
 });
 
@@ -87,6 +90,7 @@ describe("progress and the email", () => {
         details: { postal: "L5B 1M2", closetWidth: "27 in", outlet: "not-sure", access: "stairs", floor: "", city: "Mississauga", postalStatus: "yes" },
       },
       { name: "Alex", phone: "416-555-0123", email: "", preferredDay: "", notes: "" },
+      i18n,
     );
     expect(fields).toEqual({
       subject: "New rental request — Alex",

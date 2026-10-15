@@ -1,24 +1,13 @@
 import { data, type LoaderFunctionArgs } from "react-router";
 import { findGuide, guidePath, visibleGuides, type Guide } from "~/entities/guide/index.server";
-import { firstWeekFreeOffer, isFirstWeekFreeActive, referralOffer } from "~/entities/offer";
-import { flagsOf, requestTimeOf, siteConfig } from "~/shared/config";
-import type { ArticleBlock, ArticleSection, RenderedBlock } from "~/shared/lib";
+import { requestI18n } from "~/entities/offer";
+import { flagsOf, pagePaths, requestTimeOf, siteConfig } from "~/shared/config";
+import type { I18n } from "~/shared/i18n";
+import { serverText } from "~/shared/i18n/index.server";
 import { absoluteUrl, pageHead, providerRef } from "~/shared/seo";
+import { prepareArticle } from "~/widgets/article-body";
 
-// The current offers inside long-form text, filled in for this request: the first-week line
-// drops out once the offer ends.
-export function renderOffers(sections: ArticleSection[], offerActive: boolean): ArticleSection<RenderedBlock>[] {
-  const render = (block: ArticleBlock): RenderedBlock[] => {
-    if (typeof block !== "string" && "offer" in block) {
-      if (block.offer === "referral") return [`Refer a friend. ${referralOffer.text}`];
-      return offerActive ? [`First week free. ${firstWeekFreeOffer.text} ${firstWeekFreeOffer.stillPaid}`] : [];
-    }
-    return [block];
-  };
-  return sections.map((section) => ({ ...section, blocks: section.blocks.flatMap(render) }));
-}
-
-export function guideHead(guide: Guide) {
+export function guideHead({ d }: I18n, guide: Guide) {
   const url = absoluteUrl(guidePath(guide));
   return pageHead({
     path: guidePath(guide),
@@ -28,8 +17,8 @@ export function guideHead(guide: Guide) {
     draft: guide.draft,
     ogType: "article",
     breadcrumbs: [
-      { name: "Home", path: "/" },
-      { name: "Guides", path: "/guides/" },
+      { name: d.pages.home.name, path: "/" },
+      { name: d.pages.guides.name, path: pagePaths.guides },
       { name: guide.title, path: guidePath(guide) },
     ],
     // The author and publisher are the business itself: no author bios.
@@ -53,20 +42,22 @@ export function guideHead(guide: Guide) {
 }
 
 // A draft guide is a 404 unless this is a preview deployment (PREVIEW_DRAFTS=1).
-export function loader({ params, context }: LoaderFunctionArgs) {
+export async function loader(args: LoaderFunctionArgs) {
+  const { params, context } = args;
+  const i18n = await requestI18n(args);
   const { previewDrafts } = flagsOf(context);
-  const guide = findGuide(params.slug ?? "", previewDrafts);
+  const guide = findGuide(i18n, params.slug ?? "", previewDrafts);
   if (!guide) throw data("Not found", { status: 404 });
-  const offerActive = isFirstWeekFreeActive(requestTimeOf(context));
   return {
-    head: guideHead(guide),
+    head: guideHead(i18n, guide),
     guide: {
       title: guide.title,
       summary: guide.summary,
       updated: guide.updated,
-      sections: renderOffers(guide.sections, offerActive),
+      // The running offers are filled in for this request: they drop out when they end.
+      sections: prepareArticle(guide.sections, i18n, requestTimeOf(context), serverText(i18n).articles),
     },
-    otherGuides: visibleGuides(previewDrafts)
+    otherGuides: visibleGuides(i18n, previewDrafts)
       .filter((other) => other.slug !== guide.slug)
       .map((other) => ({ href: guidePath(other), label: other.title })),
   };

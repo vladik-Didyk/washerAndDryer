@@ -6,9 +6,9 @@
 // Each step posts to its own server action, which checks the fields here and keeps the
 // answers in a signed cookie session (./session.server.ts) until the last step sends them.
 // Pure functions only: the tests call them directly.
-import { machineTypes } from "~/entities/machine";
+import { getMachineTypes } from "~/entities/machine";
 import { checkPostalCode, formatPostalCode, type PostalStatus } from "~/features/postal-check";
-import { siteConfig } from "~/shared/config";
+import type { I18n } from "~/shared/i18n";
 import { EMAIL_PATTERN, PHONE_PATTERN, field, type FieldErrorMap, type Validation } from "~/shared/lib/form-data";
 
 export const STEP_PATHS = {
@@ -18,10 +18,11 @@ export const STEP_PATHS = {
   done: "/start/done/",
 } as const;
 
+// The three steps; their names are start.steps.<id> in the dictionary.
 export const STEPS = [
-  { id: "machine", title: "Machine type", path: STEP_PATHS.machine },
-  { id: "details", title: "Your space", path: STEP_PATHS.details },
-  { id: "contact", title: "How to reach you", path: STEP_PATHS.contact },
+  { id: "machine", path: STEP_PATHS.machine },
+  { id: "details", path: STEP_PATHS.details },
+  { id: "contact", path: STEP_PATHS.contact },
 ] as const;
 
 export type StepId = (typeof STEPS)[number]["id"];
@@ -32,29 +33,28 @@ export interface Choice {
   note?: string;
 }
 
-const { prices } = siteConfig;
-
 // The four sets by type, then one machine (a washer or a dryer), then "not sure".
-export const MACHINE_CHOICES: Choice[] = [
-  ...machineTypes
-    .filter((machine) => machine.slug !== "single-machine")
-    .map((machine) => ({ value: machine.slug, label: machine.title, note: `$${prices.setText}/week for the set` })),
-  { value: "washer-only", label: "Washer only", note: `$${prices.singleText}/week` },
-  { value: "dryer-only", label: "Dryer only", note: `$${prices.singleText}/week` },
-  { value: "not-sure", label: "Not sure yet", note: "We'll help you choose" },
-];
+export function machineChoices({ d }: I18n): Choice[] {
+  const text = d.start.machine;
+  return [
+    ...getMachineTypes(d)
+      .filter((machine) => machine.slug !== "single-machine")
+      .map((machine) => ({ value: machine.slug, label: machine.title, note: text.setNote })),
+    { value: "washer-only", label: text.washerOnly, note: text.singleNote },
+    { value: "dryer-only", label: text.dryerOnly, note: text.singleNote },
+    { value: "not-sure", label: text.notSure, note: text.notSureNote },
+  ];
+}
 
-export const OUTLET_CHOICES: Choice[] = [
-  { value: "3-prong", label: "3-prong" },
-  { value: "4-prong", label: "4-prong" },
-  { value: "not-sure", label: "Not sure" },
-];
+export function outletChoices({ d }: I18n): Choice[] {
+  const { outlets } = d.start.details;
+  return (["3-prong", "4-prong", "not-sure"] as const).map((value) => ({ value, label: outlets[value] }));
+}
 
-export const ACCESS_CHOICES: Choice[] = [
-  { value: "ground", label: "No stairs", note: "Ground floor or a step or two" },
-  { value: "stairs", label: "Stairs", note: "Basement or upstairs, no elevator" },
-  { value: "elevator", label: "Elevator", note: "Condo or apartment building" },
-];
+export function accessChoices({ d }: I18n): Choice[] {
+  const { accessChoices: text } = d.start.details;
+  return (["ground", "stairs", "elevator"] as const).map((value) => ({ value, ...text[value] }));
+}
 
 const labelOf = (choices: Choice[], value: string | undefined) =>
   choices.find((choice) => choice.value === value)?.label ?? value ?? "";
@@ -92,17 +92,21 @@ export const EMPTY_CONTACT: ContactStepValues = { name: "", phone: "", email: ""
 const isChoice = (choices: Choice[], value: string) => choices.some((choice) => choice.value === value);
 
 // Step 1.
-export function validateMachineStep(form: FormData): Validation<MachineStepValues, MachineStepValues> {
+export function validateMachineStep(form: FormData, i18n: I18n): Validation<MachineStepValues, MachineStepValues> {
   const values = { machine: field(form, "machine") };
-  if (!isChoice(MACHINE_CHOICES, values.machine)) {
-    return { ok: false, values, errors: { machine: "Choose a machine type, or \"Not sure yet\"." } };
+  if (!isChoice(machineChoices(i18n), values.machine)) {
+    return { ok: false, values, errors: { machine: i18n.d.start.machine.error } };
   }
   return { ok: true, values, fields: values };
 }
 
 // Step 2. The postal code must be a real Canadian one; outside the areas we know, the request
 // still goes through (we confirm by text), as the postal-code checker says.
-export function validateDetailsStep(form: FormData): Validation<DetailsStepValues, NonNullable<RentalDraft["details"]>> {
+export function validateDetailsStep(
+  form: FormData,
+  i18n: I18n,
+): Validation<DetailsStepValues, NonNullable<RentalDraft["details"]>> {
+  const { errors: text } = i18n.d.start.details;
   const values: DetailsStepValues = {
     postal: field(form, "postal"),
     closetWidth: field(form, "closetWidth"),
@@ -111,14 +115,14 @@ export function validateDetailsStep(form: FormData): Validation<DetailsStepValue
     floor: field(form, "floor"),
   };
   const errors: FieldErrorMap = {};
-  const postal = checkPostalCode(values.postal);
-  if (!values.postal) errors.postal = "Enter your postal code.";
+  const postal = checkPostalCode(values.postal, i18n);
+  if (!values.postal) errors.postal = text.postal;
   else if (postal.status === "invalid") errors.postal = postal.message;
-  if (!values.closetWidth) errors.closetWidth = "Enter the width of the space, or write \"not sure\".";
-  else if (values.closetWidth.length > 60) errors.closetWidth = "Keep it short, like 24\" or 61 cm.";
-  if (!isChoice(OUTLET_CHOICES, values.outlet)) errors.outlet = "Choose the dryer outlet, or \"Not sure\".";
-  if (!isChoice(ACCESS_CHOICES, values.access)) errors.access = "Choose how we get the machine in.";
-  if (values.floor.length > 60) errors.floor = "Keep it short, like \"3rd floor\" or \"basement\".";
+  if (!values.closetWidth) errors.closetWidth = text.widthMissing;
+  else if (values.closetWidth.length > 60) errors.closetWidth = text.widthLong;
+  if (!isChoice(outletChoices(i18n), values.outlet)) errors.outlet = text.outlet;
+  if (!isChoice(accessChoices(i18n), values.access)) errors.access = text.access;
+  if (values.floor.length > 60) errors.floor = text.floorLong;
 
   if (Object.keys(errors).length) return { ok: false, values, errors };
   return {
@@ -133,8 +137,16 @@ export function validateDetailsStep(form: FormData): Validation<DetailsStepValue
   };
 }
 
+// The longest notes we take.
+export const NOTES_MAX = 2000;
+
 // Step 3. `today` is the date in Toronto ("YYYY-MM-DD"): a preferred day can't be earlier.
-export function validateContactStep(form: FormData, today: string): Validation<ContactStepValues, ContactStepValues> {
+export function validateContactStep(
+  form: FormData,
+  today: string,
+  i18n: I18n,
+): Validation<ContactStepValues, ContactStepValues> {
+  const { forms, start } = i18n.d;
   const values: ContactStepValues = {
     name: field(form, "name"),
     phone: field(form, "phone"),
@@ -143,16 +155,16 @@ export function validateContactStep(form: FormData, today: string): Validation<C
     notes: field(form, "notes"),
   };
   const errors: FieldErrorMap = {};
-  if (!values.name) errors.name = "Enter your name.";
-  else if (values.name.length < 2) errors.name = "Name must be at least 2 characters.";
-  if (!values.phone) errors.phone = "Enter your phone number.";
-  else if (!PHONE_PATTERN.test(values.phone)) errors.phone = "Enter a valid phone number, with area code.";
-  if (values.email && !EMAIL_PATTERN.test(values.email)) errors.email = "Enter a valid email address, or leave it empty.";
+  if (!values.name) errors.name = forms.errors.nameMissing;
+  else if (values.name.length < 2) errors.name = forms.errors.nameShort;
+  if (!values.phone) errors.phone = forms.errors.phoneMissing;
+  else if (!PHONE_PATTERN.test(values.phone)) errors.phone = forms.errors.phoneInvalid;
+  if (values.email && !EMAIL_PATTERN.test(values.email)) errors.email = forms.errors.emailInvalid;
   if (values.preferredDay) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(values.preferredDay)) errors.preferredDay = "Choose a date.";
-    else if (values.preferredDay < today) errors.preferredDay = "Choose today or a later date.";
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(values.preferredDay)) errors.preferredDay = start.contact.errors.date;
+    else if (values.preferredDay < today) errors.preferredDay = start.contact.errors.dateEarly;
   }
-  if (values.notes.length > 2000) errors.notes = "Keep the notes under 2,000 characters.";
+  if (values.notes.length > NOTES_MAX) errors.notes = i18n.format(start.contact.errors.notesLong, { max: NOTES_MAX });
 
   if (Object.keys(errors).length) return { ok: false, values, errors };
   return { ok: true, values, fields: values };
@@ -165,26 +177,31 @@ export function firstOpenStep(draft: RentalDraft): StepId {
   return "contact";
 }
 
-export const machineLabel = (value: string | undefined) => labelOf(MACHINE_CHOICES, value);
-export const outletLabel = (value: string | undefined) => labelOf(OUTLET_CHOICES, value);
-export const accessLabel = (value: string | undefined) => labelOf(ACCESS_CHOICES, value);
+export const machineLabel = (i18n: I18n, value: string | undefined) => labelOf(machineChoices(i18n), value);
+export const outletLabel = (i18n: I18n, value: string | undefined) => labelOf(outletChoices(i18n), value);
+export const accessLabel = (i18n: I18n, value: string | undefined) => labelOf(accessChoices(i18n), value);
 
 // The email the business gets (through Web3Forms), one line per answer.
-export function rentalRequestFields(draft: Required<RentalDraft>, contact: ContactStepValues): Record<string, string> {
+export function rentalRequestFields(
+  draft: Required<RentalDraft>,
+  contact: ContactStepValues,
+  i18n: I18n,
+): Record<string, string> {
   const { details } = draft;
+  const { forms, start } = i18n.d;
   return {
-    subject: `New rental request — ${contact.name}`,
+    subject: i18n.format(start.email.subject, { name: contact.name }),
     name: contact.name,
     phone: contact.phone,
-    email: contact.email || "Not given",
-    machine_type: machineLabel(draft.machine.machine),
+    email: contact.email || forms.notGiven,
+    machine_type: machineLabel(i18n, draft.machine.machine),
     postal_code: details.postal,
-    area: details.city ?? "Not sure from the postal code: confirm by text",
+    area: details.city ?? start.email.areaUnsure,
     closet_width: details.closetWidth,
-    dryer_outlet: outletLabel(details.outlet),
-    access: accessLabel(details.access),
-    floor: details.floor || "Not given",
-    preferred_day: contact.preferredDay || "Not given",
-    notes: contact.notes || "None",
+    dryer_outlet: outletLabel(i18n, details.outlet),
+    access: accessLabel(i18n, details.access),
+    floor: details.floor || forms.notGiven,
+    preferred_day: contact.preferredDay || forms.notGiven,
+    notes: contact.notes || forms.none,
   };
 }

@@ -1,13 +1,11 @@
 import { useState } from "react";
+import { useI18n } from "~/shared/i18n";
 
 // Drawings or photos of the machine types. Photos is the default, so the server HTML shows
 // the photos; the switch works after hydration.
 export type MachineView = "photos" | "drawings";
 
-const VIEWS: Array<{ id: MachineView; label: string }> = [
-  { id: "photos", label: "Photos" },
-  { id: "drawings", label: "Drawings" },
-];
+const VIEWS: MachineView[] = ["photos", "drawings"];
 
 export function useMachineView(initial: MachineView = "photos") {
   const [view, setView] = useState<MachineView>(initial);
@@ -23,23 +21,24 @@ export function ViewSwitch({
   onChange: (view: MachineView) => void;
   className?: string;
 }) {
+  const { d } = useI18n();
   return (
     <div
       role="group"
-      aria-label="Show machines as"
+      aria-label={d.machines.view.label}
       className={`inline-flex rounded-full border border-line bg-paper p-1 ${className}`}
     >
       {VIEWS.map((option) => (
         <button
-          key={option.id}
+          key={option}
           type="button"
-          aria-pressed={view === option.id}
-          onClick={() => onChange(option.id)}
+          aria-pressed={view === option}
+          onClick={() => onChange(option)}
           className={`min-h-[44px] rounded-full px-5 font-display text-[15px] font-semibold transition-colors sm:min-h-0 sm:py-2 ${
-            view === option.id ? "bg-brand text-white shadow-sm" : "text-ink-soft hover:text-brand"
+            view === option ? "bg-brand text-white shadow-sm" : "text-ink-soft hover:text-brand"
           }`}
         >
-          {option.label}
+          {d.machines.view[option]}
         </button>
       ))}
     </div>

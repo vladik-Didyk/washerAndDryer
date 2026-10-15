@@ -1,17 +1,19 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { repairPage } from "~/shared/config";
+import { requestI18n } from "~/entities/offer";
+import { pagePaths } from "~/shared/config";
 import { pageHead } from "~/shared/seo";
 
-export function loader(_args: LoaderFunctionArgs) {
+export async function loader(args: LoaderFunctionArgs) {
+  const { d } = await requestI18n(args);
   return {
     head: pageHead({
-      path: repairPage.path,
+      path: pagePaths.repair,
       kind: "repair",
-      title: repairPage.metaTitle,
-      description: repairPage.metaDescription,
+      title: d.pages.repair.title,
+      description: d.pages.repair.description,
       breadcrumbs: [
-        { name: "Home", path: "/" },
-        { name: "Request a repair", path: repairPage.path },
+        { name: d.pages.home.name, path: "/" },
+        { name: d.pages.repair.name, path: pagePaths.repair },
       ],
     }),
   };

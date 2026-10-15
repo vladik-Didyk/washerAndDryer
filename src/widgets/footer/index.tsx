@@ -1,6 +1,7 @@
-import { cities, cityPath, districtPath, districts } from "~/entities/area";
-import { machinePath, machineTypes } from "~/entities/machine";
+import { cityPath, districtPath, getCities, getDistricts } from "~/entities/area";
+import { getMachineTypes, machinePath } from "~/entities/machine";
 import { siteConfig } from "~/shared/config";
+import { LANGUAGES, useI18n, type Dictionary } from "~/shared/i18n";
 import { useSite, type Site } from "~/shared/lib";
 import { Clock, Facebook, Logo, MapPin, MessageSquare, Phone } from "~/shared/ui";
 
@@ -15,16 +16,16 @@ interface FooterLink {
 }
 
 // Company links; drafts and the account page appear only when this deployment has them.
-function companyLinks(site: Site): FooterLink[] {
+function companyLinks(site: Site, footer: Dictionary["footer"]): FooterLink[] {
   return [
-    { href: "/about/", label: "About" },
-    { href: "/contact/", label: "Contact" },
-    { href: "/landlords/", label: "Landlords" },
-    { href: "/repair/", label: "Request a repair" },
-    { href: "/guides/", label: "Guides" },
-    { href: "/account/", label: "Pay / manage" },
-    { href: "/privacy/", label: "Privacy" },
-    { href: "/terms/", label: "Rental terms" },
+    { href: "/about/", label: footer.about },
+    { href: "/contact/", label: footer.contact },
+    { href: "/landlords/", label: footer.landlords },
+    { href: "/repair/", label: footer.repair },
+    { href: "/guides/", label: footer.guides },
+    { href: "/account/", label: footer.account },
+    { href: "/privacy/", label: footer.privacy },
+    { href: "/terms/", label: footer.terms },
   ].filter((link) => site.has(link.href));
 }
 
@@ -59,9 +60,10 @@ function LinkGroup({
 
 export function Footer() {
   const site = useSite();
-  const { phone, hours, facebook, companyName, tagline, location, languages, languageLinks } =
-    siteConfig;
-  const [toronto, ...otherCities] = cities;
+  const { d, format } = useI18n();
+  const { phone, facebook, companyName } = siteConfig;
+  const { footer, common } = d;
+  const [toronto, ...otherCities] = getCities(d);
 
   return (
     <footer lang="en" className="on-dark bg-brand-dark text-white/85">
@@ -79,10 +81,10 @@ export function Footer() {
               {companyName}
             </span>
           </a>
-          <p className="mt-5">{tagline}</p>
+          <p className="mt-5">{common.tagline}</p>
           <p className="mt-2 flex items-center gap-2 text-white/70">
             <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
-            {location}
+            {common.location}
           </p>
 
           <p className="mt-6 font-display text-xl font-bold text-white">{phone.display}</p>
@@ -93,7 +95,7 @@ export function Footer() {
                 className="inline-flex items-center gap-2 font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
-                Call
+                {common.call}
               </a>
             </li>
             <li>
@@ -102,19 +104,19 @@ export function Footer() {
                 className="inline-flex items-center gap-2 font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white"
               >
                 <MessageSquare className="h-4 w-4" aria-hidden="true" />
-                Text
+                {common.text}
               </a>
             </li>
           </ul>
           <ul className="mt-4 space-y-1">
-            {hours.map((entry) => (
-              <li key={entry.days} className="flex items-center gap-2">
+            {common.hoursList.map((line) => (
+              <li key={line} className="flex items-center gap-2">
                 <Clock className="h-4 w-4 shrink-0 text-white/60" aria-hidden="true" />
-                {entry.days}: {entry.time.toLowerCase()}
+                {line}
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-white/70">We speak {languages}.</p>
+          <p className="mt-2 text-white/70">{format(footer.weSpeak, { languages: common.languages })}</p>
 
           <a
             href={facebook}
@@ -123,32 +125,32 @@ export function Footer() {
             className="mt-6 inline-flex items-center gap-2 font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white"
           >
             <Facebook className="h-4 w-4" aria-hidden="true" />
-            Facebook page
-            <span className="sr-only">(opens in a new tab)</span>
+            {footer.facebook}
+            <span className="sr-only">{common.opensInNewTab}</span>
           </a>
         </div>
 
         <LinkGroup
           id="footer-machines"
-          title="Machines"
+          title={footer.machines}
           className="col-span-2 sm:col-span-1 lg:col-span-3"
           links={[
-            { href: "/machines/", label: "All machine types" },
-            ...machineTypes.map((machine) => ({ href: machinePath(machine), label: machine.title })),
+            { href: "/machines/", label: footer.allMachineTypes },
+            ...getMachineTypes(d).map((machine) => ({ href: machinePath(machine), label: machine.title })),
           ]}
         />
 
         <nav aria-labelledby="footer-areas" className="lg:col-span-2">
           <h2 id="footer-areas" className={groupTitle}>
-            Areas
+            {footer.areas}
           </h2>
           <ul className="mt-3 space-y-2">
             <li>
               <a href={cityPath(toronto)} className={footerLink}>
                 {toronto.name}
               </a>
-              <ul aria-label="Toronto districts" className="mt-2 space-y-2 border-l border-white/20 pl-3">
-                {districts.map((district) => (
+              <ul aria-label={footer.torontoDistricts} className="mt-2 space-y-2 border-l border-white/20 pl-3">
+                {getDistricts(d).map((district) => (
                   <li key={district.slug}>
                     <a href={districtPath(district)} className={footerLink}>
                       {district.name}
@@ -166,22 +168,19 @@ export function Footer() {
             ))}
             <li>
               <a href="/areas/" className={footerLink}>
-                All areas
+                {common.allAreas}
               </a>
             </li>
           </ul>
-          <p className="mt-3 text-white/70">Farther away? Ask us.</p>
+          <p className="mt-3 text-white/70">{common.fartherAwayAsk}</p>
         </nav>
 
         <div className="space-y-10 lg:col-span-3">
-          <LinkGroup id="footer-company" title="Company" links={companyLinks(site)} />
+          <LinkGroup id="footer-company" title={footer.company} links={companyLinks(site, footer)} />
           <LinkGroup
             id="footer-languages"
-            title="Languages"
-            links={[
-              { href: "/", label: "English", lang: "en" },
-              ...languageLinks.map((link) => ({ href: link.href, label: link.label, lang: link.lang })),
-            ]}
+            title={footer.languages}
+            links={LANGUAGES.map((language) => ({ href: language.path, label: language.name, lang: language.code }))}
           />
         </div>
       </div>
@@ -191,7 +190,7 @@ export function Footer() {
       <div className="border-t border-white/15 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
         {/* The year comes from the server (Toronto time), so the hydrated page always agrees. */}
         <p className="container-page py-6 text-sm text-white/70">
-          © {site.year} {companyName}
+          {format(footer.copyright, { year: String(site.year) })}
         </p>
       </div>
     </footer>

@@ -1,47 +1,51 @@
-import { startPage } from "~/shared/config";
+import { pagePaths } from "~/shared/config";
+import type { I18n } from "~/shared/i18n";
 import { pageHead } from "~/shared/seo";
-import { STEP_PATHS } from "./model";
+import { STEPS, STEP_PATHS } from "./model";
 
-const crumbs = [
-  { name: "Home", path: "/" },
-  { name: startPage.name, path: startPage.path },
+const crumbs = ({ d }: I18n) => [
+  { name: d.pages.home.name, path: "/" },
+  { name: d.pages.start.name, path: pagePaths.start },
 ];
+
+// "Step 2 of 3" in a title or description.
+const stepText = (i18n: I18n, text: string, step: number) => i18n.format(text, { step, steps: STEPS.length });
 
 // Step 1 is the page to find and link to; the later steps and the confirmation are noindex.
 export const stepHeads = {
-  machine: () =>
+  machine: (i18n: I18n) =>
     pageHead({
       path: STEP_PATHS.machine,
       kind: "start",
-      title: startPage.metaTitle,
-      description: startPage.metaDescription,
-      breadcrumbs: crumbs,
+      title: i18n.d.pages.start.title,
+      description: i18n.d.pages.start.description,
+      breadcrumbs: crumbs(i18n),
     }),
-  details: () =>
+  details: (i18n: I18n) =>
     pageHead({
       path: STEP_PATHS.details,
       kind: "start",
       noindex: true,
-      title: "Your Space: Step 2 of 3 | GTA Washer & Dryer Rentals",
-      description: "Step 2 of the rental request: postal code, closet width, dryer outlet and the way in.",
-      breadcrumbs: crumbs,
+      title: stepText(i18n, i18n.d.start.heads.details.title, 2),
+      description: stepText(i18n, i18n.d.start.heads.details.description, 2),
+      breadcrumbs: crumbs(i18n),
     }),
-  contact: () =>
+  contact: (i18n: I18n) =>
     pageHead({
       path: STEP_PATHS.contact,
       kind: "start",
       noindex: true,
-      title: "How to Reach You: Step 3 of 3 | GTA Washer & Dryer Rentals",
-      description: "Step 3 of the rental request: your name, phone number and a preferred day.",
-      breadcrumbs: crumbs,
+      title: stepText(i18n, i18n.d.start.heads.contact.title, 3),
+      description: stepText(i18n, i18n.d.start.heads.contact.description, 3),
+      breadcrumbs: crumbs(i18n),
     }),
-  done: () =>
+  done: (i18n: I18n) =>
     pageHead({
       path: STEP_PATHS.done,
       kind: "start",
       noindex: true,
-      title: "Request Sent | GTA Washer & Dryer Rentals",
-      description: "Your rental request is sent. We reply with the machine, the total and the start date.",
-      breadcrumbs: crumbs,
+      title: i18n.d.start.heads.done.title,
+      description: i18n.d.start.heads.done.description,
+      breadcrumbs: crumbs(i18n),
     }),
 };
