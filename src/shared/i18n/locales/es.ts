@@ -126,6 +126,7 @@ const es: DeepPartial<Dictionary> = {
     about: "Quiénes somos",
     contact: "Contacto",
     landlords: "Propietarios",
+    buildings: "Lavanderías",
     repair: "Pedir una reparación",
     guides: "Guías",
     account: "Pagar / gestionar",
@@ -179,6 +180,12 @@ const es: DeepPartial<Dictionary> = {
       title: "Lavadoras y secadoras para propietarios | Toronto y el GTA",
       description:
         "Lavandería para unidades en alquiler en Toronto y el GTA: sus inquilinos nos alquilan directamente, o usted alquila las máquinas. Reparaciones incluidas.",
+    },
+    buildings: {
+      name: "Lavanderías",
+      title: "Máquinas para lavanderías de edificios | Toronto y GTA",
+      description:
+        "Lavadoras y secadoras para lavanderías compartidas en edificios de Toronto y el GTA: el edificio alquila las máquinas o los residentes pagan por carga.",
     },
     landlordQuote: {
       name: "Pedir una cotización",
@@ -279,6 +286,11 @@ const es: DeepPartial<Dictionary> = {
       offerName: "Juego de lavadora y secadora para una unidad en alquiler",
       offerDescription:
         "Precio de lista por juego de lavadora y secadora, por semana. Con {quoteUnits} o más unidades, se cotiza por edificio después de verlo. Reparaciones incluidas.",
+    },
+    buildings: {
+      name: "Lavadoras y secadoras para lavanderías de edificios",
+      serviceType: "Suministro de lavadoras y secadoras para lavanderías compartidas",
+      audience: "Propietarios y administradores de edificios residenciales",
     },
     contact: {
       contactType: "servicio al cliente",
@@ -1346,10 +1358,12 @@ const es: DeepPartial<Dictionary> = {
     faqLink: "página de preguntas frecuentes",
     ctaTitle: "Pida una cotización para su edificio",
     ctaText: "Díganos la dirección, el número de unidades y lo que hay ahora.",
+    buildingsNote: "¿Una lavandería compartida en el edificio? {buildingsLink}.",
+    buildingsLink: "Vea las opciones para lavanderías",
     quote: {
       eyebrow: "Para propietarios",
       title: "Pida una cotización para su edificio",
-      lead: "Cuéntenos sobre el edificio y las unidades. Sus inquilinos pueden alquilarnos directamente, o usted puede alquilar las máquinas para sus unidades.",
+      lead: "Cuéntenos sobre el edificio y las unidades. En las unidades, sus inquilinos pueden alquilarnos directamente o usted puede alquilar las máquinas. Para una lavandería compartida, el edificio alquila las máquinas o los residentes pagan por carga.",
       howOptionsWork: "Cómo funcionan las dos opciones",
       nextTitle: "Qué pasa después",
       next: [
@@ -1373,6 +1387,8 @@ const es: DeepPartial<Dictionary> = {
       optionChoices: {
         tenants: "Mis inquilinos alquilan directamente",
         landlord: "Yo alquilo las máquinas para mis unidades",
+        laundryRoomRent: "Lavandería compartida: el edificio alquila las máquinas",
+        laundryRoomPerLoad: "Lavandería compartida: los residentes pagan por carga",
         notSure: "Todavía no lo sé",
       },
       notesHint:
@@ -1388,6 +1404,99 @@ const es: DeepPartial<Dictionary> = {
         option: "Elija cómo le gustaría hacerlo.",
       },
     },
+  },
+  buildings: {
+    eyebrow: "Para edificios residenciales",
+    title: "Lavadoras y secadoras para la lavandería de su edificio",
+    lead: "Para edificios de apartamentos y condominios con una lavandería compartida. Nosotros ponemos las máquinas, las instalamos y las reparamos. Hay dos formas de hacerlo, y cotizamos por edificio después de ver la lavandería.",
+    option: "Opción {number}",
+    options: [
+      {
+        title: "El edificio alquila las máquinas",
+        headline: "Cotización por edificio",
+        points: [
+          "El edificio alquila las máquinas para su lavandería.",
+          "El edificio decide cómo las usan los residentes.",
+          "Cotizamos después de ver la lavandería.",
+          "Reparaciones incluidas mientras alquila.",
+        ],
+      },
+      {
+        title: "Los residentes pagan por carga",
+        headline: "Sin costo para el edificio",
+        points: [
+          "Ponemos las máquinas sin costo para el edificio.",
+          "Los residentes pagan por carga.",
+          "El edificio recibe una parte de lo que recaudan las máquinas. Acordamos esa parte antes de instalar.",
+          "Reparaciones incluidas.",
+        ],
+      },
+    ],
+    optionsTitle: "Dos formas de equipar la lavandería",
+    includedTitle: "Incluido en ambos casos",
+    includedLead: "La entrega y la instalación van en la cotización, antes de instalar nada.",
+    included: [
+      "Primero vemos la lavandería y le decimos qué máquinas caben.",
+      "Instalación: conectamos el agua, el desagüe, la electricidad y la ventilación, y hacemos un ciclo de prueba antes de irnos.",
+      "Retiramos las máquinas viejas sin costo.",
+      "Reparaciones, o una máquina de reemplazo, sin costo.",
+    ],
+    stepsTitle: "Cómo funciona",
+    steps: [
+      {
+        title: "Cuéntenos sobre el edificio",
+        text: "La dirección, el número de unidades y lo que hay ahora en la lavandería.",
+      },
+      {
+        title: "Vemos la lavandería",
+        text: "Revisamos el espacio, las conexiones y cuántas máquinas caben.",
+      },
+      {
+        title: "Recibe una cotización",
+        text: "Para la opción que elija: el edificio alquila las máquinas, o los residentes pagan por carga.",
+      },
+      {
+        title: "Instalamos",
+        text: "Entregamos, conectamos cada máquina, hacemos un ciclo de prueba y retiramos las máquinas viejas.",
+      },
+      {
+        title: "Reparaciones mientras las máquinas estén",
+        text: "Llámenos o escríbanos cuando una máquina necesite reparación. La reparamos o la reemplazamos sin costo.",
+      },
+    ],
+    startWithQuote: "Empiece con una cotización",
+    inSuiteTitle: "¿Prefiere máquinas en cada unidad?",
+    inSuiteText: "Si las unidades tienen sus propias conexiones, los inquilinos pueden alquilarnos directamente, o usted puede alquilar máquinas para las unidades.",
+    inSuiteLink: "Opciones para propietarios",
+    faqTitle: "Preguntas sobre edificios",
+    faqs: [
+      {
+        question: "¿Cuánto cuesta?",
+        answer: "Cotizamos por edificio después de ver la lavandería. La entrega y la instalación van en la cotización, antes de instalar nada.",
+      },
+      {
+        question: "¿Cómo funciona la opción de pago por carga?",
+        answer: "Ponemos las máquinas sin costo para el edificio, y los residentes pagan por carga. El edificio recibe una parte de lo que recaudan las máquinas. Acordamos esa parte antes de instalar.",
+      },
+      {
+        question: "¿Qué máquinas instalan?",
+        answer: "Depende de la lavandería: el espacio, las conexiones y cuántos residentes la usan. Le decimos qué cabe después de verla.",
+      },
+      {
+        question: "¿Quién se encarga de las reparaciones?",
+        answer: "Llame o escriba al {phone} cuando una máquina necesite reparación. Las reparaciones están incluidas en ambas opciones.",
+      },
+      {
+        question: "¿Pueden retirar las máquinas viejas?",
+        answer: "Sí. Retiramos las máquinas viejas sin costo cuando instalamos las nuestras.",
+      },
+      {
+        question: "¿Qué zonas cubren?",
+        answer: "Toronto, Mississauga, Brampton, Vaughan, Markham y Richmond Hill. ¿Más lejos? Pregúntenos.",
+      },
+    ],
+    ctaTitle: "Pida una cotización para su lavandería",
+    ctaText: "Díganos la dirección, el número de unidades y lo que hay ahora en la lavandería.",
   },
 
   about: {

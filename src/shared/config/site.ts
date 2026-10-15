@@ -59,6 +59,7 @@ export const pagePaths = {
   machines: "/machines/",
   landlords: "/landlords/",
   landlordQuote: "/landlords/quote/",
+  buildings: "/buildings/",
   faq: "/faq/",
   about: "/about/",
   contact: "/contact/",

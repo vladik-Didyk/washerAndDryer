@@ -92,6 +92,7 @@ function buildCatalog(options: CatalogOptions, i18n: I18n): Entry[] {
     })),
     fixed("landlords", "landlords"),
     fixed("landlordQuote", "landlord-quote"),
+    fixed("buildings", "buildings"),
     fixed("faq", "faq"),
     fixed("about", "about"),
     fixed("contact", "contact"),

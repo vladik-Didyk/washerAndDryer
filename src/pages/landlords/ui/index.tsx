@@ -72,6 +72,15 @@ export default function LandlordsPage() {
               </Card>
             ))}
           </div>
+          <p className="mt-8 text-ink-soft">
+            {rich(text.buildingsNote, {
+              buildingsLink: (
+                <LangLink href={pagePaths.buildings} className="text-link">
+                  {text.buildingsLink}
+                </LangLink>
+              ),
+            })}
+          </p>
         </Container>
       </Section>
 

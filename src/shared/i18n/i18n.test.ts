@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import en from "./locales/en";
 import es from "./locales/es";
 import ru from "./locales/ru";
+import fr from "./locales/fr";
 import {
   LANGUAGES,
   createI18n,
@@ -38,7 +39,7 @@ function keyPaths(node: unknown, path = ""): string[] {
   return [];
 }
 
-const translations = { es, ru };
+const translations = { es, ru, fr };
 const englishKeys = new Set(keyPaths(en));
 const englishText = new Map(leaves(en));
 const sameSet = (a: string[], b: string[]) => [...new Set(a)].sort().join(",") === [...new Set(b)].sort().join(",");

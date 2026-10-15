@@ -139,6 +139,7 @@ const en = {
     about: "About",
     contact: "Contact",
     landlords: "Landlords",
+    buildings: "Laundry rooms",
     repair: "Request a repair",
     guides: "Guides",
     account: "Pay / manage",
@@ -207,6 +208,13 @@ const en = {
       title: "Landlord Quote: Washers & Dryers for Rental Units",
       description:
         "Ask for a quote for washers and dryers in your rental units in Toronto and the GTA. For {quoteUnits} or more units, we quote per building after seeing it.",
+    },
+    buildings: {
+      name: "Laundry rooms",
+      llmsNote: "shared laundry rooms in residential buildings: the building rents the machines, or residents pay per load; quoted per building",
+      title: "Laundry Room Machines for Buildings | Toronto & GTA",
+      description:
+        "Washers and dryers for shared laundry rooms in Toronto and GTA buildings: the building rents the machines, or residents pay per load. Repairs included.",
     },
     faq: {
       name: "FAQ",
@@ -301,6 +309,11 @@ const en = {
       offerName: "Washer and dryer set for a rental unit",
       offerDescription:
         "List price per washer and dryer set, per week. For {quoteUnits} or more units, quoted per building after seeing it. Repairs included.",
+    },
+    buildings: {
+      name: "Washers and dryers for building laundry rooms",
+      serviceType: "Washer and dryer supply for shared laundry rooms",
+      audience: "Residential building owners and property managers",
     },
     contact: {
       contactType: "customer service",
@@ -1372,11 +1385,14 @@ const en = {
     faqLink: "FAQ page",
     ctaTitle: "Get a quote for your building",
     ctaText: "Tell us the address, the number of units and what's there now.",
+    // The link to /buildings/ for a shared laundry room.
+    buildingsNote: "A shared laundry room in the building? {buildingsLink}.",
+    buildingsLink: "See the laundry room options",
     // /landlords/quote/
     quote: {
       eyebrow: "For landlords",
       title: "Get a quote for your building",
-      lead: "Tell us about the building and the units. Your tenants can rent from us directly, or you can rent the machines for your units.",
+      lead: "Tell us about the building and the units. In the units, your tenants can rent from us directly or you can rent the machines. For a shared laundry room, the building rents the machines or residents pay per load.",
       howOptionsWork: "How the two options work",
       nextTitle: "What happens next",
       next: [
@@ -1397,6 +1413,8 @@ const en = {
       optionChoices: {
         tenants: "My tenants rent directly",
         landlord: "I rent the machines for my units",
+        laundryRoomRent: "Shared laundry room: the building rents the machines",
+        laundryRoomPerLoad: "Shared laundry room: residents pay per load",
         notSure: "Not sure yet",
       },
       notesHint:
@@ -1412,6 +1430,103 @@ const en = {
         option: "Choose how you'd like to do it.",
       },
     },
+  },
+
+  // /buildings/: machines for the shared laundry room of a residential building. Quoted per
+  // building after we see the room: no price and no machine type on the page (owner,
+  // 2026-10-15).
+  buildings: {
+    eyebrow: "For residential buildings",
+    title: "Washers and dryers for your building's laundry room",
+    lead: "For apartment and condo buildings with a shared laundry room. We supply the machines, install them and repair them. Two ways to set it up, quoted per building after we see the room.",
+    option: "Option {number}",
+    options: [
+      {
+        title: "The building rents the machines",
+        headline: "Quoted per building",
+        points: [
+          "The building rents the machines for its laundry room.",
+          "The building decides how residents use them.",
+          "We quote after we see the room.",
+          "Repairs are included while you rent.",
+        ],
+      },
+      {
+        title: "Residents pay per load",
+        headline: "No cost to the building",
+        points: [
+          "We supply the machines at no cost to the building.",
+          "Residents pay per load.",
+          "The building gets a share of what the machines take in. We agree on the share before we install.",
+          "Repairs are included.",
+        ],
+      },
+    ],
+    optionsTitle: "Two ways to set up the laundry room",
+    includedTitle: "Included either way",
+    includedLead: "Delivery and installation are in the quote, before anything is installed.",
+    included: [
+      "We see the room first and tell you which machines fit.",
+      "Installation: we connect the water, drain, power and vent, and run a test cycle before we leave.",
+      "Old machines taken away at no charge.",
+      "Repairs, or a replacement machine, at no charge.",
+    ],
+    stepsTitle: "How it works",
+    steps: [
+      {
+        title: "Tell us about the building",
+        text: "The address, the number of units, and what's in the laundry room now.",
+      },
+      {
+        title: "We see the laundry room",
+        text: "We look at the space, the hookups and how many machines the room can take.",
+      },
+      {
+        title: "You get a quote",
+        text: "For the option you choose: the building rents the machines, or residents pay per load.",
+      },
+      {
+        title: "We install",
+        text: "We deliver, connect each machine, run a test cycle and take the old machines away.",
+      },
+      {
+        title: "Repairs while the machines are in",
+        text: "Call or text us when a machine needs a repair. We repair it or replace it at no charge.",
+      },
+    ],
+    startWithQuote: "Start with a quote",
+    inSuiteTitle: "Machines in each unit instead?",
+    inSuiteText: "If the units have their own hookups, tenants can rent from us directly, or you can rent machines for the units.",
+    inSuiteLink: "Landlord options",
+    faqTitle: "Building questions",
+    faqs: [
+      {
+        question: "What does it cost?",
+        answer: "We quote per building after we see the laundry room. Delivery and installation are in the quote, before anything is installed.",
+      },
+      {
+        question: "How does the pay-per-load option work?",
+        answer: "We supply the machines at no cost to the building, and residents pay per load. The building gets a share of what the machines take in. We agree on the share before we install.",
+      },
+      {
+        question: "Which machines do you put in?",
+        answer: "It depends on the room: the space, the hookups and how many residents use it. We tell you what fits after we see it.",
+      },
+      {
+        question: "Who arranges repairs?",
+        answer: "Call or text {phone} when a machine needs a repair. Repairs are included in both options.",
+      },
+      {
+        question: "Can you take the old machines away?",
+        answer: "Yes. We take old machines away at no charge when we install ours.",
+      },
+      {
+        question: "Which areas do you cover?",
+        answer: "Toronto, Mississauga, Brampton, Vaughan, Markham and Richmond Hill. Farther away? Ask us.",
+      },
+    ],
+    ctaTitle: "Get a quote for your laundry room",
+    ctaText: "Tell us the address, the number of units and what's in the laundry room now.",
   },
 
   about: {

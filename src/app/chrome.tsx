@@ -27,6 +27,7 @@ function mobileActionFor(
   if (chrome?.mobileAction === "textUs") return { label: bar.textUs, href: siteConfig.phone.sms, icon: "sms" };
   switch (kind) {
     case "landlords":
+    case "buildings":
       return { label: bar.getQuote, href: pagePaths.landlordQuote };
     case "landlord-quote":
       return { label: bar.getQuote, href: "#landlord-quote" };

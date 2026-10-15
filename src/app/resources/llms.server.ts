@@ -15,7 +15,7 @@ const absolute = (path: string) => `${siteUrl}${path}`;
 const PAGE_GROUPS: Array<{ title: keyof ReturnType<typeof serverText>["llms"]["groups"]; kinds: string[] }> = [
   {
     title: "main",
-    kinds: ["home", "machines", "areas", "landlords", "landlord-quote", "faq", "about", "contact", "repair", "start", "account"],
+    kinds: ["home", "machines", "areas", "landlords", "landlord-quote", "buildings", "faq", "about", "contact", "repair", "start", "account"],
   },
   { title: "machines", kinds: ["machine"] },
   { title: "areas", kinds: ["city", "district"] },

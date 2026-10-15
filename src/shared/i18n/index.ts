@@ -86,6 +86,17 @@ export const LANGUAGES = [
     dir: "ltr",
     load: () => import("./locales/ru"),
   },
+  {
+    code: "fr",
+    name: "Français",
+    englishName: "French",
+    locale: "fr-CA",
+    numberLocale: "en-CA",
+    ogLocale: "fr_CA",
+    path: "/fr/",
+    dir: "ltr",
+    load: () => import("./locales/fr"),
+  },
 ] as const satisfies readonly LanguageEntry[];
 
 export type Lang = (typeof LANGUAGES)[number]["code"];

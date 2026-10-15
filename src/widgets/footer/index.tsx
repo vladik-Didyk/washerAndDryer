@@ -21,6 +21,7 @@ function companyLinks(site: Site, footer: Dictionary["footer"]): FooterLink[] {
     { href: pagePaths.about, label: footer.about },
     { href: pagePaths.contact, label: footer.contact },
     { href: pagePaths.landlords, label: footer.landlords },
+    { href: pagePaths.buildings, label: footer.buildings },
     { href: pagePaths.repair, label: footer.repair },
     { href: pagePaths.guides, label: footer.guides },
     { href: pagePaths.account, label: footer.account },

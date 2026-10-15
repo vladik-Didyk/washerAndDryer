@@ -16,6 +16,7 @@ export type PageKind =
   | "machine"
   | "landlords"
   | "landlord-quote"
+  | "buildings"
   | "faq"
   | "about"
   | "contact"

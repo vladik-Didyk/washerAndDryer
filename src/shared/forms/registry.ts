@@ -264,6 +264,8 @@ export const fields = {
     options: [
       { label: "landlords.quote.optionChoices.tenants" },
       { label: "landlords.quote.optionChoices.landlord" },
+      { label: "landlords.quote.optionChoices.laundryRoomRent" },
+      { label: "landlords.quote.optionChoices.laundryRoomPerLoad" },
       { label: "landlords.quote.optionChoices.notSure" },
     ],
     messages: { required: "landlords.quote.errors.option" },

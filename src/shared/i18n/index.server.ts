@@ -7,11 +7,12 @@
 import enServer from "./locales/en.server";
 import esServer from "./locales/es.server";
 import ruServer from "./locales/ru.server";
+import frServer from "./locales/fr.server";
 import { deepFill, mergeDictionary, type DeepPartial, type I18n, type Lang } from "./index";
 
 export type ServerText = typeof enServer;
 
-const translations: Record<Lang, DeepPartial<ServerText> | undefined> = { en: undefined, es: esServer, ru: ruServer };
+const translations: Record<Lang, DeepPartial<ServerText> | undefined> = { en: undefined, es: esServer, ru: ruServer, fr: frServer };
 
 const resolved = new WeakMap<I18n, ServerText>();
 

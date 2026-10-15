@@ -114,6 +114,7 @@ export function serviceNode(
     path: string;
     serviceType?: string;
     areaServed?: unknown;
+    /** The weekly set and single offers by default; null for a service quoted per job. */
     offers?: unknown;
     extra?: JsonLd;
   },
@@ -128,7 +129,7 @@ export function serviceNode(
     provider: providerRef(),
     areaServed: input.areaServed ?? areaServed(i18n),
     ...input.extra,
-    offers: input.offers ?? [setOffer(i18n), singleOffer(i18n)],
+    ...(input.offers === null ? {} : { offers: input.offers ?? [setOffer(i18n), singleOffer(i18n)] }),
   };
 }
 

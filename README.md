@@ -59,7 +59,9 @@ bundle (secrets, Web3Forms, guide and policy drafts).
   HttpOnly cookie session (`session.server.ts`, path `/start`) and are cleared on send.
 - **pages/** — one slice per page: `ui/index.tsx` (the page), `loader.ts` (data + `<head>`),
   `action.ts` where a form posts (landlord quote, repair; it builds the English email),
-  `index.ts` (the route module). Every page exists in English, Spanish and Russian.
+  `index.ts` (the route module). Every page exists in English, Spanish, Russian and French.
+  `/buildings/` (shared laundry rooms in residential buildings) is quote-only: no price and
+  no machine type on it, both decided per building. Its requests use the landlord quote form.
 - **widgets/** — page sections: header, footer, offer bar, hero, machine showcase (cards,
   Photos/Drawings switch, the flipping machine animation), trust strip, CTA band, prices,
   how it works, FAQ section, service area, start-rental band, mobile action bar, and more.
@@ -108,8 +110,8 @@ machine and area copy. Components contain no English; a test fails if one does
   shape is the type of every other language (`Dictionary`).
 - `locales/en.server.ts` — the server-only English text: the guides, the privacy policy and
   rental terms, llms.txt. It never ships to the browser, so a draft stays private.
-- `locales/es.ts`, `locales/ru.ts` — only what is translated (any key of `en.ts`; every page
-  has a Spanish and a Russian version). Anything missing falls back to English.
+- `locales/es.ts`, `locales/ru.ts`, `locales/fr.ts` — only what is translated (any key of `en.ts`; every page
+  has a Spanish, a Russian and a French version). Anything missing falls back to English.
 - `index.ts` — the language registry (`LANGUAGES`), the loader (each language is its own
   chunk, loaded with `import()` and cached), the formatters and the React API:
 
@@ -129,14 +131,14 @@ Text is plain data. `{names}` are filled in: the business facts (`{phone}`, `{co
 language (`$12.50`, `November 30, 2026`, `9 am`); other names where the string is used. No
 price, amount or date is ever typed into the text.
 
-## Languages: every page in English, Spanish and Russian
+## Languages: every page in English, Spanish, Russian and French
 
 Every page exists in every language of the registry, at the same slug: English at the root,
 the others under their code — `/machines/stackable/`, `/es/machines/stackable/`,
 `/ru/machines/stackable/`; `/es/` is the Spanish home page. The rental request, the landlord
-quote and the repair request work the same way under `/es/` and `/ru/`. Exceptions: the
+quote and the repair request work the same way under `/es/`, `/ru/` and `/fr/`. Exceptions: the
 privacy policy and rental terms are English-only (`englishOnlyPaths` in
-`shared/config/site.ts`; `/es/privacy/` is a 404, and links to them from a Spanish or Russian
+`shared/config/site.ts`; `/es/privacy/` is a 404, and links to them from a Spanish, Russian or French
 page keep the English address with an "Available in English" note), and so are sitemap.xml,
 robots.txt and llms.txt.
 
@@ -150,14 +152,16 @@ robots.txt and llms.txt.
 - **Links**: write the English path, always. `<LangLink href="/faq/">`, `<Button href>` and
   `i18n.href(path)` (loaders, actions, redirects) add the page's prefix (`localizePath`).
   Every path that comes out is same-origin (`sameOriginPath`: "//x" can never become another
-  host). The header's EN · ES · RU switcher links the same page in each language
+  host). The header's EN · ES · RU · FR switcher links the same page in each language
   (`pathInLanguage`); there is no automatic redirect.
 - **SEO**: loaders give `pageHead(i18n, { path })` the English path; it writes the canonical,
   `og:url`, `og:locale`, the breadcrumbs and the hreflang links (en, es, ru, x-default = the
   English page) for the page's language. JSON-LD urls follow it. `sitemap.xml` lists every
   page in each language with its `xhtml:link` alternates.
 - **Forms**: error messages and option labels are in the page's language; option values,
-  and the emails, stay English, with `language: Spanish` (or Russian, English) first.
+  and the emails, stay English, with `language: Spanish` (or Russian, French, English) first.
+- **French** is Canadian French (fr-CA). The business answers calls in English, Spanish and
+  Russian only, so the French text never offers French service.
 - **Text**: `locales/es.ts` and `ru.ts` translate any key of `en.ts`; what they leave out
   shows in English. The guides can be translated in `locales/es.server.ts` / `ru.server.ts`.
 
@@ -211,7 +215,7 @@ option posts the English text of its label (or its own `value`), whatever the pa
 
 Prices, the deposit, the referral offer, the minimum term and the promotions are in
 `src/shared/config/pricing.ts`. Every price on the site (price cards, titles, meta
-descriptions, JSON-LD offers, llms.txt, the Spanish and Russian pages) is computed from there
+descriptions, JSON-LD offers, llms.txt, the translated pages) is computed from there
 per request, so a change shows on the next request, and a promotion appears and disappears on
 its own at its dates (decided on the server, so the HTML and the hydrated page agree).
 

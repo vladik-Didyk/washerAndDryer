@@ -23,6 +23,7 @@ const PAGES: Array<[path: string, id: string, file: string]> = [
   ["machines/:slug", "machine", page("machine")],
   ["landlords", "landlords", page("landlords")],
   ["landlords/quote", "landlord-quote", page("landlord-quote")],
+  ["buildings", "buildings", page("buildings")],
   ["faq", "faq", page("faq")],
   ["about", "about", page("about")],
   ["contact", "contact", page("contact")],

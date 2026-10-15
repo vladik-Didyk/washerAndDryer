@@ -103,17 +103,17 @@ describe("languages", () => {
     }
   });
 
-  it("lists every page in all three languages in the sitemap, with alternates", () => {
+  it("lists every page in all four languages in the sitemap, with alternates", () => {
     const xml = sitemapXml(catalog(live));
-    for (const loc of ["/machines/stackable/", "/es/machines/stackable/", "/ru/machines/stackable/", "/es/", "/ru/start/"]) {
+    for (const loc of ["/machines/stackable/", "/es/machines/stackable/", "/ru/machines/stackable/", "/es/", "/ru/start/", "/fr/machines/stackable/", "/fr/buildings/"]) {
       expect(xml).toContain(`<loc>https://washerrent.com${loc}</loc>`);
     }
     expect(xml).toContain('<xhtml:link rel="alternate" hreflang="es" href="https://washerrent.com/es/faq/"/>');
     expect(xml).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://washerrent.com/faq/"/>');
-    expect(xml.match(/<loc>/g)?.length).toBe(catalog(live).length * 3);
+    expect(xml.match(/<loc>/g)?.length).toBe(catalog(live).length * 4);
   });
 
-  it("gives each page hreflang links to its three versions, and a canonical in its own language", async () => {
+  it("gives each page hreflang links to its four versions, and a canonical in its own language", async () => {
     const spanish = await testI18n("es");
     const tags = headMeta(pageHead(spanish, { path: "/faq/", kind: "faq", title: "t", description: "d" }));
     const links = tags.filter((tag) => "tagName" in tag && tag.tagName === "link") as Array<Record<string, string>>;
@@ -122,6 +122,7 @@ describe("languages", () => {
       "en https://washerrent.com/faq/",
       "es https://washerrent.com/es/faq/",
       "ru https://washerrent.com/ru/faq/",
+      "fr https://washerrent.com/fr/faq/",
       "x-default https://washerrent.com/faq/",
     ]);
     const policy = headMeta(pageHead(spanish, { path: "/terms/", kind: "terms", title: "t", description: "d" }));
