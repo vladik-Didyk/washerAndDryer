@@ -71,9 +71,10 @@ export default function MachineGallery({ machine, className = "" }) {
                     : "opacity-75 ring-1 ring-line hover:opacity-100"
                 }`}
               >
+                {/* The button's label names the action; the alt still describes the photo. */}
                 <Photo
                   src={thumb.src}
-                  alt=""
+                  alt={thumb.alt}
                   sizes="6rem"
                   className="aspect-[5/6] w-full object-cover"
                 />
