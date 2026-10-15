@@ -6,9 +6,9 @@ import { faqs } from "../content/faqs";
 import { cities } from "../content/cities";
 import { districts } from "../content/districts";
 import { languagePages } from "../content/languages";
-import { machineTypes } from "../content/machines";
+import { machinePhotos, machineTypes } from "../content/machines";
 import { guides } from "../content/guides";
-import { heroPhoto, photoFiles } from "../content/photos";
+import { galleryPhotoSizes, heroPhoto, photoFiles } from "../content/photos";
 import { guidePath, machinePath, routes } from "../content/routes";
 
 const SITE = siteConfig.siteUrl;
@@ -402,6 +402,10 @@ function photoPreload({ src, sizes, media }) {
 
 function photoPreloads(route) {
   if (route.kind === "home") return [photoPreload(heroPhoto.narrow), photoPreload(heroPhoto.wide)];
+  if (route.kind === "machine") {
+    const [main] = machinePhotos(route.machine);
+    return main ? [photoPreload({ src: main.src, sizes: galleryPhotoSizes })] : [];
+  }
   return [];
 }
 

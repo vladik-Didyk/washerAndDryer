@@ -23,6 +23,8 @@ export const firstWeekFreeOffer = {
   title: "First week free",
   text: `New customers who start a rental by ${firstWeekFree.lastDay} pay no rent for the first week. It applies to washer and dryer sets and to single machines.`,
   stillPaid: `The $${prices.deposit} deposit and the delivery are still paid.`,
+  // Beside a price (machine type pages): the rent only.
+  note: `New customers who start by ${firstWeekFree.lastDay} pay no rent for the first week. The deposit and delivery are still paid.`,
 };
 
 export const referralOffer = {

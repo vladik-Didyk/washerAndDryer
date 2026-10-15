@@ -45,5 +45,6 @@ export const heroPhoto = {
   },
 };
 
-// The main photo on a machine type page (MachineGallery.jsx), preloaded in its <head>.
-export const galleryPhotoSizes = "(min-width: 1024px) 36rem, (min-width: 640px) 34rem, 100vw";
+// The main photo on a machine type page (MachineGallery.jsx), preloaded in its <head>: half
+// the page from 1024px, at most 36rem wide on tablets, the full width on phones.
+export const galleryPhotoSizes = "(min-width: 1024px) 33rem, (min-width: 640px) 36rem, 100vw";
