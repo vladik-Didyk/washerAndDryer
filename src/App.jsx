@@ -9,6 +9,10 @@ import AreasPage from "./pages/AreasPage";
 import FaqPage from "./pages/FaqPage";
 import LandlordsPage from "./pages/LandlordsPage";
 import LandlordQuotePage from "./pages/LandlordQuotePage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import RepairPage from "./pages/RepairPage";
+import AccountPage from "./pages/AccountPage";
 import MachinePage from "./pages/MachinePage";
 import MachinesPage from "./pages/MachinesPage";
 import LanguagePage from "./pages/LanguagePage";
@@ -38,6 +42,14 @@ function Page({ route }) {
       return <LandlordQuotePage />;
     case "faq":
       return <FaqPage />;
+    case "about":
+      return <AboutPage />;
+    case "contact":
+      return <ContactPage />;
+    case "repair":
+      return <RepairPage />;
+    case "account":
+      return <AccountPage />;
     case "language":
       return <LanguagePage content={route.content} />;
     default:

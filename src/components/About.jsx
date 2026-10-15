@@ -1,13 +1,9 @@
 import { Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
+import { howVladWorks } from "../content/about";
 
 // Facts about the owner only: no photo, no numbers beyond what he has confirmed.
-const howHeWorks = [
-  "Checks each machine before it goes out.",
-  "Connects the water, drain, power and vent properly.",
-  "Runs a test cycle before leaving.",
-  "Answers calls in English, Spanish and Russian.",
-];
+// The full version is the /about/ page.
 
 export default function About() {
   const { phone, owner, companyName } = siteConfig;
@@ -30,6 +26,11 @@ export default function About() {
             </a>
             .
           </p>
+          <p className="mt-4">
+            <a href="/about/" className="text-link">
+              More about us
+            </a>
+          </p>
         </div>
 
         <div className="rounded-3xl border border-line bg-white p-6 sm:p-8 lg:col-span-7">
@@ -37,7 +38,7 @@ export default function About() {
             How {owner} works
           </h3>
           <ul className="mt-5 space-y-4">
-            {howHeWorks.map((item) => (
+            {howVladWorks.map((item) => (
               <li key={item} className="flex gap-3 text-ink-soft">
                 <span
                   aria-hidden="true"

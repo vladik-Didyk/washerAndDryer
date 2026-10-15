@@ -239,6 +239,37 @@ function landlordService(route) {
   };
 }
 
+function aboutPage(route) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: route.metaTitle,
+    description: route.metaDescription,
+    url: absolute(route.path),
+    about: providerRef(),
+  };
+}
+
+function contactPage(route) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: route.metaTitle,
+    description: route.metaDescription,
+    url: absolute(route.path),
+    about: {
+      ...providerRef(),
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: PHONE,
+        contactType: "customer service",
+        areaServed: "CA-ON",
+        availableLanguage: ["English", "Spanish", "Russian"],
+      },
+    },
+  };
+}
+
 function machineService(route) {
   const { machine } = route;
   const offer =
@@ -292,6 +323,10 @@ function mainJsonLd(route) {
       return [machineService(route)];
     case "landlords":
       return [landlordService(route)];
+    case "about":
+      return [aboutPage(route)];
+    case "contact":
+      return [contactPage(route)];
     case "language":
       return [languageService(route)];
     default:

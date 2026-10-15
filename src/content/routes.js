@@ -5,6 +5,7 @@
 // A route with `draft: true` exists only in preview builds (src/content/drafts.js); it gets a
 // "Draft — not published" ribbon and is never listed in the sitemap.
 // `breadcrumbs` feed both the visible trail and the BreadcrumbList JSON-LD.
+import { siteConfig } from "./config";
 import { cities } from "./cities";
 import { districts } from "./districts";
 import { machineTypes } from "./machines";
@@ -15,7 +16,7 @@ export const districtPath = (district) => `/toronto/${district.slug}/`;
 export const machinePath = (machine) => `/machines/${machine.slug}/`;
 
 // Where "Check availability" goes on pages without the request form.
-export const requestFormHref = "/#request";
+export const requestFormHref = "/contact/#request";
 
 const HOME = { name: "Home", path: "/" };
 const MACHINES = { name: "Machines", path: "/machines/" };
@@ -117,6 +118,51 @@ export const routes = [
       "Answers about renting a washer and dryer in Toronto and the GTA: prices, the deposit, payment, delivery, installation, repairs and landlords.",
     breadcrumbs: [HOME, { name: "FAQ", path: "/faq/" }],
   },
+  {
+    path: "/about/",
+    kind: "about",
+    lang: "en",
+    llmsNote: "who runs the business and how he works",
+    metaTitle: "About Us | GTA Washer & Dryer Rentals, Toronto",
+    metaDescription:
+      "GTA Washer & Dryer Rentals is run by Vlad in Toronto, who has more than 3 years of experience installing and fixing washers and dryers.",
+    breadcrumbs: [HOME, { name: "About", path: "/about/" }],
+  },
+  {
+    path: "/contact/",
+    kind: "contact",
+    lang: "en",
+    llmsNote: "phone, hours, languages and the rental request form",
+    metaTitle: "Contact | GTA Washer & Dryer Rentals, (437) 907-6955",
+    metaDescription:
+      "Call or text (437) 907-6955, Monday to Saturday, 9 am to 7 pm, in English, Spanish or Russian. Or send a request and we reply with a quote.",
+    breadcrumbs: [HOME, { name: "Contact", path: "/contact/" }],
+  },
+  {
+    path: "/repair/",
+    kind: "repair",
+    lang: "en",
+    llmsNote: "repair request form for customers renting from us",
+    metaTitle: "Request a Repair | GTA Washer & Dryer Rentals",
+    metaDescription:
+      "Renting a washer or dryer from us and it stopped working? Repairs are included. Send a repair request, or call or text (437) 907-6955.",
+    breadcrumbs: [HOME, { name: "Request a repair", path: "/repair/" }],
+  },
+  // Only once the Stripe customer portal exists (siteConfig.stripePortalUrl).
+  ...(siteConfig.stripePortalUrl
+    ? [
+        {
+          path: "/account/",
+          kind: "account",
+          lang: "en",
+          llmsNote: "paying by card, the Stripe customer portal, ending a rental",
+          metaTitle: "Pay or Manage Your Rental | GTA Washer & Dryer Rentals",
+          metaDescription:
+            "Pay with the link sent with your quote, manage your card and receipts in the Stripe customer portal, or text us to end a rental.",
+          breadcrumbs: [HOME, { name: "Pay or manage", path: "/account/" }],
+        },
+      ]
+    : []),
   ...languagePages.map((content) => ({
     path: content.path,
     kind: "language",
