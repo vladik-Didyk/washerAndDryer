@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { machineTypes } from "../content/machines";
 import { machinePath } from "../content/routes";
 import MachineImage, {
@@ -6,21 +6,12 @@ import MachineImage, {
   hasPhoto,
   machinePicture,
 } from "./MachineImage";
+import KeepWordsWhole from "./KeepWordsWhole";
 
 // On wide screens the five drawings stand on one continuous mint stage, like a lineup.
 // A Drawings/Photos switch above the row swaps every card to its example photo (types without
 // a photo keep their drawing). Drawings are the default, so the prerendered page shows them.
 // Below that each type is its own panel: a row on phones, a card from 640px up.
-
-// Lines may break between words but never at a hyphen ("Side-by- / side").
-function KeepWordsWhole({ text }) {
-  return text.split(" ").map((word, index) => (
-    <Fragment key={index}>
-      {index > 0 && " "}
-      <span className="whitespace-nowrap">{word}</span>
-    </Fragment>
-  ));
-}
 
 function stageCorners(index, count) {
   if (index === 0) return "lg:rounded-none lg:rounded-l-3xl";
@@ -59,7 +50,8 @@ function ViewSwitch({ view, onChange }) {
   );
 }
 
-export default function Machines() {
+// `showAllLink` adds a link to /machines/ (off on that page itself).
+export default function Machines({ showAllLink = true }) {
   const [view, setView] = useState("drawings");
   const showPhotos = view === "photos";
   const anyPhotos = machineTypes.some(hasPhoto);
@@ -130,12 +122,19 @@ export default function Machines() {
           ))}
         </ul>
 
-        <p className="mt-10 text-sm text-ink-muted">
-          {showPhotos
-            ? "Photos are examples of each type, not our machines. "
-            : "Drawings show the type, not a specific machine. "}
-          Brand and model depend on what's available.
-        </p>
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between">
+          <p className="text-sm text-ink-muted">
+            {showPhotos
+              ? "Photos are examples of each type, not our machines. "
+              : "Drawings show the type, not a specific machine. "}
+            Brand and model depend on what's available.
+          </p>
+          {showAllLink && (
+            <a href="/machines/" className="text-link shrink-0">
+              Compare all machine types
+            </a>
+          )}
+        </div>
       </div>
     </section>
   );

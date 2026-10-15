@@ -28,13 +28,16 @@ export default function MachinePage({ machine }) {
   const { prices, phone } = siteConfig;
   const { page } = machine;
   const isSet = machine.price === prices.set;
-  const otherTypes = machineTypes
-    .filter((other) => other.slug !== machine.slug)
-    .map((other) => ({ href: machinePath(other), label: other.title }));
-  const cityLinks = cities.map((city) => ({
-    href: cityPath(city),
-    label: city.name,
-  }));
+  const otherTypes = [
+    ...machineTypes
+      .filter((other) => other.slug !== machine.slug)
+      .map((other) => ({ href: machinePath(other), label: other.title })),
+    { href: "/machines/", label: "Compare all types" },
+  ];
+  const cityLinks = [
+    ...cities.map((city) => ({ href: cityPath(city), label: city.name })),
+    { href: "/areas/", label: "All areas" },
+  ];
 
   return (
     <>

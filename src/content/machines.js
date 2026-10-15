@@ -1,5 +1,5 @@
 // The five machine types: shown in the Machines section, offered in the request form, and
-// each given its own page at /machines/<slug>/.
+// each given its own page at /machines/<slug>/. `compare` feeds the table on /machines/.
 //
 // Pictures: `photo` is a real photo the owner adds at public/photos/types/<slug>.jpg.
 // Until that file exists the build falls back to `drawing` (a standalone SVG in public/types/,
@@ -7,6 +7,11 @@
 export const machineTypes = [
   {
     slug: "stackable",
+    compare: {
+      width: "About 24″ or 27″, one machine wide",
+      loads: "Front",
+      goodFor: "Narrow, tall closets in condos and apartments",
+    },
     title: "Stackable pair",
     description:
       "Front-load washer with the dryer stacked on top. Good for narrow closets.",
@@ -37,6 +42,11 @@ export const machineTypes = [
   },
   {
     slug: "laundry-centre",
+    compare: {
+      width: "24″ or 27″",
+      loads: "Top",
+      goodFor: "Closets built for a one-piece unit",
+    },
     title: "One-piece laundry centre",
     description:
       "Washer and dryer built as one unit, 24″ or 27″ wide. The usual condo-closet machine.",
@@ -67,6 +77,11 @@ export const machineTypes = [
   },
   {
     slug: "side-by-side-front-load",
+    compare: {
+      width: "About 55″ for the pair",
+      loads: "Front",
+      goodFor: "Laundry rooms and big loads like bedding",
+    },
     title: "Side-by-side front-load",
     description: "Two machines next to each other. Big loads, easy to reach.",
     price: 12.5,
@@ -96,6 +111,11 @@ export const machineTypes = [
   },
   {
     slug: "side-by-side-top-load",
+    compare: {
+      width: "About 55″ for the pair",
+      loads: "Top",
+      goodFor: "Laundry rooms, and less bending to load",
+    },
     title: "Side-by-side top-load",
     description: "Classic top-loader with a matching dryer. Simple and tough.",
     price: 12.5,
@@ -125,6 +145,11 @@ export const machineTypes = [
   },
   {
     slug: "single-machine",
+    compare: {
+      width: "About 24″ or 27″",
+      loads: "Front or top",
+      goodFor: "Pairing with a machine you already have",
+    },
     title: "Washer or dryer only",
     description: "One machine to pair with what you already have.",
     price: 6.25,

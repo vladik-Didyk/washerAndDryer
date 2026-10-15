@@ -18,6 +18,7 @@ export const machinePath = (machine) => `/machines/${machine.slug}/`;
 export const requestFormHref = "/#request";
 
 const HOME = { name: "Home", path: "/" };
+const MACHINES = { name: "Machines", path: "/machines/" };
 const AREAS = { name: "Areas", path: "/areas/" };
 const TORONTO = { name: "Toronto", path: "/toronto/" };
 
@@ -66,6 +67,16 @@ export const routes = [
   ...cities.flatMap((city) =>
     city.slug === "toronto" ? [cityRoute(city), ...districts.map(districtRoute)] : [cityRoute(city)],
   ),
+  {
+    path: "/machines/",
+    kind: "machines",
+    lang: "en",
+    llmsNote: "all five machine types compared, with prices",
+    metaTitle: "Washer & Dryer Types for Rent | Toronto, from $6.25/week",
+    metaDescription:
+      "Compare the washer and dryer types we rent in Toronto and the GTA: stackable, laundry centre, side-by-side front-load or top-load, or one machine.",
+    breadcrumbs: [HOME, MACHINES],
+  },
   ...machineTypes.map((machine) => ({
     path: machinePath(machine),
     kind: "machine",
@@ -73,7 +84,7 @@ export const routes = [
     machine,
     metaTitle: machine.page.metaTitle,
     metaDescription: machine.page.metaDescription,
-    breadcrumbs: [HOME, { name: machine.title, path: machinePath(machine) }],
+    breadcrumbs: [HOME, MACHINES, { name: machine.title, path: machinePath(machine) }],
   })),
   {
     path: "/faq/",

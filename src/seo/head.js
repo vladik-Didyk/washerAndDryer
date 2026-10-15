@@ -6,7 +6,8 @@ import { faqs } from "../content/faqs";
 import { cities } from "../content/cities";
 import { districts } from "../content/districts";
 import { languagePages } from "../content/languages";
-import { routes } from "../content/routes";
+import { machineTypes } from "../content/machines";
+import { machinePath, routes } from "../content/routes";
 
 const SITE = siteConfig.siteUrl;
 const BUSINESS_ID = `${SITE}/#business`;
@@ -190,6 +191,35 @@ function areasService(route) {
   };
 }
 
+// The /machines/ page: the five types as a list, and the two weekly prices.
+function machinesJsonLd(route) {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Washer and dryer types for rent",
+      url: absolute(route.path),
+      itemListElement: machineTypes.map((machine, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: machine.title,
+        url: absolute(machinePath(machine)),
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Washer and dryer rental",
+      serviceType: "Washer and dryer rental",
+      description: route.metaDescription,
+      url: absolute(route.path),
+      provider: providerRef(),
+      areaServed: areaServed(),
+      offers: [setOffer(), singleOffer()],
+    },
+  ];
+}
+
 function machineService(route) {
   const { machine } = route;
   const offer =
@@ -237,6 +267,8 @@ function mainJsonLd(route) {
       return [cityService(route)];
     case "district":
       return [districtService(route)];
+    case "machines":
+      return machinesJsonLd(route);
     case "machine":
       return [machineService(route)];
     case "language":
