@@ -347,7 +347,6 @@ const en = {
 
   postalCheck: {
     label: "Your postal code",
-    heroLabel: "Do we deliver to you? Enter your postal code",
     placeholder: "e.g. M5V 2T6",
     check: "Check",
     invalid: "Enter a valid Canadian postal code, like M5V 2T6.",
@@ -661,75 +660,58 @@ const en = {
     },
     how: {
       steps: [
-        {
-          title: "Tell us what fits",
-          text: "Send your area, closet width and outlet type (3- or 4-prong). A photo of the closet helps.",
-        },
-        {
-          title: "Get a quote",
-          text: "We confirm the machine, the delivery and installation price and the start date before you pay anything.",
-        },
-        { title: "We deliver and hook it up", text: "Your old machine goes with us at no charge." },
-        { title: "Repairs on us", text: "If it breaks while you rent it, we repair or replace it." },
+        "Tell us what fits",
+        "Get a quote",
+        "We deliver and hook it up",
+        "Repairs on us",
       ],
     },
     videos: {
       title: "How installation works",
-      lead: "We do all of this for you. These manufacturer videos show what goes into a proper hookup.",
       source: "Video: {source}",
       items: {
         "veEH0wF9LEU": {
           title: "Installing a laundry centre (washer and dryer in one unit)",
           source: "W Service on YouTube",
-          steps: [
-            "Check the space: a 24-inch unit is about 70 inches tall.",
-            "Power: the dryer needs its own 240-volt outlet, 3- or 4-prong.",
-            "Vent: a 4-inch metal duct from the dryer to the outside, as short as possible.",
-            "Water: hot and cold hoses go to the matching inlets on the washer.",
-            "Drain: the drain hose goes into the standpipe or laundry tub and is tied in place.",
-            "Level: the feet are adjusted until the machine sits level and doesn't rock.",
-          ],
         },
         "h-co6mCEKNk": {
           title: "Connecting the dryer vent duct with clamps",
           source: "Imperial Manufacturing Group on YouTube",
-          steps: [
-            "The duct slides over the round exhaust on the back of the dryer.",
-            "A clamp holds each end tight, so lint and hot air don't leak.",
-            "The duct runs in one smooth curve to the wall vent, with no kinks or crushed spots.",
-            "A blocked or crushed duct is a fire risk, so we check it on every install.",
-          ],
         },
       },
     },
     prices: {
       title: "Prices",
-      set: "Washer + dryer set",
-      single: "One machine",
-      included: "Included",
-      includedItems: ["Repairs, or a replacement machine, at no charge", "Old machine haul-away at no charge"],
-      terms: [
-        "{deposit} refundable deposit, returned when the machine comes back working.",
-        "{minWeeks}-week minimum, then week to week with {noticeDays} days' notice.",
-        "Delivery and installation quoted per job, before you pay.",
-        "Pay by Interac e-Transfer or credit card.",
+      perWeek: "a week",
+      forSet: "washer + dryer set",
+      orSingle: "or {price} a week for one machine",
+      checks: [
+        "Repairs included",
+        "Old machine haul-away included",
+        "No HST charged",
       ],
+      details: "Deposit, minimum term and payment",
     },
     landlordsTeaser: {
-      title: "Landlord?",
-      text: "Your tenants can rent from us directly, with nothing for you to pay, or you can rent machines for your units. Repairs are included either way.",
+      title: "Landlord or building?",
+      text: "Machines for your units, or for your building's laundry room. Repairs included.",
       link: "Laundry for landlords",
+      buildingsLink: "Laundry rooms",
     },
     about: {
       title: "About us",
-      lead: "{company} is a local Toronto business. We bring more than {experienceYears} years of hands-on experience installing and fixing washers and dryers.",
-      questions: "Questions about a machine or your hookups? Call or text {phoneLink}.",
+      facts: [
+        "Local Toronto business",
+        "{experienceYears}+ years fixing washers and dryers",
+        "We speak {languages}",
+      ],
       more: "More about us",
-      howWeWork: "How we work",
     },
     serviceArea: {
       title: "Service area",
       allAreas: "All areas we deliver to",
+      mapLabel: "Map of the areas we deliver to",
+      lake: "Lake Ontario",
     },
     faq: {
       title: "FAQ",
@@ -738,16 +720,15 @@ const en = {
     },
     cta: {
       title: "A washer and dryer for {setPrice} a week",
-      text: "Repairs included. Delivery and installation quoted before you pay. Tell us your space, and we reply with the machine, the total and the start date.",
+      text: "Repairs included. No HST charged.",
     },
     startRental: {
       title: "Start your rental",
-      lead: "Tell us what you need. We reply with the machine, the total and the start date.",
       stepsTitle: "Three short steps",
       steps: [
-        { title: "Machine type", text: "Which type you'd like, or \"not sure\"." },
-        { title: "Your space", text: "Postal code, closet width, dryer outlet and the way in." },
-        { title: "How to reach you", text: "Name, phone and a preferred day." },
+        "Machine type",
+        "Your space",
+        "How to reach you",
       ],
       nothingToPay: "Nothing to pay now. We confirm the machine, the total and the start date first.",
     },
@@ -1224,6 +1205,10 @@ const en = {
       "delivery-time": {
         question: "How soon can you deliver?",
         answer: "Usually the same week. We confirm the date when we send the quote.",
+      },
+      installation: {
+        question: "What does installation include?",
+        answer: "We check the space and connect the dryer to its own 240-volt outlet (3- or 4-prong). We run a 4-inch metal vent duct to the outside, clamped at both ends and without kinks: a crushed duct is a fire risk. We connect the hot and cold water and the drain, level the machine and run a test cycle before we leave.",
       },
       condo: {
         question: "Can you deliver to a condo?",

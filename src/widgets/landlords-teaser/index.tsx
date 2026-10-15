@@ -2,7 +2,7 @@ import { pagePaths } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { ArrowRight, Building2, Button, Card, Container, Heading, Section } from "~/shared/ui";
 
-// Home page: a short pointer to /landlords/. It sits between Prices and About, which bring
+// Home page: a short pointer to /landlords/ and /buildings/. It sits between Prices and About, which bring
 // their own padding.
 export function LandlordsTeaser() {
   const { landlordsTeaser } = useI18n().d.home;
@@ -21,10 +21,16 @@ export function LandlordsTeaser() {
               <p className="mt-2 max-w-2xl text-ink-soft">{landlordsTeaser.text}</p>
             </div>
           </div>
-          <Button href={pagePaths.landlords} variant="secondary" className="shrink-0">
-            {landlordsTeaser.link}
-            <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
-          </Button>
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <Button href={pagePaths.landlords} variant="secondary">
+              {landlordsTeaser.link}
+              <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+            </Button>
+            <Button href={pagePaths.buildings} variant="secondary">
+              {landlordsTeaser.buildingsLink}
+              <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+            </Button>
+          </div>
         </Card>
       </Container>
     </Section>

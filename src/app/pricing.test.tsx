@@ -63,13 +63,14 @@ describe("changing a base price", () => {
     const home = render(<HomePage />);
     const spanish = render(<HomePage />, { lang: "es" });
     const russian = render(<HomePage />, { lang: "ru" });
+    const french = render(<HomePage />, { lang: "fr" });
     const server = serverOutput();
-    for (const output of [home, spanish, russian, server]) {
+    for (const output of [home, spanish, russian, french, server]) {
       expect(output).not.toMatch(/12\.50|6\.25/);
     }
     expect(home).toContain("$13.75");
     expect(home).toContain("$7 a week");
-    expect(spanish).toContain("Depósito reembolsable de $200");
+    expect(spanish).toContain("$7 por semana");
     expect(spanish).toContain("$13.75");
     expect(russian).toContain("$7");
     expect(server).toContain("Washer & Dryer Rental Toronto & GTA | $13.75/week");

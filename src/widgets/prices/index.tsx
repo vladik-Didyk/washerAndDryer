@@ -1,73 +1,91 @@
-import { promotionText, useActivePromotions, usePrices, type PriceInfo } from "~/entities/offer";
-import { useI18n } from "~/shared/i18n";
+import { promotionText, useActivePromotions, usePrices } from "~/entities/offer";
 import { pagePaths } from "~/shared/config";
-import { Button, Card, CheckList, Container, DotList, Heading, Nest, Section, WasPrice } from "~/shared/ui";
+import { useI18n } from "~/shared/i18n";
+import { ArrowRight, Button, Check, Container, Gift, Heading, LangLink, Section, UserPlus, WasPrice } from "~/shared/ui";
 
-function PriceCard({ title, price, highlighted = false }: { title: string; price: PriceInfo; highlighted?: boolean }) {
-  const { d, moneyParts } = useI18n();
-  const tag = moneyParts(price.current);
-  return (
-    <Card as="article" tone={highlighted ? "highlight" : "white"} className="flex flex-col">
-      <Heading variant="cardSmall">{title}</Heading>
-      <p className="mt-3 flex items-baseline gap-1">
-        <span className="font-display text-6xl font-extrabold tracking-tight text-brand">
-          {tag.currency}
-          {tag.value}
-        </span>
-        <span className="font-display text-lg font-semibold text-ink-soft">{d.common.perWeekSuffix}</span>
-        <WasPrice price={price} className="ml-2 font-display text-lg font-semibold text-ink-muted" />
-      </p>
-      <p className="mt-1 text-sm font-medium text-ink-muted">{d.common.priceTagNote}</p>
-
-      <p className="mt-6 font-display text-[15px] font-semibold text-ink">{d.home.prices.included}</p>
-      <CheckList items={d.home.prices.includedItems} className="mt-3 space-y-3" itemClassName="text-pretty text-ink-soft" />
-
-      <Button href={pagePaths.start} variant={highlighted ? "primary" : "secondary"} className="mt-8 w-full">
-        {d.common.startRental}
-      </Button>
-    </Card>
-  );
-}
-
+// The prices as one big price card (like the Facebook price card): the set price, the single
+// machine price in a gold pill, what's included, and the running offers as links to their
+// answers on /faq/. The deposit, the minimum term and payment are answered on /faq/ too.
 export function Prices() {
   const i18n = useI18n();
-  const { d } = i18n;
+  const { d, moneyParts, money, rich } = i18n;
+  const { prices: text } = d.home;
   const prices = usePrices();
   const promotions = useActivePromotions();
+  const tag = moneyParts(prices.set.current);
 
   return (
     <Section id="prices" aria-labelledby="prices-title">
       <Container>
-        <Heading id="prices-title">{d.home.prices.title}</Heading>
+        <Heading id="prices-title">{text.title}</Heading>
 
-        <div className="mt-10 grid max-w-5xl gap-5 md:grid-cols-2 md:gap-6">
-          <Nest>
-            <PriceCard title={d.home.prices.set} price={prices.set} highlighted />
-            <PriceCard title={d.home.prices.single} price={prices.single} />
-          </Nest>
-        </div>
+        <div className="mt-10 grid gap-6 lg:grid-cols-12 lg:items-center lg:gap-10">
+          <div className="relative overflow-hidden rounded-[2rem] bg-white p-6 shadow-[0_24px_60px_-30px_rgba(7,63,50,0.45)] ring-1 ring-line sm:p-10 lg:col-span-7">
+            <div aria-hidden="true" className="pointer-events-none absolute -bottom-16 -right-16 h-40 w-40 rounded-full bg-brand sm:h-48 sm:w-48" />
+            <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-24 h-56 w-56 rounded-full border-[10px] border-gold/70 sm:h-64 sm:w-64" />
 
-        {/* The running promotions drop out when they end (decided per request, entities/offer). */}
-        <div className="mt-6 grid max-w-5xl gap-3 md:grid-cols-2 md:gap-6">
-          {promotions.map((promotion) => {
-            const offer = promotionText(promotion, i18n);
-            return (
-              <p key={promotion.id} className="rounded-2xl bg-gold/20 px-5 py-4 text-ink">
-                <strong className="font-semibold">{offer.title}.</strong> {offer.text} {offer.stillPaid}
+            <div className="relative">
+              <p className="sr-only">{d.home.hero.priceSummary}</p>
+              <div aria-hidden="true" className="flex flex-wrap items-end gap-x-4 gap-y-1 sm:flex-nowrap">
+                <span className="flex items-start font-display font-extrabold leading-none text-brand">
+                  <span className="mt-[0.3em] text-[2.25rem] sm:text-[2.75rem]">{tag.currency}</span>
+                  <span className="text-[5.5rem] tracking-[-0.05em] sm:text-[6rem] xl:text-[7rem]">{tag.value}</span>
+                </span>
+                <span className="pb-3 font-display leading-tight">
+                  <span className="block text-2xl font-extrabold text-ink sm:text-3xl">{text.perWeek}</span>
+                  <span className="block text-lg font-semibold text-ink-soft">{text.forSet}</span>
+                </span>
+              </div>
+              <WasPrice price={prices.set} className="mt-1 block font-display text-xl font-bold text-ink-muted" />
+
+              <p aria-hidden="true" className="mt-5 inline-block rounded-full bg-gold px-5 py-2.5 font-display text-lg font-bold text-ink sm:text-xl">
+                {rich(text.orSingle, { price: <span>{money(prices.single.current)}</span> })}
               </p>
-            );
-          })}
-          <p className="rounded-2xl bg-gold/20 px-5 py-4 text-ink">
-            <strong className="font-semibold">{d.offers.referral.title}.</strong> {d.offers.referral.text}
-          </p>
-        </div>
 
-        <DotList
-          items={d.home.prices.terms}
-          className="mt-6 grid max-w-5xl gap-x-6 gap-y-2 text-sm leading-relaxed text-ink-muted md:grid-cols-2"
-          itemClassName="flex gap-2.5"
-          bullet="mt-2 h-1.5 w-1.5"
-        />
+              <ul className="mt-7 space-y-3">
+                {text.checks.map((item) => (
+                  <li key={item} className="flex items-center gap-3 font-display text-lg font-bold text-ink sm:text-xl">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand">
+                      <Check className="h-4 w-4 text-gold" strokeWidth={3} aria-hidden="true" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <Button href={pagePaths.start} className="mt-8 w-full sm:w-auto">
+                {d.common.startRental}
+                <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+              </Button>
+            </div>
+          </div>
+
+          {/* The running promotions drop out when they end (decided per request, entities/offer). */}
+          <div className="space-y-3 lg:col-span-5">
+            {promotions.map((promotion) => (
+              <LangLink
+                key={promotion.id}
+                href={`${pagePaths.faq}#${promotion.id}`}
+                className="flex items-center gap-4 rounded-2xl bg-gold/20 px-5 py-4 font-display text-lg font-bold text-ink transition-colors hover:bg-gold/30"
+              >
+                <Gift className="h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
+                {promotionText(promotion, i18n).short}
+              </LangLink>
+            ))}
+            <LangLink
+              href={`${pagePaths.faq}#referral`}
+              className="flex items-center gap-4 rounded-2xl bg-gold/20 px-5 py-4 font-display text-lg font-bold text-ink transition-colors hover:bg-gold/30"
+            >
+              <UserPlus className="h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
+              {d.offers.referral.short}
+            </LangLink>
+            <p className="pt-2">
+              <LangLink href={`${pagePaths.faq}#prices-and-payment`} className="text-link">
+                {text.details}
+              </LangLink>
+            </p>
+          </div>
+        </div>
       </Container>
     </Section>
   );

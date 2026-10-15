@@ -13,10 +13,8 @@ export function StartRental() {
     <Section id="request" aria-labelledby="request-title" className="bg-brand-mint">
       <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
-          <SectionHeader id="request-title" title={startRental.title} lead={startRental.lead} />
-          <CallCard className="mt-8">
-            <p className="mt-5 text-sm leading-relaxed text-ink-soft">{d.common.closetPhotoHelps}</p>
-          </CallCard>
+          <SectionHeader id="request-title" title={startRental.title} />
+          <CallCard className="mt-8" />
         </div>
 
         <div className="lg:col-span-7">
@@ -26,12 +24,9 @@ export function StartRental() {
             </Nest>
             <ol className="mt-6 space-y-5">
               {startRental.steps.map((step, index) => (
-                <li key={step.title} className="flex gap-4">
+                <li key={step} className="flex gap-4">
                   <NumberBadge size="md">{number(index + 1)}</NumberBadge>
-                  <div className="pt-1">
-                    <p className="font-display text-lg font-semibold text-ink">{step.title}</p>
-                    <p className="mt-0.5 text-ink-soft">{step.text}</p>
-                  </div>
+                  <p className="pt-2 font-display text-lg font-semibold text-ink">{step}</p>
                 </li>
               ))}
             </ol>

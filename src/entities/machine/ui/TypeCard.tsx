@@ -21,12 +21,15 @@ export function TypeCard({
   note,
   preferPhoto = true,
   sizes = TYPE_CARD_SIZES,
+  showDescription = true,
 }: {
   machine: MachineType;
   price: { base: number; current: number };
   note?: string;
   preferPhoto?: boolean;
   sizes?: string;
+  /** false: picture, name and price only (the home page). */
+  showDescription?: boolean;
 }) {
   const { d, money } = useI18n();
   return (
@@ -48,7 +51,9 @@ export function TypeCard({
           </LangLink>
           </Heading>
         </Nest>
-        <p className="mt-1.5 text-[15px] leading-snug text-ink-soft">{note ?? machine.description}</p>
+        {(note || showDescription) && (
+          <p className="mt-1.5 text-[15px] leading-snug text-ink-soft">{note ?? machine.description}</p>
+        )}
         <p className="mt-auto pt-3 leading-tight">
           <span className="font-display text-lg font-bold text-brand">
             {money(price.current)}

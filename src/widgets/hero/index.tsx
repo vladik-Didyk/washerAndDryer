@@ -1,5 +1,4 @@
 import { usePrices } from "~/entities/offer";
-import { PostalCodeChecker } from "~/features/postal-check";
 import { pagePaths } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { heroPhoto, photoFiles } from "~/shared/lib";
@@ -45,7 +44,7 @@ function HeroPhoto({ className = "" }: { className?: string }) {
 }
 
 // Home hero: the weekly price is the headline fact, then the two ways to start (the rental
-// request or a call) and the postal-code check. Phones: photo on top, text below it, never over it.
+// request or a call). The postal-code check sits under the service-area map. Phones: photo on top, text below it, never over it.
 // From 1024px the text keeps to the page's left edge and the photo takes the other half.
 export function Hero() {
   const { d, rich, moneyParts } = useI18n();
@@ -97,12 +96,6 @@ export function Hero() {
             </Button>
             <PhoneButton kind="call" variant="secondary" label={d.common.callOrText} className="sm:px-5" />
           </div>
-
-          <PostalCodeChecker
-            compact
-            label={d.postalCheck.heroLabel}
-            className="mt-7 max-w-md border-t border-line pt-6"
-          />
         </Container>
       </div>
     </Section>

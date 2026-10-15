@@ -1,9 +1,9 @@
 // Manufacturer how-to videos, embedded from YouTube (they play from the owners' channels;
-// nothing is copied). The step notes underneath are ours.
+// nothing is copied). What an installation includes is on /faq/ (#installation).
 import { useI18n } from "~/shared/i18n";
-import { Container, DotList, Heading, Nest, Section } from "~/shared/ui";
+import { Container, Heading, Nest, Section } from "~/shared/ui";
 
-// The YouTube ids; titles, sources and step notes are in the dictionary (home.videos.items).
+// The YouTube ids; titles and sources are in the dictionary (home.videos.items).
 const VIDEO_IDS = ["veEH0wF9LEU", "h-co6mCEKNk"] as const;
 
 export function InstallVideos() {
@@ -13,7 +13,6 @@ export function InstallVideos() {
     <Section id="install" aria-labelledby="install-title" className="bg-paper">
       <Container>
         <Heading id="install-title">{videos.title}</Heading>
-        <p className="mt-3 max-w-2xl text-ink-soft">{videos.lead}</p>
         <div className="mt-10 grid gap-10 lg:grid-cols-2">
           {VIDEO_IDS.map((id) => ({ id, ...videos.items[id] })).map((video) => (
             <article key={video.id}>
@@ -33,12 +32,6 @@ export function InstallVideos() {
                 </Heading>
               </Nest>
               <p className="text-sm text-ink-soft">{format(videos.source, { source: video.source })}</p>
-              <DotList
-                items={video.steps}
-                className="mt-3 space-y-1.5 text-ink-soft"
-                itemClassName="flex gap-2"
-                bullet="mt-2 h-1.5 w-1.5"
-              />
             </article>
           ))}
         </div>

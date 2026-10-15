@@ -19,7 +19,7 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustStrip />
-      <MachineShowcase />
+      <MachineShowcase compact />
       <HowItWorks />
       <InstallVideos />
       <Prices />

@@ -11,7 +11,8 @@ import { TypesAnimation } from "./TypesAnimation";
 // without a photo shows its drawing, tagged "Drawing"). From 768px the animated drawing of the
 // types stands beside the heading; phones skip it, the cards already show each type.
 // `showAllLink` adds a link to /machines/ (off on that page itself).
-export function MachineShowcase({ showAllLink = true }: { showAllLink?: boolean }) {
+// `compact`: cards without their description line (the home page).
+export function MachineShowcase({ showAllLink = true, compact = false }: { showAllLink?: boolean; compact?: boolean }) {
   const { view, setView, showPhotos } = useMachineView();
   const { d } = useI18n();
   const { showcase } = d.machines;
@@ -35,7 +36,13 @@ export function MachineShowcase({ showAllLink = true }: { showAllLink?: boolean 
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:mt-12 xl:grid-cols-5 xl:gap-4">
           {machineTypes.map((machine) => (
-            <TypeCard key={machine.slug} machine={machine} price={prices[machine.item]} preferPhoto={showPhotos} />
+            <TypeCard
+              key={machine.slug}
+              machine={machine}
+              price={prices[machine.item]}
+              preferPhoto={showPhotos}
+              showDescription={!compact}
+            />
           ))}
         </ul>
 

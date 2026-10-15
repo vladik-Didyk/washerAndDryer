@@ -324,7 +324,6 @@ const es: DeepPartial<Dictionary> = {
 
   postalCheck: {
     label: "Su código postal",
-    heroLabel: "¿Entregamos en su zona? Escriba su código postal",
     placeholder: "p. ej. M5V 2T6",
     check: "Verificar",
     invalid: "Escriba un código postal canadiense válido, como M5V 2T6.",
@@ -634,78 +633,58 @@ const es: DeepPartial<Dictionary> = {
     },
     how: {
       steps: [
-        {
-          title: "Díganos qué cabe",
-          text: "Envíe su zona, el ancho del clóset y el tipo de tomacorriente (3 o 4 clavijas). Una foto del clóset ayuda.",
-        },
-        {
-          title: "Reciba una cotización",
-          text: "Le confirmamos la máquina, el precio de entrega e instalación y la fecha de inicio antes de que pague nada.",
-        },
-        { title: "Entregamos y conectamos", text: "Nos llevamos su máquina vieja sin costo." },
-        { title: "Reparaciones por nuestra cuenta", text: "Si se daña mientras la alquila, la reparamos o la cambiamos." },
+        "Díganos qué cabe",
+        "Reciba una cotización",
+        "Entregamos y conectamos",
+        "Reparaciones por nuestra cuenta",
       ],
     },
     videos: {
       title: "Cómo se hace la instalación",
-      lead: "Nosotros hacemos todo esto por usted. Estos videos de fabricantes muestran lo que lleva una conexión bien hecha.",
       source: "Video: {source}",
       items: {
         veEH0wF9LEU: {
           title: "Instalación de un centro de lavado (lavadora y secadora en una unidad)",
           source: "W Service en YouTube",
-          steps: [
-            "Revisar el espacio: una unidad de 24 pulgadas mide unas 70 pulgadas de alto.",
-            "Electricidad: la secadora necesita su propio tomacorriente de 240 voltios, de 3 o 4 clavijas.",
-            "Ventilación: un ducto metálico de 4 pulgadas desde la secadora hasta el exterior, lo más corto posible.",
-            "Agua: las mangueras de agua caliente y fría van a las entradas correspondientes de la lavadora.",
-            "Desagüe: la manguera de desagüe va al tubo vertical o a la tina de lavado y se sujeta en su lugar.",
-            "Nivelación: se ajustan las patas hasta que la máquina quede nivelada y no se mueva.",
-          ],
         },
         "h-co6mCEKNk": {
           title: "Cómo conectar el ducto de la secadora con abrazaderas",
           source: "Imperial Manufacturing Group en YouTube",
-          steps: [
-            "El ducto se coloca sobre la salida redonda de la parte trasera de la secadora.",
-            "Una abrazadera sujeta bien cada extremo, para que no se escapen pelusa ni aire caliente.",
-            "El ducto va en una sola curva suave hasta la salida de la pared, sin dobleces ni partes aplastadas.",
-            "Un ducto tapado o aplastado es un riesgo de incendio, por eso lo revisamos en cada instalación.",
-          ],
         },
       },
     },
     prices: {
       title: "Precios",
-      set: "Juego de lavadora y secadora",
-      single: "Una máquina",
-      included: "Incluido",
-      includedItems: [
-        "Reparaciones: si la máquina falla, la reparamos o la cambiamos sin costo.",
-        "Nos llevamos su máquina vieja sin costo.",
+      perWeek: "por semana",
+      forSet: "juego de lavadora y secadora",
+      orSingle: "o {price} por semana por una máquina",
+      checks: [
+        "Reparaciones incluidas",
+        "Retiro de la máquina vieja incluido",
+        "No se cobra HST",
       ],
-      terms: [
-        "Depósito reembolsable de {deposit}: se devuelve cuando la máquina regresa funcionando.",
-        "Mínimo {minWeeks} semanas. Después, semana a semana; cualquiera de las partes puede terminar el alquiler con {noticeDays} días de aviso y nosotros recogemos la máquina.",
-        "La entrega y la instalación se cotizan antes de que usted pague.",
-        "Pago por Interac e-Transfer o con tarjeta de crédito.",
-      ],
+      details: "Depósito, plazo mínimo y pago",
     },
     landlordsTeaser: {
-      title: "¿Es propietario?",
-      text: "Sus inquilinos pueden alquilarnos directamente, sin que usted pague nada, o usted puede alquilar las máquinas para sus unidades. En ambos casos, las reparaciones están incluidas.",
+      title: "¿Propietario o edificio?",
+      text: "Máquinas para sus unidades o para la lavandería de su edificio. Reparaciones incluidas.",
       link: "Lavandería para propietarios",
+      buildingsLink: "Lavanderías",
     },
     about: {
       title: "Quiénes somos",
-      lead: "{company} es un negocio local de Toronto. Tenemos más de {experienceYears} años de experiencia instalando y reparando lavadoras y secadoras.",
-      questions: "¿Preguntas sobre una máquina o sus conexiones? Llame o escriba al {phoneLink}.",
+      facts: [
+        "Negocio local de Toronto",
+        "Más de {experienceYears} años reparando lavadoras y secadoras",
+        "Hablamos {languages}",
+      ],
       more: "Más sobre nosotros",
-      howWeWork: "Cómo trabajamos",
     },
     serviceArea: {
       title: "Zona de servicio",
       allAreas: "Todas las zonas donde entregamos",
+      mapLabel: "Mapa de las zonas donde entregamos",
+      lake: "Lago Ontario",
     },
     faq: {
       title: "Preguntas frecuentes",
@@ -714,16 +693,15 @@ const es: DeepPartial<Dictionary> = {
     },
     cta: {
       title: "Una lavadora y una secadora por {setPrice} por semana",
-      text: "Reparaciones incluidas. Entrega e instalación cotizadas antes de que usted pague. Díganos cómo es su espacio y le respondemos con la máquina, el total y la fecha de inicio.",
+      text: "Reparaciones incluidas. No se cobra HST.",
     },
     startRental: {
       title: "Empezar el alquiler",
-      lead: "Díganos qué necesita. Le respondemos con la máquina, el total y la fecha de inicio.",
       stepsTitle: "Tres pasos cortos",
       steps: [
-        { title: "Tipo de máquina", text: "El tipo que quiere, o \"no estoy seguro\"." },
-        { title: "Su espacio", text: "Código postal, ancho del clóset, tomacorriente de la secadora y por dónde se entra." },
-        { title: "Cómo contactarle", text: "Nombre, teléfono y un día preferido." },
+        "Tipo de máquina",
+        "Su espacio",
+        "Cómo contactarle",
       ],
       nothingToPay: "No paga nada ahora. Primero le confirmamos la máquina, el total y la fecha de inicio.",
     },
@@ -1196,6 +1174,10 @@ const es: DeepPartial<Dictionary> = {
       "delivery-time": {
         question: "¿Qué tan pronto pueden entregar?",
         answer: "Normalmente la misma semana. Confirmamos la fecha cuando enviamos la cotización.",
+      },
+      installation: {
+        question: "¿Qué incluye la instalación?",
+        answer: "Revisamos el espacio y conectamos la secadora a su propio tomacorriente de 240 voltios (de 3 o 4 clavijas). Instalamos un ducto de ventilación metálico de 4 pulgadas hacia afuera, con abrazaderas en ambos extremos y sin dobleces: un ducto aplastado es un riesgo de incendio. Conectamos el agua caliente y fría y el desagüe, nivelamos la máquina y hacemos un ciclo de prueba antes de irnos.",
       },
       condo: {
         question: "¿Pueden entregar en un condominio?",

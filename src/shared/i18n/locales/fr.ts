@@ -313,7 +313,6 @@ const fr: DeepPartial<Dictionary> = {
 
   postalCheck: {
     label: "Votre code postal",
-    heroLabel: "Livrons-nous chez vous? Entrez votre code postal",
     placeholder: "p. ex. M5V 2T6",
     check: "Vérifier",
     invalid: "Entrez un code postal canadien valide, comme M5V 2T6.",
@@ -627,78 +626,58 @@ const fr: DeepPartial<Dictionary> = {
     },
     how: {
       steps: [
-        {
-          title: "Dites-nous ce qui entre",
-          text: "Indiquez votre secteur, la largeur du placard et le type de prise (3 ou 4 broches). Une photo du placard nous aide.",
-        },
-        {
-          title: "Recevez une soumission",
-          text: "Nous confirmons l'appareil, le prix de la livraison et de l'installation, et la date de début avant que vous payiez quoi que ce soit.",
-        },
-        { title: "Nous livrons et raccordons", text: "Nous reprenons votre ancien appareil sans frais." },
-        { title: "Réparations à nos frais", text: "S'il brise pendant la location, nous le réparons ou le remplaçons." },
+        "Dites-nous ce qui entre",
+        "Recevez une soumission",
+        "Nous livrons et raccordons",
+        "Réparations à nos frais",
       ],
     },
     videos: {
       title: "Comment se passe l'installation",
-      lead: "Nous faisons tout cela pour vous. Ces vidéos de fabricants montrent ce que demande un raccordement bien fait.",
       source: "Vidéo : {source}",
       items: {
         "veEH0wF9LEU": {
           title: "Installer un centre de lavage (laveuse et sécheuse en un seul appareil)",
           source: "W Service sur YouTube",
-          steps: [
-            "Vérifier l'espace : un appareil de 24 pouces mesure environ 70 pouces de haut.",
-            "Électricité : la sécheuse a besoin de sa propre prise de 240 volts, à 3 ou 4 broches.",
-            "Évacuation : un conduit métallique de 4 pouces de la sécheuse vers l'extérieur, le plus court possible.",
-            "Eau : les tuyaux d'eau chaude et d'eau froide se branchent aux entrées correspondantes de la laveuse.",
-            "Drain : le tuyau de vidange va dans le tuyau de renvoi ou l'évier de buanderie et il est attaché en place.",
-            "Niveau : on règle les pattes jusqu'à ce que l'appareil soit de niveau et ne bouge pas.",
-          ],
         },
         "h-co6mCEKNk": {
           title: "Raccorder le conduit d'évacuation de la sécheuse avec des colliers",
           source: "Imperial Manufacturing Group sur YouTube",
-          steps: [
-            "Le conduit s'emboîte sur la sortie ronde à l'arrière de la sécheuse.",
-            "Un collier serre chaque extrémité pour que la charpie et l'air chaud ne s'échappent pas.",
-            "Le conduit va jusqu'à la sortie murale en une seule courbe douce, sans plis ni parties écrasées.",
-            "Un conduit bouché ou écrasé est un risque d'incendie : nous le vérifions à chaque installation.",
-          ],
         },
       },
     },
     prices: {
       title: "Prix",
-      set: "Ensemble laveuse et sécheuse",
-      single: "Un appareil",
-      included: "Inclus",
-      includedItems: [
-        "Réparations, ou un appareil de remplacement, sans frais",
-        "Reprise de l'ancien appareil sans frais",
+      perWeek: "par semaine",
+      forSet: "pour l'ensemble laveuse + sécheuse",
+      orSingle: "ou {price} par semaine pour un appareil",
+      checks: [
+        "Réparations incluses",
+        "Enlèvement de l'ancien appareil inclus",
+        "TVH non facturée",
       ],
-      terms: [
-        "Dépôt remboursable de {deposit}, rendu quand l'appareil nous revient en état de marche.",
-        "Minimum de {minWeeks} semaines, puis à la semaine avec un préavis de {noticeDays} jours.",
-        "Livraison et installation chiffrées pour chaque travail, avant que vous payiez.",
-        "Paiement par virement Interac ou carte de crédit.",
-      ],
+      details: "Dépôt, durée minimale et paiement",
     },
     landlordsTeaser: {
-      title: "Propriétaire?",
-      text: "Vos locataires peuvent louer directement chez nous, sans rien à payer de votre part, ou vous pouvez louer les appareils pour vos logements. Les réparations sont incluses dans les deux cas.",
+      title: "Propriétaire ou immeuble?",
+      text: "Des appareils pour vos logements, ou pour la salle de lavage de votre immeuble. Réparations incluses.",
       link: "Lavage pour les propriétaires",
+      buildingsLink: "Salles de lavage",
     },
     about: {
       title: "À propos de nous",
-      lead: "{company} est une entreprise locale de Toronto. Nous avons plus de {experienceYears} ans d'expérience pratique à installer et réparer des laveuses et des sécheuses.",
-      questions: "Des questions sur un appareil ou vos raccordements? Appelez ou écrivez par texto au {phoneLink}.",
+      facts: [
+        "Entreprise locale de Toronto",
+        "Plus de {experienceYears} ans à réparer des laveuses et sécheuses",
+        "Nous parlons {languages}",
+      ],
       more: "En savoir plus sur nous",
-      howWeWork: "Notre façon de travailler",
     },
     serviceArea: {
       title: "Zone de service",
       allAreas: "Tous les secteurs où nous livrons",
+      mapLabel: "Carte des secteurs desservis",
+      lake: "Lac Ontario",
     },
     faq: {
       title: "FAQ",
@@ -707,16 +686,15 @@ const fr: DeepPartial<Dictionary> = {
     },
     cta: {
       title: "Une laveuse et une sécheuse pour {setPrice} par semaine",
-      text: "Réparations incluses. Livraison et installation chiffrées avant que vous payiez. Décrivez-nous votre espace et nous vous répondons avec l'appareil, le total et la date de début.",
+      text: "Réparations incluses. TVH non facturée.",
     },
     startRental: {
       title: "Commencer votre location",
-      lead: "Dites-nous ce qu'il vous faut. Nous vous répondons avec l'appareil, le total et la date de début.",
       stepsTitle: "Trois courtes étapes",
       steps: [
-        { title: "Type d'appareil", text: "Le type que vous voulez, ou « je ne sais pas »." },
-        { title: "Votre espace", text: "Code postal, largeur du placard, prise de la sécheuse et accès." },
-        { title: "Comment vous joindre", text: "Nom, téléphone et un jour préféré." },
+        "Type d'appareil",
+        "Votre espace",
+        "Comment vous joindre",
       ],
       nothingToPay: "Rien à payer maintenant. Nous confirmons d'abord l'appareil, le total et la date de début.",
     },
@@ -1189,6 +1167,10 @@ const fr: DeepPartial<Dictionary> = {
       "delivery-time": {
         question: "En combien de temps pouvez-vous livrer?",
         answer: "En général la même semaine. Nous confirmons la date en envoyant la soumission.",
+      },
+      installation: {
+        question: "Que comprend l'installation?",
+        answer: "Nous vérifions l'espace et branchons la sécheuse sur sa propre prise de 240 volts (3 ou 4 broches). Nous installons un conduit d'évacuation métallique de 4 pouces vers l'extérieur, fixé par un collier aux deux bouts et sans pli : un conduit écrasé est un risque d'incendie. Nous raccordons l'eau chaude et froide et le drain, mettons l'appareil de niveau et faisons un cycle d'essai avant de partir.",
       },
       condo: {
         question: "Pouvez-vous livrer dans un condo?",

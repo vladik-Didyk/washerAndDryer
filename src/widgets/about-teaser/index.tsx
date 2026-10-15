@@ -1,43 +1,40 @@
-import { pagePaths, siteConfig } from "~/shared/config";
+import { pagePaths } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { Card, Container, DotList, Heading, LangLink, Nest, PhoneButton, Section, SectionHeader } from "~/shared/ui";
+import { ArrowRight, Button, Container, Heading, Languages, MapPin, Section, Wrench, type LucideIcon } from "~/shared/ui";
 
-// About the business: confirmed facts only, no names or photos of people.
+// About the business in three icon facts: confirmed facts only, no names or photos of people.
 // The full version is the /about/ page.
+const FACT_ICONS: LucideIcon[] = [MapPin, Wrench, Languages];
+
 export function AboutTeaser() {
-  const { phone } = siteConfig;
-  const { d, rich } = useI18n();
+  const { d, format } = useI18n();
   const { about } = d.home;
 
   return (
     <Section id="about" aria-labelledby="about-title">
-      <Container className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-5">
-          <SectionHeader id="about-title" title={about.title} lead={about.lead}>
-            <p className="mt-4 text-ink-soft">
-              {rich(about.questions, {
-                phoneLink: (
-                  <a href={phone.tel} className="text-link whitespace-nowrap">
-                    {phone.display}
-                  </a>
-                ),
-              })}
-            </p>
-            <p className="mt-4">
-              <LangLink href={pagePaths.about} className="text-link">
-                {about.more}
-              </LangLink>
-            </p>
-          </SectionHeader>
-        </div>
-
-        <Card className="lg:col-span-7">
-          <Nest>
-            <Heading variant="cardSmall">{about.howWeWork}</Heading>
-          </Nest>
-          <DotList items={d.common.howWeWork} className="mt-5 space-y-4" />
-          <PhoneButton kind="call" variant="secondary" label={d.common.callPhone} className="mt-7" />
-        </Card>
+      <Container>
+        <Heading id="about-title" variant="none" className="sr-only">
+          {about.title}
+        </Heading>
+        <ul className="grid gap-4 sm:grid-cols-3 sm:gap-6">
+          {about.facts.map((fact, index) => {
+            const Icon = FACT_ICONS[index] ?? MapPin;
+            return (
+              <li key={fact} className="flex items-center gap-4 rounded-3xl bg-brand-mint px-5 py-5 sm:flex-col sm:px-6 sm:py-8 sm:text-center">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white sm:h-16 sm:w-16">
+                  <Icon className="h-7 w-7 text-brand sm:h-8 sm:w-8" aria-hidden="true" />
+                </span>
+                <span className="font-display text-lg font-bold leading-snug text-ink">
+                  {format(fact, { languages: d.common.languages })}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+        <Button href={pagePaths.about} variant="secondary" className="mt-6">
+          {about.more}
+          <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+        </Button>
       </Container>
     </Section>
   );

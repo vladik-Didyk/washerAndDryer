@@ -1,10 +1,12 @@
 import { useI18n } from "~/shared/i18n";
-import { Container, Heading, Nest, NumberBadge, Section } from "~/shared/ui";
+import { Container, FileText, Heading, Nest, Ruler, Section, Truck, Wrench, type LucideIcon } from "~/shared/ui";
 
-// The four steps of renting, on the brand-green band (home, city and machine pages).
+// The four steps of renting, on the brand-green band (home, city and machine pages): one icon
+// and a few words each. The details are on the FAQ page.
+const STEP_ICONS: LucideIcon[] = [Ruler, FileText, Truck, Wrench];
 
 export function HowItWorks() {
-  const { d, number } = useI18n();
+  const { d } = useI18n();
   const { steps } = d.home.how;
   return (
     <Section id="how" aria-labelledby="how-title" className="on-dark bg-brand text-white">
@@ -13,37 +15,29 @@ export function HowItWorks() {
           {d.common.howItWorks}
         </Heading>
 
-        <div className="relative mt-10 lg:mt-12">
-          {/* Desktop: one line joining the four step numbers (4 columns, 24px gaps). */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-6 top-6 hidden h-0.5 w-[calc(75%+18px)] bg-white/25 lg:block"
-          />
-          <ol className="relative grid gap-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-6">
-            {steps.map((step, index) => (
-              <li key={step.title} className="relative flex gap-4 sm:block">
-                {/* Phones: a vertical line down to the next number. */}
-                {index < steps.length - 1 && (
+        <ol className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 lg:mt-12 lg:grid-cols-4 lg:gap-x-6">
+          {steps.map((step, index) => {
+            const Icon = STEP_ICONS[index] ?? Wrench;
+            return (
+              <li key={step} className="flex flex-col items-center text-center">
+                <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-white/10 sm:h-24 sm:w-24">
+                  <Icon className="h-9 w-9 text-gold sm:h-11 sm:w-11" aria-hidden="true" />
                   <span
                     aria-hidden="true"
-                    className="absolute -bottom-6 left-6 top-14 w-0.5 -translate-x-1/2 bg-white/25 sm:hidden"
-                  />
-                )}
-                <NumberBadge className="relative">{number(index + 1)}</NumberBadge>
-                <div className="pt-2.5 sm:pt-0">
-                  <Nest>
-                    <Heading variant="none" className="font-display text-xl font-bold leading-snug text-white sm:mt-5">
-                      {step.title}
-                    </Heading>
-                  </Nest>
-                  <p className="mt-2 leading-relaxed text-white/85">
-                    {step.text}
-                  </p>
-                </div>
+                    className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-gold font-display text-sm font-bold text-brand"
+                  >
+                    {index + 1}
+                  </span>
+                </span>
+                <Nest>
+                  <Heading variant="none" className="mt-4 font-display text-lg font-bold leading-snug text-white sm:text-xl">
+                    {step}
+                  </Heading>
+                </Nest>
               </li>
-            ))}
-          </ol>
-        </div>
+            );
+          })}
+        </ol>
       </Container>
     </Section>
   );

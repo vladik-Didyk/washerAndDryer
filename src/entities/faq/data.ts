@@ -56,6 +56,7 @@ const standingGroups: GroupFacts[] = [
       { id: "space-needs", href: "/guides/measure-your-laundry-space/" },
       { id: "delivery-cost" },
       { id: "delivery-time" },
+      { id: "installation" },
       { id: "condo", href: "/guides/condo-laundry-checklist/" },
       { id: "haul-away" },
       { id: "areas", href: "/areas/" },
@@ -106,7 +107,7 @@ export const faqsFor = (i18n: I18n, offers: FaqOffers): Faq[] =>
 
 // The short list on the home page, which links to /faq/ for the rest (none of these
 // mention an offer).
-const homeFaqIds = ["space-needs", "deposit", "tax", "minimum-term", "breaks", "delivery-cost"];
+const homeFaqIds = ["minimum-term", "deposit", "delivery-cost"];
 
 export function homeFaqs(i18n: I18n): Faq[] {
   const all = faqsFor(i18n, { firstWeekFree: null, referral: "" });
