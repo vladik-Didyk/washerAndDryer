@@ -60,11 +60,13 @@ export const siteConfig = {
   // Cloudflare Web Analytics: the "token" value from the snippet Cloudflare gives you. The
   // cookie-free beacon script is added to every page only when this is non-empty.
   cloudflareAnalyticsToken: "",
+  // Main menu. Secondary links (repair, guides, pay) are in Header.jsx.
   navigation: [
-    { label: "Machines", href: "/#machines" },
+    { label: "Machines", href: "/machines/" },
     { label: "Prices", href: "/#prices" },
-    { label: "How it works", href: "/#how" },
-    { label: "FAQ", href: "/#faq" },
+    { label: "Areas", href: "/areas/" },
+    { label: "Landlords", href: "/landlords/" },
+    { label: "FAQ", href: "/faq/" },
   ],
   // Language versions of the site, shown as short links in the header and footer.
   languageLinks: [
