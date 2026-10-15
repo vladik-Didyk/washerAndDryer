@@ -1,5 +1,6 @@
-import { Check, Clock, MapPin, MessageSquare, Phone } from "lucide-react";
+import { Check, Clock, Gift, MapPin, MessageSquare, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
+import { firstWeekFreeActive } from "../content/offers";
 import { machineTypes } from "../content/machines";
 import { machinePath } from "../content/routes";
 
@@ -26,6 +27,12 @@ export default function LanguagePage({ content }) {
             {content.priceSet(prices.setText)}
           </p>
           <p className="mt-2 text-lg text-ink-soft">{content.priceSingle(prices.singleText)}</p>
+          {firstWeekFreeActive && (
+            <p className="mt-5 flex max-w-3xl gap-3 rounded-2xl bg-gold/20 px-5 py-4 text-ink">
+              <Gift className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
+              <span>{content.firstWeekFree}</span>
+            </p>
+          )}
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a href={phone.tel} className="btn btn-primary">

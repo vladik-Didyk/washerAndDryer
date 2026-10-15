@@ -1,5 +1,6 @@
 // Spanish and Russian pages at /es/ and /ru/: a short version of the offer in each language.
 // Same facts as the English site; prices and the phone number come from config.js.
+// `firstWeekFree` shows only while the offer runs (src/content/offers.js).
 export const languagePages = [
   {
     lang: "es",
@@ -14,6 +15,8 @@ export const languagePages = [
     h1: "Alquiler de lavadora y secadora en Toronto y el GTA",
     priceSet: (price) => `$${price} a la semana por una lavadora y una secadora`,
     priceSingle: (price) => `o $${price} a la semana por una sola máquina`,
+    firstWeekFree:
+      "Primera semana gratis para clientes nuevos que empiecen su alquiler hasta el 30 de noviembre de 2026. El depósito y la entrega se pagan normalmente.",
     includedTitle: "Incluido",
     included: [
       "Reparaciones: si la máquina falla, la reparamos o la cambiamos sin costo.",
@@ -72,6 +75,8 @@ export const languagePages = [
     h1: "Аренда стиральной и сушильной машины в Торонто и GTA",
     priceSet: (price) => `$${price} в неделю за стиральную и сушильную машину`,
     priceSingle: (price) => `или $${price} в неделю за одну машину`,
+    firstWeekFree:
+      "Первая неделя бесплатно для новых клиентов, если аренда начнётся до 30 ноября 2026 года. Депозит и доставка оплачиваются как обычно.",
     includedTitle: "Входит в цену",
     included: [
       "Ремонт: если машина сломается, мы бесплатно отремонтируем её или заменим.",

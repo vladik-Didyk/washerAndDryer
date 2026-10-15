@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import FloatingCall from "./components/FloatingCall";
 import Breadcrumbs from "./components/Breadcrumbs";
 import DraftRibbon from "./components/DraftRibbon";
+import OfferBar from "./components/OfferBar";
 import HomePage from "./pages/HomePage";
 import CityPage from "./pages/CityPage";
 import DistrictPage from "./pages/DistrictPage";
@@ -78,6 +79,7 @@ export default function App({ path }) {
         {skipLabel}
       </a>
       {route.draft && <DraftRibbon />}
+      <OfferBar />
       <Header />
       <main id="main">
         {route.breadcrumbs && <Breadcrumbs items={route.breadcrumbs} />}

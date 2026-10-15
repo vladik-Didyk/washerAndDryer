@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { siteConfig } from "../content/config";
+import { firstWeekFreeActive, firstWeekFreeOffer, referralOffer } from "../content/offers";
 
 const included = [
   "Repairs, or a replacement machine, at no charge",
@@ -67,9 +68,18 @@ export default function Prices() {
           <PriceCard title="One machine" price={prices.singleText} />
         </div>
 
-        <p className="mt-6 max-w-5xl rounded-2xl bg-gold/20 px-5 py-4 font-semibold text-ink">
-          Refer a friend: you get $100 when they sign up for 12 months or more.
-        </p>
+        {/* The first-week offer drops out of builds made after it ends (offers.js). */}
+        <div className="mt-6 grid max-w-5xl gap-3 md:grid-cols-2 md:gap-6">
+          {firstWeekFreeActive && (
+            <p className="rounded-2xl bg-gold/20 px-5 py-4 text-ink">
+              <strong className="font-semibold">{firstWeekFreeOffer.title}.</strong>{" "}
+              {firstWeekFreeOffer.text} {firstWeekFreeOffer.stillPaid}
+            </p>
+          )}
+          <p className="rounded-2xl bg-gold/20 px-5 py-4 text-ink">
+            <strong className="font-semibold">{referralOffer.title}.</strong> {referralOffer.text}
+          </p>
+        </div>
 
         <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink-muted">
           ${prices.deposit} refundable deposit, returned when the machine comes

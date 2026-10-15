@@ -241,3 +241,6 @@ export function findRoute(path) {
 // Whether a page is part of this build: links to pages that may be missing (drafts, /account/)
 // check this first, so a build never links to a page it doesn't have.
 export const hasRoute = (path) => routes.some((route) => route.path === path);
+
+// Built and not a draft: the page is (or will be) live.
+export const isPublished = (path) => routes.some((route) => route.path === path && !route.draft);
