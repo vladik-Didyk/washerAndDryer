@@ -20,8 +20,10 @@ export const siteConfig = {
   ],
   facebook: "https://www.facebook.com/profile.php?id=61588384887072",
   prices: {
-    set: 50, // washer + dryer set, per month
-    single: 25, // one machine, per month
+    set: 12.5, // washer + dryer set, per week
+    single: 6.25, // one machine, per week
+    setText: "12.50", // as shown on the site
+    singleText: "6.25",
     deposit: 200, // refundable
   },
   serviceAreas: [

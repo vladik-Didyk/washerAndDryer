@@ -24,9 +24,9 @@ export default function CityPage({ city }) {
         title={`Washer & dryer rental in ${city.name}`}
         intro={city.intro}
         machine={machine}
-        price={prices.set}
-        priceLabel="a month for a washer + dryer set"
-        otherPrice={`or $${prices.single} a month for one machine`}
+        price={prices.setText}
+        priceLabel="a week for a washer + dryer set"
+        otherPrice={`or $${prices.singleText} a week for one machine`}
       />
 
       <section

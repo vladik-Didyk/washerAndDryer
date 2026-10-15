@@ -23,9 +23,9 @@ export default function LanguagePage({ content }) {
             {content.h1}
           </h1>
           <p className="mt-6 font-display text-3xl font-extrabold text-brand sm:text-4xl">
-            {content.priceSet(prices.set)}
+            {content.priceSet(prices.setText)}
           </p>
-          <p className="mt-2 text-lg text-ink-soft">{content.priceSingle(prices.single)}</p>
+          <p className="mt-2 text-lg text-ink-soft">{content.priceSingle(prices.singleText)}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a href={phone.tel} className="btn btn-primary">
@@ -91,7 +91,7 @@ export default function LanguagePage({ content }) {
                     {content.machines[machine.slug]}
                   </a>
                   <span className="shrink-0 font-display font-bold text-brand">
-                    ${machine.price} {content.perMonth}
+                    ${machine.price.toFixed(2)} {content.perWeek}
                   </span>
                 </li>
               ))}

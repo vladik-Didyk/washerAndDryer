@@ -12,7 +12,7 @@ export const faqs = [
   {
     question: "How long is the rental?",
     answer:
-      "12 months minimum. After that it continues month to month, and either side can end it with 30 days' notice. We pick the machine up.",
+      "52 weeks minimum. After that it continues week to week, and either side can end it with 30 days' notice. We pick the machine up.",
   },
   {
     question: "What if the machine breaks?",
@@ -64,6 +64,6 @@ export const faqs = [
   {
     question: "How do I pay?",
     answer:
-      "By e-Transfer or card. Monthly rent can be charged to your card automatically.",
+      "By e-Transfer or card. Weekly rent can be charged to your card automatically.",
   },
 ];

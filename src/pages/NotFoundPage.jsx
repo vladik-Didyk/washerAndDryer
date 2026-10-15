@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         </h1>
         <p className="lead mt-4">
           This page doesn't exist. Washer &amp; dryer rental in Toronto and the
-          GTA is ${siteConfig.prices.set} a month for a set, ${siteConfig.prices.single} for one machine.
+          GTA is ${siteConfig.prices.setText} a week for a set, ${siteConfig.prices.singleText} for one machine.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href="/" className="btn btn-primary">

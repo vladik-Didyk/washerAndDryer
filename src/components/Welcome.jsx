@@ -4,7 +4,7 @@ import HeroMachines from "./HeroMachines";
 
 const included = ["Repairs included", "Old machine haul-away included"];
 
-// Hero: the monthly price is the headline fact; the drawing cycles through the five machine types.
+// Hero: the weekly price is the headline fact; the drawing cycles through the five machine types.
 export default function Welcome() {
   const { phone, prices, owner, languages } = siteConfig;
 
@@ -25,7 +25,7 @@ export default function Welcome() {
 
           <div className="mt-5 sm:mt-7">
             <p className="sr-only">
-              ${prices.set} a month for the set, or ${prices.single} a month for
+              ${prices.setText} a week for the set, or ${prices.singleText} a week for
               one machine.
             </p>
             {/* Price tag: small "$", big figure, label hung from the top of the digits. */}
@@ -34,16 +34,16 @@ export default function Welcome() {
               className="flex items-start font-display text-[7rem] font-extrabold leading-none text-brand sm:text-[9rem]"
             >
               <span className="mt-[0.34em] text-[0.36em] leading-none">$</span>
-              <span className="tracking-[-0.05em]">{prices.set}</span>
+              <span className="tracking-[-0.05em]">{prices.setText}</span>
               <span className="ml-[0.55em] mt-[0.7em] flex flex-col text-[0.165em] font-bold leading-[1.15] text-ink">
-                <span>a month</span>
+                <span>a week</span>
                 <span>for the set</span>
               </span>
             </div>
             <p aria-hidden="true" className="mt-3 text-lg text-ink-soft sm:text-xl">
               or{" "}
               <span className="font-semibold text-ink">
-                ${prices.single} a month
+                ${prices.singleText} a week
               </span>{" "}
               for one machine
             </p>

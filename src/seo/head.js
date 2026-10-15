@@ -39,35 +39,35 @@ const providerRef = () => ({
   telephone: PHONE,
 });
 
-function monthlyOffer(name, price, description) {
+function weeklyOffer(name, price, description) {
   return {
     "@type": "Offer",
     name,
     description,
-    price: String(price),
+    price: price.toFixed(2),
     priceCurrency: "CAD",
     priceSpecification: {
       "@type": "UnitPriceSpecification",
-      price: String(price),
+      price: price.toFixed(2),
       priceCurrency: "CAD",
-      unitText: "MONTH",
-      unitCode: "MON",
+      unitText: "WEEK",
+      unitCode: "WEE",
     },
     itemOffered: { "@type": "Service", name },
   };
 }
 
 const setOffer = () =>
-  monthlyOffer(
+  weeklyOffer(
     "Washer and dryer set rental",
     siteConfig.prices.set,
-    "A washer and dryer set, per month. Repairs and old-machine haul-away included.",
+    "A washer and dryer set, per week. Repairs and old-machine haul-away included.",
   );
 const singleOffer = () =>
-  monthlyOffer(
+  weeklyOffer(
     "Single washer or dryer rental",
     siteConfig.prices.single,
-    "One washer or one dryer, per month. Repairs and old-machine haul-away included.",
+    "One washer or one dryer, per week. Repairs and old-machine haul-away included.",
   );
 
 function localBusiness() {
@@ -77,7 +77,7 @@ function localBusiness() {
     "@id": BUSINESS_ID,
     name: siteConfig.companyName,
     description:
-      "Washer and dryer rental in Toronto and the GTA. $50 a month for a washer and dryer set, $25 a month for one machine. Repairs and old-machine haul-away included. English, Spanish and Russian spoken.",
+      "Washer and dryer rental in Toronto and the GTA. $12.50 a week for a washer and dryer set, $6.25 a week for one machine. Repairs and old-machine haul-away included. English, Spanish and Russian spoken.",
     url: `${SITE}/`,
     telephone: PHONE,
     logo: `${SITE}/brand/logo.png`,
@@ -152,7 +152,7 @@ function machineService(route) {
   const { machine } = route;
   const offer =
     machine.price === siteConfig.prices.set
-      ? monthlyOffer(`${machine.title} rental`, machine.price, `${machine.title}, per month. Repairs and old-machine haul-away included.`)
+      ? weeklyOffer(`${machine.title} rental`, machine.price, `${machine.title}, per week. Repairs and old-machine haul-away included.`)
       : singleOffer();
   return {
     "@context": "https://schema.org",

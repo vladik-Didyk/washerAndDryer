@@ -20,7 +20,7 @@ function PriceCard({ title, price, highlighted = false }) {
           ${price}
         </span>
         <span className="font-display text-lg font-semibold text-ink-soft">
-          /month
+          /week
         </span>
       </p>
 
@@ -63,8 +63,8 @@ export default function Prices() {
         </h2>
 
         <div className="mt-10 grid max-w-5xl gap-5 md:grid-cols-2 md:gap-6">
-          <PriceCard title="Washer + dryer set" price={prices.set} highlighted />
-          <PriceCard title="One machine" price={prices.single} />
+          <PriceCard title="Washer + dryer set" price={prices.setText} highlighted />
+          <PriceCard title="One machine" price={prices.singleText} />
         </div>
 
         <p className="mt-6 max-w-5xl rounded-2xl bg-gold/20 px-5 py-4 font-semibold text-ink">
@@ -73,7 +73,7 @@ export default function Prices() {
 
         <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink-muted">
           ${prices.deposit} refundable deposit, returned when the machine comes
-          back working. 12-month minimum, then month to month with 30 days'
+          back working. 52-week minimum, then week to week with 30 days'
           notice. Delivery and installation quoted per job, before you pay. Pay
           by e-Transfer or card.
         </p>

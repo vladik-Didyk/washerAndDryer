@@ -113,7 +113,7 @@ export default function Machines() {
                   {machine.description}
                 </p>
                 <p className="mt-2.5 font-display text-lg font-bold text-brand sm:mt-auto sm:pt-3">
-                  ${machine.price}/month
+                  ${machine.price.toFixed(2)}/week
                   {machine.priceNote && (
                     <span className="ml-1.5 font-sans text-sm font-medium text-ink-muted">
                       {machine.priceNote}

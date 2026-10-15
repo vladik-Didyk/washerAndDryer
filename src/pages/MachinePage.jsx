@@ -43,12 +43,12 @@ export default function MachinePage({ machine }) {
         title={page.h1}
         intro={page.intro}
         machine={machine}
-        price={machine.price}
-        priceLabel={isSet ? "a month for the set" : "a month for one machine"}
+        price={machine.price.toFixed(2)}
+        priceLabel={isSet ? "a week for the set" : "a week for one machine"}
         otherPrice={
           isSet
-            ? `Need only one machine? $${prices.single} a month.`
-            : `Need both? A washer + dryer set is $${prices.set} a month.`
+            ? `Need only one machine? $${prices.singleText} a week.`
+            : `Need both? A washer + dryer set is $${prices.setText} a week.`
         }
       />
 

@@ -10,9 +10,9 @@ export const routes = [
     path: "/",
     kind: "home",
     lang: "en",
-    metaTitle: "Washer & Dryer Rental Toronto & GTA | $50/month",
+    metaTitle: "Washer & Dryer Rental Toronto & GTA | $12.50/week",
     metaDescription:
-      "Washer & dryer rental in Toronto and the GTA: $50 a month for a set, $25 for one machine. Repairs included. Call or text (437) 907-6955.",
+      "Washer & dryer rental in Toronto and the GTA: $12.50 a week for a set, $6.25 for one machine. Repairs included. Call or text (437) 907-6955.",
   },
   ...cities.map((city) => ({
     path: `/${city.slug}/`,
@@ -46,7 +46,7 @@ export const notFoundRoute = {
   lang: "en",
   metaTitle: "Page not found | GTA Washer & Dryer Rentals",
   metaDescription:
-    "This page doesn't exist. Washer & dryer rental in Toronto and the GTA: $50 a month for a set. Call or text (437) 907-6955.",
+    "This page doesn't exist. Washer & dryer rental in Toronto and the GTA: $12.50 a week for a set. Call or text (437) 907-6955.",
 };
 
 // "/toronto" and "/toronto/index.html" both mean "/toronto/".

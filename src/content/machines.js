@@ -10,15 +10,15 @@ export const machineTypes = [
     title: "Stackable pair",
     description:
       "Front-load washer with the dryer stacked on top. Good for narrow closets.",
-    price: 50,
+    price: 12.5,
     priceNote: "for the set",
     photo: "photos/types/stackable.jpg",
     drawing: "types/stackable.svg",
     alt: "Front-load washer with a dryer stacked on top",
     page: {
-      metaTitle: "Stackable Washer & Dryer Rental, Toronto | $50/month",
+      metaTitle: "Stackable Washer & Dryer Rental, Toronto | $12.50/week",
       metaDescription:
-        "Rent a stackable washer and dryer in Toronto and the GTA for $50 a month. Fits narrow closets. Repairs and old-machine haul-away included.",
+        "Rent a stackable washer and dryer in Toronto and the GTA for $12.50 a week. Fits narrow closets. Repairs and old-machine haul-away included.",
       h1: "Stackable washer & dryer rental",
       intro:
         "A front-load washer with the dryer on top: two full machines on the floor space of one.",
@@ -40,15 +40,15 @@ export const machineTypes = [
     title: "One-piece laundry centre",
     description:
       "Washer and dryer built as one unit, 24″ or 27″ wide. The usual condo-closet machine.",
-    price: 50,
+    price: 12.5,
     priceNote: "for the set",
     photo: "photos/types/laundry-centre.jpg",
     drawing: "types/one-piece.svg",
     alt: "One-piece laundry centre: a dryer above a top-load washer in one cabinet",
     page: {
-      metaTitle: "Laundry Centre Rental, Toronto | One-Piece Unit, $50/month",
+      metaTitle: "Laundry Centre Rental, Toronto | One-Piece Unit, $12.50/week",
       metaDescription:
-        "Rent a one-piece laundry centre (washer and dryer in one unit) in Toronto and the GTA for $50 a month. 24″ or 27″ wide. Repairs included.",
+        "Rent a one-piece laundry centre (washer and dryer in one unit) in Toronto and the GTA for $12.50 a week. 24″ or 27″ wide. Repairs included.",
       h1: "Laundry centre rental: washer & dryer in one unit",
       intro:
         "A top-load washer and a dryer built into one cabinet. One machine to deliver, one footprint to fit.",
@@ -69,15 +69,15 @@ export const machineTypes = [
     slug: "side-by-side-front-load",
     title: "Side-by-side front-load",
     description: "Two machines next to each other. Big loads, easy to reach.",
-    price: 50,
+    price: 12.5,
     priceNote: "for the set",
     photo: "photos/types/side-by-side-front-load.jpg",
     drawing: "types/side-by-side-front.svg",
     alt: "Front-load washer and dryer standing side by side",
     page: {
-      metaTitle: "Front-Load Washer & Dryer Rental, Toronto | $50/month",
+      metaTitle: "Front-Load Washer & Dryer Rental, Toronto | $12.50/week",
       metaDescription:
-        "Rent a side-by-side front-load washer and dryer in Toronto and the GTA for $50 a month. Full-size drums for big loads. Repairs included.",
+        "Rent a side-by-side front-load washer and dryer in Toronto and the GTA for $12.50 a week. Full-size drums for big loads. Repairs included.",
       h1: "Side-by-side front-load washer & dryer rental",
       intro:
         "A front-load washer and a matching dryer standing next to each other. Full-size drums, a flat top to fold on.",
@@ -98,15 +98,15 @@ export const machineTypes = [
     slug: "side-by-side-top-load",
     title: "Side-by-side top-load",
     description: "Classic top-loader with a matching dryer. Simple and tough.",
-    price: 50,
+    price: 12.5,
     priceNote: "for the set",
     photo: "photos/types/side-by-side-top-load.jpg",
     drawing: "types/side-by-side-top.svg",
     alt: "Top-load washer with a matching dryer",
     page: {
-      metaTitle: "Top-Load Washer & Dryer Rental, Toronto | $50/month",
+      metaTitle: "Top-Load Washer & Dryer Rental, Toronto | $12.50/week",
       metaDescription:
-        "Rent a top-load washer and matching dryer in Toronto and the GTA for $50 a month. Simple to use, less bending. Repairs and haul-away included.",
+        "Rent a top-load washer and matching dryer in Toronto and the GTA for $12.50 a week. Simple to use, less bending. Repairs and haul-away included.",
       h1: "Side-by-side top-load washer & dryer rental",
       intro:
         "The classic pair: a top-load washer with a matching dryer next to it. Simple controls, less bending.",
@@ -127,15 +127,15 @@ export const machineTypes = [
     slug: "single-machine",
     title: "Washer or dryer only",
     description: "One machine to pair with what you already have.",
-    price: 25,
+    price: 6.25,
     priceNote: null,
     photo: "photos/types/single-machine.jpg",
     drawing: "types/single.svg",
     alt: "One washer next to the dashed outline of a machine you already have",
     page: {
-      metaTitle: "Washer or Dryer Rental, Toronto | One Machine, $25/month",
+      metaTitle: "Washer or Dryer Rental, Toronto | One Machine, $6.25/week",
       metaDescription:
-        "Rent just a washer or just a dryer in Toronto and the GTA for $25 a month. Pair it with the machine you have. Repairs included.",
+        "Rent just a washer or just a dryer in Toronto and the GTA for $6.25 a week. Pair it with the machine you have. Repairs included.",
       h1: "Washer or dryer rental: one machine",
       intro:
         "Just a washer or just a dryer, to pair with the machine you already have.",
