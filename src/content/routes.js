@@ -20,6 +20,7 @@ export const requestFormHref = "/#request";
 const HOME = { name: "Home", path: "/" };
 const MACHINES = { name: "Machines", path: "/machines/" };
 const AREAS = { name: "Areas", path: "/areas/" };
+const LANDLORDS = { name: "Landlords", path: "/landlords/" };
 const TORONTO = { name: "Toronto", path: "/toronto/" };
 
 const cityRoute = (city) => ({
@@ -86,6 +87,26 @@ export const routes = [
     metaDescription: machine.page.metaDescription,
     breadcrumbs: [HOME, MACHINES, { name: machine.title, path: machinePath(machine) }],
   })),
+  {
+    path: "/landlords/",
+    kind: "landlords",
+    lang: "en",
+    llmsNote: "two options: tenants rent directly, or the landlord rents machines for the units",
+    metaTitle: "Washer & Dryer Rental for Landlords | Toronto & the GTA",
+    metaDescription:
+      "Laundry for rental units in Toronto and the GTA: tenants rent from us directly, or you rent machines for your units. Repairs included either way.",
+    breadcrumbs: [HOME, LANDLORDS],
+  },
+  {
+    path: "/landlords/quote/",
+    kind: "landlord-quote",
+    lang: "en",
+    llmsNote: "quote request form for landlords",
+    metaTitle: "Landlord Quote: Washers & Dryers for Rental Units",
+    metaDescription:
+      "Ask for a quote for washers and dryers in your rental units in Toronto and the GTA. For 3 or more units, we quote per building after seeing it.",
+    breadcrumbs: [HOME, LANDLORDS, { name: "Get a quote", path: "/landlords/quote/" }],
+  },
   {
     path: "/faq/",
     kind: "faq",

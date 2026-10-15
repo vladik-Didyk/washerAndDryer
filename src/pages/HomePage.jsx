@@ -3,6 +3,7 @@ import Machines from "../components/Machines";
 import HowItWorks from "../components/HowItWorks";
 import InstallVideos from "../components/InstallVideos";
 import Prices from "../components/Prices";
+import LandlordsTeaser from "../components/LandlordsTeaser";
 import About from "../components/About";
 import ServiceArea from "../components/ServiceArea";
 import FAQ from "../components/FAQ";
@@ -18,6 +19,7 @@ export default function HomePage() {
       <HowItWorks />
       <InstallVideos />
       <Prices />
+      <LandlordsTeaser />
       <About />
       <ServiceArea />
       <FAQ />

@@ -1,17 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  ChevronDown,
-  CircleAlert,
-  CircleCheck,
-  LoaderCircle,
-  MessageSquare,
-  Phone,
-} from "lucide-react";
+import { MessageSquare, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
 import { machineTypes } from "../content/machines";
+import {
+  FieldError,
+  Honeypot,
+  Required,
+  RequiredNote,
+  SelectChevron,
+  SendError,
+  SentPanel,
+  SubmitButton,
+  describedBy,
+  sendForm,
+} from "./FormParts";
 
-// Rental request form, sent through web3forms. A draft is kept in localStorage while typing.
+// Rental request form, sent through web3forms (FormParts.jsx). A draft is kept in
+// localStorage while typing.
 const DRAFT_KEY = "rentalRequestDraft";
 
 const EMPTY_VALUES = {
@@ -83,32 +89,12 @@ function todayISO() {
     .slice(0, 10);
 }
 
-function FieldError({ id, error }) {
-  if (!error) return null;
-  return (
-    <p id={id} className="field-error">
-      <CircleAlert className="h-4 w-4 shrink-0" aria-hidden="true" />
-      {error.message}
-    </p>
-  );
-}
-
-function Required() {
-  return (
-    <span aria-hidden="true" className="text-red-700">
-      {" "}
-      *
-    </span>
-  );
-}
-
 export default function BookingForm() {
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [initialValues] = useState(readDraft);
   // Set after hydration, so the prerendered HTML doesn't carry the build date.
   const [minDate, setMinDate] = useState(undefined);
   const saveTimer = useRef(null);
-  const sentHeadingRef = useRef(null);
   const { phone, hours } = siteConfig;
 
   const {
@@ -136,53 +122,33 @@ export default function BookingForm() {
     setMinDate(todayISO());
   }, []);
 
-  useEffect(() => {
-    if (status === "sent") sentHeadingRef.current?.focus();
-  }, [status]);
-
   const onSubmit = async (data) => {
     setStatus("sending");
     const name = data.name.trim();
-    const payload = {
-      access_key: siteConfig.web3formsKey,
-      subject: `New rental request — ${name}`,
-      from_name: "GTA Washer & Dryer Rentals website",
-      name,
-      phone: data.phone.trim(),
-      area: data.area,
-      need: data.need,
-      machine_type: data.machineType || "Not sure",
-      closet_width: data.closetWidth.trim() || "Not given",
-      start_date: data.startDate || "Not given",
-      notes: data.notes.trim() || "None",
-    };
-    // web3forms honeypot: only bots tick the hidden box, and web3forms rejects those.
-    if (data.botcheck) payload.botcheck = true;
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      const result = await response.json();
-      if (response.ok && result.success) {
-        reset(EMPTY_VALUES);
-        window.clearTimeout(saveTimer.current);
-        removeDraft();
-        setStatus("sent");
-      } else {
-        setStatus("error");
-      }
-    } catch {
+    const sent = await sendForm(
+      {
+        subject: `New rental request — ${name}`,
+        name,
+        phone: data.phone.trim(),
+        area: data.area,
+        need: data.need,
+        machine_type: data.machineType || "Not sure",
+        closet_width: data.closetWidth.trim() || "Not given",
+        start_date: data.startDate || "Not given",
+        notes: data.notes.trim() || "None",
+      },
+      data.botcheck,
+    );
+    if (sent) {
+      reset(EMPTY_VALUES);
+      window.clearTimeout(saveTimer.current);
+      removeDraft();
+      setStatus("sent");
+    } else {
       setStatus("error");
     }
   };
 
-  const describedBy = (...ids) => ids.filter(Boolean).join(" ") || undefined;
   const sending = status === "sending";
 
   return (
@@ -229,31 +195,7 @@ export default function BookingForm() {
 
         <div className="lg:col-span-7">
           {status === "sent" ? (
-            <div className="rounded-3xl border border-line bg-white px-6 py-12 text-center sm:px-10">
-              <CircleCheck
-                className="mx-auto h-12 w-12 text-brand"
-                strokeWidth={1.75}
-                aria-hidden="true"
-              />
-              <h3
-                ref={sentHeadingRef}
-                tabIndex={-1}
-                aria-describedby="request-sent-note"
-                className="mt-4 font-display text-2xl font-bold text-ink"
-              >
-                Request sent.
-              </h3>
-              <p id="request-sent-note" className="lead mt-2">
-                We'll call or text you.
-              </p>
-              <button
-                type="button"
-                onClick={() => setStatus("idle")}
-                className="btn btn-secondary mt-8"
-              >
-                Send another
-              </button>
-            </div>
+            <SentPanel onReset={() => setStatus("idle")} />
           ) : (
             <form
               noValidate
@@ -261,10 +203,7 @@ export default function BookingForm() {
               aria-labelledby="request-title"
               className="rounded-3xl border border-line bg-white p-5 sm:p-8"
             >
-              <p className="text-sm text-ink-muted">
-                Fields marked <span className="text-red-700">*</span> are
-                required.
-              </p>
+              <RequiredNote />
 
               <div className="mt-5 grid gap-5 sm:grid-cols-2">
                 <div>
@@ -337,10 +276,7 @@ export default function BookingForm() {
                         </option>
                       ))}
                     </select>
-                    <ChevronDown
-                      className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-ink-soft"
-                      aria-hidden="true"
-                    />
+                    <SelectChevron />
                   </div>
                   <FieldError id="area-error" error={errors.area} />
                 </div>
@@ -388,10 +324,7 @@ export default function BookingForm() {
                         </option>
                       ))}
                     </select>
-                    <ChevronDown
-                      className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-ink-soft"
-                      aria-hidden="true"
-                    />
+                    <SelectChevron />
                   </div>
                 </div>
 
@@ -450,44 +383,9 @@ export default function BookingForm() {
                 </div>
               </div>
 
-              {/* Honeypot for web3forms. Hidden from people and screen readers; bots tick it. */}
-              <input
-                type="checkbox"
-                autoComplete="off"
-                className="hidden"
-                {...register("botcheck")}
-              />
-
-              {status === "error" && (
-                <div
-                  role="alert"
-                  className="mt-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-red-800"
-                >
-                  <CircleAlert className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-                  <p>
-                    Couldn't send. Call or text{" "}
-                    <a href={phone.tel} className="font-semibold underline underline-offset-2">
-                      {phone.display}
-                    </a>
-                    .
-                  </p>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={sending}
-                className="btn btn-primary mt-6 w-full disabled:cursor-wait disabled:opacity-70"
-              >
-                {sending ? (
-                  <>
-                    <LoaderCircle className="h-5 w-5 animate-spin" aria-hidden="true" />
-                    Sending…
-                  </>
-                ) : (
-                  "Send request"
-                )}
-              </button>
+              <Honeypot register={register} />
+              {status === "error" && <SendError />}
+              <SubmitButton sending={sending}>Send request</SubmitButton>
             </form>
           )}
         </div>

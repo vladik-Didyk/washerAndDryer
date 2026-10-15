@@ -220,6 +220,25 @@ function machinesJsonLd(route) {
   ];
 }
 
+function landlordService(route) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Washer and dryer rental for landlords",
+    serviceType: "Washer and dryer rental for rental units",
+    description: route.metaDescription,
+    url: absolute(route.path),
+    provider: providerRef(),
+    areaServed: areaServed(),
+    audience: { "@type": "Audience", audienceType: "Landlords" },
+    offers: weeklyOffer(
+      "Washer and dryer set for a rental unit",
+      siteConfig.prices.set,
+      "List price per washer and dryer set, per week. For 3 or more units, quoted per building after seeing it. Repairs included.",
+    ),
+  };
+}
+
 function machineService(route) {
   const { machine } = route;
   const offer =
@@ -271,6 +290,8 @@ function mainJsonLd(route) {
       return machinesJsonLd(route);
     case "machine":
       return [machineService(route)];
+    case "landlords":
+      return [landlordService(route)];
     case "language":
       return [languageService(route)];
     default:

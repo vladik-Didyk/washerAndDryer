@@ -7,6 +7,8 @@ import CityPage from "./pages/CityPage";
 import DistrictPage from "./pages/DistrictPage";
 import AreasPage from "./pages/AreasPage";
 import FaqPage from "./pages/FaqPage";
+import LandlordsPage from "./pages/LandlordsPage";
+import LandlordQuotePage from "./pages/LandlordQuotePage";
 import MachinePage from "./pages/MachinePage";
 import MachinesPage from "./pages/MachinesPage";
 import LanguagePage from "./pages/LanguagePage";
@@ -30,6 +32,10 @@ function Page({ route }) {
       return <MachinesPage />;
     case "machine":
       return <MachinePage machine={route.machine} />;
+    case "landlords":
+      return <LandlordsPage />;
+    case "landlord-quote":
+      return <LandlordQuotePage />;
     case "faq":
       return <FaqPage />;
     case "language":
