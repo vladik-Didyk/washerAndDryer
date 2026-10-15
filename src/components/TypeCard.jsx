@@ -3,9 +3,11 @@ import { machinePath } from "../content/routes";
 import MachineImage from "./MachineImage";
 import KeepWordsWhole from "./KeepWordsWhole";
 
-// Card widths in the usual grids (Machines.jsx and others), for the photo's srcset.
+// Card widths for the photo's srcset: the five-type grid (Machines.jsx), and grids of four
+// (other types on a type page, types that fit a district).
 export const TYPE_CARD_SIZES =
   "(min-width: 1280px) 14rem, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 38vw";
+export const TYPE_CARD_SIZES_4UP = "(min-width: 1024px) 17rem, (min-width: 640px) 50vw, 38vw";
 
 // One machine type as a card: picture first, then the name, one line about it, the weekly
 // price and "See details". The name is the link, stretched over the whole card; the focus

@@ -1,6 +1,7 @@
 // One page per city at /<slug>/. Local detail here must stay generally true and
 // non-promissory: no claims about installs done, customers, or buildings served.
-// `machine` is the machine type pictured in the page header (a slug from machines.js).
+// `photo` is the example photo in the page header: one of the machine type photos in
+// machines.js, a different one for each city, picked to match the homes described.
 // `teaser` is the one-line summary on the /areas/ page. Toronto's districts have their own
 // pages (districts.js); its `neighbourhoods` link to them.
 export const cities = [
@@ -13,7 +14,7 @@ export const cities = [
       "Washer and dryer rental in Toronto, North York, Etobicoke, Scarborough, East York and York: $12.50 a week for a set, $6.25 for one machine.",
     intro:
       "We rent washers and dryers across the City of Toronto, including North York, Etobicoke, Scarborough, East York and York.",
-    machine: "laundry-centre",
+    photo: "photos/types/stackable.jpg",
     neighbourhoods: ["North York", "Etobicoke", "Scarborough", "East York", "York"],
     homes: [
       "A lot of Toronto lives in condos and apartments. Condo laundry closets are usually narrow, so a 24-inch stackable pair or a one-piece laundry centre is the common fit.",
@@ -36,7 +37,7 @@ export const cities = [
       "Washer and dryer rental in Mississauga: $12.50 a week for a set, $6.25 for one machine. Repairs and old-machine haul-away included. No credit check.",
     intro:
       "We rent washers and dryers across Mississauga, from Port Credit to Meadowvale and from Malton to Erin Mills.",
-    machine: "stackable",
+    photo: "photos/types/stackable-1.jpg",
     neighbourhoods: [
       "City Centre",
       "Port Credit",
@@ -67,7 +68,7 @@ export const cities = [
       "Washer and dryer rental in Brampton: $12.50 a week for a washer and dryer set, $6.25 for one machine. Repairs included. Call (437) 907-6955.",
     intro:
       "We rent washers and dryers across Brampton, including Bramalea, Springdale, Heart Lake, Mount Pleasant and Castlemore.",
-    machine: "side-by-side-front-load",
+    photo: "photos/types/side-by-side-front-load-2.jpg",
     neighbourhoods: [
       "Bramalea",
       "Springdale",
@@ -97,7 +98,7 @@ export const cities = [
       "Washer and dryer rental in Vaughan, Woodbridge, Maple and Concord: $12.50 a week for a set, $6.25 for one machine. Repairs included.",
     intro:
       "We rent washers and dryers across Vaughan, including Woodbridge, Maple, Concord, Kleinburg and the Vaughan side of Thornhill.",
-    machine: "side-by-side-top-load",
+    photo: "photos/types/side-by-side-top-load-1.jpg",
     neighbourhoods: [
       "Woodbridge",
       "Maple",
@@ -127,7 +128,7 @@ export const cities = [
       "Washer and dryer rental in Markham and Unionville: $12.50 a week for a set, $6.25 for one machine. Repairs and haul-away included. No credit check.",
     intro:
       "We rent washers and dryers across Markham, including Unionville, Markham Village, Cornell, Milliken and Berczy Village.",
-    machine: "stackable",
+    photo: "photos/types/side-by-side-front-load-1.jpg",
     neighbourhoods: [
       "Unionville",
       "Markham Village",
@@ -157,7 +158,7 @@ export const cities = [
       "Washer and dryer rental in Richmond Hill and Oak Ridges: $12.50 a week for a set, $6.25 for one machine. Repairs included. Call (437) 907-6955.",
     intro:
       "We rent washers and dryers across Richmond Hill, including Oak Ridges, Mill Pond, Bayview Hill, Richvale and Jefferson.",
-    machine: "laundry-centre",
+    photo: "photos/types/side-by-side-top-load.jpg",
     neighbourhoods: [
       "Oak Ridges",
       "Mill Pond",

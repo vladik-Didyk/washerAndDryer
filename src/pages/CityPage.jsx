@@ -1,9 +1,9 @@
 import { siteConfig } from "../content/config";
 import { cities } from "../content/cities";
 import { districts } from "../content/districts";
-import { machineTypes } from "../content/machines";
 import { cityPath, districtPath } from "../content/routes";
 import PageHero from "../components/PageHero";
+import TrustStrip from "../components/TrustStrip";
 import LocalLaundry from "../components/LocalLaundry";
 import DeliveryCheck from "../components/DeliveryCheck";
 import Machines from "../components/Machines";
@@ -20,7 +20,6 @@ const districtLinks = Object.fromEntries(
 
 export default function CityPage({ city }) {
   const { prices } = siteConfig;
-  const machine = machineTypes.find((type) => type.slug === city.machine);
   const isToronto = city.slug === "toronto";
   const otherCities = [
     ...cities
@@ -35,11 +34,12 @@ export default function CityPage({ city }) {
         eyebrow={`${city.name} · ${siteConfig.companyName}`}
         title={`Washer & dryer rental in ${city.name}`}
         intro={city.intro}
-        machine={machine}
+        photo={city.photo}
         price={prices.setText}
         priceLabel="a week for a washer + dryer set"
         otherPrice={`or $${prices.singleText} a week for one machine`}
       />
+      <TrustStrip />
 
       <LocalLaundry area={city} neighbourhoodLinks={isToronto ? districtLinks : {}} />
       <DeliveryCheck />

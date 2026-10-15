@@ -1,9 +1,9 @@
 import { siteConfig } from "../content/config";
 import { cities } from "../content/cities";
 import { districts } from "../content/districts";
-import { machineTypes } from "../content/machines";
 import { cityPath, districtPath } from "../content/routes";
 import PageHero from "../components/PageHero";
+import TrustStrip from "../components/TrustStrip";
 import LocalLaundry from "../components/LocalLaundry";
 import MachineFits from "../components/MachineFits";
 import DeliveryCheck from "../components/DeliveryCheck";
@@ -18,7 +18,6 @@ const YORK_REGION = ["vaughan", "markham", "richmond-hill"];
 // or York. Same structure as a city page, with its own local text and machine suggestions.
 export default function DistrictPage({ district }) {
   const { prices } = siteConfig;
-  const machine = machineTypes.find((type) => type.slug === district.machine);
   const toronto = cities.find((city) => city.slug === "toronto");
   const torontoLinks = [
     { href: cityPath(toronto), label: "All of Toronto" },
@@ -40,11 +39,12 @@ export default function DistrictPage({ district }) {
         eyebrow={`${district.name} · Toronto`}
         title={`Washer & dryer rental in ${district.name}`}
         intro={district.intro}
-        machine={machine}
+        photo={district.photo}
         price={prices.setText}
         priceLabel="a week for a washer + dryer set"
         otherPrice={`or $${prices.singleText} a week for one machine`}
       />
+      <TrustStrip />
 
       <LocalLaundry area={district}>
         {district.regionNote && (

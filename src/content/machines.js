@@ -261,6 +261,16 @@ export const machineTypes = [
 // The type's photos whose files are in this build, main photo first. None: show the drawing.
 export const machinePhotos = (machine) => machine.photos.filter((photo) => hasPhotoFile(photo.src));
 
+// One of the type photos by its file, with the type it shows (city and district pages pick
+// theirs this way). Null when the file isn't in the build.
+export function findMachinePhoto(src) {
+  for (const machine of machineTypes) {
+    const photo = machinePhotos(machine).find((item) => item.src === src);
+    if (photo) return { ...photo, machine };
+  }
+  return null;
+}
+
 // Hookups every machine needs. Shown on each machine type page.
 export const hookupChecklist = [
   "Hot and cold water taps for the washer",

@@ -1,7 +1,8 @@
 // Toronto's districts (the former municipalities), one page each at /toronto/<slug>/.
 // Same rules as cities.js: local detail stays general and true. Neighbourhoods listed are ones
 // that are clearly inside the district. No claims about installs done, customers or buildings.
-// `machine` is the type pictured in the page header; `fits` lists the types that usually suit
+// `photo` is the example photo in the page header (one of the machine type photos in
+// machines.js, a different one for each district); `fits` lists the types that usually suit
 // the homes there (slugs from machines.js).
 export const districts = [
   {
@@ -13,7 +14,7 @@ export const districts = [
     teaser: "Condo towers along Yonge Street, houses with basement laundry on the side streets.",
     intro:
       "We rent washers and dryers across North York, from Willowdale and Bayview Village to Don Mills, Downsview and Bathurst Manor.",
-    machine: "stackable",
+    photo: "photos/types/stackable-1.jpg",
     neighbourhoods: [
       "Willowdale",
       "Bayview Village",
@@ -52,7 +53,7 @@ export const districts = [
     teaser: "Lakeshore condos, houses with basement laundry rooms, and apartment buildings.",
     intro:
       "We rent washers and dryers across Etobicoke, from the lakeshore at Humber Bay Shores, Mimico and Long Branch up to Islington Village and Rexdale.",
-    machine: "side-by-side-front-load",
+    photo: "photos/types/side-by-side-front-load.jpg",
     neighbourhoods: [
       "Humber Bay Shores",
       "Mimico",
@@ -91,7 +92,7 @@ export const districts = [
     teaser: "Mostly houses and townhouses, plus apartment towers and newer condos.",
     intro:
       "We rent washers and dryers across Scarborough, including Agincourt, Malvern, Wexford, Guildwood, Birch Cliff and West Hill.",
-    machine: "side-by-side-top-load",
+    photo: "photos/types/side-by-side-top-load-1.jpg",
     neighbourhoods: [
       "Agincourt",
       "L'Amoreaux",
@@ -130,7 +131,7 @@ export const districts = [
     teaser: "Streets of houses in Leaside and Pape Village, apartment towers in Thorncliffe Park.",
     intro:
       "We rent washers and dryers across East York, including Leaside, Thorncliffe Park, Pape Village, Woodbine Heights and Crescent Town.",
-    machine: "laundry-centre",
+    photo: "photos/types/side-by-side-top-load-2.jpg",
     neighbourhoods: [
       "Leaside",
       "Thorncliffe Park",
@@ -169,7 +170,7 @@ export const districts = [
       "We rent washers and dryers across York, the former City of York northwest of downtown Toronto, including Weston, Mount Dennis, Fairbank and Oakwood Village.",
     // Not York Region: Vaughan, Markham and Richmond Hill have their own pages.
     regionNote: true,
-    machine: "stackable",
+    photo: "photos/types/side-by-side-front-load-2.jpg",
     neighbourhoods: [
       "Weston",
       "Mount Dennis",

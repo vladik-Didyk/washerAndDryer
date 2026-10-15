@@ -6,7 +6,7 @@ import { firstWeekFreeActive, firstWeekFreeOffer } from "../content/offers";
 import { cityPath, hasRoute } from "../content/routes";
 import MachineGallery from "../components/MachineGallery";
 import TrustStrip from "../components/TrustStrip";
-import TypeCard from "../components/TypeCard";
+import TypeCard, { TYPE_CARD_SIZES_4UP } from "../components/TypeCard";
 import KeepWordsWhole from "../components/KeepWordsWhole";
 import HowItWorks from "../components/HowItWorks";
 import LinkList from "../components/LinkList";
@@ -14,9 +14,6 @@ import CtaBand from "../components/CtaBand";
 import BookingForm from "../components/BookingForm";
 
 const MEASURE_GUIDE = "/guides/measure-your-laundry-space/";
-
-// Four cards in a row from 1024px.
-const RELATED_CARD_SIZES = "(min-width: 1024px) 17rem, (min-width: 640px) 50vw, 38vw";
 
 function CheckItem({ children }) {
   return (
@@ -261,7 +258,7 @@ export default function MachinePage({ machine }) {
           </div>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {otherTypes.map((other) => (
-              <TypeCard key={other.slug} machine={other} sizes={RELATED_CARD_SIZES} />
+              <TypeCard key={other.slug} machine={other} sizes={TYPE_CARD_SIZES_4UP} />
             ))}
           </ul>
           <p className="mt-6 text-sm text-ink-muted">
