@@ -1,9 +1,10 @@
 import { Check, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
+import HeroMachines from "./HeroMachines";
 
 const included = ["Repairs included", "Old machine haul-away included"];
 
-// Hero: the monthly price is the headline fact; the drawing shows the usual condo-closet machine.
+// Hero: the monthly price is the headline fact; the drawing cycles through the five machine types.
 export default function Welcome() {
   const { phone, prices, owner, languages } = siteConfig;
 
@@ -82,36 +83,7 @@ export default function Welcome() {
         </div>
 
         <div className="lg:col-span-5">
-          <div className="relative mx-auto w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-none">
-            <div className="relative aspect-square">
-              <div
-                aria-hidden="true"
-                className="absolute inset-[7%] rounded-full bg-gold motion-safe:animate-disc-in"
-              />
-              <div className="absolute inset-0 flex justify-center motion-safe:animate-rise-in">
-                <img
-                  src={`${import.meta.env.BASE_URL}types/one-piece.svg`}
-                  alt="Drawing of a one-piece laundry centre, 24″ or 27″ wide: a dryer above a top-load washer in one cabinet"
-                  width="400"
-                  height="480"
-                  fetchPriority="high"
-                  className="h-full w-auto"
-                />
-              </div>
-            </div>
-            {/* Width callout under the machine, drawn like a dimension line. */}
-            <div
-              aria-hidden="true"
-              className="mx-auto mt-1 w-[41.7%] motion-safe:animate-fade-in"
-            >
-              <div className="relative h-3.5 border-x-2 border-brand">
-                <div className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 bg-brand" />
-              </div>
-              <p className="mt-2 whitespace-nowrap text-center font-display text-sm font-semibold text-brand">
-                24″ or 27″ wide
-              </p>
-            </div>
-          </div>
+          <HeroMachines />
         </div>
       </div>
     </section>
