@@ -15,6 +15,7 @@ export const languagePages = [
     h1: "Alquiler de lavadora y secadora en Toronto y el GTA",
     priceSet: (price) => `$${price} a la semana por una lavadora y una secadora`,
     priceSingle: (price) => `o $${price} a la semana por una sola máquina`,
+    priceNote: "Precios en dólares canadienses. No cobramos HST.",
     firstWeekFree:
       "Primera semana gratis para clientes nuevos que empiecen su alquiler hasta el 30 de noviembre de 2026. El depósito y la entrega se pagan normalmente.",
     includedTitle: "Incluido",
@@ -30,7 +31,7 @@ export const languagePages = [
       "Mínimo 52 semanas. Después, semana a semana; cualquiera de las partes puede terminar el alquiler con 30 días de aviso y nosotros recogemos la máquina.",
       "La entrega y la instalación se cotizan antes de que usted pague.",
       "Máquinas usadas, revisadas y en buen estado. La marca y el modelo dependen de la disponibilidad.",
-      "Pago por e-Transfer o con tarjeta.",
+      "Pago por Interac e-Transfer o con tarjeta de crédito.",
       "Recomiende a un amigo: usted recibe $100 cuando él firma por 12 meses o más.",
     ],
     machinesTitle: "Tipos de máquinas",
@@ -76,6 +77,7 @@ export const languagePages = [
     h1: "Аренда стиральной и сушильной машины в Торонто и GTA",
     priceSet: (price) => `$${price} в неделю за стиральную и сушильную машину`,
     priceSingle: (price) => `или $${price} в неделю за одну машину`,
+    priceNote: "Цены в канадских долларах. HST не взимаем.",
     firstWeekFree:
       "Первая неделя бесплатно для новых клиентов, если аренда начнётся до 30 ноября 2026 года. Депозит и доставка оплачиваются как обычно.",
     includedTitle: "Входит в цену",
@@ -91,7 +93,7 @@ export const languagePages = [
       "Минимальный срок — 52 недели. Дальше — понедельно; любая сторона может завершить аренду, предупредив за 30 дней, и мы забираем машину.",
       "Стоимость доставки и установки называем до оплаты.",
       "Машины б/у, проверенные, в хорошем рабочем состоянии. Марка и модель — в зависимости от наличия.",
-      "Оплата через e-Transfer или картой.",
+      "Оплата через Interac e-Transfer или кредитной картой.",
       "Порекомендуйте нас другу: вы получите $100, когда он заключит договор на 12 месяцев или дольше.",
     ],
     machinesTitle: "Какие бывают машины",

@@ -24,6 +24,7 @@ function PriceCard({ title, price, highlighted = false }) {
           /week
         </span>
       </p>
+      <p className="mt-1 text-sm font-medium text-ink-muted">No HST charged · Prices in CAD</p>
 
       <p className="mt-6 font-display text-[15px] font-semibold text-ink">
         Included
@@ -55,6 +56,13 @@ function PriceCard({ title, price, highlighted = false }) {
 
 export default function Prices() {
   const { prices } = siteConfig;
+  const terms = [
+    "Prices in Canadian dollars. No HST charged.",
+    `$${prices.deposit} refundable deposit, returned when the machine comes back working.`,
+    "52-week minimum, then week to week with 30 days' notice.",
+    "Delivery and installation quoted per job, before you pay.",
+    "Pay by Interac e-Transfer or credit card.",
+  ];
 
   return (
     <section id="prices" aria-labelledby="prices-title" className="section">
@@ -81,12 +89,14 @@ export default function Prices() {
           </p>
         </div>
 
-        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink-muted">
-          ${prices.deposit} refundable deposit, returned when the machine comes
-          back working. 52-week minimum, then week to week with 30 days'
-          notice. Delivery and installation quoted per job, before you pay. Pay
-          by e-Transfer or card.
-        </p>
+        <ul className="mt-6 grid max-w-5xl gap-x-6 gap-y-2 text-sm leading-relaxed text-ink-muted md:grid-cols-2">
+          {terms.map((term) => (
+            <li key={term} className="flex gap-2.5">
+              <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+              {term}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -335,7 +335,7 @@ export default function BookingForm() {
                   <input
                     id="closetWidth"
                     type="text"
-                    placeholder={'e.g. 24"'}
+                    placeholder={'e.g. 24" or 61 cm'}
                     className="field mt-2"
                     {...register("closetWidth")}
                   />

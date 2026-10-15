@@ -126,6 +126,7 @@ const terms = {
       heading: "Price",
       blocks: [
         `$${prices.setText} a week for a washer and dryer set. $${prices.singleText} a week for one machine. Rent is charged every week on the same weekday.`,
+        "Prices are in Canadian dollars. We don't charge HST: the weekly price is what you pay.",
       ],
     },
     {
@@ -179,7 +180,7 @@ const terms = {
       id: "payment",
       heading: "Payment",
       blocks: [
-        "By e-Transfer or card. Card payments go through a Stripe payment link sent with your quote.",
+        "By Interac e-Transfer or credit card. Card payments go through a Stripe payment link sent with your quote.",
       ],
     },
     // Left out of builds made after the offer ends.

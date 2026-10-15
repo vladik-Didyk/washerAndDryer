@@ -51,7 +51,8 @@ export default function AreasPage() {
         <p className="mt-4 font-display text-lg font-bold text-brand">
           {`Same price in every area: $${prices.setText} a week for a set, $${prices.singleText} for one machine.`}
         </p>
-        <p className="mt-2 text-ink-soft">Farther away? Text us your address and we'll tell you.</p>
+        <p className="mt-1 text-sm text-ink-muted">Prices in Canadian dollars. No HST charged.</p>
+        <p className="mt-3 text-ink-soft">Farther away? Text us your address and we'll tell you.</p>
         <a href={phone.sms} className="btn btn-secondary mt-6">
           <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
           Text {phone.display}

@@ -61,6 +61,7 @@ export function llmsTxt() {
 
 - Washer + dryer set: $${prices.setText} a week (CAD)
 - One machine (washer only or dryer only): $${prices.singleText} a week (CAD)
+- No HST is charged: the weekly price is what you pay
 - Rent is charged every week on the same weekday. There are no monthly prices.
 - Repairs included: repair or a replacement machine at no charge
 - Old machine haul-away included, at no charge
@@ -80,7 +81,7 @@ ${offers.join("\n")}
 - To end a rental, text us
 - No credit check
 - Delivery usually the same week
-- Payment by e-Transfer or card; card payments go through a payment link sent with the quote
+- Payment by Interac e-Transfer or credit card; card payments go through a payment link sent with the quote
 - Damage beyond normal wear is the renter's responsibility
 - The full written rental agreement is given before signing
 

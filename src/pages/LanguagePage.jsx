@@ -27,6 +27,7 @@ export default function LanguagePage({ content }) {
             {content.priceSet(prices.setText)}
           </p>
           <p className="mt-2 text-lg text-ink-soft">{content.priceSingle(prices.singleText)}</p>
+          <p className="mt-1 text-sm text-ink-muted">{content.priceNote}</p>
           {firstWeekFreeActive && (
             <p className="mt-5 flex max-w-3xl gap-3 rounded-2xl bg-gold/20 px-5 py-4 text-ink">
               <Gift className="mt-0.5 h-5 w-5 shrink-0 text-brand" aria-hidden="true" />

@@ -87,6 +87,8 @@ function localBusiness() {
     logo: `${SITE}/brand/logo.png`,
     image: `${SITE}/og-image.jpg`,
     priceRange: "$",
+    currenciesAccepted: "CAD",
+    paymentAccepted: "Interac e-Transfer, Credit Card",
     knowsLanguage: ["en", "es", "ru"],
     address: {
       "@type": "PostalAddress",

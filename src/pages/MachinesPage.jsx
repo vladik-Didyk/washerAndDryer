@@ -109,6 +109,7 @@ export default function MachinesPage() {
           is ${prices.singleText} a week. Every type comes with repairs and old-machine
           haul-away included.
         </p>
+        <p className="mt-2 text-sm text-ink-muted">Prices in Canadian dollars. No HST charged.</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a href="#request" className="btn btn-primary">
             Start your rental

@@ -67,7 +67,12 @@ export const faqGroups = [
       {
         id: "price",
         question: "How much does it cost?",
-        answer: `$${prices.setText} a week for a washer and dryer set, or $${prices.singleText} a week for one machine. Rent is charged every week on the same weekday.`,
+        answer: `$${prices.setText} a week for a washer and dryer set, or $${prices.singleText} a week for one machine, in Canadian dollars. Rent is charged every week on the same weekday.`,
+      },
+      {
+        id: "tax",
+        question: "Do prices include tax?",
+        answer: "We don't charge HST. The weekly price is what you pay.",
       },
       {
         id: "deposit",
@@ -78,7 +83,7 @@ export const faqGroups = [
         id: "payment",
         question: "How do I pay?",
         answer:
-          "By e-Transfer or card. To pay by card, use the payment link we send with your quote.",
+          "By Interac e-Transfer or credit card. To pay by card, use the payment link we send with your quote.",
       },
       {
         id: "referral",
@@ -194,5 +199,5 @@ export const faqGroups = [
 export const faqs = faqGroups.flatMap((group) => group.items);
 
 // The short list on the home page, which links to /faq/ for the rest.
-const homeFaqIds = ["space-needs", "deposit", "minimum-term", "breaks", "delivery-cost"];
+const homeFaqIds = ["space-needs", "deposit", "tax", "minimum-term", "breaks", "delivery-cost"];
 export const homeFaqs = homeFaqIds.map((id) => faqs.find((faq) => faq.id === id));

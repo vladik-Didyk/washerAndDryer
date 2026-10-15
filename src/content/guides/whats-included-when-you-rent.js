@@ -26,7 +26,8 @@ export default {
             `$${prices.singleText} a week for one machine: just a washer or just a dryer`,
           ],
         },
-        "Rent is charged every week on the same weekday. All our prices are weekly.",
+        "Rent is charged every week on the same weekday. All our prices are weekly, in Canadian dollars.",
+        "We don't charge HST. The weekly price is what you pay.",
       ],
     },
     {
@@ -87,7 +88,7 @@ export default {
     {
       heading: "Paying",
       blocks: [
-        "Pay by e-Transfer or card. For a card, we send a payment link with your quote. There's no credit check.",
+        "Pay by Interac e-Transfer or credit card. For a card, we send a payment link with your quote. There's no credit check.",
       ],
     },
     {

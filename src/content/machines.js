@@ -57,7 +57,7 @@ export const machineTypes = [
         "Anyone who wants a front-load washer but has room for only one footprint",
       ],
       size:
-        "Compact stackable pairs are usually about 24 inches wide; full-size ones about 27 inches. Measure the width, depth and height of the space, and the door you have to bring them through. Leave a few inches behind for the hoses and the dryer vent.",
+        "Compact stackable pairs are usually about 24 inches (61 cm) wide; full-size ones about 27 inches (69 cm). Measure the width, depth and height of the space, and the door you have to bring them through. Leave a few inches behind for the hoses and the dryer vent.",
     },
   },
   {
@@ -101,7 +101,7 @@ export const machineTypes = [
         "People who prefer loading the washer from the top",
       ],
       size:
-        "Laundry centres come 24 or 27 inches wide. A 24-inch unit is about 70 inches tall. Measure the closet width and height, and check the depth with the doors closed.",
+        "Laundry centres come 24 or 27 inches (61 or 69 cm) wide. A 24-inch unit is about 70 inches (178 cm) tall. Measure the closet width and height, and check the depth with the doors closed.",
     },
   },
   {
@@ -152,7 +152,7 @@ export const machineTypes = [
         "Spaces with room in front for both doors to swing open",
       ],
       size:
-        "Full-size machines are usually about 27 inches wide each, so plan for roughly 55 inches of width plus a little space between and around them. Check that both doors can open fully.",
+        "Full-size machines are usually about 27 inches (69 cm) wide each, so plan for roughly 55 inches (140 cm) of width plus a little space between and around them. Check that both doors can open fully.",
     },
   },
   {
@@ -203,7 +203,7 @@ export const machineTypes = [
         "Households that want a simple, familiar machine",
       ],
       size:
-        "Full-size machines are usually about 27 inches wide each, so plan for roughly 55 inches of width. The washer lid needs clear space above it to open, so a low shelf over the washer can get in the way.",
+        "Full-size machines are usually about 27 inches (69 cm) wide each, so plan for roughly 55 inches (140 cm) of width. The washer lid needs clear space above it to open, so a low shelf over the washer can get in the way.",
     },
   },
   {
@@ -253,7 +253,7 @@ export const machineTypes = [
         "You want a washer now and a dryer later",
       ],
       size:
-        "Most full-size machines are about 27 inches wide; compact ones about 24 inches. If you are renting a dryer to stack on your washer, tell us the washer's brand and model so we can check that they stack.",
+        "Most full-size machines are about 27 inches (69 cm) wide; compact ones about 24 inches (61 cm). If you are renting a dryer to stack on your washer, tell us the washer's brand and model so we can check that they stack.",
     },
   },
 ];
