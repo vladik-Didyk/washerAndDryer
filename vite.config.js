@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
-import { findMachinePhotos } from "./scripts/photo-sizes.mjs";
+import { findPhotos } from "./scripts/photo-sizes.mjs";
 
 // PREVIEW_DRAFTS=1 (pnpm build:preview) also builds the pages marked `draft: true`, each with a
 // "Draft — not published" ribbon. A normal build leaves them out entirely (src/content/drafts.js).
@@ -21,8 +21,9 @@ export default defineConfig({
   // Build-time constants. The client and the prerender build read the same values, so the
   // prerendered HTML always matches what the browser hydrates.
   define: {
-    // Machine photos present at build time (public/photos/types/*.jpg) with their pixel sizes.
-    __MACHINE_PHOTOS__: JSON.stringify(findMachinePhotos(fileURLToPath(new URL("./public", import.meta.url)))),
+    // Photos present at build time (public/photos/<folder>/*.jpg): pixel sizes, and the WebP
+    // and smaller versions made by scripts/make-photo-versions.mjs (src/content/photos.js).
+    __PHOTOS__: JSON.stringify(findPhotos(fileURLToPath(new URL("./public", import.meta.url)))),
     __INCLUDE_DRAFTS__: JSON.stringify(includeDrafts),
     __BUILD_TIME__: JSON.stringify(buildDate.toISOString()),
   },

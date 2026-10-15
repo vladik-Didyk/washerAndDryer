@@ -1,23 +1,43 @@
 // The five machine types: shown in the Machines section, offered in the request form, and
-// each given its own page at /machines/<slug>/. `compare` feeds the table on /machines/.
+// each given its own page at /machines/<slug>/. `compare` feeds the table on /machines/;
+// `sizes` (with `compare.loads` and `compare.goodFor`) the table on the type's page. Sizes
+// are typical ones only, in inches and centimetres: 24″ = 61 cm, 27″ = 69 cm, 55″ = 140 cm,
+// 70″ = 178 cm.
 //
-// Pictures: `photo` is a real photo the owner adds at public/photos/types/<slug>.jpg.
-// Until that file exists the build falls back to `drawing` (a standalone SVG in public/types/,
-// also used in social graphics). See src/components/MachineImage.jsx and vite.config.js.
+// Pictures: `photos` are example photos (Pexels, see docs/photo-credits.md), the first one the
+// main photo. Each is shown only when its file is in public/photos/types/, with WebP and
+// smaller versions from `pnpm photos`. A type with no photo file shows `drawing` instead (a
+// standalone SVG in public/types/, also used in social graphics), marked as a drawing.
+// Every photo carries "Example of this type. Your machine may be a different brand."
+// See src/components/MachineImage.jsx and src/content/photos.js.
+import { hasPhotoFile } from "./photos";
+
 export const machineTypes = [
   {
     slug: "stackable",
     compare: {
-      width: "About 24″ or 27″, one machine wide",
+      width: "About 24″ (61 cm) or 27″ (69 cm), one machine wide",
       loads: "Front",
       goodFor: "Narrow, tall closets in condos and apartments",
     },
+    sizes: [
+      { label: "Width", value: "About 24″ (61 cm) compact, or about 27″ (69 cm) full-size" },
+      { label: "Floor space", value: "One machine wide: the dryer stands on top of the washer" },
+    ],
     title: "Stackable pair",
-    description:
-      "Front-load washer with the dryer stacked on top. Good for narrow closets.",
+    description: "Dryer stacked on a front-load washer. Fits narrow closets.",
     price: 12.5,
     priceNote: "for the set",
-    photo: "photos/types/stackable.jpg",
+    photos: [
+      {
+        src: "photos/types/stackable-1.jpg",
+        alt: "Example of a stackable washer and dryer: a white dryer on top of a white front-load washer",
+      },
+      {
+        src: "photos/types/stackable.jpg",
+        alt: "Example of a stackable washer and dryer in a laundry closet with its door open",
+      },
+    ],
     drawing: "types/stackable.svg",
     alt: "Front-load washer with a dryer stacked on top",
     page: {
@@ -43,16 +63,25 @@ export const machineTypes = [
   {
     slug: "laundry-centre",
     compare: {
-      width: "24″ or 27″",
+      width: "24″ (61 cm) or 27″ (69 cm)",
       loads: "Top",
       goodFor: "Closets built for a one-piece unit",
     },
+    sizes: [
+      { label: "Width", value: "24″ (61 cm) or 27″ (69 cm)" },
+      { label: "Height", value: "About 70″ (178 cm) for a 24″ unit" },
+    ],
     title: "One-piece laundry centre",
-    description:
-      "Washer and dryer built as one unit, 24″ or 27″ wide. The usual condo-closet machine.",
+    description: "Washer and dryer in one unit. The usual condo-closet machine.",
     price: 12.5,
     priceNote: "for the set",
-    photo: "photos/types/laundry-centre.jpg",
+    // No photo yet: the drawing shows until this file is added (docs/photo-credits.md).
+    photos: [
+      {
+        src: "photos/types/laundry-centre.jpg",
+        alt: "Example of a one-piece laundry centre: a dryer above a top-load washer in one cabinet",
+      },
+    ],
     drawing: "types/one-piece.svg",
     alt: "One-piece laundry centre: a dryer above a top-load washer in one cabinet",
     page: {
@@ -78,15 +107,32 @@ export const machineTypes = [
   {
     slug: "side-by-side-front-load",
     compare: {
-      width: "About 55″ for the pair",
+      width: "About 55″ (140 cm) for the pair",
       loads: "Front",
       goodFor: "Laundry rooms and big loads like bedding",
     },
+    sizes: [
+      { label: "Width", value: "About 27″ (69 cm) each, about 55″ (140 cm) for the pair" },
+      { label: "Clearance", value: "Room in front for both doors to open fully" },
+    ],
     title: "Side-by-side front-load",
-    description: "Two machines next to each other. Big loads, easy to reach.",
+    description: "Two full-size machines side by side. Big loads, easy to reach.",
     price: 12.5,
     priceNote: "for the set",
-    photo: "photos/types/side-by-side-front-load.jpg",
+    photos: [
+      {
+        src: "photos/types/side-by-side-front-load-1.jpg",
+        alt: "Example of a white front-load washer and dryer side by side on a raised platform with drawers",
+      },
+      {
+        src: "photos/types/side-by-side-front-load-2.jpg",
+        alt: "Example of a white front-load washer and dryer side by side on pedestals in a laundry room",
+      },
+      {
+        src: "photos/types/side-by-side-front-load.jpg",
+        alt: "Example of a grey front-load washer and dryer side by side on pedestals, next to a window",
+      },
+    ],
     drawing: "types/side-by-side-front.svg",
     alt: "Front-load washer and dryer standing side by side",
     page: {
@@ -112,15 +158,32 @@ export const machineTypes = [
   {
     slug: "side-by-side-top-load",
     compare: {
-      width: "About 55″ for the pair",
+      width: "About 55″ (140 cm) for the pair",
       loads: "Top",
       goodFor: "Laundry rooms, and less bending to load",
     },
+    sizes: [
+      { label: "Width", value: "About 27″ (69 cm) each, about 55″ (140 cm) for the pair" },
+      { label: "Clearance", value: "Clear space above the washer for the lid to open" },
+    ],
     title: "Side-by-side top-load",
-    description: "Classic top-loader with a matching dryer. Simple and tough.",
+    description: "Top-load washer with a matching dryer. Simple and tough.",
     price: 12.5,
     priceNote: "for the set",
-    photo: "photos/types/side-by-side-top-load.jpg",
+    photos: [
+      {
+        src: "photos/types/side-by-side-top-load-1.jpg",
+        alt: "Example of a white top-load washer and matching dryer in a laundry room with yellow walls",
+      },
+      {
+        src: "photos/types/side-by-side-top-load-2.jpg",
+        alt: "Example of a top-load washer and dryer in an unfinished basement",
+      },
+      {
+        src: "photos/types/side-by-side-top-load.jpg",
+        alt: "Example of a white top-load washer and matching dryer under wall cabinets",
+      },
+    ],
     drawing: "types/side-by-side-top.svg",
     alt: "Top-load washer with a matching dryer",
     page: {
@@ -146,15 +209,31 @@ export const machineTypes = [
   {
     slug: "single-machine",
     compare: {
-      width: "About 24″ or 27″",
+      width: "About 24″ (61 cm) or 27″ (69 cm)",
       loads: "Front or top",
       goodFor: "Pairing with a machine you already have",
     },
+    sizes: [
+      { label: "Width", value: "About 27″ (69 cm) full-size, or about 24″ (61 cm) compact" },
+    ],
     title: "Washer or dryer only",
-    description: "One machine to pair with what you already have.",
+    description: "One machine to pair with the one you already have.",
     price: 6.25,
     priceNote: null,
-    photo: "photos/types/single-machine.jpg",
+    photos: [
+      {
+        src: "photos/types/single-machine-washer.jpg",
+        alt: "Example of a single white front-load washer with towels on top",
+      },
+      {
+        src: "photos/types/single-machine-dryer.jpg",
+        alt: "Example of a single white front-load dryer",
+      },
+      {
+        src: "photos/types/single-machine.jpg",
+        alt: "Example of a single white front-load washer",
+      },
+    ],
     drawing: "types/single.svg",
     alt: "One washer next to the dashed outline of a machine you already have",
     page: {
@@ -178,6 +257,9 @@ export const machineTypes = [
     },
   },
 ];
+
+// The type's photos whose files are in this build, main photo first. None: show the drawing.
+export const machinePhotos = (machine) => machine.photos.filter((photo) => hasPhotoFile(photo.src));
 
 // Hookups every machine needs. Shown on each machine type page.
 export const hookupChecklist = [

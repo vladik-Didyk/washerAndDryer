@@ -8,6 +8,7 @@
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:preview": "PREVIEW_DRAFTS=1 pnpm run build",
     "preview": "vite preview",
+    "photos": "node scripts/make-photo-versions.mjs",
     "test": "node scripts/test-postal-codes.mjs"
   },
   "dependencies": {
