@@ -10,6 +10,8 @@
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
   "upload_source_maps": true,
+  "workers_dev": true,
+  "preview_urls": false,
   // washerrent.com and www (www redirects to the apex in workers/app.ts). The workers.dev
   // address stays on as a preview; its pages carry the washerrent.com canonical.
   "routes": [
