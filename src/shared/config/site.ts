@@ -1,5 +1,8 @@
 // Business facts used across the site. Change them here, not in the components.
 // Only verified facts belong in this file: no invented numbers, claims or reviews.
+// Secrets and per-deployment settings (the Web3Forms key, the Stripe portal link, the
+// analytics token, search-engine verification codes) come from the environment instead:
+// see ./env.ts and README.md.
 export const siteConfig = {
   companyName: "GTA Washer & Dryer Rentals",
   siteUrl: "https://washerrent.com", // no trailing slash
@@ -27,8 +30,8 @@ export const siteConfig = {
   },
   offers: {
     // First week's rent free for new customers who start a rental by Nov 30, 2026: sets and
-    // single machines. The deposit and the delivery are still paid. Shown until `endsAt`
-    // (src/content/offers.js decides from the build date; the offer bar re-checks in the browser).
+    // single machines. The deposit and the delivery are still paid. Shown until `endsAt`,
+    // decided on the server for every request (src/entities/offer).
     firstWeekFree: {
       endsAt: "2026-12-01T05:00:00Z", // the end of Nov 30, 2026 in Toronto (EST, UTC-5)
       lastDay: "November 30, 2026",
@@ -48,18 +51,7 @@ export const siteConfig = {
     { name: "Markham" },
     { name: "Richmond Hill" },
   ],
-  // Search engine ownership checks. Paste the code from Google Search Console / Bing
-  // Webmaster Tools (the content="" value only); the meta tag is output only when non-empty.
-  googleSiteVerification: "",
-  bingSiteVerification: "",
-  web3formsKey: "b1731368-a27c-491d-a5a3-c3783ebd926c",
-  // Stripe customer portal login link (https://billing.stripe.com/p/login/...). While this is
-  // empty, the /account/ page and every link to it are left out of the build.
-  stripePortalUrl: "",
-  // Cloudflare Web Analytics: the "token" value from the snippet Cloudflare gives you. The
-  // cookie-free beacon script is added to every page only when this is non-empty.
-  cloudflareAnalyticsToken: "",
-  // Main menu. Secondary links (repair, guides, pay) are in Header.jsx.
+  // Main menu. Secondary links (repair, guides, pay) are in widgets/header.
   navigation: [
     { label: "Machines", href: "/machines/" },
     { label: "Prices", href: "/#prices" },
@@ -72,4 +64,6 @@ export const siteConfig = {
     { short: "ES", label: "Español", lang: "es", href: "/es/" },
     { short: "RU", label: "Русский", lang: "ru", href: "/ru/" },
   ],
-};
+} as const;
+
+export type SiteConfig = typeof siteConfig;
