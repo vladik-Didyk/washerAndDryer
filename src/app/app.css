@@ -1,3 +1,4 @@
+/* Site styles: Tailwind (tailwind.config.ts) plus the few shared classes below. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

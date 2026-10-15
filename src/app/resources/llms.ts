@@ -1,18 +1,21 @@
-// llms.txt: a plain-text fact sheet for AI assistants, written to dist/llms.txt by
-// scripts/prerender.mjs. Facts come from src/content/; the page list comes from the routes in
-// this build, so it never lists a page the build doesn't have. Drafts appear only in preview
-// builds, marked as drafts.
-import { siteConfig } from "../content/config";
-import { machineTypes } from "../content/machines";
-import { hookupChecklist } from "../content/machines";
-import { firstWeekFreeActive, firstWeekFreeOffer, referralOffer } from "../content/offers";
-import { routes } from "../content/routes";
+// /llms.txt: a plain-text fact sheet for AI assistants. Facts come from shared/config and the
+// entities; the page list comes from the catalog, so it never lists a page this deployment
+// doesn't have. Drafts appear only in preview deployments, marked as drafts.
+import type { LoaderFunctionArgs } from "react-router";
+import { machineTypes } from "~/entities/machine";
+import { firstWeekFreeOffer, referralOffer } from "~/entities/offer";
+import { hookupChecklist, siteConfig } from "~/shared/config";
+import { siteCatalog, type CatalogEntry } from "../catalog";
+import { catalogOptions } from "./context";
 
 const { companyName, siteUrl, phone, prices, languages, facebook } = siteConfig;
-const absolute = (path) => `${siteUrl}${path}`;
+const absolute = (path: string) => `${siteUrl}${path}`;
 
-const PAGE_GROUPS = [
-  { title: "Main pages", kinds: ["home", "machines", "areas", "landlords", "landlord-quote", "faq", "about", "contact", "repair", "account"] },
+const PAGE_GROUPS: Array<{ title: string; kinds: string[] }> = [
+  {
+    title: "Main pages",
+    kinds: ["home", "machines", "areas", "landlords", "landlord-quote", "faq", "about", "contact", "repair", "start", "account"],
+  },
   { title: "Machine types", kinds: ["machine"] },
   { title: "Areas", kinds: ["city", "district"] },
   { title: "Guides", kinds: ["guides", "guide"] },
@@ -20,23 +23,22 @@ const PAGE_GROUPS = [
   { title: "Other languages", kinds: ["language"] },
 ];
 
-function pageLine(route) {
-  const name = route.breadcrumbs?.at(-1)?.name ?? route.name ?? route.metaTitle;
-  const note = route.llmsNote ? `: ${route.llmsNote}` : "";
-  const draft = route.draft ? " (draft, not published yet)" : "";
-  return `- [${name}](${absolute(route.path)})${note}${draft}`;
+function pageLine(entry: CatalogEntry) {
+  const note = entry.llmsNote ? `: ${entry.llmsNote}` : "";
+  const draft = entry.draft ? " (draft, not published yet)" : "";
+  return `- [${entry.name}](${absolute(entry.path)})${note}${draft}`;
 }
 
-function pageSections() {
+function pageSections(entries: CatalogEntry[]) {
   return PAGE_GROUPS.map((group) => {
-    const lines = routes.filter((route) => group.kinds.includes(route.kind)).map(pageLine);
+    const lines = entries.filter((entry) => group.kinds.includes(entry.kind)).map(pageLine);
     return lines.length ? `### ${group.title}\n\n${lines.join("\n")}` : null;
   }).filter(Boolean);
 }
 
-export function llmsTxt() {
+export function llmsTxt(entries: CatalogEntry[], offerActive: boolean): string {
   const offers = [
-    firstWeekFreeActive && `- ${firstWeekFreeOffer.title}: ${firstWeekFreeOffer.text} ${firstWeekFreeOffer.stillPaid}`,
+    offerActive && `- ${firstWeekFreeOffer.title}: ${firstWeekFreeOffer.text} ${firstWeekFreeOffer.stillPaid}`,
     `- ${referralOffer.title}: ${referralOffer.text}`,
   ].filter(Boolean);
 
@@ -105,6 +107,13 @@ A local Toronto business with more than 3 years of hands-on experience installin
 
 ## Pages
 
-${pageSections().join("\n\n")}
+${pageSections(entries).join("\n\n")}
 `;
+}
+
+export function loader({ context }: LoaderFunctionArgs) {
+  const options = catalogOptions(context);
+  return new Response(llmsTxt(siteCatalog(options), options.offerActive), {
+    headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, max-age=3600" },
+  });
 }
