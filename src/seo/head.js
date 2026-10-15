@@ -4,6 +4,7 @@
 import { siteConfig } from "../content/config";
 import { faqs } from "../content/faqs";
 import { cities } from "../content/cities";
+import { districts } from "../content/districts";
 import { languagePages } from "../content/languages";
 import { routes } from "../content/routes";
 
@@ -148,6 +149,47 @@ function cityService(route) {
   };
 }
 
+function districtService(route) {
+  const { district } = route;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Washer and dryer rental in ${district.name}, Toronto`,
+    serviceType: "Washer and dryer rental",
+    description: route.metaDescription,
+    url: absolute(route.path),
+    provider: providerRef(),
+    areaServed: {
+      "@type": "Place",
+      name: `${district.name}, Toronto`,
+      containedInPlace: { "@type": "City", name: "Toronto" },
+    },
+    offers: [setOffer(), singleOffer()],
+  };
+}
+
+// The /areas/ page: one service, every city and Toronto district.
+function areasService(route) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Washer and dryer rental in Toronto and the GTA",
+    serviceType: "Washer and dryer rental",
+    description: route.metaDescription,
+    url: absolute(route.path),
+    provider: providerRef(),
+    areaServed: [
+      ...areaServed(),
+      ...districts.map((district) => ({
+        "@type": "Place",
+        name: `${district.name}, Toronto`,
+        containedInPlace: { "@type": "City", name: "Toronto" },
+      })),
+    ],
+    offers: [setOffer(), singleOffer()],
+  };
+}
+
 function machineService(route) {
   const { machine } = route;
   const offer =
@@ -186,8 +228,12 @@ function mainJsonLd(route) {
   switch (route.kind) {
     case "home":
       return [localBusiness(), faqPage()];
+    case "areas":
+      return [areasService(route)];
     case "city":
       return [cityService(route)];
+    case "district":
+      return [districtService(route)];
     case "machine":
       return [machineService(route)];
     case "language":

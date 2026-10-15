@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:preview": "PREVIEW_DRAFTS=1 pnpm run build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node scripts/test-postal-codes.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.469.0",

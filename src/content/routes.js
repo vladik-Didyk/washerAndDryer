@@ -6,13 +6,37 @@
 // "Draft — not published" ribbon and is never listed in the sitemap.
 // `breadcrumbs` feed both the visible trail and the BreadcrumbList JSON-LD.
 import { cities } from "./cities";
+import { districts } from "./districts";
 import { machineTypes } from "./machines";
 import { languagePages } from "./languages";
 
 export const cityPath = (city) => `/${city.slug}/`;
+export const districtPath = (district) => `/toronto/${district.slug}/`;
 export const machinePath = (machine) => `/machines/${machine.slug}/`;
 
 const HOME = { name: "Home", path: "/" };
+const AREAS = { name: "Areas", path: "/areas/" };
+const TORONTO = { name: "Toronto", path: "/toronto/" };
+
+const cityRoute = (city) => ({
+  path: cityPath(city),
+  kind: "city",
+  lang: "en",
+  city,
+  metaTitle: city.metaTitle,
+  metaDescription: city.metaDescription,
+  breadcrumbs: [HOME, AREAS, { name: city.name, path: cityPath(city) }],
+});
+
+const districtRoute = (district) => ({
+  path: districtPath(district),
+  kind: "district",
+  lang: "en",
+  district,
+  metaTitle: district.metaTitle,
+  metaDescription: district.metaDescription,
+  breadcrumbs: [HOME, AREAS, TORONTO, { name: district.name, path: districtPath(district) }],
+});
 
 export const routes = [
   {
@@ -25,15 +49,20 @@ export const routes = [
     metaDescription:
       "Washer & dryer rental in Toronto and the GTA: $12.50 a week for a set, $6.25 for one machine. Repairs included. Call or text (437) 907-6955.",
   },
-  ...cities.map((city) => ({
-    path: cityPath(city),
-    kind: "city",
+  {
+    path: "/areas/",
+    kind: "areas",
     lang: "en",
-    city,
-    metaTitle: city.metaTitle,
-    metaDescription: city.metaDescription,
-    breadcrumbs: [HOME, { name: city.name, path: cityPath(city) }],
-  })),
+    llmsNote: "every city and Toronto district we deliver to, with a postal-code check",
+    metaTitle: "Washer & Dryer Rental Service Area | Toronto & the GTA",
+    metaDescription:
+      "Where we deliver rental washers and dryers: Toronto and its districts, Mississauga, Brampton, Vaughan, Markham and Richmond Hill. Check your postal code.",
+    breadcrumbs: [HOME, AREAS],
+  },
+  // Each city, with Toronto's districts right after Toronto.
+  ...cities.flatMap((city) =>
+    city.slug === "toronto" ? [cityRoute(city), ...districts.map(districtRoute)] : [cityRoute(city)],
+  ),
   ...machineTypes.map((machine) => ({
     path: machinePath(machine),
     kind: "machine",

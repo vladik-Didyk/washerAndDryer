@@ -4,6 +4,8 @@ import FloatingCall from "./components/FloatingCall";
 import Breadcrumbs from "./components/Breadcrumbs";
 import HomePage from "./pages/HomePage";
 import CityPage from "./pages/CityPage";
+import DistrictPage from "./pages/DistrictPage";
+import AreasPage from "./pages/AreasPage";
 import MachinePage from "./pages/MachinePage";
 import LanguagePage from "./pages/LanguagePage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -16,8 +18,12 @@ function Page({ route }) {
   switch (route.kind) {
     case "home":
       return <HomePage />;
+    case "areas":
+      return <AreasPage />;
     case "city":
       return <CityPage city={route.city} />;
+    case "district":
+      return <DistrictPage district={route.district} />;
     case "machine":
       return <MachinePage machine={route.machine} />;
     case "language":
