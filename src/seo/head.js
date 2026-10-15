@@ -8,6 +8,7 @@ import { districts } from "../content/districts";
 import { languagePages } from "../content/languages";
 import { machineTypes } from "../content/machines";
 import { guides } from "../content/guides";
+import { heroPhoto, photoFiles } from "../content/photos";
 import { guidePath, machinePath, routes } from "../content/routes";
 
 const SITE = siteConfig.siteUrl;
@@ -384,6 +385,26 @@ function jsonLdFor(route) {
   return nodes;
 }
 
+// Preload for the photo at the top of a page, with the same files and `sizes` as its <picture>,
+// so the browser fetches it while still reading the <head>. WebP when there is one.
+function photoPreload({ src, sizes, media }) {
+  const files = photoFiles(src);
+  if (!files) return null;
+  const srcSet = files.webpSrcSet ?? files.jpegSrcSet;
+  return [
+    `<link rel="preload" as="image"`,
+    files.webpSrcSet ? ` type="image/webp"` : "",
+    ` imagesrcset="${escapeAttr(srcSet)}" imagesizes="${escapeAttr(sizes)}"`,
+    media ? ` media="${escapeAttr(media)}"` : "",
+    ` fetchpriority="high" />`,
+  ].join("");
+}
+
+function photoPreloads(route) {
+  if (route.kind === "home") return [photoPreload(heroPhoto.narrow), photoPreload(heroPhoto.wide)];
+  return [];
+}
+
 // The home page and the Spanish and Russian pages are language versions of each other.
 const languageAlternates = [
   { lang: "en", path: "/" },
@@ -405,6 +426,7 @@ export function renderHead(route) {
   const tags = [
     `<title>${escapeAttr(route.metaTitle)}</title>`,
     `<meta name="description" content="${escapeAttr(route.metaDescription)}" />`,
+    ...photoPreloads(route).filter(Boolean),
   ];
 
   if (route.kind !== "not-found") {

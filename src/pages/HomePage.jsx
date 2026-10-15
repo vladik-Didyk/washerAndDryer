@@ -1,4 +1,5 @@
 import Welcome from "../components/Welcome";
+import TrustStrip from "../components/TrustStrip";
 import Machines from "../components/Machines";
 import HowItWorks from "../components/HowItWorks";
 import InstallVideos from "../components/InstallVideos";
@@ -15,6 +16,7 @@ export default function HomePage() {
   return (
     <>
       <Welcome />
+      <TrustStrip />
       <Machines />
       <HowItWorks />
       <InstallVideos />

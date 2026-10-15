@@ -1,35 +1,25 @@
 import { useState } from "react";
 import { machineTypes } from "../content/machines";
-import { machinePath } from "../content/routes";
-import MachineImage, {
-  PHOTO_CAPTION,
-  hasPhoto,
-  machinePicture,
-} from "./MachineImage";
-import KeepWordsWhole from "./KeepWordsWhole";
+import { hasPhoto } from "./MachineImage";
+import MachineTypesAnimation from "./MachineTypesAnimation";
+import TypeCard from "./TypeCard";
 
-// On wide screens the five drawings stand on one continuous mint stage, like a lineup.
-// A Drawings/Photos switch above the row swaps every card to its example photo (types without
-// a photo keep their drawing). Drawings are the default, so the prerendered page shows them.
-// Below that each type is its own panel: a row on phones, a card from 640px up.
-
-function stageCorners(index, count) {
-  if (index === 0) return "lg:rounded-none lg:rounded-l-3xl";
-  if (index === count - 1) return "lg:rounded-none lg:rounded-r-3xl";
-  return "lg:rounded-none";
-}
+// The five types as photo cards, each linking to its page. A Drawings/Photos switch swaps every
+// card to its drawing; Photos is the default, so the prerendered page shows the photos (a type
+// without a photo shows its drawing, tagged "Drawing"). From 768px the animated drawing of the
+// types stands beside the heading; phones skip it, the cards already show each type.
 
 const VIEWS = [
-  { id: "drawings", label: "Drawings" },
   { id: "photos", label: "Photos" },
+  { id: "drawings", label: "Drawings" },
 ];
 
-function ViewSwitch({ view, onChange }) {
+function ViewSwitch({ view, onChange, className = "" }) {
   return (
     <div
       role="group"
       aria-label="Show machines as"
-      className="inline-flex rounded-full border border-line bg-paper p-1"
+      className={`inline-flex rounded-full border border-line bg-paper p-1 ${className}`}
     >
       {VIEWS.map((option) => (
         <button
@@ -52,7 +42,7 @@ function ViewSwitch({ view, onChange }) {
 
 // `showAllLink` adds a link to /machines/ (off on that page itself).
 export default function Machines({ showAllLink = true }) {
-  const [view, setView] = useState("drawings");
+  const [view, setView] = useState("photos");
   const showPhotos = view === "photos";
   const anyPhotos = machineTypes.some(hasPhoto);
 
@@ -63,66 +53,29 @@ export default function Machines({ showAllLink = true }) {
       className="section border-y border-line bg-white"
     >
       <div className="container-page">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
+        <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10">
+          <div className="md:col-span-7 lg:col-span-8">
             <h2 id="machines-title" className="h2">
-              Pick the type that fits your space
+              Find the type that fits your space
             </h2>
-            <p className="lead mt-4">
+            <p className="lead mt-4 max-w-2xl">
               Tell us your closet size and outlet type. We find a machine that
               fits, check it, deliver it and hook it up.
             </p>
+            {anyPhotos && <ViewSwitch view={view} onChange={setView} className="mt-6" />}
           </div>
-          {anyPhotos && <ViewSwitch view={view} onChange={setView} />}
+          <div className="hidden md:col-span-5 md:block lg:col-span-4">
+            <MachineTypesAnimation className="max-w-[16rem] lg:max-w-[17rem]" />
+          </div>
         </div>
 
-        <ul className="mt-10 grid gap-y-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:mt-12 lg:grid-cols-5 lg:gap-x-0">
-          {machineTypes.map((machine, index) => (
-            <li
-              key={machine.slug}
-              className="flex items-center gap-4 sm:flex-col sm:items-stretch sm:gap-0"
-            >
-              <div className="w-28 shrink-0 sm:w-auto">
-                {/* The photo caption sits in the text column, so titles stay level across the row. */}
-                <MachineImage
-                  machine={machine}
-                  preferPhoto={showPhotos}
-                  showCaption={false}
-                  frameClassName={`aspect-[5/6] overflow-hidden rounded-2xl bg-brand-mint sm:aspect-[4/3] sm:rounded-3xl lg:aspect-[5/6] ${stageCorners(index, machineTypes.length)}`}
-                />
-              </div>
-              {/* From 640px up the price sits at the bottom, so prices line up across a row. */}
-              <div className="min-w-0 sm:mt-5 sm:flex sm:flex-1 sm:flex-col lg:px-4">
-                <h3 className="font-display text-lg font-bold leading-snug text-ink">
-                  <a
-                    href={machinePath(machine)}
-                    className="underline decoration-brand/30 decoration-2 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand"
-                  >
-                    <KeepWordsWhole text={machine.title} />
-                  </a>
-                </h3>
-                <p className="mt-1.5 text-[15px] leading-relaxed text-ink-soft">
-                  {machine.description}
-                </p>
-                <p className="mt-2.5 font-display text-lg font-bold text-brand sm:mt-auto sm:pt-3">
-                  ${machine.price.toFixed(2)}/week
-                  {machine.priceNote && (
-                    <span className="ml-1.5 font-sans text-sm font-medium text-ink-muted">
-                      {machine.priceNote}
-                    </span>
-                  )}
-                </p>
-                {machinePicture(machine, showPhotos).isPhoto && (
-                  <p className="mt-1.5 text-xs leading-snug text-ink-muted">
-                    {PHOTO_CAPTION}
-                  </p>
-                )}
-              </div>
-            </li>
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 lg:mt-12 xl:grid-cols-5 xl:gap-4">
+          {machineTypes.map((machine) => (
+            <TypeCard key={machine.slug} machine={machine} preferPhoto={showPhotos} />
           ))}
         </ul>
 
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between">
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between">
           <p className="text-sm text-ink-muted">
             {showPhotos
               ? "Photos are examples of each type, not our machines. "

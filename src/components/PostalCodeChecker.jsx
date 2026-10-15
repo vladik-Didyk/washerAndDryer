@@ -13,8 +13,14 @@ const TONES = {
 // "Do we deliver to you?" by postal code (logic and FSA lists in src/content/areas.js).
 // Works in the browser after hydration; nothing is sent anywhere. The answer is never "no":
 // a code we can't place gets "text us your address".
-// `requestHref` is where "Check availability" goes after a yes (the request form).
-export default function PostalCodeChecker({ requestHref = "#request", className = "" }) {
+// `requestHref` is where "Start your rental" goes after a yes (the request form).
+// `label` names the field; `compact` makes the field a little shorter (home hero).
+export default function PostalCodeChecker({
+  requestHref = "#request",
+  label = "Your postal code",
+  compact = false,
+  className = "",
+}) {
   const id = useId();
   const inputId = `${id}postal`;
   const resultId = `${id}result`;
@@ -32,7 +38,7 @@ export default function PostalCodeChecker({ requestHref = "#request", className 
   return (
     <form noValidate onSubmit={onSubmit} className={className}>
       <label htmlFor={inputId} className="label">
-        Your postal code
+        {label}
       </label>
       <div className="mt-2 flex gap-2">
         <input
@@ -51,7 +57,7 @@ export default function PostalCodeChecker({ requestHref = "#request", className 
           }}
           aria-invalid={result?.status === "invalid" ? "true" : undefined}
           aria-describedby={resultId}
-          className="field min-w-0 flex-1 uppercase placeholder:normal-case"
+          className={`field min-w-0 flex-1 uppercase placeholder:normal-case ${compact ? "min-h-[3rem] py-2.5" : ""}`}
         />
         <button type="submit" className="btn btn-primary shrink-0 px-5">
           Check
@@ -68,7 +74,7 @@ export default function PostalCodeChecker({ requestHref = "#request", className 
         )}
         {result?.status === "yes" && (
           <a href={requestHref} className="text-link mt-2 inline-block">
-            Check availability
+            Start your rental
           </a>
         )}
         {result?.status === "unsure" && (

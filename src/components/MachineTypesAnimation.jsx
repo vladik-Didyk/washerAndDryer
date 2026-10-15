@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { machineTypes } from "../content/machines";
 import { MACHINE_PARTS } from "../content/machineParts";
+import { machinePath } from "../content/routes";
 
-// The hero machine changes type every few seconds, one physical step at a time: the two machines
-// of a side-by-side pair lift into a stack, the stack fuses into a one-piece cabinet, the cabinet
-// splits into a top-load pair, the dryer fades to an outline (one machine only), and the pair
-// comes back. Two "slots" do this: each moves to its spot in the next layout and turns a quarter
-// on its vertical axis to change face (3D flip, see Slot).
+// Beside the heading of the Machines section (Machines.jsx): a drawing that changes type every
+// few seconds, one physical step at a time: the two machines of a side-by-side pair lift into a
+// stack, the stack fuses into a one-piece cabinet, the cabinet splits into a top-load pair, the
+// dryer fades to an outline (one machine only), and the pair comes back. Two "slots" do this:
+// each moves to its spot in the next layout and turns a quarter on its vertical axis to change
+// face (3D flip, see Slot). It only changes while it is on screen.
 //
 // Coordinates are the 400x480 canvas of the drawings in public/types/; a slot's box is the
 // part's viewBox, so in each layout the machines stand exactly where the full drawing has them.
@@ -63,7 +65,7 @@ const MOVE_EASING = "cubic-bezier(0.65, 0, 0.35, 1)";
 const FLIP_MS = 760; // keep equal to the machine-flip duration in tailwind.config.js
 const pctX = (px) => `${(px / 400) * 100}%`;
 const pctY = (px) => `${(px / 480) * 100}%`;
-// The stage (400x480) is centred in the square hero box: 83.3% of its width, 8.3% margin.
+// The stage (400x480) is centred in the square box: 83.3% of its width, 8.3% margin.
 const toBox = (px) => `${8.33 + (px / 400) * 83.33}%`;
 const widthOnBox = (px) => `${(px / 400) * 83.33}%`;
 
@@ -131,11 +133,26 @@ function Slot({ target, reducedMotion, front }) {
   );
 }
 
-export default function HeroMachines() {
+// `className` sets the width (the drawing is square, plus the width line and the dots).
+export default function MachineTypesAnimation({ className = "" }) {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [hovered, setHovered] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [onScreen, setOnScreen] = useState(false);
+  const rootRef = useRef(null);
+
+  // Cycle only while visible: it sits below the fold, and is hidden on phones.
+  useEffect(() => {
+    const node = rootRef.current;
+    if (!("IntersectionObserver" in window)) {
+      setOnScreen(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => setOnScreen(entry.isIntersecting));
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   // Respect "reduce motion": no automatic cycling and no movement; the dots still switch types.
   useEffect(() => {
@@ -146,7 +163,7 @@ export default function HeroMachines() {
     return () => query.removeEventListener("change", update);
   }, []);
 
-  const cycling = playing && !hovered && !reducedMotion;
+  const cycling = playing && !hovered && !reducedMotion && onScreen;
   useEffect(() => {
     if (!cycling) return undefined;
     const timer = window.setTimeout(
@@ -160,10 +177,11 @@ export default function HeroMachines() {
 
   return (
     <div
+      ref={rootRef}
       role="group"
       aria-roledescription="carousel"
       aria-label="Machine types we rent"
-      className="relative mx-auto w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-none"
+      className={`relative mx-auto w-full ${className}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setHovered(true)}
@@ -213,7 +231,7 @@ export default function HeroMachines() {
 
       <div className="mt-2 flex items-center justify-center motion-safe:animate-fade-in">
         <a
-          href="#machines"
+          href={machinePath(current.machine)}
           className="font-display text-[15px] font-bold text-ink underline decoration-brand/30 decoration-2 underline-offset-4 hover:text-brand"
         >
           {current.machine.title}

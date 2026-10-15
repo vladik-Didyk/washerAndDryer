@@ -1,29 +1,70 @@
-import { Check, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
-import HeroMachines from "./HeroMachines";
+import { heroPhoto, photoFiles } from "../content/photos";
+import PostalCodeChecker from "./PostalCodeChecker";
 
-const included = ["Repairs included", "Old machine haul-away included"];
+// The laundry-room photo. Phones get the portrait crop as a band above the text; from 640px the
+// wide photo; from 1024px it fills the right half of the hero, out to the edge of the window.
+// It is the page's largest image, so it loads first (and src/seo/head.js preloads the same
+// files, from the same `heroPhoto` settings).
+function HeroPhoto({ className = "" }) {
+  const { wide, narrow, alt } = heroPhoto;
+  const wideFiles = photoFiles(wide.src);
+  const narrowFiles = photoFiles(narrow.src);
+  if (!wideFiles || !narrowFiles) return null;
 
-// Hero: the weekly price is the headline fact; the drawing cycles through the five machine types.
+  return (
+    <figure className={`relative ${className}`}>
+      <picture className="contents">
+        {wideFiles.webpSrcSet && (
+          <source media={wide.media} type="image/webp" srcSet={wideFiles.webpSrcSet} sizes={wide.sizes} />
+        )}
+        <source media={wide.media} srcSet={wideFiles.jpegSrcSet} sizes={wide.sizes} />
+        {narrowFiles.webpSrcSet && (
+          <source type="image/webp" srcSet={narrowFiles.webpSrcSet} sizes={narrow.sizes} />
+        )}
+        <img
+          src={narrowFiles.src}
+          srcSet={narrowFiles.jpegSrcSet}
+          sizes={narrow.sizes}
+          width={narrowFiles.width}
+          height={narrowFiles.height}
+          alt={alt}
+          fetchPriority="high"
+          className="aspect-[4/3] w-full object-cover object-[50%_88%] sm:aspect-[2/1] sm:object-[40%_60%] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:rounded-bl-[3rem] lg:object-[40%_50%]"
+        />
+      </picture>
+      <figcaption className="absolute bottom-3 right-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-medium text-white sm:bottom-4 sm:right-4">
+        Example photo
+      </figcaption>
+    </figure>
+  );
+}
+
+// Home hero: the weekly price is the headline fact, then the two ways to start (the request
+// form or a call) and the postal-code check. Phones: photo on top, text below it, never over it.
+// From 1024px the text keeps to the page's left edge and the photo takes the other half.
 export default function Welcome() {
-  const { phone, prices, owner, languages } = siteConfig;
+  const { phone, prices, owner } = siteConfig;
 
   return (
     <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
-      <div className="container-page grid items-center gap-12 pb-16 pt-10 sm:pt-14 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-16">
-        <div className="lg:col-span-7">
+      <div className="lg:grid lg:min-h-[37rem] lg:grid-cols-[minmax(2rem,1fr)_minmax(0,35rem)_minmax(0,33rem)_minmax(2rem,1fr)]">
+        <HeroPhoto className="lg:col-[3/5] lg:row-start-1" />
+
+        <div className="container-page pb-12 pt-8 sm:pb-14 sm:pt-10 lg:col-[2/3] lg:row-start-1 lg:mx-0 lg:max-w-none lg:self-center lg:px-0 lg:py-14 lg:pr-10">
           <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
             <MapPin className="h-4 w-4" aria-hidden="true" />
             Run by {owner} in Toronto
           </p>
           <h1
             id="hero-title"
-            className="mt-3 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-tight text-ink sm:text-[3.25rem] lg:text-[3.5rem]"
+            className="mt-3 font-display text-[2.375rem] font-extrabold leading-[1.06] tracking-tight text-ink sm:text-[3rem] lg:text-[2.75rem] xl:text-[3rem]"
           >
             Washer &amp; dryer rental in Toronto &amp; the GTA
           </h1>
 
-          <div className="mt-5 sm:mt-7">
+          <div className="mt-5 sm:mt-6">
             <p className="sr-only">
               ${prices.setText} a week for the set, or ${prices.singleText} a week for
               one machine.
@@ -32,59 +73,42 @@ export default function Welcome() {
                 Phones have no room beside the figure, so there the label sits under it. */}
             <div
               aria-hidden="true"
-              className="flex flex-wrap items-start font-display text-[7rem] font-extrabold leading-none text-brand sm:flex-nowrap sm:text-[9rem]"
+              className="flex flex-wrap items-start font-display text-[5.5rem] font-extrabold leading-none text-brand sm:flex-nowrap sm:text-[6.5rem] lg:text-[6rem]"
             >
               <span className="mt-[0.34em] text-[0.36em] leading-none">$</span>
               <span className="tracking-[-0.05em]">{prices.setText}</span>
-              <span className="mt-2 flex w-full gap-[0.3em] text-[0.165em] font-bold leading-[1.15] text-ink sm:ml-[0.55em] sm:mt-[0.7em] sm:w-auto sm:flex-col sm:gap-0">
+              <span className="mt-2 flex w-full gap-[0.3em] text-[0.2em] font-bold leading-[1.15] text-ink sm:ml-[0.5em] sm:mt-[0.62em] sm:w-auto sm:flex-col sm:gap-0">
                 <span>a week</span>
                 <span>for the set</span>
               </span>
             </div>
-            <p aria-hidden="true" className="mt-3 text-lg text-ink-soft sm:text-xl">
+            <p aria-hidden="true" className="mt-3 text-lg text-ink-soft">
               or{" "}
               <span className="font-semibold text-ink">
                 ${prices.singleText} a week
               </span>{" "}
               for one machine
             </p>
+            <p className="mt-2 text-sm text-ink-muted">
+              Prices in Canadian dollars. No HST charged.
+            </p>
           </div>
 
-          <ul className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-7">
-            {included.map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-2.5 font-semibold text-ink"
-              >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold">
-                  <Check
-                    className="h-4 w-4 text-brand-dark"
-                    strokeWidth={3}
-                    aria-hidden="true"
-                  />
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <p className="mt-4 text-ink-soft">
-            No credit check · Same-week delivery · {languages}
-          </p>
-
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href="#request" className="btn btn-primary">
-              Check availability
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href="#request" className="btn btn-primary sm:px-5">
+              Start your rental
             </a>
-            <a href={phone.tel} className="btn btn-secondary">
+            <a href={phone.tel} className="btn btn-secondary sm:px-5">
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               Call or text {phone.display}
             </a>
           </div>
-        </div>
 
-        <div className="lg:col-span-5">
-          <HeroMachines />
+          <PostalCodeChecker
+            compact
+            label="Do we deliver to you? Enter your postal code"
+            className="mt-7 max-w-md border-t border-line pt-6"
+          />
         </div>
       </div>
     </section>
