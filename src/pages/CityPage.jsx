@@ -10,6 +10,7 @@ import Machines from "../components/Machines";
 import HowItWorks from "../components/HowItWorks";
 import Prices from "../components/Prices";
 import LinkList from "../components/LinkList";
+import CtaBand from "../components/CtaBand";
 import BookingForm from "../components/BookingForm";
 
 // Toronto's district names link to their own pages (src/content/districts.js).
@@ -65,6 +66,7 @@ export default function CityPage({ city }) {
         </div>
       </section>
 
+      <CtaBand title={`Ready to rent in ${city.name}?`} />
       <BookingForm />
     </>
   );

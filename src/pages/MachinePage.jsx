@@ -10,6 +10,7 @@ import TypeCard from "../components/TypeCard";
 import KeepWordsWhole from "../components/KeepWordsWhole";
 import HowItWorks from "../components/HowItWorks";
 import LinkList from "../components/LinkList";
+import CtaBand from "../components/CtaBand";
 import BookingForm from "../components/BookingForm";
 
 const MEASURE_GUIDE = "/guides/measure-your-laundry-space/";
@@ -276,6 +277,10 @@ export default function MachinePage({ machine }) {
         </div>
       </section>
 
+      <CtaBand
+        title={`${machine.title}: $${machine.price.toFixed(2)} a week`}
+        text="Delivery and installation quoted before you pay. Repairs included while you rent."
+      />
       <BookingForm />
     </>
   );

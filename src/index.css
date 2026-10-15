@@ -94,6 +94,11 @@
     @apply bg-gold text-ink hover:bg-gold-dark;
   }
 
+  /* Secondary button on dark green or on a photo under a dark overlay */
+  .btn-outline-light {
+    @apply border-2 border-white/85 text-white hover:bg-white hover:text-brand-dark;
+  }
+
   /* Form controls */
   .label {
     @apply block font-display text-[15px] font-semibold text-ink;

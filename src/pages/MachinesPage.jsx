@@ -6,6 +6,7 @@ import Machines from "../components/Machines";
 import LinkList from "../components/LinkList";
 import PageIntro from "../components/PageIntro";
 import KeepWordsWhole from "../components/KeepWordsWhole";
+import CtaBand from "../components/CtaBand";
 import BookingForm from "../components/BookingForm";
 
 const COLUMNS = [
@@ -157,6 +158,10 @@ export default function MachinesPage() {
         </div>
       </section>
 
+      <CtaBand
+        title="Not sure which type fits?"
+        text={`Text a photo of the space to ${phone.display} and we'll tell you what fits.`}
+      />
       <BookingForm />
     </>
   );

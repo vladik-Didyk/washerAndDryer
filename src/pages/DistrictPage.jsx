@@ -9,6 +9,7 @@ import MachineFits from "../components/MachineFits";
 import DeliveryCheck from "../components/DeliveryCheck";
 import Prices from "../components/Prices";
 import LinkList from "../components/LinkList";
+import CtaBand from "../components/CtaBand";
 import BookingForm from "../components/BookingForm";
 
 const YORK_REGION = ["vaughan", "markham", "richmond-hill"];
@@ -73,6 +74,7 @@ export default function DistrictPage({ district }) {
         </div>
       </section>
 
+      <CtaBand title={`Ready to rent in ${district.name}?`} />
       <BookingForm />
     </>
   );

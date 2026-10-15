@@ -1,8 +1,9 @@
-import { ArrowRight, Building2, Check, MessageSquare, Phone } from "lucide-react";
+import { ArrowRight, Building2, Check, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
 import { hookupChecklist } from "../content/machines";
 import { landlordOptions, landlordIncluded, landlordSteps, landlordFaqs } from "../content/landlords";
 import PageIntro from "../components/PageIntro";
+import CtaBand from "../components/CtaBand";
 
 const QUOTE_PATH = "/landlords/quote/";
 
@@ -156,29 +157,11 @@ export default function LandlordsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="landlord-cta-title" className="pb-16 sm:pb-20 lg:pb-24">
-        <div className="container-page">
-          <div className="grid gap-6 rounded-3xl bg-brand-mint px-5 py-8 sm:p-10 lg:grid-cols-12 lg:items-center lg:gap-10">
-            <div className="lg:col-span-7">
-              <h2 id="landlord-cta-title" className="h2">
-                Get a quote for your building
-              </h2>
-              <p className="lead mt-3">
-                Tell us the address, the number of units and what's there now.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
-              <a href={QUOTE_PATH} className="btn btn-primary">
-                Get a quote
-              </a>
-              <a href={phone.sms} className="btn btn-secondary">
-                <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-                Text {phone.display}
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Get a quote for your building"
+        text="Tell us the address, the number of units and what's there now."
+        action={{ label: "Get a quote", href: QUOTE_PATH }}
+      />
     </>
   );
 }
