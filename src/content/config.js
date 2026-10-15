@@ -4,7 +4,7 @@ export const siteConfig = {
   companyName: "GTA Washer & Dryer Rentals",
   siteUrl: "https://washerrent.com", // no trailing slash
   // The date the page content last changed; used as <lastmod> in the generated sitemap.xml.
-  lastUpdated: "2026-10-14",
+  lastUpdated: "2026-10-15",
   owner: "Vlad",
   languages: "English, Spanish & Russian",
   tagline: "Washer & dryer rental in Toronto & the GTA",
@@ -26,6 +26,18 @@ export const siteConfig = {
     singleText: "6.25",
     deposit: 200, // refundable
   },
+  offers: {
+    // First week's rent free for new customers who start a rental by Nov 30, 2026: sets and
+    // single machines. The deposit and the delivery are still paid. Shown until `endsAt`
+    // (src/content/offers.js decides from the build date; the offer bar re-checks in the browser).
+    firstWeekFree: {
+      endsAt: "2026-12-01T05:00:00Z", // the end of Nov 30, 2026 in Toronto (EST, UTC-5)
+      lastDay: "November 30, 2026",
+      lastDayShort: "Nov 30",
+    },
+    // $100 when a friend you refer signs up for 12 months or more.
+    referral: { amount: 100, minMonths: 12 },
+  },
   serviceAreas: [
     {
       name: "Toronto",
@@ -42,6 +54,12 @@ export const siteConfig = {
   googleSiteVerification: "",
   bingSiteVerification: "",
   web3formsKey: "b1731368-a27c-491d-a5a3-c3783ebd926c",
+  // Stripe customer portal login link (https://billing.stripe.com/p/login/...). While this is
+  // empty, the /account/ page and every link to it are left out of the build.
+  stripePortalUrl: "",
+  // Cloudflare Web Analytics: the "token" value from the snippet Cloudflare gives you. The
+  // cookie-free beacon script is added to every page only when this is non-empty.
+  cloudflareAnalyticsToken: "",
   navigation: [
     { label: "Machines", href: "/#machines" },
     { label: "Prices", href: "/#prices" },

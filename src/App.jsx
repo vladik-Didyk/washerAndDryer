@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FloatingCall from "./components/FloatingCall";
+import Breadcrumbs from "./components/Breadcrumbs";
 import HomePage from "./pages/HomePage";
 import CityPage from "./pages/CityPage";
 import MachinePage from "./pages/MachinePage";
@@ -37,6 +38,7 @@ export default function App({ path }) {
       </a>
       <Header />
       <main id="main">
+        {route.breadcrumbs && <Breadcrumbs items={route.breadcrumbs} />}
         <Page route={route} />
       </main>
       <Footer />

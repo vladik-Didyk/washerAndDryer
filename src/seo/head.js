@@ -182,31 +182,26 @@ function languageService(route) {
   };
 }
 
-function jsonLdFor(route) {
+function mainJsonLd(route) {
   switch (route.kind) {
     case "home":
       return [localBusiness(), faqPage()];
     case "city":
-      return [
-        cityService(route),
-        breadcrumbs([
-          { name: "Home", path: "/" },
-          { name: route.city.name, path: route.path },
-        ]),
-      ];
+      return [cityService(route)];
     case "machine":
-      return [
-        machineService(route),
-        breadcrumbs([
-          { name: "Home", path: "/" },
-          { name: route.machine.title, path: route.path },
-        ]),
-      ];
+      return [machineService(route)];
     case "language":
       return [languageService(route)];
     default:
       return [];
   }
+}
+
+// The page's own nodes, then its BreadcrumbList (every inner page has one).
+function jsonLdFor(route) {
+  const nodes = mainJsonLd(route);
+  if (route.breadcrumbs) nodes.push(breadcrumbs(route.breadcrumbs));
+  return nodes;
 }
 
 // The home page and the Spanish and Russian pages are language versions of each other.
@@ -215,22 +210,31 @@ const languageAlternates = [
   ...languagePages.map((page) => ({ lang: page.lang, path: page.path })),
 ];
 
+// Cloudflare Web Analytics: cookie-free visit counts, only once a token is set in config.js.
+function analyticsTag() {
+  const token = siteConfig.cloudflareAnalyticsToken;
+  if (!token) return null;
+  if (!/^[\w-]+$/.test(token)) throw new Error("cloudflareAnalyticsToken has unexpected characters");
+  return `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${token}"}'></script>`;
+}
+
 export function renderHead(route) {
-  const isIndexed = route.kind !== "not-found";
+  // Drafts (preview builds only) and the 404 page stay out of search results.
+  const isIndexed = route.kind !== "not-found" && !route.draft;
   const url = absolute(route.path);
   const tags = [
     `<title>${escapeAttr(route.metaTitle)}</title>`,
     `<meta name="description" content="${escapeAttr(route.metaDescription)}" />`,
   ];
 
-  if (isIndexed) {
+  if (route.kind !== "not-found") {
     tags.push(`<link rel="canonical" href="${url}" />`);
     tags.push(`<meta property="og:url" content="${url}" />`);
-  } else {
-    tags.push(`<meta name="robots" content="noindex" />`);
   }
+  if (!isIndexed) tags.push(`<meta name="robots" content="noindex" />`);
 
   tags.push(
+    `<meta property="og:type" content="${route.kind === "guide" ? "article" : "website"}" />`,
     `<meta property="og:locale" content="${OG_LOCALES[route.lang] ?? "en_CA"}" />`,
     `<meta property="og:title" content="${escapeAttr(route.metaTitle)}" />`,
     `<meta property="og:description" content="${escapeAttr(route.metaDescription)}" />`,
@@ -255,11 +259,16 @@ export function renderHead(route) {
   }
 
   for (const data of jsonLdFor(route)) tags.push(jsonLdScript(data));
+
+  const analytics = analyticsTag();
+  if (analytics) tags.push(analytics);
   return tags.join("\n    ");
 }
 
+// Published pages only: drafts are never listed, even in a preview build.
 export function sitemapXml() {
   const urls = routes
+    .filter((route) => !route.draft)
     .map(
       (route) =>
         `  <url>\n    <loc>${absolute(route.path)}</loc>\n    <lastmod>${siteConfig.lastUpdated}</lastmod>\n  </url>`,

@@ -1,39 +1,53 @@
 // Every page of the site. The prerender script writes one dist/<path>index.html per route,
-// the sitemap lists them, and App.jsx picks the page component from the path.
+// the sitemap and llms.txt list them, and App.jsx picks the page component from the path.
 // URLs always end with a slash.
+//
+// A route with `draft: true` exists only in preview builds (src/content/drafts.js); it gets a
+// "Draft — not published" ribbon and is never listed in the sitemap.
+// `breadcrumbs` feed both the visible trail and the BreadcrumbList JSON-LD.
 import { cities } from "./cities";
 import { machineTypes } from "./machines";
 import { languagePages } from "./languages";
+
+export const cityPath = (city) => `/${city.slug}/`;
+export const machinePath = (machine) => `/machines/${machine.slug}/`;
+
+const HOME = { name: "Home", path: "/" };
 
 export const routes = [
   {
     path: "/",
     kind: "home",
     lang: "en",
+    name: "Home",
+    llmsNote: "offer, machine types, prices, how it works, FAQ, request form",
     metaTitle: "Washer & Dryer Rental Toronto & GTA | $12.50/week",
     metaDescription:
       "Washer & dryer rental in Toronto and the GTA: $12.50 a week for a set, $6.25 for one machine. Repairs included. Call or text (437) 907-6955.",
   },
   ...cities.map((city) => ({
-    path: `/${city.slug}/`,
+    path: cityPath(city),
     kind: "city",
     lang: "en",
     city,
     metaTitle: city.metaTitle,
     metaDescription: city.metaDescription,
+    breadcrumbs: [HOME, { name: city.name, path: cityPath(city) }],
   })),
   ...machineTypes.map((machine) => ({
-    path: `/machines/${machine.slug}/`,
+    path: machinePath(machine),
     kind: "machine",
     lang: "en",
     machine,
     metaTitle: machine.page.metaTitle,
     metaDescription: machine.page.metaDescription,
+    breadcrumbs: [HOME, { name: machine.title, path: machinePath(machine) }],
   })),
   ...languagePages.map((content) => ({
     path: content.path,
     kind: "language",
     lang: content.lang,
+    name: content.languageName,
     content,
     metaTitle: content.metaTitle,
     metaDescription: content.metaDescription,
@@ -63,5 +77,6 @@ export function findRoute(path) {
   return routes.find((route) => route.path === clean) ?? notFoundRoute;
 }
 
-export const cityPath = (city) => `/${city.slug}/`;
-export const machinePath = (machine) => `/machines/${machine.slug}/`;
+// Whether a page is part of this build: links to pages that may be missing (drafts, /account/)
+// check this first, so a build never links to a page it doesn't have.
+export const hasRoute = (path) => routes.some((route) => route.path === path);
