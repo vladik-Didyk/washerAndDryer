@@ -1,9 +1,10 @@
-// Guide. `draft: true` until the owner approves it (see src/content/drafts.js).
-import { siteConfig } from "../config";
+// Guide. `draft: true` until the owner approves it (shown only with PREVIEW_DRAFTS=1).
+import { siteConfig } from "~/shared/config";
+import type { Guide } from "../model";
 
 const { phone, prices } = siteConfig;
 
-export default {
+const guide: Guide = {
   slug: "stackable-vs-laundry-centre",
   draft: true,
   published: "2026-10-15",
@@ -86,3 +87,5 @@ export default {
     },
   ],
 };
+
+export default guide;

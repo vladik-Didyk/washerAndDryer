@@ -1,12 +1,13 @@
-// Guide. `draft: true` until the owner approves it (see src/content/drafts.js).
+// Guide. `draft: true` until the owner approves it (shown only with PREVIEW_DRAFTS=1).
 // Section blocks: a string is a paragraph; { list }, { steps }, { note } and { link } are the
-// other kinds (rendered by src/components/ArticleBody.jsx).
-import { siteConfig } from "../config";
-import { hookupChecklist } from "../machines";
+// other kinds (rendered by widgets/article-body).
+import { siteConfig } from "~/shared/config";
+import type { Guide } from "../model";
+import { hookupChecklist } from "~/shared/config";
 
 const { phone } = siteConfig;
 
-export default {
+const guide: Guide = {
   slug: "measure-your-laundry-space",
   draft: true,
   published: "2026-10-15",
@@ -109,3 +110,5 @@ export default {
     },
   ],
 };
+
+export default guide;

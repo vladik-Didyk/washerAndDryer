@@ -2,13 +2,33 @@
 // FAQPage JSON-LD; the home page shows a few (homeFaqIds) and links to /faq/.
 // `id` is the anchor on /faq/ (the offer bar links to /faq/#first-week-free and /faq/#referral).
 // Answers are plain text so the same words work in JSON-LD. `link` adds a link under the
-// answer on the page; it's left out while the page it points to isn't in the build.
-import { siteConfig } from "./config";
-import { firstWeekFreeActive, firstWeekFreeOffer, referralOffer } from "./offers";
+// answer on the page; it's left out while the page it points to doesn't exist (a draft).
+// The offer wording comes from entities/offer and is passed in (faqGroupsFor): the
+// first-week-free group exists only while the offer runs.
+import { siteConfig } from "~/shared/config";
 
 const { phone, prices } = siteConfig;
 
-export const faqGroups = [
+export interface Faq {
+  id: string;
+  question: string;
+  answer: string;
+  link?: { href: string; label: string };
+}
+
+export interface FaqGroup {
+  id: string;
+  title: string;
+  items: Faq[];
+}
+
+// The current offers' wording; `firstWeekFree` is null once that offer is over.
+export interface FaqOffers {
+  firstWeekFree: string | null;
+  referral: string;
+}
+
+const standingGroups = ({ referral }: FaqOffers): FaqGroup[] => [
   {
     id: "renting",
     title: "Renting",
@@ -88,7 +108,7 @@ export const faqGroups = [
       {
         id: "referral",
         question: "Do you have a referral offer?",
-        answer: `Yes. ${referralOffer.text}`,
+        answer: `Yes. ${referral}`,
       },
     ],
   },
@@ -177,27 +197,35 @@ export const faqGroups = [
       },
     ],
   },
-  // Shown only while the offer runs (decided at build time, see offers.js).
-  firstWeekFreeActive && {
-    id: "first-week-free-offer",
-    title: "First week free",
-    items: [
-      {
-        id: "first-week-free",
-        question: "How does the first week free work?",
-        answer: firstWeekFreeOffer.text,
-      },
-      {
-        id: "first-week-free-costs",
-        question: "With the first week free, what do I still pay?",
-        answer: `The $${prices.deposit} refundable deposit and the delivery. From the second week, the weekly rent is charged as usual.`,
-      },
-    ],
-  },
-].filter(Boolean);
+];
 
-export const faqs = faqGroups.flatMap((group) => group.items);
+// Shown only while the offer runs (decided per request, see entities/offer).
+const firstWeekFreeGroup = (text: string): FaqGroup => ({
+  id: "first-week-free-offer",
+  title: "First week free",
+  items: [
+    {
+      id: "first-week-free",
+      question: "How does the first week free work?",
+      answer: text,
+    },
+    {
+      id: "first-week-free-costs",
+      question: "With the first week free, what do I still pay?",
+      answer: `The $${prices.deposit} refundable deposit and the delivery. From the second week, the weekly rent is charged as usual.`,
+    },
+  ],
+});
 
-// The short list on the home page, which links to /faq/ for the rest.
+export const faqGroupsFor = (offers: FaqOffers): FaqGroup[] =>
+  offers.firstWeekFree
+    ? [...standingGroups(offers), firstWeekFreeGroup(offers.firstWeekFree)]
+    : standingGroups(offers);
+
+export const faqsFor = (offers: FaqOffers): Faq[] => faqGroupsFor(offers).flatMap((group) => group.items);
+
+// The short list on the home page, which links to /faq/ for the rest (none of these
+// mention an offer).
 const homeFaqIds = ["space-needs", "deposit", "tax", "minimum-term", "breaks", "delivery-cost"];
-export const homeFaqs = homeFaqIds.map((id) => faqs.find((faq) => faq.id === id));
+const allStanding = standingGroups({ firstWeekFree: null, referral: "" }).flatMap((group) => group.items);
+export const homeFaqs: Faq[] = homeFaqIds.map((id) => allStanding.find((faq) => faq.id === id)!);

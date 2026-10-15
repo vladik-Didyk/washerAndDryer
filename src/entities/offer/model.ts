@@ -1,22 +1,20 @@
 // Current offers, worded once for the offer bar, FAQ, terms, price cards and llms.txt.
-// Facts (dates, amounts) live in config.js.
+// Facts (dates, amounts) live in shared/config.
 //
-// Whether the first-week-free offer still shows is decided by the build date (__BUILD_TIME__,
-// from vite.config.js), not the visitor's clock, so the prerendered HTML and the page the
-// browser hydrates always agree. The offer bar re-checks the real date after hydration, in case
-// the site isn't rebuilt when the offer ends.
-import { siteConfig } from "./config";
+// Whether the first-week-free offer still shows is decided on the server for every request
+// (the root loader, from the request time), never by the visitor's clock: the HTML and the
+// hydrated page always agree, and the offer disappears on its own at the end of
+// November 30, 2026 in Toronto, with no rebuild.
+import { siteConfig } from "~/shared/config";
 
 const { prices } = siteConfig;
 const { firstWeekFree, referral } = siteConfig.offers;
 
-const firstWeekFreeEnd = Date.parse(firstWeekFree.endsAt);
+export const firstWeekFreeEnd = Date.parse(firstWeekFree.endsAt);
 
 // `time` is a millisecond timestamp, e.g. Date.now().
-export const isFirstWeekFreeOver = (time) => time >= firstWeekFreeEnd;
-
-// True when this build was made before the offer ended.
-export const firstWeekFreeActive = !isFirstWeekFreeOver(Date.parse(__BUILD_TIME__));
+export const isFirstWeekFreeOver = (time: number) => time >= firstWeekFreeEnd;
+export const isFirstWeekFreeActive = (time: number) => !isFirstWeekFreeOver(time);
 
 export const firstWeekFreeOffer = {
   short: `First week free until ${firstWeekFree.lastDayShort}`,

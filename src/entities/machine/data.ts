@@ -1,4 +1,4 @@
-// The five machine types: shown in the Machines section, offered in the request form, and
+// The five machine types: shown in the Machines section, offered in the rental request, and
 // each given its own page at /machines/<slug>/. `compare` feeds the table on /machines/;
 // `sizes` (with `compare.loads` and `compare.goodFor`) the table on the type's page. Sizes
 // are typical ones only, in inches and centimetres: 24″ = 61 cm, 27″ = 69 cm, 55″ = 140 cm,
@@ -9,10 +9,39 @@
 // smaller versions from `pnpm photos`. A type with no photo file shows `drawing` instead (a
 // standalone SVG in public/types/, also used in social graphics), marked as a drawing.
 // Every photo carries "Example of this type. Your machine may be a different brand."
-// See src/components/MachineImage.jsx and src/content/photos.js.
-import { hasPhotoFile } from "./photos";
+// See ./ui/MachineImage.tsx and src/shared/lib/photos.ts.
+import { hasPhotoFile } from "~/shared/lib/photos";
 
-export const machineTypes = [
+export { hookupChecklist } from "~/shared/config/hookups";
+
+export interface MachinePhoto {
+  src: string;
+  alt: string;
+}
+
+export interface MachineType {
+  slug: string;
+  compare: { width: string; loads: string; goodFor: string };
+  sizes: Array<{ label: string; value: string }>;
+  title: string;
+  description: string;
+  price: number;
+  priceNote: string | null;
+  photos: MachinePhoto[];
+  drawing: string;
+  alt: string;
+  page: {
+    metaTitle: string;
+    metaDescription: string;
+    h1: string;
+    intro: string;
+    whatItIs: string[];
+    fits: string[];
+    size: string;
+  };
+}
+
+export const machineTypes: MachineType[] = [
   {
     slug: "stackable",
     compare: {
@@ -259,11 +288,12 @@ export const machineTypes = [
 ];
 
 // The type's photos whose files are in this build, main photo first. None: show the drawing.
-export const machinePhotos = (machine) => machine.photos.filter((photo) => hasPhotoFile(photo.src));
+export const machinePhotos = (machine: MachineType) =>
+  machine.photos.filter((photo) => hasPhotoFile(photo.src));
 
 // One of the type photos by its file, with the type it shows (city and district pages pick
 // theirs this way). Null when the file isn't in the build.
-export function findMachinePhoto(src) {
+export function findMachinePhoto(src: string): (MachinePhoto & { machine: MachineType }) | null {
   for (const machine of machineTypes) {
     const photo = machinePhotos(machine).find((item) => item.src === src);
     if (photo) return { ...photo, machine };
@@ -271,11 +301,7 @@ export function findMachinePhoto(src) {
   return null;
 }
 
-// Hookups every machine needs. Shown on each machine type page.
-export const hookupChecklist = [
-  "Hot and cold water taps for the washer",
-  "A drain: a standpipe or a laundry tub",
-  "A standard outlet for the washer",
-  "For an electric dryer: a 240V outlet, 3- or 4-prong",
-  "For a vented dryer: a vent to the outside",
-];
+
+export const machinePath = (machine: { slug: string }) => `/machines/${machine.slug}/`;
+
+export const findMachine = (slug: string) => machineTypes.find((machine) => machine.slug === slug);

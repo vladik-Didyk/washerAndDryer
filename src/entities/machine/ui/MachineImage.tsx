@@ -1,16 +1,15 @@
-import { machinePhotos } from "../content/machines";
-import Photo from "./Photo";
+import { Photo } from "~/shared/ui";
+import { machinePhotos, type MachineType } from "../data";
 
 // Shown with every example photo of a machine type (once per card grid or gallery).
-export const PHOTO_CAPTION =
-  "Example of this type. Your machine may be a different brand.";
+export const PHOTO_CAPTION = "Example of this type. Your machine may be a different brand.";
 
-export const hasPhoto = (machine) => machinePhotos(machine).length > 0;
+export const hasPhoto = (machine: MachineType) => machinePhotos(machine).length > 0;
 
-// The type's main picture: its first photo in this build (src/content/machines.js), otherwise
-// its drawing from public/types/. Pass preferPhoto=false to get the drawing even when a photo
-// exists (the Drawings/Photos switch in Machines.jsx).
-export function machinePicture(machine, preferPhoto = true) {
+// The type's main picture: its first photo in this build (../data.ts), otherwise its drawing
+// from public/types/. Pass preferPhoto=false to get the drawing even when a photo exists (the
+// Drawings/Photos switch, features/view-switch).
+export function machinePicture(machine: MachineType, preferPhoto = true) {
   const [photo] = preferPhoto ? machinePhotos(machine) : [];
   if (photo) return { isPhoto: true, src: photo.src, alt: photo.alt };
   return { isPhoto: false, src: machine.drawing, alt: `Drawing: ${machine.alt}` };
@@ -18,7 +17,7 @@ export function machinePicture(machine, preferPhoto = true) {
 
 // A small "Drawing" tag over a drawing, so it isn't taken for a photo. Screen readers get the
 // same from the alt text ("Drawing: ..."), so the tag itself is hidden from them.
-export function DrawingTag({ className = "left-2.5 top-2.5" }) {
+export function DrawingTag({ className = "left-2.5 top-2.5" }: { className?: string }) {
   return (
     <span
       aria-hidden="true"
@@ -30,14 +29,21 @@ export function DrawingTag({ className = "left-2.5 top-2.5" }) {
 }
 
 // `frameClassName` sizes the box: a photo fills it, a drawing is centred at full height.
-// `sizes` is the photo's display width for srcset (src/components/Photo.jsx).
-export default function MachineImage({
+// `sizes` is the photo's display width for srcset (shared/ui Photo).
+export function MachineImage({
   machine,
   preferPhoto = true,
   sizes,
   frameClassName = "",
   priority = false,
   tagDrawing = true,
+}: {
+  machine: MachineType;
+  preferPhoto?: boolean;
+  sizes: string;
+  frameClassName?: string;
+  priority?: boolean;
+  tagDrawing?: boolean;
 }) {
   const picture = machinePicture(machine, preferPhoto);
   return (
@@ -53,7 +59,7 @@ export default function MachineImage({
       ) : (
         <>
           <img
-            src={`${import.meta.env.BASE_URL}${picture.src}`}
+            src={`/${picture.src}`}
             alt={picture.alt}
             width={400}
             height={480}

@@ -1,10 +1,9 @@
-import { ArrowRight } from "lucide-react";
-import { machinePath } from "../content/routes";
-import MachineImage from "./MachineImage";
-import KeepWordsWhole from "./KeepWordsWhole";
+import { ArrowRight, KeepWordsWhole } from "~/shared/ui";
+import { machinePath, type MachineType } from "../data";
+import { MachineImage } from "./MachineImage";
 
-// Card widths for the photo's srcset: the five-type grid (Machines.jsx), and grids of four
-// (other types on a type page, types that fit a district).
+// Card widths for the photo's srcset: the five-type grid (widgets/machine-showcase), and grids
+// of four (other types on a type page, types that fit a district).
 export const TYPE_CARD_SIZES =
   "(min-width: 1280px) 14rem, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 38vw";
 export const TYPE_CARD_SIZES_4UP = "(min-width: 1024px) 17rem, (min-width: 640px) 50vw, 38vw";
@@ -14,7 +13,17 @@ export const TYPE_CARD_SIZES_4UP = "(min-width: 1024px) 17rem, (min-width: 640px
 // ring is drawn on the card. Phones: picture on the left. From 640px: picture on top.
 // `note` replaces the description (e.g. why the type suits an area); `preferPhoto` follows the
 // Drawings/Photos switch. A drawing carries its "Drawing" tag.
-export default function TypeCard({ machine, note, preferPhoto = true, sizes = TYPE_CARD_SIZES }) {
+export function TypeCard({
+  machine,
+  note,
+  preferPhoto = true,
+  sizes = TYPE_CARD_SIZES,
+}: {
+  machine: MachineType;
+  note?: string;
+  preferPhoto?: boolean;
+  sizes?: string;
+}) {
   return (
     <li className="group relative flex overflow-hidden rounded-2xl border border-line bg-white transition-[border-color,box-shadow] duration-150 hover:border-brand hover:shadow-[0_14px_30px_-18px_rgba(7,63,50,0.45)] sm:flex-col">
       <MachineImage

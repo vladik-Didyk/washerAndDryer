@@ -1,10 +1,26 @@
 // Toronto's districts (the former municipalities), one page each at /toronto/<slug>/.
-// Same rules as cities.js: local detail stays general and true. Neighbourhoods listed are ones
+// Same rules as ./cities.ts: local detail stays general and true. Neighbourhoods listed are ones
 // that are clearly inside the district. No claims about installs done, customers or buildings.
 // `photo` is the example photo in the page header (one of the machine type photos in
-// machines.js, a different one for each district); `fits` lists the types that usually suit
-// the homes there (slugs from machines.js).
-export const districts = [
+// entities/machine, a different one for each district); `fits` lists the types that usually
+// suit the homes there (machine type slugs).
+export interface District {
+  slug: string;
+  name: string;
+  metaTitle: string;
+  metaDescription: string;
+  teaser: string;
+  intro: string;
+  /** York (the former city) is not York Region: the page says so. */
+  regionNote?: boolean;
+  photo: string;
+  neighbourhoods: string[];
+  homes: string[];
+  fits: Array<{ machine: string; note: string }>;
+  checklist: string[];
+}
+
+export const districts: District[] = [
   {
     slug: "north-york",
     name: "North York",
@@ -199,3 +215,6 @@ export const districts = [
     ],
   },
 ];
+
+export const districtPath = (district: { slug: string }) => `/toronto/${district.slug}/`;
+export const findDistrict = (slug: string) => districts.find((district) => district.slug === slug);

@@ -1,10 +1,23 @@
 // One page per city at /<slug>/. Local detail here must stay generally true and
 // non-promissory: no claims about installs done, customers, or buildings served.
 // `photo` is the example photo in the page header: one of the machine type photos in
-// machines.js, a different one for each city, picked to match the homes described.
+// entities/machine, a different one for each city, picked to match the homes described.
 // `teaser` is the one-line summary on the /areas/ page. Toronto's districts have their own
-// pages (districts.js); its `neighbourhoods` link to them.
-export const cities = [
+// pages (./districts.ts); its `neighbourhoods` link to them.
+export interface City {
+  slug: string;
+  name: string;
+  teaser: string;
+  metaTitle: string;
+  metaDescription: string;
+  intro: string;
+  photo: string;
+  neighbourhoods: string[];
+  homes: string[];
+  checklist: string[];
+}
+
+export const cities: City[] = [
   {
     slug: "toronto",
     name: "Toronto",
@@ -180,3 +193,6 @@ export const cities = [
     ],
   },
 ];
+
+export const cityPath = (city: { slug: string }) => `/${city.slug}/`;
+export const findCity = (slug: string) => cities.find((city) => city.slug === slug);
