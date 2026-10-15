@@ -4,9 +4,9 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "dev": "react-router dev",
+    "dev": "react-router dev --port 8790 --strictPort",
     "build": "react-router build",
-    "preview": "pnpm run build && wrangler dev -c build/server/wrangler.json --port 8790 --ip 127.0.0.1",
+    "preview": "pnpm run build && wrangler dev -c build/server/wrangler.json --port 8791 --ip 127.0.0.1",
     "deploy": "pnpm run build && wrangler deploy",
     "cf-typegen": "wrangler types && react-router typegen",
     "typecheck": "wrangler types && react-router typegen && tsc -b",

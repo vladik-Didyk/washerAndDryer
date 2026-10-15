@@ -19,10 +19,13 @@ pnpm dev                         # dev server with hot reload, http://localhost:
 pnpm test                        # Vitest: postal codes, rental steps, forms, catalog, prices, dictionaries
 pnpm typecheck                   # wrangler types + react-router typegen + tsc
 pnpm build                       # client + Worker bundles into build/
-pnpm preview                     # build, then serve the Worker locally on :8790
+pnpm preview                     # build, then serve the built Worker on :8791 (production check)
 ```
 
-Ports 8765–8782 are used by other projects on this machine; this one uses 8790.
+Ports 8765–8782 are used by other projects on this machine; this one uses 8790 (dev) and 8791
+(preview). Use `pnpm dev` for everyday work: it renders from the source, so a build or deploy
+never breaks it. `pnpm preview` serves `build/`, and any later build replaces those files under
+it (pages then load without styles until it is restarted), so use it only for a final check.
 
 To try forms locally without sending email, add `FORMS_DRY_RUN=1` to `.dev.vars`: the
 server logs the submission (key masked) instead of posting to Web3Forms.
@@ -31,7 +34,7 @@ To run the built Worker with other settings, e.g. drafts on:
 
 ```bash
 pnpm build
-pnpm exec wrangler dev -c build/server/wrangler.json --port 8790 \
+pnpm exec wrangler dev -c build/server/wrangler.json --port 8791 \
   --var PREVIEW_DRAFTS:1 --var FORMS_DRY_RUN:1 --var SESSION_SECRET:dev
 ```
 

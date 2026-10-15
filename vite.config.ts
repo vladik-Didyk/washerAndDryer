@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
       ? [tsconfigPaths()]
       : [cloudflare({ viteEnvironment: { name: "ssr" } }), reactRouter(), tsconfigPaths()],
   server: { port: 8790, strictPort: true },
-  preview: { port: 8790, strictPort: true },
+  preview: { port: 8791, strictPort: true },
   test: {
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     environment: "node",
