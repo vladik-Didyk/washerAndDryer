@@ -101,16 +101,22 @@ export const isLang = (value: unknown): value is Lang => LANGUAGES.some((entry) 
 // (/machines/stackable/, /es/machines/stackable/, /ru/machines/stackable/). English has no
 // prefix. src/app/routes.ts registers each page once per language from this registry.
 
-const PREFIX = /^\/([a-z]{2})(?=\/|$)/;
+const PREFIX = /^\/([a-z]{2})(?=[/\\]|$)/;
+
+// A path that can only ever point at this site: any run of leading slashes and backslashes
+// becomes one "/" ("//evil.com/" and "/\\evil.com" would otherwise be read by browsers as
+// another host). Every path this module hands out goes through it.
+export const sameOriginPath = (path: string) => path.replace(/^[/\\]+/, "/");
 
 // "/es/faq/" -> { lang: "es", path: "/faq/" }; "/faq/" -> { lang: "en", path: "/faq/" }.
+// Only a code of the registry counts as a prefix.
 export function splitLangPath(pathname: string): { lang: Lang; path: string } {
-  const match = pathname.match(PREFIX);
+  const safe = sameOriginPath(pathname.startsWith("/") || pathname.startsWith("\\") ? pathname : `/${pathname}`);
+  const match = safe.match(PREFIX);
   if (match && match[1] !== DEFAULT_LANG && isLang(match[1])) {
-    const rest = pathname.slice(match[0].length);
-    return { lang: match[1], path: rest.startsWith("/") ? rest : `/${rest}` };
+    return { lang: match[1], path: sameOriginPath(`/${safe.slice(match[0].length)}`) };
   }
-  return { lang: DEFAULT_LANG, path: pathname };
+  return { lang: DEFAULT_LANG, path: safe };
 }
 
 // The language of a URL: /es/... is Spanish, /ru/... Russian, everything else English.
@@ -120,12 +126,14 @@ export const langFromPath = (pathname: string): Lang => splitLangPath(pathname).
 export const isEnglishOnly = (href: string) => englishOnlyPaths.includes(href.split(/[?#]/)[0]);
 
 // A site link in a language: "/faq/#deposit" -> "/es/faq/#deposit". Links that are not site
-// paths (tel:, sms:, https:, #anchor), English-only pages and links that already carry a
-// language stay as they are.
+// paths (tel:, sms:, https:, #anchor) stay as they are; a site path always comes out as one
+// same-origin path (sameOriginPath), English-only pages and paths that already carry a
+// language without a new prefix.
 export function localizePath(href: string, lang: Lang): string {
-  if (lang === DEFAULT_LANG || !href.startsWith("/") || href.startsWith("//") || isEnglishOnly(href)) return href;
-  if (splitLangPath(href).lang !== DEFAULT_LANG) return href;
-  return `/${lang}${href}`;
+  if (!href.startsWith("/") && !href.startsWith("\\")) return href;
+  const path = sameOriginPath(href);
+  if (lang === DEFAULT_LANG || isEnglishOnly(path) || splitLangPath(path).lang !== DEFAULT_LANG) return path;
+  return `/${lang}${path}`;
 }
 
 // The same page in another language (the language switcher). An English-only page has no

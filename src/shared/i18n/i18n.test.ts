@@ -102,11 +102,26 @@ describe("paths", () => {
     expect(localizePath("/start/?machine=stackable", "ru")).toBe("/ru/start/?machine=stackable");
     expect(localizePath("/es/faq/", "es")).toBe("/es/faq/");
     expect(localizePath("/faq/", "en")).toBe("/faq/");
-    for (const other of ["tel:+14379076955", "sms:+1", "https://example.com/", "#top", "//cdn.example.com/x"]) {
+    for (const other of ["tel:+14379076955", "sms:+1", "https://example.com/", "#top"]) {
       expect(localizePath(other, "es")).toBe(other);
     }
     // English-only pages keep their English address.
     expect(localizePath("/terms/#first-week-free", "es")).toBe("/terms/#first-week-free");
+  });
+
+  it("never turns a path into another host's address", () => {
+    const hostile = ["//evil.com/", "/\\evil.com", "/es//evil.com", "/es/\\evil.com/", "\\\\evil.com", "/ru///evil.com/x"];
+    for (const path of hostile) {
+      for (const { code } of LANGUAGES) {
+        for (const out of [pathInLanguage(path, code), localizePath(path, code), splitLangPath(path).path]) {
+          expect(out, `${path} -> ${out}`).toMatch(/^\/(?![/\\])/);
+          expect(new URL(out, "https://washerrent.com").host, out).toBe("washerrent.com");
+        }
+      }
+    }
+    expect(pathInLanguage("//evil.com/", "es")).toBe("/es/evil.com/");
+    expect(pathInLanguage("/es//evil.com", "en")).toBe("/evil.com");
+    expect(langFromPath("/xx/faq/")).toBe("en");
   });
 
   it("maps the page being shown to its other languages", () => {
