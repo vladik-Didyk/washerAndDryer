@@ -54,7 +54,8 @@ bundle (secrets, Web3Forms, guide and policy drafts).
   `loaders.server.ts` / `actions.server.ts` are the server side; answers live in a signed
   HttpOnly cookie session (`session.server.ts`, path `/start`) and are cleared on send.
 - **pages/** — one slice per page: `ui/index.tsx` (the page), `loader.ts` (data + `<head>`),
-  `action.ts` where a form posts (landlord quote, repair), `index.ts` (the route module).
+  `action.ts` where a form posts (landlord quote, repair; it builds the English email),
+  `index.ts` (the route module). Every page exists in English, Spanish and Russian.
 - **widgets/** — page sections: header, footer, offer bar, hero, machine showcase (cards,
   Photos/Drawings switch, the flipping machine animation), trust strip, CTA band, prices,
   how it works, FAQ section, service area, start-rental band, mobile action bar, and more.
@@ -63,10 +64,29 @@ bundle (secrets, Web3Forms, guide and policy drafts).
 - **entities/** — business data with small UI: machine (types, cards), area (cities,
   districts), offer (prices after promotions, the running promotions, the facts every text
   needs, the per-request text), faq (questions, accordion, list), guide (drafts, server-only).
-- **shared/** — i18n (every word of the site, see below), config (business facts, prices and
-  promotions, page paths, environment), ui (buttons, Photo with WebP/srcset, form fields,
-  icons, the struck-through old price), seo (meta + JSON-LD builders), api
-  (`web3forms.server.ts`), lib (dates, the per-request site context).
+- **shared/** — i18n (every word of the site, and the language paths, see below), config
+  (business facts, prices and promotions, page paths, English-only pages, environment),
+  forms (every form field and form, see "Forms"), ui (the page blocks: Container, Section,
+  Heading, SectionHeader, Card, Button, LangLink, PhoneButton, CallCard, lists; Photo with
+  WebP/srcset, icons, the struck-through old price), seo (meta, hreflang + JSON-LD builders),
+  api (`web3forms.server.ts`), lib (dates, the per-request site context).
+
+### Page blocks (shared/ui)
+
+Pages stay readable JSX, built from a few blocks instead of repeated class strings:
+
+- `<Section>` is a band of the page (the `.section` rhythm unless `padded={false}`);
+  `<Container>` the horizontal frame. `<Heading>` takes its level from the depth: the page's
+  hero is level 1 (`<Section nest={false}>`, its heading the h1), each `<Section>` inside the
+  page one deeper (h2), `<Nest>` or a nested `<Section>` deeper again (h3). The look is
+  `variant` (`page`, `section`, `card`, `cardSmall`, `item`, `question`, `label`), so a heading
+  can move without changing its size. `<SectionHeader>` is eyebrow + heading + lead.
+- `<Card tone padding>` is the `rounded-3xl` shell (white, paper, mint, highlight...).
+- `<Button href variant>` is a link (kept in the page's language) or a `<button>`;
+  `<PhoneButton kind="call|text">` and `<CallCard>` ("Prefer to call or text?") carry the
+  phone number. `<LangLink>` is the plain link. The rental request is `pagePaths.start`.
+- `widgets/cta-band`: the closing call to action, `variant="photo"` (the dark photo band) or
+  `variant="panel"` (the mint panel with buttons or the postal-code checker).
 
 Content rules from the old site still hold: verified facts only, no owner name, prices in
 CAD, "No HST charged".
@@ -84,14 +104,14 @@ machine and area copy. Components contain no English; a test fails if one does
   shape is the type of every other language (`Dictionary`).
 - `locales/en.server.ts` — the server-only English text: the guides, the privacy policy and
   rental terms, llms.txt. It never ships to the browser, so a draft stays private.
-- `locales/es.ts`, `locales/ru.ts` — only what is translated (the `/es/` and `/ru/` pages, the
-  skip link, the phone bar). Anything missing falls back to English.
+- `locales/es.ts`, `locales/ru.ts` — only what is translated (any key of `en.ts`; every page
+  has a Spanish and a Russian version). Anything missing falls back to English.
 - `index.ts` — the language registry (`LANGUAGES`), the loader (each language is its own
   chunk, loaded with `import()` and cached), the formatters and the React API:
 
   ```tsx
   const { d, format, rich, money, date } = useI18n();
-  <h2>{d.home.prices.title}</h2>                                 // typed: a typo is a type error
+  <Heading>{d.home.prices.title}</Heading>                       // typed: a typo is a type error
   {format(d.areas.page.title, { place: city.name })}             // "Washer & dryer rental in {place}"
   {rich(d.forms.sendError, { phoneLink: <a href={tel}>{phone}</a> })}
   ```
@@ -105,29 +125,83 @@ Text is plain data. `{names}` are filled in: the business facts (`{phone}`, `{co
 language (`$12.50`, `November 30, 2026`, `9 am`); other names where the string is used. No
 price, amount or date is ever typed into the text.
 
-The server picks the language from the URL (`/es/...`, `/ru/...`, everything else English),
-the root loader loads it, and `src/app/entry.client.tsx` loads the same dictionary (from
-`<html lang>`) before hydrating, so the HTML doesn't carry the dictionary.
+## Languages: every page in English, Spanish and Russian
+
+Every page exists in every language of the registry, at the same slug: English at the root,
+the others under their code — `/machines/stackable/`, `/es/machines/stackable/`,
+`/ru/machines/stackable/`; `/es/` is the Spanish home page. The rental request, the landlord
+quote and the repair request work the same way under `/es/` and `/ru/`. Exceptions: the
+privacy policy and rental terms are English-only (`englishOnlyPaths` in
+`shared/config/site.ts`; `/es/privacy/` is a 404, and links to them from a Spanish or Russian
+page keep the English address with an "Available in English" note), and so are sitemap.xml,
+robots.txt and llms.txt.
+
+- **Routes**: `src/app/routes.ts` lists every page once (`PAGES`) and registers that list for
+  each language of `LANGUAGES`: the path gets the code in front (`es/faq`) and the route id
+  gets it behind (`faq.es`). The same module serves every language.
+- **Language of a request**: from the URL (`langFromPath`, only codes of the registry count).
+  The root loader loads that dictionary, sets `<html lang>`, and the whole page follows it,
+  header, footer, offer bar and phone bar included. The browser loads the same dictionary
+  before hydrating (`src/app/entry.client.tsx`), so the HTML doesn't carry it.
+- **Links**: write the English path, always. `<LangLink href="/faq/">`, `<Button href>` and
+  `i18n.href(path)` (loaders, actions, redirects) add the page's prefix (`localizePath`).
+  Every path that comes out is same-origin (`sameOriginPath`: "//x" can never become another
+  host). The header's EN · ES · RU switcher links the same page in each language
+  (`pathInLanguage`); there is no automatic redirect.
+- **SEO**: loaders give `pageHead(i18n, { path })` the English path; it writes the canonical,
+  `og:url`, `og:locale`, the breadcrumbs and the hreflang links (en, es, ru, x-default = the
+  English page) for the page's language. JSON-LD urls follow it. `sitemap.xml` lists every
+  page in each language with its `xhtml:link` alternates.
+- **Forms**: error messages and option labels are in the page's language; option values,
+  and the emails, stay English, with `language: Spanish` (or Russian, English) first.
+- **Text**: `locales/es.ts` and `ru.ts` translate any key of `en.ts`; what they leave out
+  shows in English. The guides can be translated in `locales/es.server.ts` / `ru.server.ts`.
 
 ### Add a language
 
-1. Write `src/shared/i18n/locales/xx.ts`:
+1. Write `src/shared/i18n/locales/xx.ts` (and an empty `xx.server.ts`, like `es.server.ts`):
    ```ts
    import type { DeepPartial, Dictionary } from "../index";
-   const xx: DeepPartial<Dictionary> = { chrome: { skipLink: "..." }, language: { h1: "..." } };
+   const xx: DeepPartial<Dictionary> = { chrome: { skipLink: "..." }, home: { hero: { title: "..." } } };
    export default xx;
    ```
    Translate as much or as little as you like; the rest shows in English. Keep the same
    `{placeholders}` as English (the test checks), and set `formats` if dates or times are
    written differently.
-2. Add one entry to `LANGUAGES` in `src/shared/i18n/index.ts` (code, name, locales, path,
-   `load: () => import("./locales/xx")`).
-3. If it gets its own page, add a route in `src/app/routes.ts` (as `es` and `ru` use
-   `pages/language`). The sitemap, llms.txt, hreflang links and the language links in the
-   header and footer follow the registry.
+2. Add one entry to `LANGUAGES` in `src/shared/i18n/index.ts` (code, name, English name,
+   locales, path `/xx/`, `load: () => import("./locales/xx")`), and the server part to the
+   `translations` record of `src/shared/i18n/index.server.ts`.
+3. That's all: the routes (`/xx/...` for every page), the switcher, hreflang, the sitemap and
+   the footer's language links follow the registry.
 
 To change wording, edit the dictionary only. The tests check that every translation has only
 keys English has, with the same placeholders.
+
+## Forms
+
+Every form field and every form is defined once, in `src/shared/forms/registry.ts`:
+
+- `fields`: one entry per field — `name` (what is posted), `kind` (`text`, `tel`, `email`,
+  `number`, `date`, `textarea`, `select`, `choice`), `label` / `hint` / `placeholder` and
+  option labels as **dictionary keys** (never text), `options`, the checks (`required`,
+  `pattern`, `integer`, `min`, `minLength`, `maxLength`, `notBefore`) with their `messages`
+  (dictionary keys), and the HTML (`autoComplete`, `inputMode`, `rows`, `columns`,
+  `className`...).
+- `forms`: one entry per form — its id prefix and its fields in order, each a field key or
+  `{ field, ...overrides }` where one form needs another label, message, hint or layout.
+
+The same definition draws the controls (`<FormFields form="repair" values errors />`, or one
+`<Field form="repair" name="phone" />`) and checks the post on the server
+(`validateForm("repair", formData, i18n)` returns the values and a message per field). An
+option posts the English text of its label (or its own `value`), whatever the page's language.
+
+- **Add a field**: put its words in `locales/en.ts`, add an entry to `fields`, add its key to
+  the forms that need it. The page and the server check pick it up; add it to the email in the
+  form's action if the business needs it.
+- **Add a form**: add an entry to `forms`; in the page, `<Form method="post">` with
+  `<FormFields form="...">`, `<Honeypot />` and `<SubmitButton>`; in the action,
+  `validateForm`, then `submitToWeb3Forms(env, formEmail(i18n, { subject, ... }))` with the
+  email built from `englishOf(i18n)`.
 
 ## Prices and promotions
 
