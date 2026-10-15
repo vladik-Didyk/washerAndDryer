@@ -1,9 +1,10 @@
 import { ArrowRight, Building2 } from "lucide-react";
 
-// Home page: a short pointer to /landlords/.
+// Home page: a short pointer to /landlords/. It sits between Prices and About, which bring
+// their own padding.
 export default function LandlordsTeaser() {
   return (
-    <section aria-labelledby="landlords-teaser-title" className="pb-16 sm:pb-20 lg:pb-24">
+    <section aria-labelledby="landlords-teaser-title">
       <div className="container-page">
         <div className="flex flex-col gap-5 rounded-3xl border border-line bg-white p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <div className="flex gap-4">
