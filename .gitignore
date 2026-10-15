@@ -40,3 +40,6 @@ coverage/
 
 # Cache
 .cache/
+
+# Prerender server bundle (deleted after each build)
+dist-ssr/
