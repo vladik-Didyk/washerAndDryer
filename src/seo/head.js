@@ -227,7 +227,10 @@ function languageService(route) {
 function mainJsonLd(route) {
   switch (route.kind) {
     case "home":
-      return [localBusiness(), faqPage()];
+      return [localBusiness()];
+    case "faq":
+      // The only page with FAQPage markup: every question on the site lives on /faq/.
+      return [faqPage()];
     case "areas":
       return [areasService(route)];
     case "city":

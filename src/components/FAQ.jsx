@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Plus } from "lucide-react";
-import { faqs } from "../content/faqs";
+import { ArrowRight, Plus } from "lucide-react";
+import { homeFaqs } from "../content/faqs";
 import { siteConfig } from "../content/config";
 
 function FAQItem({ faq, index, isOpen, onToggle }) {
@@ -46,7 +46,8 @@ function FAQItem({ faq, index, isOpen, onToggle }) {
   );
 }
 
-export default function FAQ() {
+// Accordion of a few common questions; the full list is on /faq/ (FaqPage.jsx).
+export default function FAQ({ items = homeFaqs, moreHref = "/faq/" }) {
   const [openItems, setOpenItems] = useState(() => new Set());
   const { phone } = siteConfig;
 
@@ -77,10 +78,16 @@ export default function FAQ() {
             </a>
             .
           </p>
+          {moreHref && (
+            <a href={moreHref} className="btn btn-secondary mt-6">
+              All questions and answers
+              <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+            </a>
+          )}
         </div>
 
         <div className="divide-y divide-line rounded-3xl border border-line bg-paper px-5 sm:px-8 lg:col-span-8">
-          {faqs.map((faq, index) => (
+          {items.map((faq, index) => (
             <FAQItem
               key={faq.question}
               faq={faq}

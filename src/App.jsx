@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import CityPage from "./pages/CityPage";
 import DistrictPage from "./pages/DistrictPage";
 import AreasPage from "./pages/AreasPage";
+import FaqPage from "./pages/FaqPage";
 import MachinePage from "./pages/MachinePage";
 import LanguagePage from "./pages/LanguagePage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -26,6 +27,8 @@ function Page({ route }) {
       return <DistrictPage district={route.district} />;
     case "machine":
       return <MachinePage machine={route.machine} />;
+    case "faq":
+      return <FaqPage />;
     case "language":
       return <LanguagePage content={route.content} />;
     default:

@@ -14,6 +14,9 @@ export const cityPath = (city) => `/${city.slug}/`;
 export const districtPath = (district) => `/toronto/${district.slug}/`;
 export const machinePath = (machine) => `/machines/${machine.slug}/`;
 
+// Where "Check availability" goes on pages without the request form.
+export const requestFormHref = "/#request";
+
 const HOME = { name: "Home", path: "/" };
 const AREAS = { name: "Areas", path: "/areas/" };
 const TORONTO = { name: "Toronto", path: "/toronto/" };
@@ -72,6 +75,16 @@ export const routes = [
     metaDescription: machine.page.metaDescription,
     breadcrumbs: [HOME, { name: machine.title, path: machinePath(machine) }],
   })),
+  {
+    path: "/faq/",
+    kind: "faq",
+    lang: "en",
+    llmsNote: "renting, prices and payment, delivery and installation, repairs, landlords, current offers",
+    metaTitle: "Washer & Dryer Rental FAQ | GTA Washer & Dryer Rentals",
+    metaDescription:
+      "Answers about renting a washer and dryer in Toronto and the GTA: prices, the deposit, payment, delivery, installation, repairs and landlords.",
+    breadcrumbs: [HOME, { name: "FAQ", path: "/faq/" }],
+  },
   ...languagePages.map((content) => ({
     path: content.path,
     kind: "language",
