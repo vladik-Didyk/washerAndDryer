@@ -10,6 +10,10 @@ export const siteConfig = {
   // The business's name, as written everywhere (text uses it as {company}).
   companyName: "GTA Washer & Dryer Rentals",
   siteUrl: "https://washerrent.com", // no trailing slash
+  // The picture shown when a page is shared (Facebook, WhatsApp...) and in JSON-LD. It shows
+  // the weekly price, so remake public/og-image.jpg when a price changes, and change `v`:
+  // Facebook keeps the old picture for a URL it has already seen.
+  ogImage: "https://washerrent.com/og-image.jpg?v=2026-10-15",
   // The date the page content last changed; used as <lastmod> in the generated sitemap.xml.
   lastUpdated: "2026-10-15",
   phone: {

@@ -34,7 +34,7 @@ export function guideHead(i18n: I18n, guide: Guide) {
         datePublished: guide.published,
         dateModified: guide.updated,
         inLanguage: i18n.lang === "en" ? "en-CA" : i18n.lang,
-        image: `${siteConfig.siteUrl}/og-image.jpg`,
+        image: siteConfig.ogImage,
         author: providerRef(),
         publisher: { ...providerRef(), logo: { "@type": "ImageObject", url: `${siteConfig.siteUrl}/brand/logo.png` } },
       },

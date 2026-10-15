@@ -62,7 +62,7 @@ export function localBusiness(i18n: I18n): JsonLd {
     url: absolute(i18n.href("/")),
     telephone: PHONE_E164,
     logo: `${SITE}/brand/logo.png`,
-    image: `${SITE}/og-image.jpg`,
+    image: siteConfig.ogImage,
     priceRange: "$",
     currenciesAccepted: "CAD",
     paymentAccepted: business.paymentAccepted,
