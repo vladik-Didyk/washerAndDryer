@@ -1,4 +1,6 @@
-export type Lang = "en" | "es" | "ru";
+import type { Lang } from "../i18n";
+
+export type { Lang };
 
 export interface Crumb {
   name: string;

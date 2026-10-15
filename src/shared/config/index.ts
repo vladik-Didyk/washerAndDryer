@@ -1,6 +1,5 @@
-export { siteConfig, type SiteConfig } from "./site";
-export { howWeWork } from "./about";
-export { hookupChecklist } from "./hookups";
+export { siteConfig, pagePaths, type FixedPage, type SiteConfig } from "./site";
+export { experienceYears, pricing, promotions, type PriceItem, type Promotion } from "./pricing";
 export {
   envOf,
   flagsOf,
@@ -10,17 +9,3 @@ export {
   type SiteEnv,
   type SiteFlags,
 } from "./env";
-export {
-  aboutPage,
-  accountPage,
-  areasPage,
-  contactPage,
-  faqPage,
-  homePage,
-  landlordQuotePage,
-  landlordsPage,
-  machinesPage,
-  notFoundPage,
-  repairPage,
-  startPage,
-} from "./pages";

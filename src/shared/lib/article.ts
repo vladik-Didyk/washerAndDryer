@@ -1,17 +1,16 @@
 // The blocks of a long-form page (guides, the privacy policy, the rental terms):
 // a string is a paragraph; the objects are a bulleted list, numbered steps, a highlighted
-// note, a link (left out while its page doesn't exist), or one of the current offers
-// (filled in per request by the page, so it follows the offer dates).
-export type ArticleBlock =
+// note, or a link (left out while its page doesn't exist). The text itself is in shared/i18n
+// (locales/en.server.ts), where two more kinds are filled in per request before the page gets
+// them: { include } (a shared list or text) and { offer } (the running offers).
+export type RenderedBlock =
   | string
   | { list: string[] }
   | { steps: string[] }
   | { note: string }
-  | { link: { href: string; label: string } }
-  | { offer: "first-week-free" | "referral" };
+  | { link: { href: string; label: string } };
 
-// What reaches the page after the offers are filled in.
-export type RenderedBlock = Exclude<ArticleBlock, { offer: string }>;
+export type ArticleBlock = RenderedBlock | { include: string } | { offer: string };
 
 export interface ArticleSection<Block = ArticleBlock> {
   /** The section's anchor; defaults to the heading in lower-case words joined by dashes. */

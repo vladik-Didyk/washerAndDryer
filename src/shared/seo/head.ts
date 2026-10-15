@@ -2,6 +2,7 @@
 // JSON-LD. Pages build a PageHead in their loader (pageHead) and export `meta = seoMeta`.
 import type { MetaDescriptor } from "react-router";
 import { siteConfig } from "../config/site";
+import { LANGUAGES, languageOf } from "../i18n";
 import { photoFiles } from "../lib/photos";
 import { breadcrumbList } from "./json-ld";
 import type { Crumb, JsonLd, Lang, PageHead, PageKind, Preload } from "./types";
@@ -9,10 +10,10 @@ import type { Crumb, JsonLd, Lang, PageHead, PageKind, Preload } from "./types";
 export const absoluteUrl = (path: string) => `${siteConfig.siteUrl}${path}`;
 
 // The home page and the Spanish and Russian pages are language versions of each other.
-export const languageAlternates = [
-  { lang: "en", path: "/" },
-  ...siteConfig.languageLinks.map((link) => ({ lang: link.lang, path: link.href })),
-];
+export const languageAlternates: Array<{ lang: string; path: string }> = LANGUAGES.map((language) => ({
+  lang: language.code,
+  path: language.path,
+}));
 
 export interface PageHeadInput {
   path: string;
@@ -24,7 +25,6 @@ export interface PageHeadInput {
   noindex?: boolean;
   breadcrumbs?: Crumb[];
   ogType?: "website" | "article";
-  ogLocale?: string;
   jsonLd?: JsonLd[];
   preloads?: Array<Preload | null>;
 }
@@ -43,7 +43,7 @@ export function pageHead(input: PageHeadInput): PageHead {
     noindex: Boolean(input.noindex || input.draft || input.kind === "not-found"),
     breadcrumbs,
     ogType: input.ogType ?? "website",
-    ogLocale: input.ogLocale ?? "en_CA",
+    ogLocale: languageOf(input.lang ?? "en").ogLocale,
     alternates: languageAlternates.some((alt) => alt.path === input.path) ? languageAlternates : [],
     jsonLd: [...(input.jsonLd ?? []), ...(breadcrumbs ? [breadcrumbList(breadcrumbs)] : [])],
     preloads: (input.preloads ?? []).filter((preload): preload is Preload => Boolean(preload)),

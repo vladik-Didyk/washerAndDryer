@@ -1,6 +1,7 @@
 export { Logo } from "./Logo";
 export { KeepWordsWhole } from "./KeepWordsWhole";
 export { Photo } from "./Photo";
+export { WasPrice } from "./WasPrice";
 export { LinkList, type LinkItem } from "./LinkList";
 export { Bullet, Container, Section, buttonClass, textLinkClass } from "./layout";
 export {

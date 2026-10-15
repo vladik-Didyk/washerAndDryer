@@ -1,16 +1,5 @@
-const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
-];
-
-// "2026-10-15" -> "October 15, 2026". Spelled out by hand so the server and the browser
-// always print the same text.
-export function formatDate(iso: string): string {
-  const [year, month, day] = iso.split("-").map(Number);
-  return `${MONTHS[month - 1]} ${day}, ${year}`;
-}
-
 // The calendar date in Toronto for a moment, as "YYYY-MM-DD" (the business's own day).
+// Written-out dates come from shared/i18n (i18n.date).
 export function torontoDate(time: number): string {
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Toronto",
@@ -23,3 +12,11 @@ export function torontoDate(time: number): string {
 }
 
 export const torontoYear = (time: number): number => Number(torontoDate(time).slice(0, 4));
+
+// "2026-10-15" as an ISO calendar date, checked (sitemap <lastmod>).
+export function isoDate(value: string): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || Number.isNaN(Date.parse(value))) {
+    throw new Error(`Not a calendar date: "${value}"`);
+  }
+  return value;
+}

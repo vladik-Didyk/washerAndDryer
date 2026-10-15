@@ -46,9 +46,9 @@ export function photoFiles(src: string): PhotoFiles | null {
 
 // The home page photo. Phones get a portrait crop above the text; from 640px up, the wide
 // photo, which takes about half the width beside the text from 1024px (widgets/hero).
-// `sizes` must match the layout, and the head preloads use these same values.
+// `sizes` must match the layout, and the head preloads use these same values. The alt text is
+// in the dictionary (home.hero.photoAlt).
 export const heroPhoto = {
-  alt: "A white front-load washer and dryer side by side in a bright laundry room",
   wide: {
     src: "photos/hero/laundry-room.jpg",
     media: "(min-width: 640px)",

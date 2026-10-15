@@ -1,69 +1,68 @@
 // Business facts used across the site. Change them here, not in the components.
 // Only verified facts belong in this file: no invented numbers, claims or reviews.
-// Secrets and per-deployment settings (the Web3Forms key, the Stripe portal link, the
-// analytics token, search-engine verification codes) come from the environment instead:
-// see ./env.ts and README.md.
+// Words live in shared/i18n (one dictionary per language); prices and promotions in
+// ./pricing.ts. Secrets and per-deployment settings (the Web3Forms key, the Stripe portal
+// link, the analytics token, search-engine verification codes) come from the environment
+// instead: see ./env.ts and README.md.
+import type { Dictionary } from "../i18n";
+
 export const siteConfig = {
+  // The business's name, as written everywhere (text uses it as {company}).
   companyName: "GTA Washer & Dryer Rentals",
   siteUrl: "https://washerrent.com", // no trailing slash
   // The date the page content last changed; used as <lastmod> in the generated sitemap.xml.
   lastUpdated: "2026-10-15",
-  languages: "English, Spanish & Russian",
-  tagline: "Washer & dryer rental in Toronto & the GTA",
-  location: "Toronto · serving the GTA",
   phone: {
     display: "(437) 907-6955",
+    e164: "+1-437-907-6955",
     tel: "tel:+14379076955",
     sms: "sms:+14379076955",
   },
-  hours: [
-    { days: "Mon–Sat", time: "9 am – 7 pm" },
-    { days: "Sunday", time: "Closed" },
-  ],
+  // Opening hours (Toronto time). The words around them are in the dictionary.
+  hours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "09:00",
+    closes: "19:00",
+  },
   facebook: "https://www.facebook.com/profile.php?id=61588384887072",
-  prices: {
-    set: 12.5, // washer + dryer set, per week
-    single: 6.25, // one machine, per week
-    setText: "12.50", // as shown on the site
-    singleText: "6.25",
-    deposit: 200, // refundable
+  // Languages we answer calls in (ISO codes, for JSON-LD).
+  spokenLanguages: ["en", "es", "ru"],
+  // Where we deliver, in this order: the cities (one page each, entities/area) and Toronto's
+  // districts. Names and local text are in the dictionary (areas.cities, areas.districts).
+  serviceAreas: {
+    cities: ["toronto", "mississauga", "brampton", "vaughan", "markham", "richmond-hill"],
+    torontoDistricts: ["north-york", "etobicoke", "scarborough", "east-york", "york"],
+  } satisfies {
+    cities: Array<keyof Dictionary["areas"]["cities"]>;
+    torontoDistricts: Array<keyof Dictionary["areas"]["districts"]>;
   },
-  offers: {
-    // First week's rent free for new customers who start a rental by Nov 30, 2026: sets and
-    // single machines. The deposit and the delivery are still paid. Shown until `endsAt`,
-    // decided on the server for every request (src/entities/offer).
-    firstWeekFree: {
-      endsAt: "2026-12-01T05:00:00Z", // the end of Nov 30, 2026 in Toronto (EST, UTC-5)
-      lastDay: "November 30, 2026",
-      lastDayShort: "Nov 30",
-    },
-    // $100 when a friend you refer signs up for 12 months or more.
-    referral: { amount: 100, minMonths: 12 },
-  },
-  serviceAreas: [
-    {
-      name: "Toronto",
-      districts: ["North York", "Etobicoke", "Scarborough", "East York", "York"],
-    },
-    { name: "Mississauga" },
-    { name: "Brampton" },
-    { name: "Vaughan" },
-    { name: "Markham" },
-    { name: "Richmond Hill" },
-  ],
-  // Main menu. Secondary links (repair, guides, pay) are in widgets/header.
+  // Main menu: the label is nav.<key> in the dictionary. Secondary links are in widgets/header.
   navigation: [
-    { label: "Machines", href: "/machines/" },
-    { label: "Prices", href: "/#prices" },
-    { label: "Areas", href: "/areas/" },
-    { label: "Landlords", href: "/landlords/" },
-    { label: "FAQ", href: "/faq/" },
-  ],
-  // Language versions of the site, shown as short links in the header and footer.
-  languageLinks: [
-    { short: "ES", label: "Español", lang: "es", href: "/es/" },
-    { short: "RU", label: "Русский", lang: "ru", href: "/ru/" },
-  ],
+    { key: "machines", href: "/machines/" },
+    { key: "prices", href: "/#prices" },
+    { key: "areas", href: "/areas/" },
+    { key: "landlords", href: "/landlords/" },
+    { key: "faq", href: "/faq/" },
+  ] satisfies Array<{ key: keyof Dictionary["nav"]; href: string }>,
 } as const;
 
 export type SiteConfig = typeof siteConfig;
+
+// The fixed pages' paths. Their titles and descriptions are in the dictionary (pages.<key>).
+export const pagePaths = {
+  home: "/",
+  areas: "/areas/",
+  machines: "/machines/",
+  landlords: "/landlords/",
+  landlordQuote: "/landlords/quote/",
+  faq: "/faq/",
+  about: "/about/",
+  contact: "/contact/",
+  repair: "/repair/",
+  account: "/account/",
+  start: "/start/",
+  guides: "/guides/",
+  notFound: "/404/",
+} as const;
+
+export type FixedPage = keyof typeof pagePaths;

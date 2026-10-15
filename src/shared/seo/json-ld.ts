@@ -1,16 +1,19 @@
-// Schema.org JSON-LD pieces shared by the pages. Facts come from shared/config; nothing here
+// Schema.org JSON-LD pieces shared by the pages. Facts come from shared/config and the
+// request's prices (the i18n facts, entities/offer); words from the dictionary. Nothing here
 // invents a claim. No reviews or ratings: there are none yet.
 import { siteConfig } from "../config/site";
+import type { I18n } from "../i18n";
 import type { Crumb, JsonLd } from "./types";
 
 const SITE = siteConfig.siteUrl;
 const BUSINESS_ID = `${SITE}/#business`;
-export const PHONE_E164 = "+1-437-907-6955";
+export const PHONE_E164 = siteConfig.phone.e164;
 
 const absolute = (path: string) => `${SITE}${path}`;
 
-export const areaServed = () =>
-  siteConfig.serviceAreas.map((area) => ({ "@type": "City", name: area.name }));
+// Every city we deliver to.
+export const areaServed = ({ d }: I18n) =>
+  siteConfig.serviceAreas.cities.map((slug) => ({ "@type": "City", name: d.areas.cities[slug].name }));
 
 // Short reference to the business, for nodes on pages other than the home page.
 export const providerRef = () => ({
@@ -21,16 +24,19 @@ export const providerRef = () => ({
   telephone: PHONE_E164,
 });
 
+// A weekly price, as schema.org wants it: "12.50".
+const schemaPrice = (amount: number) => amount.toFixed(2);
+
 export function weeklyOffer(name: string, price: number, description: string): JsonLd {
   return {
     "@type": "Offer",
     name,
     description,
-    price: price.toFixed(2),
+    price: schemaPrice(price),
     priceCurrency: "CAD",
     priceSpecification: {
       "@type": "UnitPriceSpecification",
-      price: price.toFixed(2),
+      price: schemaPrice(price),
       priceCurrency: "CAD",
       unitText: "WEEK",
       unitCode: "WEE",
@@ -39,55 +45,47 @@ export function weeklyOffer(name: string, price: number, description: string): J
   };
 }
 
-export const setOffer = () =>
-  weeklyOffer(
-    "Washer and dryer set rental",
-    siteConfig.prices.set,
-    "A washer and dryer set, per week. Repairs and old-machine haul-away included.",
-  );
+export const setOffer = (i18n: I18n) =>
+  weeklyOffer(i18n.d.jsonLd.setOffer.name, i18n.amount("setPrice"), i18n.d.jsonLd.setOffer.description);
 
-export const singleOffer = () =>
-  weeklyOffer(
-    "Single washer or dryer rental",
-    siteConfig.prices.single,
-    "One washer or one dryer, per week. Repairs and old-machine haul-away included.",
-  );
+export const singleOffer = (i18n: I18n) =>
+  weeklyOffer(i18n.d.jsonLd.singleOffer.name, i18n.amount("singlePrice"), i18n.d.jsonLd.singleOffer.description);
 
-export function localBusiness(): JsonLd {
+export function localBusiness(i18n: I18n): JsonLd {
+  const { business } = i18n.d.jsonLd;
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": BUSINESS_ID,
     name: siteConfig.companyName,
-    description:
-      "Washer and dryer rental in Toronto and the GTA. $12.50 a week for a washer and dryer set, $6.25 a week for one machine. Repairs and old-machine haul-away included. English, Spanish and Russian spoken.",
+    description: business.description,
     url: `${SITE}/`,
     telephone: PHONE_E164,
     logo: `${SITE}/brand/logo.png`,
     image: `${SITE}/og-image.jpg`,
     priceRange: "$",
     currenciesAccepted: "CAD",
-    paymentAccepted: "Interac e-Transfer, Credit Card",
-    knowsLanguage: ["en", "es", "ru"],
+    paymentAccepted: business.paymentAccepted,
+    knowsLanguage: [...siteConfig.spokenLanguages],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Toronto",
       addressRegion: "ON",
       addressCountry: "CA",
     },
-    areaServed: areaServed(),
+    areaServed: areaServed(i18n),
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "09:00",
-        closes: "19:00",
+        dayOfWeek: [...siteConfig.hours.days],
+        opens: siteConfig.hours.opens,
+        closes: siteConfig.hours.closes,
       },
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Washer and dryer rentals",
-      itemListElement: [setOffer(), singleOffer()],
+      name: business.catalog,
+      itemListElement: [setOffer(i18n), singleOffer(i18n)],
     },
     sameAs: [siteConfig.facebook],
   };
@@ -107,26 +105,29 @@ export function breadcrumbList(items: Crumb[]): JsonLd {
 }
 
 // A "Service" node for a page: washer and dryer rental, somewhere, at the weekly prices.
-export function serviceNode(input: {
-  name: string;
-  description: string;
-  path: string;
-  serviceType?: string;
-  areaServed?: unknown;
-  offers?: unknown;
-  extra?: JsonLd;
-}): JsonLd {
+export function serviceNode(
+  i18n: I18n,
+  input: {
+    name: string;
+    description: string;
+    path: string;
+    serviceType?: string;
+    areaServed?: unknown;
+    offers?: unknown;
+    extra?: JsonLd;
+  },
+): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: input.name,
-    serviceType: input.serviceType ?? "Washer and dryer rental",
+    serviceType: input.serviceType ?? i18n.d.jsonLd.serviceType,
     description: input.description,
     url: absolute(input.path),
     provider: providerRef(),
-    areaServed: input.areaServed ?? areaServed(),
+    areaServed: input.areaServed ?? areaServed(i18n),
     ...input.extra,
-    offers: input.offers ?? [setOffer(), singleOffer()],
+    offers: input.offers ?? [setOffer(i18n), singleOffer(i18n)],
   };
 }
 
@@ -145,10 +146,11 @@ export function itemList(name: string, path: string, items: Array<{ name: string
   };
 }
 
-export const torontoPlace = (name: string) => ({
+// A Toronto district as a place inside the city.
+export const torontoPlace = (i18n: I18n, place: string) => ({
   "@type": "Place",
-  name: `${name}, Toronto`,
-  containedInPlace: { "@type": "City", name: "Toronto" },
+  name: i18n.format(i18n.d.jsonLd.torontoPlace, { place }),
+  containedInPlace: { "@type": "City", name: i18n.d.areas.cities.toronto.name },
 });
 
 export { absolute as absoluteSiteUrl, BUSINESS_ID };

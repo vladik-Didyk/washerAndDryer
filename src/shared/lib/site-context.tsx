@@ -1,12 +1,13 @@
 // What every page may need to know about this request, decided once by the root loader
-// (src/app/root.tsx) and handed down: whether the first-week offer still runs, which optional
-// pages exist (drafts only with PREVIEW_DRAFTS, /account/ only with STRIPE_PORTAL_URL) and the
-// year for the footer. Components read it here instead of the clock, so the server HTML and
-// the hydrated page always agree.
+// (src/app/root.tsx) and handed down: the request time (prices and promotions are decided from
+// it, entities/offer), which optional pages exist (drafts only with PREVIEW_DRAFTS, /account/
+// only with STRIPE_PORTAL_URL) and the year for the footer. Components read it here instead of the clock, so the server HTML and the
+// hydrated page always agree.
 import { createContext, useContext, type ReactNode } from "react";
 
 export interface SiteState {
-  offerActive: boolean;
+  /** The request time (ms), from the server: prices and promotions (entities/offer). */
+  now: number;
   year: number;
   /** Optional pages and whether this deployment has them (path -> present). */
   optionalPages: Record<string, boolean>;
@@ -16,7 +17,7 @@ export interface SiteState {
 }
 
 const defaultState: SiteState = {
-  offerActive: false,
+  now: 0,
   year: 2026,
   optionalPages: {},
   draftPages: [],

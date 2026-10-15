@@ -1,6 +1,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { ChevronDown, CircleAlert, CircleCheck, LoaderCircle } from "./icons";
 import { siteConfig } from "../config/site";
+import { useI18n } from "../i18n";
 import { describedBy } from "../lib/format";
 
 // Pieces shared by the site's forms (rental request, landlord quote, repair request). They
@@ -29,9 +30,10 @@ export function Required() {
 }
 
 export function RequiredNote() {
+  const { d, rich } = useI18n();
   return (
     <p className="text-sm text-ink-muted">
-      Fields marked <span className="text-red-700">*</span> are required.
+      {rich(d.forms.requiredNote, { star: <span className="text-red-700">*</span> })}
     </p>
   );
 }
@@ -56,6 +58,7 @@ export function Honeypot() {
 
 export function SendError() {
   const { phone } = siteConfig;
+  const { d, rich } = useI18n();
   return (
     <div
       role="alert"
@@ -63,17 +66,20 @@ export function SendError() {
     >
       <CircleAlert className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
       <p>
-        Couldn't send. Call or text{" "}
-        <a href={phone.tel} className="font-semibold underline underline-offset-2">
-          {phone.display}
-        </a>
-        .
+        {rich(d.forms.sendError, {
+          phoneLink: (
+            <a href={phone.tel} className="font-semibold underline underline-offset-2">
+              {phone.display}
+            </a>
+          ),
+        })}
       </p>
     </div>
   );
 }
 
 export function SubmitButton({ sending, children }: { sending: boolean; children: ReactNode }) {
+  const { d } = useI18n();
   return (
     <button
       type="submit"
@@ -83,7 +89,7 @@ export function SubmitButton({ sending, children }: { sending: boolean; children
       {sending ? (
         <>
           <LoaderCircle className="h-5 w-5 animate-spin" aria-hidden="true" />
-          Sending…
+          {d.forms.sending}
         </>
       ) : (
         children
@@ -95,14 +101,15 @@ export function SubmitButton({ sending, children }: { sending: boolean; children
 // Shown in place of the form once it's sent. Focus moves to the heading so screen readers
 // announce it. "Send another" reloads the page with an empty form.
 export function SentPanel({
-  title = "Request sent.",
-  note = "We'll call or text you.",
+  title,
+  note,
   resetHref,
 }: {
   title?: string;
   note?: string;
   resetHref: string;
 }) {
+  const { d } = useI18n();
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     headingRef.current?.focus();
@@ -117,13 +124,13 @@ export function SentPanel({
         aria-describedby="form-sent-note"
         className="mt-4 font-display text-2xl font-bold text-ink"
       >
-        {title}
+        {title ?? d.forms.sentTitle}
       </h3>
       <p id="form-sent-note" className="lead mt-2">
-        {note}
+        {note ?? d.forms.sentNote}
       </p>
       <a href={resetHref} className="btn btn-secondary mt-8">
-        Send another
+        {d.forms.sendAnother}
       </a>
     </div>
   );
