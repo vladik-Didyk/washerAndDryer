@@ -16,7 +16,10 @@ export default function LegalPage({ page }) {
       >
         <p className="lead mt-5">{page.summary}</p>
         <p className="mt-4 text-sm text-ink-muted">
-          Last updated <time dateTime={page.updated}>{formatDate(page.updated)}</time>
+          Last updated{" "}
+          <time dateTime={page.updated} className="whitespace-nowrap">
+            {formatDate(page.updated)}
+          </time>
         </p>
       </PageIntro>
 

@@ -19,7 +19,9 @@ export default function GuidePage({ guide }) {
         <p className="lead mt-5">{guide.summary}</p>
         <p className="mt-4 text-sm text-ink-muted">
           By {companyName} · Updated{" "}
-          <time dateTime={guide.updated}>{formatDate(guide.updated)}</time>
+          <time dateTime={guide.updated} className="whitespace-nowrap">
+            {formatDate(guide.updated)}
+          </time>
         </p>
       </PageIntro>
 
