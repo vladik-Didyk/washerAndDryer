@@ -4,6 +4,7 @@ import { hookupChecklist, machineTypes } from "../content/machines";
 import { hasRoute, machinePath } from "../content/routes";
 import Machines from "../components/Machines";
 import LinkList from "../components/LinkList";
+import PageIntro from "../components/PageIntro";
 import KeepWordsWhole from "../components/KeepWordsWhole";
 import BookingForm from "../components/BookingForm";
 
@@ -101,34 +102,22 @@ export default function MachinesPage() {
 
   return (
     <>
-      <section id="top" aria-labelledby="hero-title" className="pb-12 pt-8 sm:pt-10 lg:pb-14">
-        <div className="container-page">
-          <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-            <Ruler className="h-4 w-4" aria-hidden="true" />
-            Five types, two prices
-          </p>
-          <h1
-            id="hero-title"
-            className="mt-3 max-w-4xl font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.75rem] lg:text-[3rem]"
-          >
-            Washer &amp; dryer types we rent
-          </h1>
-          <p className="lead mt-5 max-w-2xl">
-            Any washer and dryer set is ${prices.setText} a week. One machine on its
-            own is ${prices.singleText} a week. Every type comes with repairs and
-            old-machine haul-away included.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href="#request" className="btn btn-primary">
-              Check availability
-            </a>
-            <a href={phone.tel} className="btn btn-secondary">
-              <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-              Call or text {phone.display}
-            </a>
-          </div>
+      <PageIntro icon={Ruler} eyebrow="Five types, two prices" title="Washer & dryer types we rent">
+        <p className="lead mt-5 max-w-2xl">
+          Any washer and dryer set is ${prices.setText} a week. One machine on its own
+          is ${prices.singleText} a week. Every type comes with repairs and old-machine
+          haul-away included.
+        </p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href="#request" className="btn btn-primary">
+            Check availability
+          </a>
+          <a href={phone.tel} className="btn btn-secondary">
+            <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
+            Call or text {phone.display}
+          </a>
         </div>
-      </section>
+      </PageIntro>
 
       <Machines showAllLink={false} />
       <Compare />

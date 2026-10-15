@@ -1,6 +1,7 @@
 // The heading block of an inner page: eyebrow line, the page's one h1, then `children`
-// (intro text, buttons). `aside` fills a right-hand column on wide screens.
-export default function PageIntro({ icon: Icon, eyebrow, title, aside, children }) {
+// (intro text, buttons). `aside` fills a right-hand column on wide screens; without it the
+// text keeps to `textWidth`.
+export default function PageIntro({ icon: Icon, eyebrow, title, aside, textWidth = "max-w-3xl", children }) {
   const text = (
     <>
       {eyebrow && (
@@ -28,7 +29,7 @@ export default function PageIntro({ icon: Icon, eyebrow, title, aside, children 
         </div>
       ) : (
         <div className="container-page">
-          <div className="max-w-3xl">{text}</div>
+          <div className={textWidth}>{text}</div>
         </div>
       )}
     </section>

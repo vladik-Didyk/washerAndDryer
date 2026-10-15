@@ -3,6 +3,7 @@ import { siteConfig } from "../content/config";
 import { cities } from "../content/cities";
 import { districts } from "../content/districts";
 import { cityPath, districtPath } from "../content/routes";
+import PageIntro from "../components/PageIntro";
 import PostalCodeChecker from "../components/PostalCodeChecker";
 import BookingForm from "../components/BookingForm";
 
@@ -32,37 +33,27 @@ export default function AreasPage() {
 
   return (
     <>
-      <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
-        <div className="container-page grid gap-10 pb-14 pt-8 sm:pt-10 lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-16">
-          <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-              <MapPin className="h-4 w-4" aria-hidden="true" />
-              Toronto &amp; the GTA
-            </p>
-            <h1
-              id="hero-title"
-              className="mt-3 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.75rem] lg:text-[3rem]"
-            >
-              Where we deliver
-            </h1>
-            <p className="lead mt-5 max-w-2xl">
-              We deliver rental washers and dryers across Toronto and five cities
-              around it. Type your postal code to check, or find your area below.
-            </p>
-            <p className="mt-4 text-ink-soft">
-              Farther away? Text us your address and we'll tell you.
-            </p>
-            <a href={phone.sms} className="btn btn-secondary mt-6">
-              <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-              Text {phone.display}
-            </a>
-          </div>
-          <div className="rounded-3xl bg-brand-mint p-6 sm:p-8 lg:col-span-5">
+      <PageIntro
+        icon={MapPin}
+        eyebrow="Toronto & the GTA"
+        title="Where we deliver"
+        aside={
+          <div className="rounded-3xl bg-brand-mint p-6 sm:p-8">
             <h2 className="font-display text-2xl font-bold text-ink">Do we deliver to you?</h2>
             <PostalCodeChecker className="mt-5" />
           </div>
-        </div>
-      </section>
+        }
+      >
+        <p className="lead mt-5 max-w-2xl">
+          We deliver rental washers and dryers across Toronto and five cities around
+          it. Type your postal code to check, or find your area below.
+        </p>
+        <p className="mt-4 text-ink-soft">Farther away? Text us your address and we'll tell you.</p>
+        <a href={phone.sms} className="btn btn-secondary mt-6">
+          <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
+          Text {phone.display}
+        </a>
+      </PageIntro>
 
       <section
         aria-labelledby="toronto-title"

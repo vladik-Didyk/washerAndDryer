@@ -2,6 +2,7 @@ import { ArrowRight, Building2, Check, MessageSquare, Phone } from "lucide-react
 import { siteConfig } from "../content/config";
 import { hookupChecklist } from "../content/machines";
 import { landlordOptions, landlordIncluded, landlordSteps, landlordFaqs } from "../content/landlords";
+import PageIntro from "../components/PageIntro";
 
 const QUOTE_PATH = "/landlords/quote/";
 
@@ -27,35 +28,12 @@ export default function LandlordsPage() {
 
   return (
     <>
-      <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
-        <div className="container-page grid gap-10 pb-14 pt-8 sm:pt-10 lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-16">
-          <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-              <Building2 className="h-4 w-4" aria-hidden="true" />
-              For landlords
-            </p>
-            <h1
-              id="hero-title"
-              className="mt-3 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.75rem] lg:text-[3rem]"
-            >
-              Washers and dryers for your rental units
-            </h1>
-            <p className="lead mt-5 max-w-2xl">
-              Two ways to put laundry in your units. Either way, we install the
-              machines, take the old ones away, and repairs are included.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href={QUOTE_PATH} className="btn btn-primary">
-                Get a quote
-              </a>
-              <a href={phone.tel} className="btn btn-secondary">
-                <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-                Call or text {phone.display}
-              </a>
-            </div>
-          </div>
-
-          <ol className="space-y-3 lg:col-span-5">
+      <PageIntro
+        icon={Building2}
+        eyebrow="For landlords"
+        title="Washers and dryers for your rental units"
+        aside={
+          <ol className="space-y-3">
             {landlordOptions.map((option, index) => (
               <li key={option.title} className="rounded-3xl bg-brand-mint p-6">
                 <p className="font-display text-sm font-semibold text-brand">Option {index + 1}</p>
@@ -64,8 +42,22 @@ export default function LandlordsPage() {
               </li>
             ))}
           </ol>
+        }
+      >
+        <p className="lead mt-5 max-w-2xl">
+          Two ways to put laundry in your units. Either way, we install the machines,
+          take the old ones away, and repairs are included.
+        </p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href={QUOTE_PATH} className="btn btn-primary">
+            Get a quote
+          </a>
+          <a href={phone.tel} className="btn btn-secondary">
+            <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
+            Call or text {phone.display}
+          </a>
         </div>
-      </section>
+      </PageIntro>
 
       <section aria-labelledby="options-title" className="section border-y border-line bg-white">
         <div className="container-page">

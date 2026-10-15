@@ -2,6 +2,7 @@ import { ArrowRight, CircleHelp, MessageSquare, Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
 import { faqGroups } from "../content/faqs";
 import { hasRoute, requestFormHref } from "../content/routes";
+import PageIntro from "../components/PageIntro";
 
 // A link under an answer, only when its page is part of this build (drafts may be missing).
 function AnswerLink({ link }) {
@@ -21,42 +22,30 @@ export default function FaqPage() {
 
   return (
     <>
-      <section id="top" aria-labelledby="hero-title" className="pb-10 pt-8 sm:pt-10 lg:pb-12">
-        <div className="container-page">
-          <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-            <CircleHelp className="h-4 w-4" aria-hidden="true" />
-            FAQ
-          </p>
-          <h1
-            id="hero-title"
-            className="mt-3 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.75rem] lg:text-[3rem]"
-          >
-            Questions and answers
-          </h1>
-          <p className="lead mt-5 max-w-2xl">
-            Renting, prices, delivery, repairs and landlords. Another question? Call
-            or text{" "}
-            <a href={phone.tel} className="text-link whitespace-nowrap">
-              {phone.display}
-            </a>
-            .
-          </p>
-          <nav aria-label="Topics" className="mt-8">
-            <ul className="flex flex-wrap gap-2.5">
-              {faqGroups.map((group) => (
-                <li key={group.id}>
-                  <a
-                    href={`#${group.id}`}
-                    className="inline-flex min-h-[2.75rem] items-center rounded-full border border-line bg-white px-4 py-2 font-medium text-ink transition-colors hover:border-brand hover:bg-brand-mint hover:text-brand-dark"
-                  >
-                    {group.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </section>
+      <PageIntro icon={CircleHelp} eyebrow="FAQ" title="Questions and answers" textWidth="max-w-5xl">
+        <p className="lead mt-5 max-w-2xl">
+          Renting, prices, delivery, repairs and landlords. Another question? Call or
+          text{" "}
+          <a href={phone.tel} className="text-link whitespace-nowrap">
+            {phone.display}
+          </a>
+          .
+        </p>
+        <nav aria-label="Topics" className="mt-8">
+          <ul className="flex flex-wrap gap-2.5">
+            {faqGroups.map((group) => (
+              <li key={group.id}>
+                <a
+                  href={`#${group.id}`}
+                  className="inline-flex min-h-[2.75rem] items-center rounded-full border border-line bg-white px-4 py-2 font-medium text-ink transition-colors hover:border-brand hover:bg-brand-mint hover:text-brand-dark"
+                >
+                  {group.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </PageIntro>
 
       <div className="border-y border-line bg-white">
         <div className="container-page py-14 sm:py-16 lg:py-20">
