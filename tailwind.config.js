@@ -49,19 +49,20 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-        // A machine set down on the floor: drops in, settles with a small squash.
-        "machine-land": {
-          "0%": { transform: "translateY(-14px)" },
-          "55%": { transform: "translateY(3px) scaleY(0.985)" },
-          "100%": { transform: "translateY(0) scaleY(1)" },
+        // Hero machine changing type: turns edge-on, the drawing swaps, turns back to face front.
+        "machine-flip": {
+          "0%": { transform: "rotateY(0deg)", animationTimingFunction: "ease-in" },
+          "50%": { transform: "rotateY(90deg)" },
+          "50.01%": { transform: "rotateY(-90deg)", animationTimingFunction: "ease-out" },
+          "100%": { transform: "rotateY(0deg)" },
         },
       },
       animation: {
-        // The hero animates on load; its machine drawing then cycles through the five types.
+        // The hero animates on load; HeroMachines then moves the machines between the five types.
         "disc-in": "disc-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both",
         "rise-in": "rise-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.12s both",
         "fade-in": "fade-in 0.5s ease-out 0.55s both",
-        "machine-land": "machine-land 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both",
+        "machine-flip": "machine-flip 0.76s linear both",
       },
     },
   },
