@@ -1,7 +1,7 @@
-import { useId, useState } from "react";
-import { CircleAlert, CircleCheck, CircleHelp, MessageSquare } from "lucide-react";
-import { siteConfig } from "../content/config";
-import { checkPostalCode } from "../content/areas";
+import { useId, useState, type FormEvent } from "react";
+import { siteConfig } from "~/shared/config";
+import { CircleAlert, CircleCheck, CircleHelp, MessageSquare } from "~/shared/ui";
+import { checkPostalCode, type PostalCheck } from "./model";
 
 const ICONS = { yes: CircleCheck, unsure: CircleHelp, invalid: CircleAlert };
 const TONES = {
@@ -10,25 +10,30 @@ const TONES = {
   invalid: "text-red-700",
 };
 
-// "Do we deliver to you?" by postal code (logic and FSA lists in src/content/areas.js).
+// "Do we deliver to you?" by postal code (logic and FSA lists in ./model.ts).
 // Works in the browser after hydration; nothing is sent anywhere. The answer is never "no":
 // a code we can't place gets "text us your address".
-// `requestHref` is where "Start your rental" goes after a yes (the request form).
+// `requestHref` is where "Start your rental" goes after a yes (the rental request).
 // `label` names the field; `compact` makes the field a little shorter (home hero).
-export default function PostalCodeChecker({
-  requestHref = "#request",
+export function PostalCodeChecker({
+  requestHref = "/start/",
   label = "Your postal code",
   compact = false,
   className = "",
+}: {
+  requestHref?: string;
+  label?: string;
+  compact?: boolean;
+  className?: string;
 }) {
   const id = useId();
   const inputId = `${id}postal`;
   const resultId = `${id}result`;
   const [value, setValue] = useState("");
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<PostalCheck | null>(null);
   const { phone } = siteConfig;
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult(checkPostalCode(value));
   };
@@ -66,7 +71,7 @@ export default function PostalCodeChecker({
 
       {/* Always in the page, so screen readers announce the answer when it appears. */}
       <div id={resultId} role="status" className="mt-3">
-        {result && (
+        {result && Icon && (
           <div className={`flex items-start gap-2 font-semibold ${TONES[result.status]}`}>
             <Icon className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
             <p>{result.message}</p>

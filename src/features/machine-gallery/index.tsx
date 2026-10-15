@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { machinePhotos } from "../content/machines";
-import { galleryPhotoSizes } from "../content/photos";
-import { DrawingTag, PHOTO_CAPTION } from "./MachineImage";
-import Photo from "./Photo";
+import { DrawingTag, PHOTO_CAPTION, machinePhotos, type MachineType } from "~/entities/machine";
+import { galleryPhotoSizes } from "~/shared/lib";
+import { Photo } from "~/shared/ui";
 
 const frame = "relative aspect-[5/6] overflow-hidden rounded-3xl bg-brand-mint";
 
 // The photos of a machine type page: the main photo and, when there are more, a row of
 // thumbnail buttons that switch it. The buttons are ordinary buttons (Tab, then Enter or Space);
-// the one showing is marked aria-current. The prerendered page shows the first photo. A type
-// with no photo in the build shows its drawing, tagged and captioned as a drawing.
+// the one showing is marked aria-current. The server HTML shows the first photo. A type with
+// no photo in the build shows its drawing, tagged and captioned as a drawing.
 // Every photo here is an example, and the caption says so.
-export default function MachineGallery({ machine, className = "" }) {
+export function MachineGallery({ machine, className = "" }: { machine: MachineType; className?: string }) {
   const photos = machinePhotos(machine);
   const [shown, setShown] = useState(0);
   const photo = photos[shown];
@@ -21,7 +20,7 @@ export default function MachineGallery({ machine, className = "" }) {
       <figure className={className}>
         <div className={frame}>
           <img
-            src={`${import.meta.env.BASE_URL}${machine.drawing}`}
+            src={`/${machine.drawing}`}
             alt={`Drawing: ${machine.alt}`}
             width={400}
             height={480}
@@ -72,12 +71,7 @@ export default function MachineGallery({ machine, className = "" }) {
                 }`}
               >
                 {/* The button's label names the action; the alt still describes the photo. */}
-                <Photo
-                  src={thumb.src}
-                  alt={thumb.alt}
-                  sizes="6rem"
-                  className="aspect-[5/6] w-full object-cover"
-                />
+                <Photo src={thumb.src} alt={thumb.alt} sizes="6rem" className="aspect-[5/6] w-full object-cover" />
               </button>
             </li>
           ))}
