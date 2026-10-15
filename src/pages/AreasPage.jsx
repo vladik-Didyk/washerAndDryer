@@ -28,7 +28,7 @@ function AreaCard({ href, name, label, teaser }) {
 
 // /areas/: every city and Toronto district we deliver to, with the postal-code checker.
 export default function AreasPage() {
-  const { phone } = siteConfig;
+  const { phone, prices } = siteConfig;
   const [toronto, ...otherCities] = cities;
 
   return (
@@ -48,7 +48,10 @@ export default function AreasPage() {
           We deliver rental washers and dryers across Toronto and five cities around
           it. Type your postal code to check, or find your area below.
         </p>
-        <p className="mt-4 text-ink-soft">Farther away? Text us your address and we'll tell you.</p>
+        <p className="mt-4 font-display text-lg font-bold text-brand">
+          {`Same price in every area: $${prices.setText} a week for a set, $${prices.singleText} for one machine.`}
+        </p>
+        <p className="mt-2 text-ink-soft">Farther away? Text us your address and we'll tell you.</p>
         <a href={phone.sms} className="btn btn-secondary mt-6">
           <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
           Text {phone.display}
