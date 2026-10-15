@@ -290,6 +290,8 @@ previous id.
 
 Releases: 2026-10-15, version `b338f0e8` (Spanish and Russian site, the EN · ES · RU switcher,
 the forms registry), up to commit `8fba2f2`.
+2026-10-15, version `aa0c470e`: the share image with the weekly price. 2026-10-15, version
+`0d34ed11`: Canadian French (`/fr/`) and the laundry room page (`/buildings/`).
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
