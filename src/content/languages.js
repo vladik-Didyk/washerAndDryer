@@ -27,7 +27,7 @@ export const languagePages = [
     termsTitle: "Condiciones",
     terms: (deposit) => [
       `Depósito reembolsable de $${deposit}: se devuelve cuando la máquina regresa funcionando.`,
-      "Mínimo 12 meses. Después, mes a mes, con 30 días de aviso.",
+      "Mínimo 52 semanas. Después, semana a semana; cualquiera de las partes puede terminar el alquiler con 30 días de aviso y nosotros recogemos la máquina.",
       "La entrega y la instalación se cotizan antes de que usted pague.",
       "Máquinas usadas, revisadas y en buen estado. La marca y el modelo dependen de la disponibilidad.",
       "Pago por e-Transfer o con tarjeta.",
@@ -88,7 +88,7 @@ export const languagePages = [
     termsTitle: "Условия",
     terms: (deposit) => [
       `Возвратный депозит $${deposit}: возвращаем, когда машину сдают в рабочем состоянии.`,
-      "Минимальный срок — 12 месяцев. Дальше — помесячно, с уведомлением за 30 дней.",
+      "Минимальный срок — 52 недели. Дальше — понедельно; любая сторона может завершить аренду, предупредив за 30 дней, и мы забираем машину.",
       "Стоимость доставки и установки называем до оплаты.",
       "Машины б/у, проверенные, в хорошем рабочем состоянии. Марка и модель — в зависимости от наличия.",
       "Оплата через e-Transfer или картой.",
