@@ -33,7 +33,7 @@ const NEED_OPTIONS = ["Washer + dryer set", "Washer only", "Dryer only"];
 const MACHINE_OPTIONS = [
   "Not sure",
   ...machineTypes
-    .filter((machine) => machine.id !== "single")
+    .filter((machine) => machine.slug !== "single-machine")
     .map((machine) => machine.title),
 ];
 
@@ -105,7 +105,8 @@ function Required() {
 export default function BookingForm() {
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [initialValues] = useState(readDraft);
-  const [minDate] = useState(todayISO);
+  // Set after hydration, so the prerendered HTML doesn't carry the build date.
+  const [minDate, setMinDate] = useState(undefined);
   const saveTimer = useRef(null);
   const sentHeadingRef = useRef(null);
   const { phone, hours } = siteConfig;
@@ -130,6 +131,10 @@ export default function BookingForm() {
       window.clearTimeout(saveTimer.current);
     };
   }, [watch]);
+
+  useEffect(() => {
+    setMinDate(todayISO());
+  }, []);
 
   useEffect(() => {
     if (status === "sent") sentHeadingRef.current?.focus();
@@ -419,6 +424,7 @@ export default function BookingForm() {
                     {...register("startDate", {
                       validate: (value) =>
                         !value ||
+                        !minDate ||
                         value >= minDate ||
                         "Choose today or a later date.",
                     })}

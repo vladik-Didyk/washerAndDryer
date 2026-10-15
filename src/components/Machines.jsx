@@ -1,5 +1,11 @@
 import { Fragment } from "react";
 import { machineTypes } from "../content/machines";
+import { machinePath } from "../content/routes";
+import MachineImage, {
+  PHOTO_CAPTION,
+  anyDrawingShown,
+  machinePicture,
+} from "./MachineImage";
 
 // On wide screens the five drawings stand on one continuous mint stage, like a lineup.
 // Below that each type is its own panel: a row on phones, a card from 640px up.
@@ -41,27 +47,26 @@ export default function Machines() {
         <ul className="mt-10 grid gap-y-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:mt-12 lg:grid-cols-5 lg:gap-x-0">
           {machineTypes.map((machine, index) => (
             <li
-              key={machine.id}
+              key={machine.slug}
               className="flex items-center gap-4 sm:flex-col sm:items-stretch sm:gap-0"
             >
-              <div
-                className={`relative w-28 shrink-0 rounded-2xl bg-brand-mint sm:w-auto sm:rounded-3xl ${stageCorners(index, machineTypes.length)}`}
-              >
-                <div className="aspect-[5/6] sm:aspect-[4/3] lg:aspect-[5/6]">
-                  <img
-                    src={`${import.meta.env.BASE_URL}${machine.image}`}
-                    alt={machine.alt}
-                    width="400"
-                    height="480"
-                    loading="lazy"
-                    className="mx-auto h-full w-auto"
-                  />
-                </div>
+              <div className="w-28 shrink-0 sm:w-auto">
+                {/* The photo caption sits in the text column, so titles stay level across the row. */}
+                <MachineImage
+                  machine={machine}
+                  showCaption={false}
+                  frameClassName={`aspect-[5/6] overflow-hidden rounded-2xl bg-brand-mint sm:aspect-[4/3] sm:rounded-3xl lg:aspect-[5/6] ${stageCorners(index, machineTypes.length)}`}
+                />
               </div>
               {/* From 640px up the price sits at the bottom, so prices line up across a row. */}
               <div className="min-w-0 sm:mt-5 sm:flex sm:flex-1 sm:flex-col lg:px-4">
                 <h3 className="font-display text-lg font-bold leading-snug text-ink">
-                  <KeepWordsWhole text={machine.title} />
+                  <a
+                    href={machinePath(machine)}
+                    className="underline decoration-brand/30 decoration-2 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand"
+                  >
+                    <KeepWordsWhole text={machine.title} />
+                  </a>
                 </h3>
                 <p className="mt-1.5 text-[15px] leading-relaxed text-ink-soft">
                   {machine.description}
@@ -74,14 +79,21 @@ export default function Machines() {
                     </span>
                   )}
                 </p>
+                {machinePicture(machine).isPhoto && (
+                  <p className="mt-1.5 text-xs leading-snug text-ink-muted">
+                    {PHOTO_CAPTION}
+                  </p>
+                )}
               </div>
             </li>
           ))}
         </ul>
 
         <p className="mt-10 text-sm text-ink-muted">
-          Drawings, not photos of a specific machine. Brand and model depend on
-          what's available.
+          {anyDrawingShown(machineTypes)
+            ? "Drawings show the type, not a specific machine. "
+            : ""}
+          Brand and model depend on what's available.
         </p>
       </div>
     </section>

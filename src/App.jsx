@@ -1,33 +1,43 @@
 import Header from "./components/Header";
-import Welcome from "./components/Welcome";
-import Machines from "./components/Machines";
-import HowItWorks from "./components/HowItWorks";
-import InstallVideos from "./components/InstallVideos";
-import Prices from "./components/Prices";
-import ServiceArea from "./components/ServiceArea";
-import FAQ from "./components/FAQ";
-import BookingForm from "./components/BookingForm";
 import Footer from "./components/Footer";
 import FloatingCall from "./components/FloatingCall";
+import HomePage from "./pages/HomePage";
+import CityPage from "./pages/CityPage";
+import MachinePage from "./pages/MachinePage";
+import LanguagePage from "./pages/LanguagePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import { findRoute } from "./content/routes";
 
-// Light theme only. Testimonials stay off the page until there are real customer reviews
-// (src/content/testimonials.js); the dark-mode hook files are kept but unused.
-export default function App() {
+// No router: the page comes from the path (the prerender passes each route's URL; the browser
+// passes location.pathname). Links between pages are plain <a href> with trailing slashes.
+// Light theme only; the dark-mode hook files are kept but unused.
+function Page({ route }) {
+  switch (route.kind) {
+    case "home":
+      return <HomePage />;
+    case "city":
+      return <CityPage city={route.city} />;
+    case "machine":
+      return <MachinePage machine={route.machine} />;
+    case "language":
+      return <LanguagePage content={route.content} />;
+    default:
+      return <NotFoundPage />;
+  }
+}
+
+export default function App({ path }) {
+  const route = findRoute(path);
+  const skipLabel = route.kind === "language" ? route.content.skipLink : "Skip to content";
+
   return (
     <>
       <a href="#main" className="skip-link">
-        Skip to content
+        {skipLabel}
       </a>
       <Header />
       <main id="main">
-        <Welcome />
-        <Machines />
-        <HowItWorks />
-        <InstallVideos />
-        <Prices />
-        <ServiceArea />
-        <FAQ />
-        <BookingForm />
+        <Page route={route} />
       </main>
       <Footer />
       <FloatingCall />

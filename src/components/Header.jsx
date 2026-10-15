@@ -6,7 +6,7 @@ import Logo from "./Logo";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef(null);
-  const { phone, navigation } = siteConfig;
+  const { phone, navigation, languageLinks } = siteConfig;
 
   // Close the mobile menu on Escape, and when the window grows to the desktop layout.
   useEffect(() => {
@@ -30,10 +30,13 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md">
+    <header
+      lang="en"
+      className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md"
+    >
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-4">
         <a
-          href="#top"
+          href="/"
           onClick={closeMenu}
           className="flex min-w-0 items-center gap-3 rounded-xl"
         >
@@ -48,14 +51,27 @@ export default function Header() {
         </a>
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-0.5 xl:gap-1">
             {navigation.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="rounded-full px-4 py-2 text-[15px] font-medium text-ink-soft transition-colors hover:bg-brand-mint hover:text-brand-dark"
+                  className="whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium text-ink-soft transition-colors hover:bg-brand-mint hover:text-brand-dark xl:px-4"
                 >
                   {link.label}
+                </a>
+              </li>
+            ))}
+            {languageLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  lang={link.lang}
+                  hrefLang={link.lang}
+                  aria-label={link.label}
+                  className="rounded-full px-2.5 py-2 text-[15px] font-semibold text-ink-soft transition-colors hover:bg-brand-mint hover:text-brand-dark"
+                >
+                  {link.short}
                 </a>
               </li>
             ))}
@@ -98,6 +114,21 @@ export default function Header() {
                   href={link.href}
                   onClick={closeMenu}
                   className="block border-b border-line py-3.5 font-display text-lg font-semibold text-ink transition-colors hover:text-brand"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex gap-6 border-b border-line py-3.5">
+            {languageLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  lang={link.lang}
+                  hrefLang={link.lang}
+                  onClick={closeMenu}
+                  className="font-display text-lg font-semibold text-ink transition-colors hover:text-brand"
                 >
                   {link.label}
                 </a>

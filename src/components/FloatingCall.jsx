@@ -31,6 +31,7 @@ export default function FloatingCall() {
   // The aside keeps the button inside a landmark; hiding the aside hides both.
   return (
     <aside
+      lang="en"
       aria-label="Call us"
       className={`fixed bottom-4 right-4 z-30 transition-[opacity,transform,visibility] duration-200 md:hidden ${
         covered ? "invisible translate-y-4 opacity-0" : "visible opacity-100"

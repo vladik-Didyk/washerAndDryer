@@ -48,8 +48,8 @@ export const faqs = [
     answer: "No. There is no credit check.",
   },
   {
-    question: "Do you speak Spanish?",
-    answer: "Yes. We speak English and Spanish.",
+    question: "Which languages do you speak?",
+    answer: "English, Spanish and Russian.",
   },
   {
     question: "Do you have a referral offer?",

@@ -1,9 +1,15 @@
 import { MapPin } from "lucide-react";
 import { siteConfig } from "../content/config";
+import { cities } from "../content/cities";
+import { cityPath } from "../content/routes";
 
-export default function ServiceArea() {
-  const { serviceAreas, phone } = siteConfig;
-  const [toronto, ...cities] = serviceAreas;
+const cityLink =
+  "underline decoration-brand/30 decoration-2 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand";
+
+// Each city links to its own page. `title` lets a city page call this "Other areas".
+export default function ServiceArea({ title = "Service area" }) {
+  const { phone } = siteConfig;
+  const [toronto, ...others] = cities;
 
   return (
     <section
@@ -15,7 +21,7 @@ export default function ServiceArea() {
         <div className="grid gap-8 rounded-3xl bg-brand-mint px-5 py-8 sm:p-10 lg:grid-cols-12 lg:gap-10 lg:p-12">
           <div className="lg:col-span-4">
             <h2 id="areas-title" className="h2">
-              Service area
+              {title}
             </h2>
             <p className="lead mt-4">Farther away? Ask us.</p>
             <p className="mt-2 text-ink-soft">
@@ -30,19 +36,23 @@ export default function ServiceArea() {
             <li className="sm:col-span-2">
               <span className="flex items-center gap-2 font-display text-2xl font-bold text-ink">
                 <MapPin className="h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
-                {toronto.name}
+                <a href={cityPath(toronto)} className={cityLink}>
+                  {toronto.name}
+                </a>
               </span>
               <span className="mt-1 block pl-7 text-ink-soft">
-                {toronto.districts.join(", ")}
+                {toronto.neighbourhoods.join(", ")}
               </span>
             </li>
-            {cities.map((city) => (
+            {others.map((city) => (
               <li
-                key={city.name}
+                key={city.slug}
                 className="flex items-center gap-2 border-t border-brand-mint-strong pt-4 font-display text-xl font-bold text-ink"
               >
                 <MapPin className="h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
-                {city.name}
+                <a href={cityPath(city)} className={cityLink}>
+                  {city.name}
+                </a>
               </li>
             ))}
           </ul>

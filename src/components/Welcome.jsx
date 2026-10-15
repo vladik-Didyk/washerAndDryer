@@ -5,7 +5,7 @@ const included = ["Repairs included", "Old machine haul-away included"];
 
 // Hero: the monthly price is the headline fact; the drawing shows the usual condo-closet machine.
 export default function Welcome() {
-  const { phone, prices } = siteConfig;
+  const { phone, prices, owner, languages } = siteConfig;
 
   return (
     <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
@@ -13,13 +13,13 @@ export default function Welcome() {
         <div className="lg:col-span-7">
           <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
             <MapPin className="h-4 w-4" aria-hidden="true" />
-            Toronto &amp; the GTA
+            Run by {owner} in Toronto
           </p>
           <h1
             id="hero-title"
             className="mt-3 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-tight text-ink sm:text-[3.25rem] lg:text-[3.5rem]"
           >
-            Washer &amp; dryer rental
+            Washer &amp; dryer rental in Toronto &amp; the GTA
           </h1>
 
           <div className="mt-5 sm:mt-7">
@@ -67,7 +67,7 @@ export default function Welcome() {
           </ul>
 
           <p className="mt-4 text-ink-soft">
-            No credit check · Same-week delivery · English &amp; Spanish
+            No credit check · Same-week delivery · {languages}
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
