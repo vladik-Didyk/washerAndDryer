@@ -57,7 +57,6 @@ function PriceCard({ title, price, highlighted = false }) {
 export default function Prices() {
   const { prices } = siteConfig;
   const terms = [
-    "Prices in Canadian dollars. No HST charged.",
     `$${prices.deposit} refundable deposit, returned when the machine comes back working.`,
     "52-week minimum, then week to week with 30 days' notice.",
     "Delivery and installation quoted per job, before you pay.",

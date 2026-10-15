@@ -161,7 +161,13 @@ export default function MachinesPage() {
 
       <CtaBand
         title="Not sure which type fits?"
-        text={`Text a photo of the space to ${phone.display} and we'll tell you what fits.`}
+        text={
+          <>
+            Text a photo of the space to{" "}
+            <span className="whitespace-nowrap">{phone.display}</span> and we'll tell you
+            what fits.
+          </>
+        }
       />
       <BookingForm />
     </>

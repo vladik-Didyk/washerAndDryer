@@ -2,10 +2,12 @@ import { Phone } from "lucide-react";
 import { siteConfig } from "../content/config";
 import { heroPhoto } from "../content/photos";
 import Photo from "./Photo";
+import KeepWordsWhole from "./KeepWordsWhole";
 
 // A closing band near the bottom of the main pages: the home page's laundry-room photo under a
 // dark green overlay, one short line, and the two ways to start. By default "Start your
 // rental" goes to the request form on the page; `action` changes it (landlords: a quote).
+// `title` is plain text (words never break at a hyphen); `text` may hold markup.
 // The overlay keeps white text well above 4.5:1 wherever it sits: solid enough over the
 // whole photo on phones, darkest behind the text from 1024px.
 export default function CtaBand({
@@ -33,7 +35,7 @@ export default function CtaBand({
       <div className="container-page py-16 sm:py-20 lg:py-24">
         <div className="max-w-xl">
           <h2 id="cta-band-title" className="h2 text-white">
-            {title}
+            <KeepWordsWhole text={title} />
           </h2>
           <p className="lead mt-4 text-white/90">{text}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

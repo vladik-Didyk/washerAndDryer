@@ -2,7 +2,7 @@
 // each given its own page at /machines/<slug>/. `compare` feeds the table on /machines/;
 // `sizes` (with `compare.loads` and `compare.goodFor`) the table on the type's page. Sizes
 // are typical ones only, in inches and centimetres: 24″ = 61 cm, 27″ = 69 cm, 55″ = 140 cm,
-// 70″ = 178 cm.
+// 70″ = 178 cm. "\u00a0" (a non-breaking space) keeps "cm" on the line of its number.
 //
 // Pictures: `photos` are example photos (Pexels, see docs/photo-credits.md), the first one the
 // main photo. Each is shown only when its file is in public/photos/types/, with WebP and
@@ -16,12 +16,12 @@ export const machineTypes = [
   {
     slug: "stackable",
     compare: {
-      width: "About 24″ (61 cm) or 27″ (69 cm), one machine wide",
+      width: "About 24″ (61\u00a0cm) or 27″ (69\u00a0cm), one machine wide",
       loads: "Front",
       goodFor: "Narrow, tall closets in condos and apartments",
     },
     sizes: [
-      { label: "Width", value: "About 24″ (61 cm) compact, or about 27″ (69 cm) full-size" },
+      { label: "Width", value: "About 24″ (61\u00a0cm) compact, or about 27″ (69\u00a0cm) full-size" },
       { label: "Floor space", value: "One machine wide: the dryer stands on top of the washer" },
     ],
     title: "Stackable pair",
@@ -57,19 +57,19 @@ export const machineTypes = [
         "Anyone who wants a front-load washer but has room for only one footprint",
       ],
       size:
-        "Compact stackable pairs are usually about 24 inches (61 cm) wide; full-size ones about 27 inches (69 cm). Measure the width, depth and height of the space, and the door you have to bring them through. Leave a few inches behind for the hoses and the dryer vent.",
+        "Compact stackable pairs are usually about 24 inches (61\u00a0cm) wide; full-size ones about 27 inches (69\u00a0cm). Measure the width, depth and height of the space, and the door you have to bring them through. Leave a few inches behind for the hoses and the dryer vent.",
     },
   },
   {
     slug: "laundry-centre",
     compare: {
-      width: "24″ (61 cm) or 27″ (69 cm)",
+      width: "24″ (61\u00a0cm) or 27″ (69\u00a0cm)",
       loads: "Top",
       goodFor: "Closets built for a one-piece unit",
     },
     sizes: [
-      { label: "Width", value: "24″ (61 cm) or 27″ (69 cm)" },
-      { label: "Height", value: "About 70″ (178 cm) for a 24″ unit" },
+      { label: "Width", value: "24″ (61\u00a0cm) or 27″ (69\u00a0cm)" },
+      { label: "Height", value: "About 70″ (178\u00a0cm) for a 24″ unit" },
     ],
     title: "One-piece laundry centre",
     description: "Washer and dryer in one unit. The usual condo-closet machine.",
@@ -101,18 +101,18 @@ export const machineTypes = [
         "People who prefer loading the washer from the top",
       ],
       size:
-        "Laundry centres come 24 or 27 inches (61 or 69 cm) wide. A 24-inch unit is about 70 inches (178 cm) tall. Measure the closet width and height, and check the depth with the doors closed.",
+        "Laundry centres come 24 or 27 inches (61 or 69\u00a0cm) wide. A 24-inch unit is about 70 inches (178\u00a0cm) tall. Measure the closet width and height, and check the depth with the doors closed.",
     },
   },
   {
     slug: "side-by-side-front-load",
     compare: {
-      width: "About 55″ (140 cm) for the pair",
+      width: "About 55″ (140\u00a0cm) for the pair",
       loads: "Front",
       goodFor: "Laundry rooms and big loads like bedding",
     },
     sizes: [
-      { label: "Width", value: "About 27″ (69 cm) each, about 55″ (140 cm) for the pair" },
+      { label: "Width", value: "About 27″ (69\u00a0cm) each, about 55″ (140\u00a0cm) for the pair" },
       { label: "Clearance", value: "Room in front for both doors to open fully" },
     ],
     title: "Side-by-side front-load",
@@ -152,18 +152,18 @@ export const machineTypes = [
         "Spaces with room in front for both doors to swing open",
       ],
       size:
-        "Full-size machines are usually about 27 inches (69 cm) wide each, so plan for roughly 55 inches (140 cm) of width plus a little space between and around them. Check that both doors can open fully.",
+        "Full-size machines are usually about 27 inches (69\u00a0cm) wide each, so plan for roughly 55 inches (140\u00a0cm) of width plus a little space between and around them. Check that both doors can open fully.",
     },
   },
   {
     slug: "side-by-side-top-load",
     compare: {
-      width: "About 55″ (140 cm) for the pair",
+      width: "About 55″ (140\u00a0cm) for the pair",
       loads: "Top",
       goodFor: "Laundry rooms, and less bending to load",
     },
     sizes: [
-      { label: "Width", value: "About 27″ (69 cm) each, about 55″ (140 cm) for the pair" },
+      { label: "Width", value: "About 27″ (69\u00a0cm) each, about 55″ (140\u00a0cm) for the pair" },
       { label: "Clearance", value: "Clear space above the washer for the lid to open" },
     ],
     title: "Side-by-side top-load",
@@ -203,18 +203,18 @@ export const machineTypes = [
         "Households that want a simple, familiar machine",
       ],
       size:
-        "Full-size machines are usually about 27 inches (69 cm) wide each, so plan for roughly 55 inches (140 cm) of width. The washer lid needs clear space above it to open, so a low shelf over the washer can get in the way.",
+        "Full-size machines are usually about 27 inches (69\u00a0cm) wide each, so plan for roughly 55 inches (140\u00a0cm) of width. The washer lid needs clear space above it to open, so a low shelf over the washer can get in the way.",
     },
   },
   {
     slug: "single-machine",
     compare: {
-      width: "About 24″ (61 cm) or 27″ (69 cm)",
+      width: "About 24″ (61\u00a0cm) or 27″ (69\u00a0cm)",
       loads: "Front or top",
       goodFor: "Pairing with a machine you already have",
     },
     sizes: [
-      { label: "Width", value: "About 27″ (69 cm) full-size, or about 24″ (61 cm) compact" },
+      { label: "Width", value: "About 27″ (69\u00a0cm) full-size, or about 24″ (61\u00a0cm) compact" },
     ],
     title: "Washer or dryer only",
     description: "One machine to pair with the one you already have.",
@@ -253,7 +253,7 @@ export const machineTypes = [
         "You want a washer now and a dryer later",
       ],
       size:
-        "Most full-size machines are about 27 inches (69 cm) wide; compact ones about 24 inches (61 cm). If you are renting a dryer to stack on your washer, tell us the washer's brand and model so we can check that they stack.",
+        "Most full-size machines are about 27 inches (69\u00a0cm) wide; compact ones about 24 inches (61\u00a0cm). If you are renting a dryer to stack on your washer, tell us the washer's brand and model so we can check that they stack.",
     },
   },
 ];
