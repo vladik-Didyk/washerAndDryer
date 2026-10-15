@@ -11,6 +11,7 @@ import {
   type FormActionData,
 } from "~/shared/forms";
 import { useI18n } from "~/shared/i18n";
+import { Card, Heading } from "~/shared/ui";
 
 // Repair request for a machine rented from us: the fields of the "repair" form (shared/forms
 // registry), posted to the page's server action. It works with JavaScript off.
@@ -24,15 +25,16 @@ export function RepairForm({ result }: { result?: FormActionData }) {
   }
 
   return (
-    <Form
+    <Card
+      as={Form}
       method="post"
       noValidate
+      padding="form"
       aria-labelledby="repair-form-title"
-      className="rounded-3xl border border-line bg-white p-5 sm:p-8"
     >
-      <h2 id="repair-form-title" className="font-display text-2xl font-bold text-ink">
+      <Heading id="repair-form-title" variant="card">
         {repair.formTitle}
-      </h2>
+      </Heading>
       <div className="mt-2">
         <RequiredNote />
       </div>
@@ -48,6 +50,6 @@ export function RepairForm({ result }: { result?: FormActionData }) {
       <Honeypot />
       {result?.status === "error" && <SendError />}
       <SubmitButton sending={sending}>{repair.submit}</SubmitButton>
-    </Form>
+    </Card>
   );
 }

@@ -1,4 +1,5 @@
-import { LangLink } from "./LangLink";
+import { LangLink } from "./actions";
+import { Heading } from "./layout";
 export interface LinkItem {
   href: string;
   label: string;
@@ -18,9 +19,9 @@ export function LinkList({
 }) {
   return (
     <nav aria-labelledby={id} className={className}>
-      <h2 id={id} className="font-display text-xl font-bold text-ink">
+      <Heading id={id} variant="cardSmall">
         {title}
-      </h2>
+      </Heading>
       <ul className="mt-4 flex flex-wrap gap-2.5">
         {links.map((link) => (
           <li key={link.href}>

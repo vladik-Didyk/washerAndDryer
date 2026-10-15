@@ -1,8 +1,8 @@
 import { cityPath, districtPath, getCities, getDistricts } from "~/entities/area";
 import { PostalCodeChecker } from "~/features/postal-check";
-import { siteConfig } from "~/shared/config";
+import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { LangLink, MapPin } from "~/shared/ui";
+import { Card, Container, LangLink, MapPin, Section, SectionHeader } from "~/shared/ui";
 
 const cityLink =
   "underline decoration-brand/30 decoration-2 underline-offset-4 transition-colors hover:text-brand hover:decoration-brand";
@@ -14,26 +14,21 @@ export function ServiceArea({ title }: { title?: string }) {
   const [toronto, ...others] = getCities(d);
 
   return (
-    <section
-      id="areas"
-      aria-labelledby="areas-title"
-      className="pb-16 sm:pb-20 lg:pb-24"
-    >
-      <div className="container-page">
-        <div className="grid gap-8 rounded-3xl bg-brand-mint px-5 py-8 sm:p-10 lg:grid-cols-12 lg:gap-10 lg:p-12">
+    <Section id="areas" aria-labelledby="areas-title" padded={false} className="pb-16 sm:pb-20 lg:pb-24">
+      <Container>
+        <Card tone="mint" padding="none" className="grid gap-8 px-5 py-8 sm:p-10 lg:grid-cols-12 lg:gap-10 lg:p-12">
           <div className="lg:col-span-5">
-            <h2 id="areas-title" className="h2">
-              {title ?? d.home.serviceArea.title}
-            </h2>
-            <p className="lead mt-4">
-              {rich(d.common.fartherAwayCall, {
+            <SectionHeader
+              id="areas-title"
+              title={title ?? d.home.serviceArea.title}
+              lead={rich(d.common.fartherAwayCall, {
                 phoneLink: (
                   <a href={phone.tel} className="text-link whitespace-nowrap">
                     {phone.display}
                   </a>
                 ),
               })}
-            </p>
+            />
             <PostalCodeChecker className="mt-6" />
           </div>
 
@@ -69,13 +64,13 @@ export function ServiceArea({ title }: { title?: string }) {
               ))}
             </ul>
             <p className="mt-6">
-              <LangLink href="/areas/" className="text-link">
+              <LangLink href={pagePaths.areas} className="text-link">
                 {d.home.serviceArea.allAreas}
               </LangLink>
             </p>
           </div>
-        </div>
-      </div>
-    </section>
+        </Card>
+      </Container>
+    </Section>
   );
 }

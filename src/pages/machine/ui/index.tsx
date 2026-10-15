@@ -1,13 +1,28 @@
-import type { ReactNode } from "react";
 import { useLoaderData } from "react-router";
 import { cityPath, getCities } from "~/entities/area";
 import { TYPE_CARD_SIZES_4UP, TypeCard, findMachine, getMachineTypes, type MachineType } from "~/entities/machine";
 import { promotionText, useActivePromotions, usePrices } from "~/entities/offer";
 import { MachineGallery } from "~/features/machine-gallery";
-import { siteConfig } from "~/shared/config";
+import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
-import { Check, Gift, KeepWordsWhole, LangLink, LinkList, MapPin, Phone, WasPrice } from "~/shared/ui";
+import {
+  Button,
+  Card,
+  CheckList,
+  Container,
+  Eyebrow,
+  Gift,
+  Heading,
+  KeepWordsWhole,
+  LangLink,
+  LinkList,
+  MapPin,
+  PhoneButton,
+  Section,
+  SectionHeader,
+  WasPrice,
+} from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { HowItWorks } from "~/widgets/how-it-works";
 import { StartRental } from "~/widgets/start-rental";
@@ -15,17 +30,6 @@ import { TrustStrip } from "~/widgets/trust-strip";
 import type { loader } from "../loader";
 
 const MEASURE_GUIDE = "/guides/measure-your-laundry-space/";
-
-function CheckItem({ children }: { children: ReactNode }) {
-  return (
-    <li className="flex gap-3">
-      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold">
-        <Check className="h-3.5 w-3.5 text-brand-dark" strokeWidth={3} aria-hidden="true" />
-      </span>
-      {children}
-    </li>
-  );
-}
 
 // The price box beside the gallery: weekly price, what's included, the two ways to start, and
 // the running promotions (decided per request, entities/offer).
@@ -39,13 +43,14 @@ function RentalSummary({ machine, className = "" }: { machine: MachineType; clas
   const isSet = machine.item === "set";
 
   return (
-    <section
+    <Section
       aria-labelledby="summary-title"
+      padded={false}
       className={`rounded-3xl border border-line bg-white p-6 shadow-[0_18px_40px_-28px_rgba(7,63,50,0.45)] sm:p-8 ${className}`}
     >
-      <h2 id="summary-title" className="sr-only">
+      <Heading id="summary-title" variant="none" className="sr-only">
         {text.summaryTitle}
-      </h2>
+      </Heading>
       <p className="flex flex-wrap items-baseline gap-x-2">
         <span className="font-display text-5xl font-extrabold tracking-tight text-brand">{money(price.current)}</span>
         <span className="font-display text-lg font-bold text-ink">{d.common.aWeek}</span>
@@ -54,20 +59,13 @@ function RentalSummary({ machine, className = "" }: { machine: MachineType; clas
       <p className="mt-1.5 text-ink-soft">{isSet ? text.forSet : text.forSingle}</p>
       <p className="mt-1 text-sm font-medium text-ink-muted">{d.common.priceTagNote}</p>
 
-      <ul className="mt-5 space-y-2.5 border-t border-line pt-5 text-ink-soft">
-        {text.included.map((item) => (
-          <CheckItem key={item}>{item}</CheckItem>
-        ))}
-      </ul>
+      <CheckList items={text.included} className="mt-5 space-y-2.5 border-t border-line pt-5 text-ink-soft" itemClassName="" />
 
       <div className="mt-6 grid gap-3">
-        <LangLink href={`/start/?machine=${machine.slug}`} className="btn btn-primary w-full">
+        <Button href={`${pagePaths.start}?machine=${machine.slug}`} className="w-full">
           {d.common.startRental}
-        </LangLink>
-        <a href={phone.tel} className="btn btn-secondary w-full">
-          <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-          {d.common.callOrText}
-        </a>
+        </Button>
+        <PhoneButton kind="call" variant="secondary" label={d.common.callOrText} className="w-full" />
       </div>
 
       {promotions.map((promotion) => {
@@ -88,7 +86,7 @@ function RentalSummary({ machine, className = "" }: { machine: MachineType; clas
       <p className="mt-4 text-sm leading-relaxed text-ink-muted">
         {text.terms} {isSet ? text.needOne : text.needBoth}
       </p>
-    </section>
+    </Section>
   );
 }
 
@@ -151,25 +149,23 @@ export default function MachinePage() {
   const otherTypes = getMachineTypes(d).filter((other) => other.slug !== machine.slug);
   const cityLinks = [
     ...getCities(d).map((city) => ({ href: cityPath(city), label: city.name })),
-    { href: "/areas/", label: d.common.allAreas },
+    { href: pagePaths.areas, label: d.common.allAreas },
   ];
 
   return (
     <>
-      <section id="top" aria-labelledby="hero-title" className="pb-12 pt-6 sm:pb-16 sm:pt-8">
+      <Section id="top" aria-labelledby="hero-title" padded={false} nest={false} className="pb-12 pt-6 sm:pb-16 sm:pt-8">
         {/* Phones: heading, photos, price. From 1024px: photos left, heading and price right. */}
-        <div className="container-page grid gap-8 lg:grid-cols-12 lg:items-start lg:gap-x-12 lg:gap-y-8">
+        <Container className="grid gap-8 lg:grid-cols-12 lg:items-start lg:gap-x-12 lg:gap-y-8">
           <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1">
-            <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-              <MapPin className="h-4 w-4" aria-hidden="true" />
-              {d.common.torontoAndGta}
-            </p>
-            <h1
+            <Eyebrow icon={MapPin}>{d.common.torontoAndGta}</Eyebrow>
+            <Heading
               id="hero-title"
+              variant="none"
               className="mt-3 font-display text-[2.125rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.5rem] lg:text-[2.625rem]"
             >
               {page.h1}
-            </h1>
+            </Heading>
             <p className="lead mt-4">{page.intro}</p>
           </div>
 
@@ -182,25 +178,22 @@ export default function MachinePage() {
             machine={machine}
             className="mx-auto w-full max-w-xl lg:col-span-6 lg:col-start-7 lg:row-start-2 lg:max-w-none"
           />
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <TrustStrip />
 
-      <section id="specs" aria-labelledby="specs-title" className="section">
-        <div className="container-page">
-          <h2 id="specs-title" className="h2">
-            {text.specsTitle}
-          </h2>
-          <p className="lead mt-4 max-w-2xl">{text.specsLead}</p>
-        </div>
-        <div className="container-page mt-8 grid gap-6 lg:grid-cols-12 lg:gap-12">
-          <div className="rounded-3xl border border-line bg-white px-5 sm:px-8 lg:col-span-7">
+      <Section id="specs" aria-labelledby="specs-title">
+        <Container>
+          <SectionHeader id="specs-title" title={text.specsTitle} lead={text.specsLead} leadClassName="mt-4 max-w-2xl" />
+        </Container>
+        <Container className="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-12">
+          <Card padding="none" className="px-5 sm:px-8 lg:col-span-7">
             <SpecsTable machine={machine} />
-          </div>
+          </Card>
 
-          <div className="rounded-3xl bg-brand-mint p-6 sm:p-8 lg:col-span-5 lg:self-start">
-            <h2 className="font-display text-xl font-bold text-ink">{text.fitTitle}</h2>
+          <Card tone="mint" className="lg:col-span-5 lg:self-start">
+            <Heading variant="cardSmall">{text.fitTitle}</Heading>
             <p className="mt-3 text-ink-soft">
               {rich(text.fitText, {
                 phoneLink: (
@@ -215,50 +208,40 @@ export default function MachinePage() {
                 {d.common.measureGuide}
               </LangLink>
             )}
-          </div>
-        </div>
-      </section>
+          </Card>
+        </Container>
+      </Section>
 
-      <section
-        id="details"
-        aria-labelledby="details-title"
-        className="section border-y border-line bg-white"
-      >
-        <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
+      <Section id="details" aria-labelledby="details-title" className="border-y border-line bg-white">
+        <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
-            <h2 id="details-title" className="h2">
-              {text.whatItIs}
-            </h2>
+            <Heading id="details-title">{text.whatItIs}</Heading>
             {page.whatItIs.map((paragraph) => (
               <p key={paragraph} className="lead mt-4">
                 {paragraph}
               </p>
             ))}
 
-            <h2 className="mt-12 font-display text-2xl font-bold text-ink">{text.size}</h2>
+            <Heading variant="card" className="mt-12">
+              {text.size}
+            </Heading>
             <p className="mt-4 leading-relaxed text-ink-soft">{page.size}</p>
           </div>
 
-          <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:col-span-5 lg:self-start">
-            <h2 className="font-display text-xl font-bold text-ink">{text.whoItFits}</h2>
-            <ul className="mt-4 space-y-3 text-ink-soft">
-              {page.fits.map((item) => (
-                <CheckItem key={item}>{item}</CheckItem>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+          <Card tone="paper" className="lg:col-span-5 lg:self-start">
+            <Heading variant="cardSmall">{text.whoItFits}</Heading>
+            <CheckList items={page.fits} className="mt-4 space-y-3 text-ink-soft" itemClassName="" />
+          </Card>
+        </Container>
+      </Section>
 
       <HowItWorks />
 
-      <section aria-labelledby="other-types-title" className="section">
-        <div className="container-page">
+      <Section aria-labelledby="other-types-title">
+        <Container>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <h2 id="other-types-title" className="h2">
-              {text.otherTypes}
-            </h2>
-            <LangLink href="/machines/" className="text-link shrink-0">
+            <Heading id="other-types-title">{text.otherTypes}</Heading>
+            <LangLink href={pagePaths.machines} className="text-link shrink-0">
               {d.common.compareAllTypes}
             </LangLink>
           </div>
@@ -274,8 +257,8 @@ export default function MachinePage() {
             links={cityLinks}
             className="mt-12"
           />
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <CtaBand
         title={format(text.ctaTitle, { title: machine.title, price: money(prices[machine.item].current) })}

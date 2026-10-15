@@ -2,8 +2,9 @@ import { TypeCard, getMachineTypes, hasPhoto } from "~/entities/machine";
 import { usePrices } from "~/entities/offer";
 import { ViewSwitch, useMachineView } from "~/features/view-switch";
 import { useI18n } from "~/shared/i18n";
+import { pagePaths } from "~/shared/config";
+import { Container, LangLink, Section, SectionHeader } from "~/shared/ui";
 import { TypesAnimation } from "./TypesAnimation";
-import { LangLink } from "~/shared/ui";
 
 // The five types as photo cards, each linking to its page. A Drawings/Photos switch swaps every
 // card to its drawing; Photos is the default, so the server HTML shows the photos (a type
@@ -19,15 +20,13 @@ export function MachineShowcase({ showAllLink = true }: { showAllLink?: boolean 
   const anyPhotos = machineTypes.some(hasPhoto);
 
   return (
-    <section id="machines" aria-labelledby="machines-title" className="section border-y border-line bg-white">
-      <div className="container-page">
+    <Section id="machines" aria-labelledby="machines-title" className="border-y border-line bg-white">
+      <Container>
         <div className="grid gap-8 md:grid-cols-12 md:items-center md:gap-10">
           <div className="md:col-span-7 lg:col-span-8">
-            <h2 id="machines-title" className="h2">
-              {showcase.title}
-            </h2>
-            <p className="lead mt-4 max-w-2xl">{showcase.lead}</p>
-            {anyPhotos && <ViewSwitch view={view} onChange={setView} className="mt-6" />}
+            <SectionHeader id="machines-title" title={showcase.title} lead={showcase.lead} leadClassName="mt-4 max-w-2xl">
+              {anyPhotos && <ViewSwitch view={view} onChange={setView} className="mt-6" />}
+            </SectionHeader>
           </div>
           <div className="hidden md:col-span-5 md:block lg:col-span-4">
             <TypesAnimation className="max-w-[16rem] lg:max-w-[17rem]" />
@@ -46,12 +45,12 @@ export function MachineShowcase({ showAllLink = true }: { showAllLink?: boolean 
             {showcase.availabilityNote}
           </p>
           {showAllLink && (
-            <LangLink href="/machines/" className="text-link shrink-0">
+            <LangLink href={pagePaths.machines} className="text-link shrink-0">
               {d.common.compareAllTypes}
             </LangLink>
           )}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

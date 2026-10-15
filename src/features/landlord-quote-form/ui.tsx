@@ -11,6 +11,7 @@ import {
   type FormActionData,
 } from "~/shared/forms";
 import { useI18n } from "~/shared/i18n";
+import { Card, Heading } from "~/shared/ui";
 
 // Landlord quote request: the fields of the "landlordQuote" form (shared/forms registry),
 // posted to the page's server action, so it works with JavaScript off; with JavaScript on,
@@ -25,15 +26,16 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData }) {
   }
 
   return (
-    <Form
+    <Card
+      as={Form}
       method="post"
       noValidate
+      padding="form"
       aria-labelledby="quote-form-title"
-      className="rounded-3xl border border-line bg-white p-5 sm:p-8"
     >
-      <h2 id="quote-form-title" className="font-display text-2xl font-bold text-ink">
+      <Heading id="quote-form-title" variant="card">
         {quote.formTitle}
-      </h2>
+      </Heading>
       <div className="mt-2">
         <RequiredNote />
       </div>
@@ -49,6 +51,6 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData }) {
       <Honeypot />
       {result?.status === "error" && <SendError />}
       <SubmitButton sending={sending}>{quote.submit}</SubmitButton>
-    </Form>
+    </Card>
   );
 }

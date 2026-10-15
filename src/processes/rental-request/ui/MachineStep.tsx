@@ -1,7 +1,8 @@
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
+import { pagePaths } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { FormFields, SubmitButton, type FieldErrors } from "~/shared/forms";
-import { ArrowRight, LangLink } from "~/shared/ui";
+import { ArrowRight, Card, LangLink } from "~/shared/ui";
 import type { machineAction } from "../actions.server";
 import type { machineLoader } from "../loaders.server";
 import { StepShell } from "./StepShell";
@@ -25,7 +26,7 @@ export function MachineStep() {
         <p>
           {rich(text.intro, {
             link: (
-              <LangLink href="/machines/" className="text-link">
+              <LangLink href={pagePaths.machines} className="text-link">
                 {d.common.compareTypes}
               </LangLink>
             ),
@@ -33,12 +34,12 @@ export function MachineStep() {
         </p>
       }
     >
-      <Form method="post" noValidate className="rounded-3xl border border-line bg-white p-5 sm:p-8">
+      <Card as={Form} method="post" noValidate padding="form">
         <FormFields form="startMachine" values={values} errors={errors} />
         <SubmitButton sending={busy} next icon={ArrowRight}>
           {text.next}
         </SubmitButton>
-      </Form>
+      </Card>
     </StepShell>
   );
 }

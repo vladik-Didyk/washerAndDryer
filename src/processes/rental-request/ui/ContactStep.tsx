@@ -1,5 +1,6 @@
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
 import { useI18n } from "~/shared/i18n";
+import { Card, Heading } from "~/shared/ui";
 import { FormFields, Honeypot, RequiredNote, SendError, SubmitButton, type FieldErrors } from "~/shared/forms";
 import type { contactAction } from "../actions.server";
 import type { contactLoader } from "../loaders.server";
@@ -13,7 +14,7 @@ export function ContactStep() {
   const sending = useNavigation().state === "submitting";
   const values = result?.values ?? saved;
   const errors: FieldErrors = result?.errors ?? {};
-  const { forms, start } = useI18n().d;
+  const { start } = useI18n().d;
   const text = start.contact;
 
   return (
@@ -24,7 +25,7 @@ export function ContactStep() {
       backHref={STEP_PATHS.details}
     >
       <div className="mb-6 rounded-3xl border border-brand-mint-strong bg-white/70 p-5 sm:p-6">
-        <h2 className="font-display text-lg font-bold text-ink">{text.summaryTitle}</h2>
+        <Heading variant="item">{text.summaryTitle}</Heading>
         <dl className="mt-3 grid gap-x-6 gap-y-1.5 text-[15px] sm:grid-cols-[auto_1fr]">
           {summary.map((row) => (
             <div key={row.label} className="contents">
@@ -38,7 +39,7 @@ export function ContactStep() {
         )}
       </div>
 
-      <Form method="post" noValidate className="rounded-3xl border border-line bg-white p-5 sm:p-8">
+      <Card as={Form} method="post" noValidate padding="form">
         <RequiredNote />
         <div className="mt-5 grid gap-5 sm:grid-cols-2">
           <FormFields form="startContact" values={values} errors={errors} today={today} />
@@ -46,7 +47,7 @@ export function ContactStep() {
         <Honeypot />
         {result && "status" in result && result.status === "error" && <SendError />}
         <SubmitButton sending={sending}>{text.submit}</SubmitButton>
-      </Form>
+      </Card>
     </StepShell>
   );
 }

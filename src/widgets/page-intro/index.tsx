@@ -2,10 +2,10 @@
 // (intro text, buttons). `aside` fills a right-hand column on wide screens; without it the
 // text keeps to `textWidth`.
 import type { ReactNode } from "react";
-import type { LucideIcon } from "~/shared/ui";
+import { Container, Eyebrow, Heading, Nest, Section, type LucideIcon } from "~/shared/ui";
 
 export function PageIntro({
-  icon: Icon,
+  icon,
   eyebrow,
   title,
   aside,
@@ -21,34 +21,34 @@ export function PageIntro({
 }) {
   const text = (
     <>
-      {eyebrow && (
-        <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-          {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
-          {eyebrow}
-        </p>
-      )}
-      <h1
-        id="hero-title"
-        className="mt-3 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.75rem] lg:text-[3rem]"
-      >
+      {eyebrow && <Eyebrow icon={icon}>{eyebrow}</Eyebrow>}
+      <Heading id="hero-title" variant="page" className="mt-3">
         {title}
-      </h1>
+      </Heading>
       {children}
     </>
   );
 
   return (
-    <section id="top" aria-labelledby="hero-title" className="overflow-hidden pb-12 pt-8 sm:pt-10 lg:pb-14">
+    <Section
+      id="top"
+      aria-labelledby="hero-title"
+      padded={false}
+      nest={false}
+      className="overflow-hidden pb-12 pt-8 sm:pt-10 lg:pb-14"
+    >
       {aside ? (
-        <div className="container-page grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+        <Container className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
           <div className="lg:col-span-7">{text}</div>
-          <div className="lg:col-span-5">{aside}</div>
-        </div>
+          <div className="lg:col-span-5">
+            <Nest>{aside}</Nest>
+          </div>
+        </Container>
       ) : (
-        <div className="container-page">
+        <Container>
           <div className={textWidth}>{text}</div>
-        </div>
+        </Container>
       )}
-    </section>
+    </Section>
   );
 }

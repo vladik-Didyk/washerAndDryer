@@ -1,18 +1,17 @@
 import { useI18n } from "~/shared/i18n";
+import { Container, Heading, Nest, NumberBadge, Section } from "~/shared/ui";
+
+// The four steps of renting, on the brand-green band (home, city and machine pages).
 
 export function HowItWorks() {
   const { d, number } = useI18n();
   const { steps } = d.home.how;
   return (
-    <section
-      id="how"
-      aria-labelledby="how-title"
-      className="on-dark section bg-brand text-white"
-    >
-      <div className="container-page">
-        <h2 id="how-title" className="h2 text-white">
+    <Section id="how" aria-labelledby="how-title" className="on-dark bg-brand text-white">
+      <Container>
+        <Heading id="how-title" className="text-white">
           {d.common.howItWorks}
-        </h2>
+        </Heading>
 
         <div className="relative mt-10 lg:mt-12">
           {/* Desktop: one line joining the four step numbers (4 columns, 24px gaps). */}
@@ -30,16 +29,13 @@ export function HowItWorks() {
                     className="absolute -bottom-6 left-6 top-14 w-0.5 -translate-x-1/2 bg-white/25 sm:hidden"
                   />
                 )}
-                <span
-                  aria-hidden="true"
-                  className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold font-display text-xl font-extrabold text-ink"
-                >
-                  {number(index + 1)}
-                </span>
+                <NumberBadge className="relative">{number(index + 1)}</NumberBadge>
                 <div className="pt-2.5 sm:pt-0">
-                  <h3 className="font-display text-xl font-bold leading-snug text-white sm:mt-5">
-                    {step.title}
-                  </h3>
+                  <Nest>
+                    <Heading variant="none" className="font-display text-xl font-bold leading-snug text-white sm:mt-5">
+                      {step.title}
+                    </Heading>
+                  </Nest>
                   <p className="mt-2 leading-relaxed text-white/85">
                     {step.text}
                   </p>
@@ -48,7 +44,7 @@ export function HowItWorks() {
             ))}
           </ol>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

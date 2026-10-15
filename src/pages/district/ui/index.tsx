@@ -2,7 +2,8 @@ import { useLoaderData } from "react-router";
 import { YORK_REGION, cityPath, districtPath, findDistrict, getCities, getDistricts } from "~/entities/area";
 import { usePrices } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
-import { LangLink, LinkList, WasPrice } from "~/shared/ui";
+import { pagePaths } from "~/shared/config";
+import { Container, LangLink, LinkList, Section, WasPrice } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { DeliveryCheck } from "~/widgets/delivery-check";
 import { LocalLaundry } from "~/widgets/local-laundry";
@@ -31,7 +32,7 @@ export default function DistrictPage() {
   ];
   const cityLinks = [
     ...cities.filter((city) => city.slug !== "toronto").map((city) => ({ href: cityPath(city), label: city.name })),
-    { href: "/areas/", label: d.common.allAreas },
+    { href: pagePaths.areas, label: d.common.allAreas },
   ];
   const yorkRegion = cities.filter((city) => YORK_REGION.includes(city.slug));
 
@@ -70,12 +71,12 @@ export default function DistrictPage() {
       <DeliveryCheck spacing="pt-16 sm:pt-20" />
       <Prices />
 
-      <section aria-label={text.otherAreasLabel} className="section pt-0 sm:pt-0 lg:pt-0">
-        <div className="container-page grid gap-10 lg:grid-cols-2">
+      <Section aria-label={text.otherAreasLabel} className="pt-0 sm:pt-0 lg:pt-0">
+        <Container className="grid gap-10 lg:grid-cols-2">
           <LinkList id="toronto-links-title" title={text.otherToronto} links={torontoLinks} />
           <LinkList id="city-links-title" title={text.aroundToronto} links={cityLinks} />
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <CtaBand title={format(text.ctaTitle, { place: district.name })} />
       <StartRental />

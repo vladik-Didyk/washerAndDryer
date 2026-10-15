@@ -2,7 +2,8 @@ import { useLoaderData } from "react-router";
 import { FaqList } from "~/entities/faq";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { CircleHelp, LangLink, MessageSquare, Phone } from "~/shared/ui";
+import { CircleHelp, Container } from "~/shared/ui";
+import { CtaBand } from "~/widgets/cta-band";
 import { PageIntro } from "~/widgets/page-intro";
 import type { loader } from "../loader";
 
@@ -43,36 +44,12 @@ export default function FaqPage() {
       </PageIntro>
 
       <div className="border-y border-line bg-white">
-        <div className="container-page py-14 sm:py-16 lg:py-20">
+        <Container className="py-14 sm:py-16 lg:py-20">
           <FaqList groups={faqGroups} />
-        </div>
+        </Container>
       </div>
 
-      <section aria-labelledby="faq-cta-title" className="section">
-        <div className="container-page">
-          <div className="grid gap-6 rounded-3xl bg-brand-mint px-5 py-8 sm:p-10 lg:grid-cols-12 lg:items-center lg:gap-10">
-            <div className="lg:col-span-7">
-              <h2 id="faq-cta-title" className="h2">
-                {d.common.readyToRent}
-              </h2>
-              <p className="lead mt-3">{d.common.readyToRentText}</p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
-              <LangLink href="/start/" className="btn btn-primary">
-                {d.common.startRental}
-              </LangLink>
-              <a href={phone.tel} className="btn btn-secondary">
-                <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-                {d.common.call}
-              </a>
-              <a href={phone.sms} className="btn btn-secondary">
-                <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-                {d.common.text}
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CtaBand variant="panel" id="faq-cta-title" />
     </>
   );
 }

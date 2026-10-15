@@ -8,7 +8,8 @@ import { useEffect, useRef, type ComponentPropsWithoutRef, type ReactNode } from
 import { siteConfig } from "../config/site";
 import { useI18n, type I18n } from "../i18n";
 import { describedBy } from "../lib/format";
-import { Button } from "../ui/LangLink";
+import { Button } from "../ui/actions";
+import { Card, Heading, Nest } from "../ui/layout";
 import { ChevronDown, CircleAlert, CircleCheck, LoaderCircle, type LucideIcon } from "../ui/icons";
 import { fieldOptions, type FieldErrors, type FormValues, type ResolvedOption } from "./model";
 import { formFields, forms, type FieldDef, type FormKey } from "./registry";
@@ -112,18 +113,21 @@ export function SentPanel({ title, note, resetHref }: { title?: string; note?: s
   }, []);
 
   return (
-    <div className="rounded-3xl border border-line bg-white px-6 py-12 text-center sm:px-10">
+    <Card padding="none" className="px-6 py-12 text-center sm:px-10">
       <CircleCheck className="mx-auto h-12 w-12 text-brand" strokeWidth={1.75} aria-hidden="true" />
-      <h3 ref={headingRef} tabIndex={-1} aria-describedby="form-sent-note" className="mt-4 font-display text-2xl font-bold text-ink">
-        {title ?? d.forms.sentTitle}
-      </h3>
+      {/* One level below the form's own title, which it replaces. */}
+      <Nest>
+        <Heading ref={headingRef} tabIndex={-1} aria-describedby="form-sent-note" variant="card" className="mt-4">
+          {title ?? d.forms.sentTitle}
+        </Heading>
+      </Nest>
       <p id="form-sent-note" className="lead mt-2">
         {note ?? d.forms.sentNote}
       </p>
       <Button href={resetHref} variant="secondary" className="mt-8">
         {d.forms.sendAnother}
       </Button>
-    </div>
+    </Card>
   );
 }
 

@@ -1,7 +1,7 @@
 import { activePromotions, promotionText } from "~/entities/offer";
 import type { I18n } from "~/shared/i18n";
 import { sectionId, useSite, type ArticleBlock, type ArticleSection, type RenderedBlock } from "~/shared/lib";
-import { ArrowRight, Info, LangLink } from "~/shared/ui";
+import { ArrowRight, DotList, Heading, Info, LangLink, NumberBadge, Section } from "~/shared/ui";
 
 // The per-request blocks of an article's text (shared/i18n locales/en.server.ts), filled in by
 // the page loader: { include: "hookups" } is the hookup checklist; { offer: "promotions" } one
@@ -42,14 +42,12 @@ function Block({ block }: { block: RenderedBlock }) {
 
   if ("list" in block) {
     return (
-      <ul className="mt-4 space-y-2.5">
-        {block.list.map((item) => (
-          <li key={item} className={`flex gap-3 ${text}`}>
-            <span aria-hidden="true" className="mt-[0.6rem] h-2 w-2 shrink-0 rounded-full bg-gold" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
+      <DotList
+        items={block.list.map((item) => <span key={item}>{item}</span>)}
+        className="mt-4 space-y-2.5"
+        itemClassName={`flex gap-3 ${text}`}
+        bullet="mt-[0.6rem] h-2 w-2"
+      />
     );
   }
 
@@ -58,12 +56,7 @@ function Block({ block }: { block: RenderedBlock }) {
       <ol className="mt-5 space-y-4">
         {block.steps.map((step, index) => (
           <li key={step} className={`flex gap-3 ${text}`}>
-            <span
-              aria-hidden="true"
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold font-display text-sm font-bold text-ink"
-            >
-              {index + 1}
-            </span>
+            <NumberBadge size="sm">{index + 1}</NumberBadge>
             <span className="pt-0.5">{step}</span>
           </li>
         ))}
@@ -100,14 +93,14 @@ export function ArticleBody({ sections }: { sections: ArticleSection<RenderedBlo
   return sections.map((section) => {
     const id = sectionId(section);
     return (
-      <section key={id} id={id} aria-labelledby={`${id}-title`} className="mt-12 first:mt-0">
-        <h2 id={`${id}-title`} className="font-display text-2xl font-bold leading-tight text-ink sm:text-[1.75rem]">
+      <Section key={id} id={id} aria-labelledby={`${id}-title`} padded={false} className="mt-12 first:mt-0">
+        <Heading id={`${id}-title`} variant="card" className="leading-tight sm:text-[1.75rem]">
           {section.heading}
-        </h2>
+        </Heading>
         {section.blocks.map((block, index) => (
           <Block key={index} block={block} />
         ))}
-      </section>
+      </Section>
     );
   });
 }

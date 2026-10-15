@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { LangLink, MapPin } from "~/shared/ui";
+import { Card, Container, DotList, Heading, LangLink, MapPin, Nest, Section } from "~/shared/ui";
 
 // Local detail for a city or district page: what homes are like there, the neighbourhoods we
 // deliver to, and what to check before calling. `neighbourhoodLinks` maps a neighbourhood name
@@ -20,25 +20,21 @@ export function LocalLaundry({
   const text = d.areas.page;
 
   return (
-    <section
-      id="local"
-      aria-labelledby="local-title"
-      className="section border-y border-line bg-white"
-    >
-      <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
+    <Section id="local" aria-labelledby="local-title" className="border-y border-line bg-white">
+      <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
           {children}
-          <h2 id="local-title" className="h2">
-            {format(text.localTitle, { place: area.name })}
-          </h2>
+          <Heading id="local-title">{format(text.localTitle, { place: area.name })}</Heading>
           {area.homes.map((paragraph) => (
             <p key={paragraph} className="lead mt-4">
               {paragraph}
             </p>
           ))}
-          <h3 className="mt-8 font-display text-lg font-bold text-ink">
-            {format(text.localAreas, { place: area.name })}
-          </h3>
+          <Nest>
+            <Heading variant="item" className="mt-8">
+              {format(text.localAreas, { place: area.name })}
+            </Heading>
+          </Nest>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-ink-soft">
             {area.neighbourhoods.map((name) => (
               <li key={name} className="flex items-center gap-1.5">
@@ -55,21 +51,11 @@ export function LocalLaundry({
           </ul>
         </div>
 
-        <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:col-span-5 lg:self-start">
-          <h3 className="font-display text-xl font-bold text-ink">
-            {text.beforeYouCall}
-          </h3>
-          <ul className="mt-5 space-y-3">
-            {area.checklist.map((item) => (
-              <li key={item} className="flex gap-3 text-ink-soft">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-2 w-2 shrink-0 rounded-full bg-gold"
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
+        <Card tone="paper" className="lg:col-span-5 lg:self-start">
+          <Nest>
+            <Heading variant="cardSmall">{text.beforeYouCall}</Heading>
+          </Nest>
+          <DotList items={area.checklist} className="mt-5 space-y-3" />
           <p className="mt-6 text-ink-soft">
             {rich(text.notSure, {
               phoneLink: (
@@ -79,8 +65,8 @@ export function LocalLaundry({
               ),
             })}
           </p>
-        </div>
-      </div>
-    </section>
+        </Card>
+      </Container>
+    </Section>
   );
 }

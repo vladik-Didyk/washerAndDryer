@@ -2,7 +2,8 @@ import { useLoaderData } from "react-router";
 import { cityPath, districtPath, findCity, getCities, getDistricts } from "~/entities/area";
 import { usePrices } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
-import { LinkList, WasPrice } from "~/shared/ui";
+import { pagePaths } from "~/shared/config";
+import { Container, LinkList, Section, WasPrice } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { DeliveryCheck } from "~/widgets/delivery-check";
 import { HowItWorks } from "~/widgets/how-it-works";
@@ -29,7 +30,7 @@ export default function CityPage() {
     ...getCities(d)
       .filter((other) => other.slug !== city.slug)
       .map((other) => ({ href: cityPath(other), label: other.name })),
-    { href: "/areas/", label: d.common.allAreas },
+    { href: pagePaths.areas, label: d.common.allAreas },
   ];
 
   return (
@@ -52,8 +53,8 @@ export default function CityPage() {
       <Prices />
       <HowItWorks />
 
-      <section aria-label={text.otherAreasLabel} className="section">
-        <div className="container-page grid gap-10 lg:grid-cols-2">
+      <Section aria-label={text.otherAreasLabel}>
+        <Container className="grid gap-10 lg:grid-cols-2">
           {isToronto && (
             <LinkList
               id="districts-title"
@@ -65,8 +66,8 @@ export default function CityPage() {
             <LinkList id="other-areas-title" title={text.otherAreas} links={otherCities} />
             <p className="mt-4 text-ink-soft">{d.common.fartherAwayAsk}</p>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <CtaBand title={format(text.ctaTitle, { place: city.name })} />
       <StartRental />

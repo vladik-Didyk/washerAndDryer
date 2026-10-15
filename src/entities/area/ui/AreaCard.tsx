@@ -1,6 +1,7 @@
-import { LangLink, MapPin } from "~/shared/ui";
+import { Heading, LangLink, MapPin, Nest } from "~/shared/ui";
 
-// One card per area; the link covers the whole card.
+// One card per area; the link covers the whole card. Its heading is one level below the
+// section it sits in.
 export function AreaCard({
   href,
   name,
@@ -15,7 +16,8 @@ export function AreaCard({
   return (
     <li className="relative rounded-2xl border border-line bg-white p-5 transition-colors hover:border-brand hover:bg-brand-mint/40">
       {label && <p className="text-sm font-semibold text-ink-muted">{label}</p>}
-      <h3 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
+      <Nest>
+        <Heading variant="cardSmall" className="flex items-center gap-2">
         <MapPin className="h-5 w-5 shrink-0 text-brand" aria-hidden="true" />
         <LangLink
           href={href}
@@ -23,7 +25,8 @@ export function AreaCard({
         >
           {name}
         </LangLink>
-      </h3>
+        </Heading>
+      </Nest>
       <p className="mt-2 text-ink-soft">{teaser}</p>
     </li>
   );

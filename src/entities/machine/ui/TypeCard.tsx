@@ -1,5 +1,5 @@
 import { useI18n } from "~/shared/i18n";
-import { ArrowRight, KeepWordsWhole, LangLink, WasPrice } from "~/shared/ui";
+import { ArrowRight, Heading, KeepWordsWhole, LangLink, Nest, WasPrice } from "~/shared/ui";
 import { machinePath, type MachineType } from "../data";
 import { MachineImage } from "./MachineImage";
 
@@ -12,7 +12,7 @@ export const TYPE_CARD_SIZES_4UP = "(min-width: 1024px) 17rem, (min-width: 640px
 // One machine type as a card: picture first, then the name, one line about it, the weekly
 // price (`price`, from entities/offer usePrices; the list price struck through while a
 // promotion lowers it) and "See details". The name is the link, stretched over the whole card; the focus
-// ring is drawn on the card. Phones: picture on the left. From 640px: picture on top.
+// ring is drawn on the card. Its heading is one level below the section it sits in. Phones: picture on the left. From 640px: picture on top.
 // `note` replaces the description (e.g. why the type suits an area); `preferPhoto` follows the
 // Drawings/Photos switch. A drawing carries its "Drawing" tag.
 export function TypeCard({
@@ -38,14 +38,16 @@ export function TypeCard({
         frameClassName="aspect-[4/5] w-[38%] shrink-0 overflow-hidden bg-brand-mint sm:aspect-[4/3] sm:w-auto xl:aspect-[4/5]"
       />
       <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
-        <h3 className="font-display text-lg font-bold leading-snug text-ink">
+        <Nest>
+          <Heading variant="item" className="leading-snug">
           <LangLink
             href={machinePath(machine)}
             className="transition-colors after:absolute after:inset-0 after:rounded-2xl group-hover:text-brand focus-visible:outline-none focus-visible:after:ring-[3px] focus-visible:after:ring-inset focus-visible:after:ring-brand"
           >
             <KeepWordsWhole text={machine.title} />
           </LangLink>
-        </h3>
+          </Heading>
+        </Nest>
         <p className="mt-1.5 text-[15px] leading-snug text-ink-soft">{note ?? machine.description}</p>
         <p className="mt-auto pt-3 leading-tight">
           <span className="font-display text-lg font-bold text-brand">

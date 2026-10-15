@@ -1,6 +1,5 @@
-import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { LangLink, MessageSquare, Phone } from "~/shared/ui";
+import { Button, MessageSquare, PhoneButton } from "~/shared/ui";
 import { useTypingInField, type MobileAction } from "./model";
 
 // Phones only (from 768px the header has the phone and "Start your rental"): a bar fixed to
@@ -11,7 +10,6 @@ import { useTypingInField, type MobileAction } from "./model";
 // language.
 export function MobileActionBar({ action }: { action: MobileAction }) {
   const typing = useTypingInField();
-  const { phone } = siteConfig;
   const { mobileBar } = useI18n().d.chrome;
 
   // The aside keeps the buttons inside a landmark; hiding the aside hides both.
@@ -23,14 +21,11 @@ export function MobileActionBar({ action }: { action: MobileAction }) {
       }`}
     >
       <div className="mx-auto grid max-w-md grid-cols-[2fr_3fr] gap-3">
-        <a href={phone.tel} aria-label={mobileBar.callAria} className="btn btn-primary px-4">
-          <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-          {mobileBar.call}
-        </a>
-        <LangLink href={action.href} className="btn btn-secondary whitespace-nowrap px-4">
+        <PhoneButton kind="call" aria-label={mobileBar.callAria} label={mobileBar.call} className="px-4" />
+        <Button href={action.href} variant="secondary" className="whitespace-nowrap px-4">
           {action.icon === "sms" && <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />}
           {action.label}
-        </LangLink>
+        </Button>
       </div>
     </aside>
   );

@@ -1,9 +1,9 @@
 import { usePrices } from "~/entities/offer";
 import { PostalCodeChecker } from "~/features/postal-check";
-import { siteConfig } from "~/shared/config";
+import { pagePaths } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { heroPhoto, photoFiles } from "~/shared/lib";
-import { LangLink, MapPin, Phone, WasPrice } from "~/shared/ui";
+import { Button, Container, Eyebrow, Heading, MapPin, PhoneButton, Section, WasPrice } from "~/shared/ui";
 
 // The laundry-room photo. Phones get the portrait crop as a band above the text; from 640px the
 // wide photo; from 1024px it fills the right half of the hero, out to the edge of the window.
@@ -48,7 +48,6 @@ function HeroPhoto({ className = "" }: { className?: string }) {
 // request or a call) and the postal-code check. Phones: photo on top, text below it, never over it.
 // From 1024px the text keeps to the page's left edge and the photo takes the other half.
 export function Hero() {
-  const { phone } = siteConfig;
   const { d, rich, moneyParts } = useI18n();
   const { hero } = d.home;
   const prices = usePrices();
@@ -56,21 +55,19 @@ export function Hero() {
   const tag = moneyParts(prices.set.current);
 
   return (
-    <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
+    <Section id="top" aria-labelledby="hero-title" padded={false} nest={false} className="overflow-hidden">
       <div className="lg:grid lg:min-h-[37rem] lg:grid-cols-[minmax(2rem,1fr)_minmax(0,35rem)_minmax(0,33rem)_minmax(2rem,1fr)]">
         <HeroPhoto className="lg:col-[3/5] lg:row-start-1" />
 
-        <div className="container-page pb-12 pt-8 sm:pb-14 sm:pt-10 lg:col-[2/3] lg:row-start-1 lg:mx-0 lg:max-w-none lg:self-center lg:px-0 lg:py-14 lg:pr-10">
-          <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-            <MapPin className="h-4 w-4" aria-hidden="true" />
-            {hero.eyebrow}
-          </p>
-          <h1
+        <Container className="pb-12 pt-8 sm:pb-14 sm:pt-10 lg:col-[2/3] lg:row-start-1 lg:mx-0 lg:max-w-none lg:self-center lg:px-0 lg:py-14 lg:pr-10">
+          <Eyebrow icon={MapPin}>{hero.eyebrow}</Eyebrow>
+          <Heading
             id="hero-title"
+            variant="none"
             className="mt-3 font-display text-[2.375rem] font-extrabold leading-[1.06] tracking-tight text-ink sm:text-[3rem] lg:text-[2.75rem] xl:text-[3rem]"
           >
             {hero.title}
-          </h1>
+          </Heading>
 
           <div className="mt-5 sm:mt-6">
             <p className="sr-only">{hero.priceSummary}</p>
@@ -95,13 +92,10 @@ export function Hero() {
           </div>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <LangLink href="/start/" className="btn btn-primary sm:px-5">
+            <Button href={pagePaths.start} className="sm:px-5">
               {d.common.startRental}
-            </LangLink>
-            <a href={phone.tel} className="btn btn-secondary sm:px-5">
-              <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-              {d.common.callOrText}
-            </a>
+            </Button>
+            <PhoneButton kind="call" variant="secondary" label={d.common.callOrText} className="sm:px-5" />
           </div>
 
           <PostalCodeChecker
@@ -109,8 +103,8 @@ export function Hero() {
             label={d.postalCheck.heroLabel}
             className="mt-7 max-w-md border-t border-line pt-6"
           />
-        </div>
+        </Container>
       </div>
-    </section>
+    </Section>
   );
 }

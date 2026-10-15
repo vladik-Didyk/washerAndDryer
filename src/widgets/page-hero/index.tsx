@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import { findMachinePhoto } from "~/entities/machine";
-import { siteConfig } from "~/shared/config";
+import { pagePaths } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { LangLink, MapPin, Phone, Photo } from "~/shared/ui";
+import { Button, Container, Eyebrow, Heading, MapPin, PhoneButton, Photo, Section } from "~/shared/ui";
 
 // Header for the city and district pages: the home hero's facts, smaller, beside an example
 // photo of one machine type (`photo`, a file from entities/machine). `price` is the
@@ -28,26 +28,17 @@ export function PageHero({
   otherPrice?: string;
   photo?: string;
 }) {
-  const { phone } = siteConfig;
   const { d, format } = useI18n();
   const shown = photo ? findMachinePhoto(d, photo) : null;
 
   return (
-    <section id="top" aria-labelledby="hero-title" className="overflow-hidden">
-      <div className="container-page grid items-center gap-10 pb-14 pt-8 sm:pt-10 lg:grid-cols-12 lg:gap-12 lg:pb-16 lg:pt-12">
+    <Section id="top" aria-labelledby="hero-title" padded={false} nest={false} className="overflow-hidden">
+      <Container className="grid items-center gap-10 pb-14 pt-8 sm:pt-10 lg:grid-cols-12 lg:gap-12 lg:pb-16 lg:pt-12">
         <div className="lg:col-span-7">
-          {eyebrow && (
-            <p className="inline-flex items-center gap-1.5 font-display text-[15px] font-semibold text-brand">
-              <MapPin className="h-4 w-4" aria-hidden="true" />
-              {eyebrow}
-            </p>
-          )}
-          <h1
-            id="hero-title"
-            className="mt-3 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-ink sm:text-[2.75rem] lg:text-[3rem]"
-          >
+          {eyebrow && <Eyebrow icon={MapPin}>{eyebrow}</Eyebrow>}
+          <Heading id="hero-title" variant="page" className="mt-3">
             {title}
-          </h1>
+          </Heading>
           {intro && <p className="lead mt-5 max-w-2xl">{intro}</p>}
 
           <p className="mt-6 flex flex-wrap items-baseline gap-x-2">
@@ -59,13 +50,8 @@ export function PageHero({
           <p className="mt-2 text-sm text-ink-muted">{d.common.pricesNote}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <LangLink href="/start/" className="btn btn-primary">
-              {d.common.startRental}
-            </LangLink>
-            <a href={phone.tel} className="btn btn-secondary">
-              <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-              {d.common.callOrText}
-            </a>
+            <Button href={pagePaths.start}>{d.common.startRental}</Button>
+            <PhoneButton kind="call" variant="secondary" label={d.common.callOrText} />
           </div>
         </div>
 
@@ -85,7 +71,7 @@ export function PageHero({
             </figcaption>
           </figure>
         )}
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

@@ -1,8 +1,8 @@
 import { useId, useState, type FormEvent } from "react";
-import { pagePaths, siteConfig } from "~/shared/config";
+import { pagePaths } from "~/shared/config";
 import { Field } from "~/shared/forms";
 import { useI18n } from "~/shared/i18n";
-import { CircleAlert, CircleCheck, CircleHelp, LangLink, MessageSquare } from "~/shared/ui";
+import { Button, CircleAlert, CircleCheck, CircleHelp, LangLink, PhoneButton } from "~/shared/ui";
 import { checkPostalCode, type PostalCheck } from "./model";
 
 const ICONS = { yes: CircleCheck, unsure: CircleHelp, invalid: CircleAlert };
@@ -33,7 +33,6 @@ export function PostalCodeChecker({
   const resultId = `${id}result`;
   const [value, setValue] = useState("");
   const [result, setResult] = useState<PostalCheck | null>(null);
-  const { phone } = siteConfig;
   const i18n = useI18n();
   const { d } = i18n;
 
@@ -63,9 +62,9 @@ export function PostalCodeChecker({
           className: compact ? "min-h-[3rem] py-2.5" : undefined,
         }}
         after={
-          <button type="submit" className="btn btn-primary shrink-0 px-5">
+          <Button type="submit" className="shrink-0 px-5">
             {d.postalCheck.check}
-          </button>
+          </Button>
         }
       />
 
@@ -83,10 +82,7 @@ export function PostalCodeChecker({
           </LangLink>
         )}
         {result?.status === "unsure" && (
-          <a href={phone.sms} className="btn btn-secondary mt-3">
-            <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-            {d.postalCheck.textUs}
-          </a>
+          <PhoneButton kind="text" label={d.postalCheck.textUs} className="mt-3" />
         )}
       </div>
     </form>

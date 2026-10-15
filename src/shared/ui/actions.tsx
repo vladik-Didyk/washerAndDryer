@@ -1,5 +1,8 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { siteConfig } from "../config/site";
 import { DEFAULT_LANG, isEnglishOnly, useI18n } from "../i18n";
+import { MessageSquare, Phone } from "./icons";
+import { Card } from "./layout";
 
 // Links that stay in the page's language. Every site link goes through LangLink (or Button):
 // on a Spanish page "/faq/" becomes "/es/faq/"; tel:, sms:, https: and #anchors stay as they
@@ -60,5 +63,58 @@ export function Button({ variant = "primary", className = "", children, ...props
     <button type={type} {...rest} className={classes}>
       {children}
     </button>
+  );
+}
+
+// A button to call or text the business. The label is "Call" / "Text" unless given
+// (common.callOrText, "Call {phone}"...).
+export function PhoneButton({
+  kind = "call",
+  variant = kind === "call" ? "primary" : "secondary",
+  label,
+  className,
+  ...rest
+}: {
+  kind?: "call" | "text";
+  variant?: ButtonVariant;
+  label?: ReactNode;
+  className?: string;
+} & Omit<ComponentPropsWithoutRef<"a">, "href" | "className" | "children">) {
+  const { d } = useI18n();
+  const { phone } = siteConfig;
+  const Icon = kind === "call" ? Phone : MessageSquare;
+  return (
+    <Button href={kind === "call" ? phone.tel : phone.sms} variant={variant} className={className} {...rest}>
+      <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+      {label ?? (kind === "call" ? d.common.call : d.common.text)}
+    </Button>
+  );
+}
+
+// "Prefer to call or text?": the phone number, the hours and the two buttons, in a card.
+// `title` replaces the question; `children` go under the buttons.
+export function CallCard({
+  title,
+  tone = "mintEdge",
+  className,
+  children,
+}: {
+  title?: string;
+  tone?: "mintEdge" | "mintBordered";
+  className?: string;
+  children?: ReactNode;
+}) {
+  const { d } = useI18n();
+  return (
+    <Card tone={tone} padding="sm" className={className}>
+      <p className="font-display font-semibold text-ink">{title ?? d.common.preferCallOrText}</p>
+      <p className="mt-1 font-display text-2xl font-bold text-brand">{siteConfig.phone.display}</p>
+      <p className="mt-1 text-sm text-ink-muted">{d.common.hoursSentence}</p>
+      <div className="mt-5 grid grid-cols-2 gap-3">
+        <PhoneButton kind="call" />
+        <PhoneButton kind="text" />
+      </div>
+      {children}
+    </Card>
   );
 }

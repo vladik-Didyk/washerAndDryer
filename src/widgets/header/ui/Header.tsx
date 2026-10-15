@@ -3,13 +3,15 @@ import { LANGUAGES, pathInLanguage, useI18n, type Dictionary } from "~/shared/i1
 import { useSite, type Site } from "~/shared/lib";
 import {
   BookOpen,
+  Button,
   Clock,
+  Container,
   CreditCard,
   LangLink,
   Logo,
   Menu,
-  MessageSquare,
   Phone,
+  PhoneButton,
   Wrench,
   X,
   type LucideIcon,
@@ -77,7 +79,7 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
     <>
       {/* Utility row: scrolls away; only the main header below it stays on screen. */}
       <div className="hidden border-b border-line bg-white lg:block">
-        <div className="container-page flex h-9 items-center justify-between gap-6 text-[13px] text-ink-muted">
+        <Container className="flex h-9 items-center justify-between gap-6 text-[13px] text-ink-muted">
           <p className="flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" aria-hidden="true" />
             {format(d.header.utilityLine, { languages: d.common.languages })}
@@ -105,15 +107,15 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
               </li>
             </ul>
           </nav>
-        </div>
+        </Container>
       </div>
 
       <header
         className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md"
       >
-        <div className="container-page flex h-[4.5rem] items-center justify-between gap-4">
+        <Container className="flex h-[4.5rem] items-center justify-between gap-4">
           <LangLink
-            href="/"
+            href={pagePaths.home}
             onClick={closeMenu}
             className="flex min-w-0 items-center gap-3 rounded-xl"
           >
@@ -160,9 +162,9 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               <span className="hidden whitespace-nowrap lg:inline">{phone.display}</span>
             </a>
-            <LangLink href={requestHref} className="btn btn-primary hidden whitespace-nowrap px-5 md:inline-flex">
+            <Button href={requestHref} className="hidden whitespace-nowrap px-5 md:inline-flex">
               {d.common.startRental}
-            </LangLink>
+            </Button>
             <button
               ref={menuButtonRef}
               type="button"
@@ -179,7 +181,7 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
               )}
             </button>
           </div>
-        </div>
+        </Container>
 
         <div
           id="mobile-menu"
@@ -187,7 +189,7 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
           className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-paper lg:hidden"
         >
           {/* Bottom padding on phones keeps the last items clear of the fixed Call bar. */}
-          <nav aria-label={d.nav.main} className="container-page pb-24 pt-3 md:pb-3">
+          <Container as="nav" aria-label={d.nav.main} className="pb-24 pt-3 md:pb-3">
             <ul>
               {navigation.map((link) => (
                 <li key={link.href}>
@@ -223,22 +225,16 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
               linkClassName="px-1 font-semibold text-ink transition-colors hover:text-brand aria-[current=page]:text-brand aria-[current=page]:underline aria-[current=page]:underline-offset-4"
             />
             <div className="grid grid-cols-2 gap-3 pb-3 pt-5">
-              <LangLink href={requestHref} onClick={closeMenu} className="btn btn-primary col-span-2">
+              <Button href={requestHref} onClick={closeMenu} className="col-span-2">
                 {d.common.startRental}
-              </LangLink>
-              <a href={phone.tel} className="btn btn-secondary">
-                <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-                {d.common.call}
-              </a>
-              <a href={phone.sms} className="btn btn-secondary">
-                <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-                {d.common.text}
-              </a>
+              </Button>
+              <PhoneButton kind="call" variant="secondary" />
+              <PhoneButton kind="text" />
             </div>
             <p className="pb-2 text-center text-sm text-ink-muted">
               {d.header.menuContact}
             </p>
-          </nav>
+          </Container>
         </div>
       </header>
     </>

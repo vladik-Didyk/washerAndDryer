@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { FileText } from "~/shared/ui";
+import { Container, FileText } from "~/shared/ui";
 import { ArticleBody } from "~/widgets/article-body";
 import { PageIntro } from "~/widgets/page-intro";
 import type { loader } from "../loader";
@@ -32,7 +32,7 @@ export default function LegalPage() {
       </PageIntro>
 
       <div className="border-t border-line bg-white">
-        <div className="container-page py-12 sm:py-14 lg:py-16">
+        <Container className="py-12 sm:py-14 lg:py-16">
           <div className="max-w-3xl">
             <ArticleBody sections={page.sections} />
             <p className="mt-14 border-t border-line pt-8 text-ink-soft">
@@ -45,7 +45,7 @@ export default function LegalPage() {
               })}
             </p>
           </div>
-        </div>
+        </Container>
       </div>
     </>
   );

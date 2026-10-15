@@ -1,9 +1,23 @@
 import { getMachineTypes, machinePath, type MachineType } from "~/entities/machine";
 import { usePrices } from "~/entities/offer";
-import { siteConfig } from "~/shared/config";
+import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
-import { Check, KeepWordsWhole, LangLink, LinkList, Phone, Ruler, WasPrice } from "~/shared/ui";
+import {
+  Button,
+  Card,
+  CheckList,
+  Container,
+  Heading,
+  KeepWordsWhole,
+  LangLink,
+  LinkList,
+  PhoneButton,
+  Ruler,
+  Section,
+  SectionHeader,
+  WasPrice,
+} from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { MachineShowcase } from "~/widgets/machine-showcase";
 import { PageIntro } from "~/widgets/page-intro";
@@ -35,12 +49,9 @@ function Compare() {
   const text = d.machines.index;
   const machineTypes = getMachineTypes(d);
   return (
-    <section aria-labelledby="compare-title" className="section">
-      <div className="container-page">
-        <h2 id="compare-title" className="h2">
-          {text.compareTitle}
-        </h2>
-        <p className="lead mt-4 max-w-2xl">{text.compareLead}</p>
+    <Section aria-labelledby="compare-title">
+      <Container>
+        <SectionHeader id="compare-title" title={text.compareTitle} lead={text.compareLead} leadClassName="mt-4 max-w-2xl" />
 
         <ul className="mt-8 space-y-3 md:hidden">
           {machineTypes.map((machine) => (
@@ -65,7 +76,7 @@ function Compare() {
           ))}
         </ul>
 
-        <div className="mt-10 hidden overflow-hidden rounded-3xl border border-line bg-white md:block">
+        <Card padding="none" className="mt-10 hidden overflow-hidden md:block">
           <table className="w-full text-left">
             <thead className="bg-brand-mint font-display text-[15px] text-ink">
               <tr>
@@ -102,9 +113,9 @@ function Compare() {
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-    </section>
+        </Card>
+      </Container>
+    </Section>
   );
 }
 
@@ -125,38 +136,19 @@ export default function MachinesPage() {
         <p className="lead mt-5 max-w-2xl">{text.lead}</p>
         <p className="mt-2 text-sm text-ink-muted">{d.common.pricesNote}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <LangLink href="/start/" className="btn btn-primary">
-            {d.common.startRental}
-          </LangLink>
-          <a href={phone.tel} className="btn btn-secondary">
-            <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
-            {d.common.callOrText}
-          </a>
+          <Button href={pagePaths.start}>{d.common.startRental}</Button>
+          <PhoneButton kind="call" variant="secondary" label={d.common.callOrText} />
         </div>
       </PageIntro>
 
       <MachineShowcase showAllLink={false} />
       <Compare />
 
-      <section
-        aria-labelledby="hookups-title"
-        className="section border-y border-line bg-white"
-      >
-        <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
+      <Section aria-labelledby="hookups-title" className="border-y border-line bg-white">
+        <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
-            <h2 id="hookups-title" className="h2">
-              {text.hookupsTitle}
-            </h2>
-            <ul className="mt-6 space-y-3">
-              {d.common.hookups.map((item) => (
-                <li key={item} className="flex gap-3 text-ink-soft">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold">
-                    <Check className="h-3.5 w-3.5 text-brand-dark" strokeWidth={3} aria-hidden="true" />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <Heading id="hookups-title">{text.hookupsTitle}</Heading>
+            <CheckList items={d.common.hookups} className="mt-6 space-y-3" />
             <p className="mt-6 text-ink-soft">
               {rich(d.common.textPhotoFits, {
                 phoneLink: (
@@ -168,12 +160,12 @@ export default function MachinesPage() {
             </p>
           </div>
           {guides.length > 0 && (
-            <div className="rounded-3xl border border-line bg-paper p-6 sm:p-8 lg:col-span-5 lg:self-start">
+            <Card tone="paper" className="lg:col-span-5 lg:self-start">
               <LinkList id="machine-guides-title" title={text.guidesTitle} links={guides} />
-            </div>
+            </Card>
           )}
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <CtaBand
         title={text.ctaTitle}

@@ -37,6 +37,7 @@ import {
 } from "~/shared/i18n";
 import { SiteProvider, torontoYear, type SiteState } from "~/shared/lib";
 import { headMeta, type PageHead } from "~/shared/seo";
+import { Container, Heading, Section } from "~/shared/ui";
 import { optionalPages } from "./catalog";
 import { SiteChrome, fontStylesheet, ogImage, type PageChrome } from "./chrome";
 import appStylesHref from "./app.css?url";
@@ -187,11 +188,9 @@ function ErrorMessage() {
   const { d, rich } = i18nOf(root);
   const { phone } = siteConfig;
   return (
-    <section aria-labelledby="hero-title" className="section">
-      <div className="container-page max-w-3xl">
-        <h1 id="hero-title" className="h2">
-          {d.error.title}
-        </h1>
+    <Section aria-labelledby="hero-title" nest={false}>
+      <Container className="max-w-3xl">
+        <Heading id="hero-title">{d.error.title}</Heading>
         <p className="lead mt-4">
           {rich(d.error.text, {
             phoneLink: (
@@ -201,7 +200,7 @@ function ErrorMessage() {
             ),
           })}
         </p>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

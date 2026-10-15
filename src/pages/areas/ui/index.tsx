@@ -2,7 +2,7 @@ import { AreaCard, cityPath, districtPath, getCities, getDistricts } from "~/ent
 import { PostalCodeChecker } from "~/features/postal-check";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { MapPin, MessageSquare } from "~/shared/ui";
+import { Card, Container, Heading, MapPin, PhoneButton, Section, SectionHeader } from "~/shared/ui";
 import { PageIntro } from "~/widgets/page-intro";
 import { StartRental } from "~/widgets/start-rental";
 
@@ -20,31 +20,22 @@ export default function AreasPage() {
         eyebrow={text.eyebrow}
         title={text.title}
         aside={
-          <div className="rounded-3xl bg-brand-mint p-6 sm:p-8">
-            <h2 className="font-display text-2xl font-bold text-ink">{text.checkTitle}</h2>
+          <Card tone="mint">
+            <Heading variant="card">{text.checkTitle}</Heading>
             <PostalCodeChecker className="mt-5" />
-          </div>
+          </Card>
         }
       >
         <p className="lead mt-5 max-w-2xl">{text.lead}</p>
         <p className="mt-4 font-display text-lg font-bold text-brand">{text.samePrice}</p>
         <p className="mt-1 text-sm text-ink-muted">{d.common.pricesNote}</p>
         <p className="mt-3 text-ink-soft">{text.fartherText}</p>
-        <a href={phone.sms} className="btn btn-secondary mt-6">
-          <MessageSquare className="h-[18px] w-[18px]" aria-hidden="true" />
-          {d.common.textPhone}
-        </a>
+        <PhoneButton kind="text" label={d.common.textPhone} className="mt-6" />
       </PageIntro>
 
-      <section
-        aria-labelledby="toronto-title"
-        className="section border-y border-line bg-white"
-      >
-        <div className="container-page">
-          <h2 id="toronto-title" className="h2">
-            {text.torontoTitle}
-          </h2>
-          <p className="lead mt-4 max-w-3xl">{text.torontoLead}</p>
+      <Section aria-labelledby="toronto-title" className="border-y border-line bg-white">
+        <Container>
+          <SectionHeader id="toronto-title" title={text.torontoTitle} lead={text.torontoLead} leadClassName="mt-4 max-w-3xl" />
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <AreaCard href={cityPath(toronto)} name={toronto.name} label={text.wholeCity} teaser={toronto.teaser} />
             {getDistricts(d).map((district) => (
@@ -57,15 +48,12 @@ export default function AreasPage() {
               />
             ))}
           </ul>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      <section aria-labelledby="gta-title" className="section">
-        <div className="container-page">
-          <h2 id="gta-title" className="h2">
-            {text.aroundTitle}
-          </h2>
-          <p className="lead mt-4 max-w-3xl">{text.aroundLead}</p>
+      <Section aria-labelledby="gta-title">
+        <Container>
+          <SectionHeader id="gta-title" title={text.aroundTitle} lead={text.aroundLead} leadClassName="mt-4 max-w-3xl" />
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {otherCities.map((city) => (
               <AreaCard key={city.slug} href={cityPath(city)} name={city.name} teaser={city.teaser} />
@@ -80,8 +68,8 @@ export default function AreasPage() {
               ),
             })}
           </p>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <StartRental />
     </>

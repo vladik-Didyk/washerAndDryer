@@ -1,7 +1,7 @@
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
 import { useI18n } from "~/shared/i18n";
 import { FormFields, SubmitButton, type FieldErrors } from "~/shared/forms";
-import { ArrowRight } from "~/shared/ui";
+import { ArrowRight, Card } from "~/shared/ui";
 import type { detailsAction } from "../actions.server";
 import type { detailsLoader } from "../loaders.server";
 import { STEP_PATHS } from "../model";
@@ -25,14 +25,14 @@ export function DetailsStep() {
       intro={<p>{rich(text.intro, { machine: <strong className="font-semibold text-ink">{machine}</strong> })}</p>}
       backHref={STEP_PATHS.machine}
     >
-      <Form method="post" noValidate className="rounded-3xl border border-line bg-white p-5 sm:p-8">
+      <Card as={Form} method="post" noValidate padding="form">
         <div className="grid gap-5 sm:grid-cols-2">
           <FormFields form="startDetails" values={values} errors={errors} />
         </div>
         <SubmitButton sending={busy} next icon={ArrowRight}>
           {text.next}
         </SubmitButton>
-      </Form>
+      </Card>
     </StepShell>
   );
 }

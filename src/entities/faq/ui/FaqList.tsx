@@ -1,4 +1,4 @@
-import { ArrowRight, LangLink } from "~/shared/ui";
+import { ArrowRight, Card, Heading, LangLink, Nest, Section } from "~/shared/ui";
 import { useSite } from "~/shared/lib";
 import type { FaqGroup } from "../data";
 
@@ -19,22 +19,20 @@ export function FaqList({ groups }: { groups: FaqGroup[] }) {
   return (
     <div className="max-w-4xl space-y-14">
       {groups.map((group) => (
-        <section key={group.id} id={group.id} aria-labelledby={`${group.id}-title`}>
-          <h2 id={`${group.id}-title`} className="h2">
-            {group.title}
-          </h2>
-          <div className="mt-6 divide-y divide-line rounded-3xl border border-line bg-paper px-5 sm:px-8">
+        <Section key={group.id} id={group.id} aria-labelledby={`${group.id}-title`} padded={false}>
+          <Heading id={`${group.id}-title`}>{group.title}</Heading>
+          <Card tone="paper" padding="none" className="mt-6 divide-y divide-line px-5 sm:px-8">
             {group.items.map((faq) => (
               <div key={faq.id} id={faq.id} className="py-6">
-                <h3 className="font-display text-[17px] font-semibold leading-snug text-ink sm:text-lg">
-                  {faq.question}
-                </h3>
+                <Nest>
+                  <Heading variant="question">{faq.question}</Heading>
+                </Nest>
                 <p className="mt-2 max-w-prose leading-relaxed text-ink-soft">{faq.answer}</p>
                 <AnswerLink link={faq.link} />
               </div>
             ))}
-          </div>
-        </section>
+          </Card>
+        </Section>
       ))}
     </div>
   );

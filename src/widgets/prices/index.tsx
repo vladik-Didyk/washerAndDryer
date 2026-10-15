@@ -1,18 +1,14 @@
 import { promotionText, useActivePromotions, usePrices, type PriceInfo } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
-import { Check, LangLink, WasPrice } from "~/shared/ui";
+import { pagePaths } from "~/shared/config";
+import { Button, Card, CheckList, Container, DotList, Heading, Nest, Section, WasPrice } from "~/shared/ui";
 
 function PriceCard({ title, price, highlighted = false }: { title: string; price: PriceInfo; highlighted?: boolean }) {
   const { d, moneyParts } = useI18n();
   const tag = moneyParts(price.current);
   return (
-    <article
-      // The ring thickens the highlighted border without shifting the card's content.
-      className={`flex flex-col rounded-3xl border bg-white p-6 sm:p-8 ${
-        highlighted ? "border-brand ring-2 ring-brand" : "border-line"
-      }`}
-    >
-      <h3 className="font-display text-xl font-bold text-ink">{title}</h3>
+    <Card as="article" tone={highlighted ? "highlight" : "white"} className="flex flex-col">
+      <Heading variant="cardSmall">{title}</Heading>
       <p className="mt-3 flex items-baseline gap-1">
         <span className="font-display text-6xl font-extrabold tracking-tight text-brand">
           {tag.currency}
@@ -24,21 +20,12 @@ function PriceCard({ title, price, highlighted = false }: { title: string; price
       <p className="mt-1 text-sm font-medium text-ink-muted">{d.common.priceTagNote}</p>
 
       <p className="mt-6 font-display text-[15px] font-semibold text-ink">{d.home.prices.included}</p>
-      <ul className="mt-3 space-y-3">
-        {d.home.prices.includedItems.map((item) => (
-          <li key={item} className="flex gap-3 text-pretty text-ink-soft">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold">
-              <Check className="h-3.5 w-3.5 text-brand-dark" strokeWidth={3} aria-hidden="true" />
-            </span>
-            {item}
-          </li>
-        ))}
-      </ul>
+      <CheckList items={d.home.prices.includedItems} className="mt-3 space-y-3" itemClassName="text-pretty text-ink-soft" />
 
-      <LangLink href="/start/" className={`btn mt-8 w-full ${highlighted ? "btn-primary" : "btn-secondary"}`}>
+      <Button href={pagePaths.start} variant={highlighted ? "primary" : "secondary"} className="mt-8 w-full">
         {d.common.startRental}
-      </LangLink>
-    </article>
+      </Button>
+    </Card>
   );
 }
 
@@ -49,15 +36,15 @@ export function Prices() {
   const promotions = useActivePromotions();
 
   return (
-    <section id="prices" aria-labelledby="prices-title" className="section">
-      <div className="container-page">
-        <h2 id="prices-title" className="h2">
-          {d.home.prices.title}
-        </h2>
+    <Section id="prices" aria-labelledby="prices-title">
+      <Container>
+        <Heading id="prices-title">{d.home.prices.title}</Heading>
 
         <div className="mt-10 grid max-w-5xl gap-5 md:grid-cols-2 md:gap-6">
-          <PriceCard title={d.home.prices.set} price={prices.set} highlighted />
-          <PriceCard title={d.home.prices.single} price={prices.single} />
+          <Nest>
+            <PriceCard title={d.home.prices.set} price={prices.set} highlighted />
+            <PriceCard title={d.home.prices.single} price={prices.single} />
+          </Nest>
         </div>
 
         {/* The running promotions drop out when they end (decided per request, entities/offer). */}
@@ -75,15 +62,13 @@ export function Prices() {
           </p>
         </div>
 
-        <ul className="mt-6 grid max-w-5xl gap-x-6 gap-y-2 text-sm leading-relaxed text-ink-muted md:grid-cols-2">
-          {d.home.prices.terms.map((term) => (
-            <li key={term} className="flex gap-2.5">
-              <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-              {term}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+        <DotList
+          items={d.home.prices.terms}
+          className="mt-6 grid max-w-5xl gap-x-6 gap-y-2 text-sm leading-relaxed text-ink-muted md:grid-cols-2"
+          itemClassName="flex gap-2.5"
+          bullet="mt-2 h-1.5 w-1.5"
+        />
+      </Container>
+    </Section>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus } from "~/shared/ui";
+import { Heading, Plus } from "~/shared/ui";
 import type { Faq } from "../data";
 
 function FaqItem({
@@ -18,7 +18,7 @@ function FaqItem({
 
   return (
     <div>
-      <h3>
+      <Heading variant="none">
         <button
           id={buttonId}
           type="button"
@@ -36,7 +36,7 @@ function FaqItem({
             />
           </span>
         </button>
-      </h3>
+      </Heading>
       {/* Closed answers are inert: hidden from screen readers and keyboard, still animatable. */}
       <div
         id={panelId}
@@ -53,7 +53,8 @@ function FaqItem({
   );
 }
 
-// Questions that open one at a time (any number open). All closed in the server HTML.
+// Questions that open one at a time (any number open). All closed in the server HTML. Each
+// question is a heading at the level where the list stands (wrap it in Nest under a title).
 export function FaqAccordion({ items, className = "" }: { items: Faq[]; className?: string }) {
   const [openItems, setOpenItems] = useState<Set<number>>(() => new Set());
 
