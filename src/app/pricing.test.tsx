@@ -2,6 +2,7 @@
 // or add a promotion, and the rendered pages, titles, JSON-LD and llms.txt follow.
 import type { ReactNode } from "react";
 import { renderToString } from "react-dom/server";
+import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it } from "vitest";
 import { offerFacts } from "~/entities/offer";
 import HomePage from "~/pages/home/ui";
@@ -27,18 +28,21 @@ afterEach(() => {
   promotions.splice(0, promotions.length, ...originalPromotions);
 });
 
-// A page as the root renders it: the text and the site state of one moment.
+// A page as the root renders it (inside a router, for its links): the text and the site
+// state of one moment.
 function render(page: ReactNode, { lang = "en", now = TEST_NOW }: { lang?: Lang; now?: number } = {}) {
   const i18n = createI18n(lang, offerFacts(now));
   const site = { now, year: torontoYear(now), optionalPages: {}, draftPages: [], stripePortalUrl: null };
   return renderToString(
-    <I18nProvider value={i18n}>
-      <SiteProvider value={site}>
-        <OfferBar />
-        {page}
-        <Footer />
-      </SiteProvider>
-    </I18nProvider>,
+    <MemoryRouter>
+      <I18nProvider value={i18n}>
+        <SiteProvider value={site}>
+          <OfferBar />
+          {page}
+          <Footer />
+        </SiteProvider>
+      </I18nProvider>
+    </MemoryRouter>,
   ).replaceAll("<!-- -->", "");
 }
 

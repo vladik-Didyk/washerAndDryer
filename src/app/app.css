@@ -78,9 +78,14 @@
     @apply font-semibold text-brand underline decoration-brand/30 decoration-2 underline-offset-4 transition-colors hover:decoration-brand;
   }
 
-  /* Buttons: pill shape, 48px tall minimum for touch */
+  /* Buttons: pill shape, 48px tall minimum for touch; they press in a little when tapped */
   .btn {
-    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-center font-display text-base font-semibold leading-tight transition-colors duration-150;
+    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-center font-display text-base font-semibold leading-tight transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.97];
+  }
+
+  /* A card that is a link: it presses in a little too */
+  .press {
+    @apply active:scale-[0.98];
   }
 
   .btn-primary {
@@ -135,5 +140,41 @@
 
   .skip-link {
     @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:font-semibold focus:text-white;
+  }
+}
+
+/* Motion. Only for people who haven't turned motion off, and only where the browser can do
+   it; everyone else gets the same page, standing still. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Sections rise into place as they scroll into view, driven by the scroll itself (no
+     script): the content, not the band behind it. The first section (the page's top) is
+     already in view and stays put. */
+  @supports (animation-timeline: view()) {
+    main > section:not(:first-of-type) > * {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+
+  /* Pages cross-fade (router links ask for a view transition); the header stays put. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 200ms;
+  }
+
+  header {
+    view-transition-name: site-header;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

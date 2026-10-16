@@ -1,4 +1,5 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { Link } from "react-router";
 import { siteConfig } from "../config/site";
 import { DEFAULT_LANG, isEnglishOnly, useI18n } from "../i18n";
 import { MessageSquare, Phone } from "./icons";
@@ -8,15 +9,26 @@ import { Card } from "./layout";
 // on a Spanish page "/faq/" becomes "/es/faq/"; tel:, sms:, https: and #anchors stay as they
 // are. A page that exists in English only (the policies) keeps its English address and gets a
 // short "Available in English" note, so nobody is surprised by the language change.
-// Plain <a> elements: every page works without JavaScript.
+// A link to a page of this site in this language is a router <Link>: once the page has
+// loaded, the next one comes without a full reload (faster, the spinning logo shows while it
+// loads, and the pages cross-fade). It still renders a plain <a href>, so every page works
+// without JavaScript. Other links (another language, tel:, #anchors) stay plain <a>.
 
 export type LangLinkProps = ComponentPropsWithoutRef<"a"> & { href: string };
 
 export function LangLink({ href, children, ...rest }: LangLinkProps) {
   const i18n = useI18n();
   const englishOnly = i18n.lang !== DEFAULT_LANG && isEnglishOnly(href);
+  const target = i18n.href(href);
+  if (href.startsWith("/") && !englishOnly && !rest.target && !rest.download) {
+    return (
+      <Link to={target} prefetch="intent" viewTransition {...rest}>
+        {children}
+      </Link>
+    );
+  }
   return (
-    <a href={i18n.href(href)} {...(englishOnly ? { hrefLang: DEFAULT_LANG } : {})} {...rest}>
+    <a href={target} {...(englishOnly ? { hrefLang: DEFAULT_LANG } : {})} {...rest}>
       {children}
       {englishOnly && (
         <span className="font-normal">

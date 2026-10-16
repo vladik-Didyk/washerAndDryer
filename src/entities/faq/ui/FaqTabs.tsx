@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import { useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
 import {
@@ -44,21 +45,18 @@ export function FaqTabs({ groups }: { groups: FaqGroup[] }) {
   // null until hydrated: every group shows (the server HTML), then one tab at a time.
   const [active, setActive] = useState<string | null>(null);
   const [open, setOpen] = useState<string | null>(null);
+  // The hash, from the router: a link to /faq/#… from this page doesn't reload it.
+  const { hash } = useLocation();
 
   useEffect(() => {
-    const fromHash = () => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
-      const group = groups.find((g) => g.id === id || g.items.some((item) => item.id === id));
-      setActive(group?.id ?? groups[0]?.id ?? null);
-      if (group && group.id !== id) {
-        setOpen(id);
-        requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "center" }));
-      }
-    };
-    fromHash();
-    window.addEventListener("hashchange", fromHash);
-    return () => window.removeEventListener("hashchange", fromHash);
-  }, [groups]);
+    const id = decodeURIComponent(hash.slice(1));
+    const group = groups.find((g) => g.id === id || g.items.some((item) => item.id === id));
+    setActive(group?.id ?? groups[0]?.id ?? null);
+    if (group && group.id !== id) {
+      setOpen(id);
+      requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "center" }));
+    }
+  }, [groups, hash]);
 
   return (
     <div>
