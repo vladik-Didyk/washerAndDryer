@@ -1,5 +1,5 @@
 import { useI18n } from "~/shared/i18n";
-import { Carousel, Container, Heading, Photo, Section } from "~/shared/ui";
+import { Carousel, Container, CtaRow, Heading, Photo, Section } from "~/shared/ui";
 
 // /buildings/ and /landlords/: a carousel of shared laundry rooms (Unsplash examples,
 // docs/photo-credits.md). Two in view on tablets, three on desktops, one and a peek on phones.
@@ -38,6 +38,7 @@ export function SharedRooms() {
             />
           ))}
         </Carousel>
+        <CtaRow goal="quote" />
       </Container>
     </Section>
   );

@@ -3,7 +3,7 @@ import { usePrices } from "~/entities/offer";
 import { ViewSwitch, useMachineView } from "~/features/view-switch";
 import { useI18n } from "~/shared/i18n";
 import { pagePaths } from "~/shared/config";
-import { Container, LangLink, Section, SectionHeader } from "~/shared/ui";
+import { Container, CtaRow, LangLink, Section, SectionHeader } from "~/shared/ui";
 import { TypesAnimation } from "./TypesAnimation";
 
 // The five types as photo cards, each linking to its page. A Drawings/Photos switch swaps every
@@ -57,6 +57,7 @@ export function MachineShowcase({ showAllLink = true, compact = false }: { showA
             </LangLink>
           )}
         </div>
+        <CtaRow />
       </Container>
     </Section>
   );

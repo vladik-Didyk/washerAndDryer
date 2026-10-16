@@ -32,7 +32,7 @@
     outline-offset: 3px;
   }
 
-  /* Dark green sections: a gold ring stays visible there */
+  /* Blue and navy sections: a sunshine ring stays visible there */
   .on-dark :focus-visible {
     outline-color: theme("colors.gold.DEFAULT");
   }
@@ -101,7 +101,7 @@
     @apply bg-gold text-ink hover:bg-gold-dark;
   }
 
-  /* Secondary button on dark green or on a photo under a dark overlay */
+  /* Secondary button on blue or navy, or on a photo under a dark overlay */
   .btn-outline-light {
     @apply border-2 border-white/85 text-white hover:bg-white hover:text-brand-dark;
   }

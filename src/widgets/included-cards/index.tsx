@@ -1,5 +1,5 @@
 import { useI18n } from "~/shared/i18n";
-import { Container, Heading, Nest, Photo, Section } from "~/shared/ui";
+import { Container, CtaRow, Heading, Nest, Photo, Section } from "~/shared/ui";
 
 // Three photo cards under the home hero: what every rental includes. The photos are
 // examples (Unsplash, docs/photo-credits.md).
@@ -34,6 +34,7 @@ export function IncludedCards() {
             );
           })}
         </ul>
+        <CtaRow />
       </Container>
     </Section>
   );

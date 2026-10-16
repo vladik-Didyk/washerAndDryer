@@ -1,5 +1,5 @@
 import { useI18n } from "~/shared/i18n";
-import { Carousel, Container, Heading, Photo, Section } from "~/shared/ui";
+import { Carousel, Container, CtaRow, Heading, Photo, Section } from "~/shared/ui";
 
 // Home page: a carousel of laundry spaces (Unsplash examples, docs/photo-credits.md) with a
 // short caption each: three in view on desktops, one and a bit of the next on phones.
@@ -44,6 +44,7 @@ export function RoomsCarousel() {
             </figure>
           ))}
         </Carousel>
+        <CtaRow />
       </Container>
     </Section>
   );

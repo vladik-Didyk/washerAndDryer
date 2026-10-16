@@ -1,7 +1,7 @@
 import { TYPE_CARD_SIZES_4UP, TypeCard, findMachine } from "~/entities/machine";
 import { usePrices } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
-import { Container, Heading, Section } from "~/shared/ui";
+import { Container, CtaRow, Heading, Section } from "~/shared/ui";
 
 // "Machines that usually fit here": a photo card per type with the reason, linking to the type
 // page. `fits` is [{ machine: slug, note }]. The photos are examples, and the line under the
@@ -29,6 +29,7 @@ export function MachineFits({ title, fits }: { title: string; fits: Array<{ mach
             ) : null;
           })}
         </ul>
+        <CtaRow />
       </Container>
     </Section>
   );

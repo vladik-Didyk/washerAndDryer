@@ -32,3 +32,4 @@ export {
 export * from "./icons";
 export { Carousel } from "./Carousel";
 export { Fold } from "./Fold";
+export { CtaRow } from "./CtaRow";

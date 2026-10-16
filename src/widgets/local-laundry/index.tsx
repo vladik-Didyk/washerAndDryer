@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { Card, Container, DotList, Fold, Heading, LangLink, MapPin, Nest, Section } from "~/shared/ui";
+import { Card, Container, CtaRow, DotList, Fold, Heading, LangLink, MapPin, Nest, Section } from "~/shared/ui";
 
 // Local detail for a city or district page: the neighbourhoods we deliver to, what to check
 // before calling, and what homes are like there (folded: still on the page for search). `neighbourhoodLinks` maps a neighbourhood name
@@ -68,6 +68,7 @@ export function LocalLaundry({
             })}
           </p>
         </Card>
+        <CtaRow />
       </Container>
     </Section>
   );

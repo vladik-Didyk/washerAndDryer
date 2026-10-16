@@ -1,7 +1,7 @@
 import { useI18n } from "~/shared/i18n";
-import { Container, FileText, Heading, Nest, Ruler, Section, Truck, Wrench, type LucideIcon } from "~/shared/ui";
+import { Container, CtaRow, FileText, Heading, Nest, Ruler, Section, Truck, Wrench, type LucideIcon } from "~/shared/ui";
 
-// The four steps of renting, on the brand-green band (home, city and machine pages): one icon
+// The four steps of renting, on the blue band (home, city and machine pages): one icon
 // and a few words each. The details are on the FAQ page.
 const STEP_ICONS: LucideIcon[] = [Ruler, FileText, Truck, Wrench];
 
@@ -38,6 +38,7 @@ export function HowItWorks() {
             );
           })}
         </ol>
+        <CtaRow tone="dark" align="center" />
       </Container>
     </Section>
   );
