@@ -2,7 +2,7 @@ import { useI18n } from "~/shared/i18n";
 import { Carousel, Container, Heading, Photo, Section } from "~/shared/ui";
 
 // Home page: a carousel of laundry spaces (Unsplash examples, docs/photo-credits.md) with a
-// short caption each: three in view on desktops, one on phones. It moves on by itself.
+// short caption each: three in view on desktops, one and a bit of the next on phones.
 const PHOTOS = [
   "rooms/stacked-small-room",
   "rooms/washer-shelves",
@@ -28,10 +28,9 @@ export function RoomsCarousel() {
       <Container className="mt-8">
         <Carousel
           label={rooms.title}
-          auto
-          controls="below"
+          className="[--arrow-top:calc(50%-1.25rem)]"
           trackClassName="-mx-2 gap-0 rounded-3xl"
-          slideClassName="px-2 md:w-1/2 lg:w-1/3"
+          slideClassName="w-[85%] px-2 md:w-1/2 lg:w-1/3"
         >
           {PHOTOS.map((name) => (
             <figure key={name}>

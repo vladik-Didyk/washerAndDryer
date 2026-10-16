@@ -2,7 +2,7 @@ import { useI18n } from "~/shared/i18n";
 import { Carousel, Container, Heading, Photo, Section } from "~/shared/ui";
 
 // /buildings/ and /landlords/: a carousel of shared laundry rooms (Unsplash examples,
-// docs/photo-credits.md). Two in view on tablets, three on desktops; it moves on by itself.
+// docs/photo-credits.md). Two in view on tablets, three on desktops, one and a peek on phones.
 const PHOTOS = [
   "shared/stacked-dryers-tiles",
   "shared/washers-and-dryers-rows",
@@ -25,10 +25,8 @@ export function SharedRooms() {
       <Container className="mt-8">
         <Carousel
           label={sharedRooms.title}
-          auto
-          controls="below"
           trackClassName="-mx-2 rounded-3xl"
-          slideClassName="px-2 md:w-1/2 lg:w-1/3"
+          slideClassName="w-[85%] px-2 md:w-1/2 lg:w-1/3"
         >
           {PHOTOS.map((name) => (
             <Photo

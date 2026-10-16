@@ -37,7 +37,7 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
 
   return (
     <figure className={className}>
-      <div className="relative">
+      <div>
         <Carousel label={d.machines.galleryLabel} index={shown} onChange={setShown} trackClassName={`${frame} rounded-3xl`}>
           {photos.map((item, index) => (
             <Photo
@@ -50,14 +50,6 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
             />
           ))}
         </Carousel>
-        {photos.length > 1 && (
-          <p
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-16 right-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-semibold text-white"
-          >
-            {format(d.machines.galleryCounter, { index: shown + 1, count: photos.length })}
-          </p>
-        )}
       </div>
 
       {photos.length > 1 && (
