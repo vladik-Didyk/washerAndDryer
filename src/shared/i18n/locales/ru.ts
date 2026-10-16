@@ -15,6 +15,7 @@ const ru: DeepPartial<Dictionary> = {
   },
 
   common: {
+    moreDetails: "Подробнее",
     carousel: {
       previous: "Предыдущий слайд",
       next: "Следующий слайд",
@@ -603,6 +604,7 @@ const ru: DeepPartial<Dictionary> = {
       ctaText: "Пришлите фото места на {phoneSpan}, и мы скажем, что подойдёт.",
     },
     page: {
+      measureTip: "Измерьте ширину, высоту и глубину места, а также дверные проёмы на пути.",
       summaryTitle: "Цена и что в неё входит",
       forSet: "За комплект из стиральной и сушильной машины.",
       forSingle: "За одну машину: стиральную или сушильную.",
@@ -1131,12 +1133,13 @@ const ru: DeepPartial<Dictionary> = {
       aroundLead: "На запад — в регион Peel, на север — в регион York.",
     },
     page: {
+      mapLabel: "{place} на карте районов доставки",
+      aboutHomes: "Жильё: {place}",
       cityEyebrow: "{place} · {company}",
       districtEyebrow: "{place} · Торонто",
       title: "Аренда стиральной и сушильной машины: {place}",
       priceLabel: "в неделю за комплект из стиральной и сушильной машины",
       otherPrice: "или {singlePrice} в неделю за одну машину",
-      photoCaption: "Пример фото: {title}. Ваша машина может быть другой марки.",
       otherAreasLabel: "Другие районы",
       torontoDistricts: "Районы Торонто",
       otherAreas: "Другие районы, где мы работаем",

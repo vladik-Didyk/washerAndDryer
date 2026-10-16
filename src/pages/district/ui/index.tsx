@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router";
-import { YORK_REGION, cityPath, districtPath, findDistrict, getCities, getDistricts } from "~/entities/area";
+import { AreaMap, YORK_REGION, cityPath, districtPath, findDistrict, getCities, getDistricts } from "~/entities/area";
 import { usePrices } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
 import { pagePaths } from "~/shared/config";
@@ -42,7 +42,13 @@ export default function DistrictPage() {
         eyebrow={format(text.districtEyebrow, { place: district.name })}
         title={format(text.title, { place: district.name })}
         intro={district.intro}
-        photo={district.photo}
+        visual={
+          <AreaMap
+            label={format(text.mapLabel, { place: district.name })}
+            highlight="toronto"
+            pin={{ at: district.pin, label: district.name }}
+          />
+        }
         price={money(prices.set.current)}
         wasPrice={<WasPrice price={prices.set} className="font-display text-lg font-bold text-ink-muted" />}
         priceLabel={text.priceLabel}

@@ -15,6 +15,7 @@ const es: DeepPartial<Dictionary> = {
   },
 
   common: {
+    moreDetails: "Más detalles",
     carousel: {
       previous: "Imagen anterior",
       next: "Imagen siguiente",
@@ -619,6 +620,7 @@ const es: DeepPartial<Dictionary> = {
       ctaText: "Envíe una foto del espacio al {phoneSpan} y le decimos qué máquina cabe.",
     },
     page: {
+      measureTip: "Mida el ancho, la altura y la profundidad de su espacio, y las puertas por donde pasará la máquina.",
       summaryTitle: "Precio y qué incluye",
       forSet: "Por el juego de lavadora y secadora.",
       forSingle: "Por una máquina: una lavadora o una secadora.",
@@ -1148,12 +1150,13 @@ const es: DeepPartial<Dictionary> = {
       aroundLead: "Al oeste, la región de Peel; al norte, la región de York.",
     },
     page: {
+      mapLabel: "{place} en el mapa de las zonas donde entregamos",
+      aboutHomes: "Las viviendas en {place}",
       cityEyebrow: "{place} · {company}",
       districtEyebrow: "{place} · Toronto",
       title: "Alquiler de lavadora y secadora en {place}",
       priceLabel: "por semana un juego de lavadora y secadora",
       otherPrice: "o {singlePrice} por semana una sola máquina",
-      photoCaption: "Foto de ejemplo: {title}. Su máquina puede ser de otra marca.",
       otherAreasLabel: "Otras zonas",
       torontoDistricts: "Distritos de Toronto",
       otherAreas: "Otras zonas donde damos servicio",

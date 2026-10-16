@@ -4,8 +4,8 @@
 // the dictionary (shared/i18n areas.cities / areas.districts). Local detail stays generally
 // true and non-promissory: no claims about installs done, customers or buildings served.
 //
-// `photo` is the example photo in the page header: one of the machine type photos in
-// entities/machine, a different one for each area, picked to match the homes described.
+// A district's `pin` is where it sits on the drawn service map (ui/AreaMap, the page header):
+// a rough spot inside Toronto, not a survey point.
 // A district's `fits` lists the machine types that usually suit its homes (the reasons are in
 // the dictionary); `regionNote` marks York (the former city), which is not York Region.
 import { siteConfig } from "~/shared/config";
@@ -15,35 +15,26 @@ type CitySlug = (typeof siteConfig.serviceAreas.cities)[number];
 type DistrictSlug = (typeof siteConfig.serviceAreas.torontoDistricts)[number];
 type FitSlug = keyof Dictionary["machines"]["types"];
 
-const cityPhotos: Record<CitySlug, string> = {
-  toronto: "photos/types/stackable.jpg",
-  mississauga: "photos/types/stackable-1.jpg",
-  brampton: "photos/types/side-by-side-front-load-2.jpg",
-  vaughan: "photos/types/side-by-side-top-load-1.jpg",
-  markham: "photos/types/side-by-side-front-load-1.jpg",
-  "richmond-hill": "photos/types/side-by-side-top-load.jpg",
-};
-
-const districtFacts: Record<DistrictSlug, { photo: string; fits: FitSlug[]; regionNote?: boolean }> = {
+const districtFacts: Record<DistrictSlug, { pin: [x: number, y: number]; fits: FitSlug[]; regionNote?: boolean }> = {
   "north-york": {
-    photo: "photos/types/stackable-1.jpg",
+    pin: [420, 196],
     fits: ["stackable", "laundry-centre", "side-by-side-top-load", "single-machine"],
   },
   etobicoke: {
-    photo: "photos/types/side-by-side-front-load.jpg",
+    pin: [262, 250],
     fits: ["stackable", "side-by-side-front-load", "side-by-side-top-load", "single-machine"],
   },
   scarborough: {
-    photo: "photos/types/side-by-side-top-load-1.jpg",
+    pin: [580, 204],
     fits: ["side-by-side-top-load", "side-by-side-front-load", "laundry-centre", "single-machine"],
   },
   "east-york": {
-    photo: "photos/types/side-by-side-top-load-2.jpg",
+    pin: [500, 238],
     fits: ["side-by-side-top-load", "stackable", "laundry-centre", "single-machine"],
   },
   // Not York Region: Vaughan, Markham and Richmond Hill have their own pages.
   york: {
-    photo: "photos/types/side-by-side-front-load-2.jpg",
+    pin: [360, 244],
     fits: ["side-by-side-front-load", "side-by-side-top-load", "stackable", "single-machine"],
     regionNote: true,
   },
@@ -52,11 +43,12 @@ const districtFacts: Record<DistrictSlug, { photo: string; fits: FitSlug[]; regi
 // The York Region cities (the note on the York page).
 export const YORK_REGION: string[] = ["vaughan", "markham", "richmond-hill"];
 
-export type City = Dictionary["areas"]["cities"][CitySlug] & { slug: CitySlug; photo: string };
+export type City = Dictionary["areas"]["cities"][CitySlug] & { slug: CitySlug };
+export type { CitySlug };
 
 export interface District extends Omit<Dictionary["areas"]["districts"][DistrictSlug], "fits"> {
   slug: DistrictSlug;
-  photo: string;
+  pin: [x: number, y: number];
   regionNote: boolean;
   fits: Array<{ machine: FitSlug; note: string }>;
 }
@@ -68,7 +60,7 @@ const builtDistricts = new WeakMap<Dictionary, District[]>();
 export function getCities(d: Dictionary): City[] {
   let list = builtCities.get(d);
   if (!list) {
-    list = siteConfig.serviceAreas.cities.map((slug) => ({ ...d.areas.cities[slug], slug, photo: cityPhotos[slug] }));
+    list = siteConfig.serviceAreas.cities.map((slug) => ({ ...d.areas.cities[slug], slug }));
     builtCities.set(d, list);
   }
   return list;
@@ -85,7 +77,7 @@ export function getDistricts(d: Dictionary): District[] {
       return {
         ...text,
         slug,
-        photo: facts.photo,
+        pin: facts.pin,
         regionNote: facts.regionNote ?? false,
         fits: facts.fits.map((machine) => ({ machine, note: notes[machine] ?? "" })),
       };

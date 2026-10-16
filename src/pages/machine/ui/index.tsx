@@ -7,11 +7,13 @@ import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
 import {
+  BadgeCheck,
   Button,
   Card,
   CheckList,
   Container,
   Eyebrow,
+  Fold,
   Gift,
   Heading,
   KeepWordsWhole,
@@ -19,14 +21,16 @@ import {
   LinkList,
   MapPin,
   PhoneButton,
+  Ruler,
   Section,
   SectionHeader,
+  Truck,
   WasPrice,
+  Wrench,
 } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { HowItWorks } from "~/widgets/how-it-works";
 import { StartRental } from "~/widgets/start-rental";
-import { TrustStrip } from "~/widgets/trust-strip";
 import type { loader } from "../loader";
 
 const MEASURE_GUIDE = "/guides/measure-your-laundry-space/";
@@ -135,6 +139,74 @@ function SpecsTable({ machine }: { machine: MachineType }) {
   );
 }
 
+// Four short facts with icons under the header: the type's typical width, then what every
+// rental includes.
+function MachineFacts({ machine }: { machine: MachineType }) {
+  const { d } = useI18n();
+  const { trust } = d.home;
+  const items = [
+    { Icon: Ruler, label: d.machines.animation.widths[machine.slug] },
+    { Icon: Wrench, label: trust.repairs },
+    { Icon: Truck, label: trust.sameWeek },
+    { Icon: BadgeCheck, label: trust.noCreditCheck },
+  ];
+  return (
+    <Section aria-label={trust.label} padded={false} className="border-y border-line bg-white">
+      <Container as="ul" className="grid grid-cols-2 gap-x-4 gap-y-5 py-6 lg:grid-cols-4">
+        {items.map(({ Icon, label }) => (
+          <li key={label} className="flex items-center gap-3 font-display text-[15px] font-semibold leading-tight text-ink sm:text-base">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-mint text-brand">
+              <Icon className="h-5 w-5" aria-hidden="true" />
+            </span>
+            {label}
+          </li>
+        ))}
+      </Container>
+    </Section>
+  );
+}
+
+// The type's drawing with its typical width marked under it, and the typical sizes as a short
+// list (only the sizes the type's text gives: the width, and the height where we know it).
+function SizeDiagram({ machine }: { machine: MachineType }) {
+  const { d } = useI18n();
+  const text = d.machines.page;
+  return (
+    <figure>
+      <div className="rounded-3xl bg-brand-mint px-6 pb-6 pt-8">
+        <img
+          src={`/${machine.drawing}`}
+          alt=""
+          width={400}
+          height={480}
+          className="mx-auto h-56 w-auto sm:h-64"
+        />
+        <div aria-hidden="true" className="mx-auto mt-3 flex max-w-[16rem] items-center gap-2 text-brand">
+          <span className="h-3 w-0.5 bg-brand" />
+          <span className="h-0.5 flex-1 bg-brand" />
+          <span className="whitespace-nowrap font-display text-sm font-bold">{d.machines.animation.widths[machine.slug]}</span>
+          <span className="h-0.5 flex-1 bg-brand" />
+          <span className="h-3 w-0.5 bg-brand" />
+        </div>
+      </div>
+      <figcaption className="mt-4">
+        <dl className="space-y-2">
+          {machine.sizes.map((row) => (
+            <div key={row.label} className="flex gap-3">
+              <dt className="w-28 shrink-0 font-display font-semibold text-ink">{row.label}</dt>
+              <dd className="text-ink-soft">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-4 flex gap-2 text-sm text-ink-muted">
+          <Ruler className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+          {text.measureTip}
+        </p>
+      </figcaption>
+    </figure>
+  );
+}
+
 // /machines/<slug>/: photos and price first, then sizes, what the type is, how renting works,
 // the other types, and the way to start a rental.
 export default function MachinePage() {
@@ -181,16 +253,16 @@ export default function MachinePage() {
         </Container>
       </Section>
 
-      <TrustStrip />
+      <MachineFacts machine={machine} />
 
       <Section id="specs" aria-labelledby="specs-title">
         <Container>
-          <SectionHeader id="specs-title" title={text.specsTitle} lead={text.specsLead} leadClassName="mt-4 max-w-2xl" />
+          <SectionHeader id="specs-title" title={text.specsTitle} />
         </Container>
         <Container className="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-12">
-          <Card padding="none" className="px-5 sm:px-8 lg:col-span-7">
-            <SpecsTable machine={machine} />
-          </Card>
+          <div className="lg:col-span-7">
+            <SizeDiagram machine={machine} />
+          </div>
 
           <Card tone="mint" className="lg:col-span-5 lg:self-start">
             <Heading variant="cardSmall">{text.fitTitle}</Heading>
@@ -213,25 +285,26 @@ export default function MachinePage() {
       </Section>
 
       <Section id="details" aria-labelledby="details-title" className="border-y border-line bg-white">
-        <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-7">
-            <Heading id="details-title">{text.whatItIs}</Heading>
+        <Container className="max-w-4xl">
+          <Heading id="details-title">{text.whoItFits}</Heading>
+          <CheckList items={page.fits} className="mt-5 space-y-3 text-ink-soft" itemClassName="" />
+
+          <Fold className="mt-10">
+            <Heading variant="card">{text.whatItIs}</Heading>
             {page.whatItIs.map((paragraph) => (
-              <p key={paragraph} className="lead mt-4">
+              <p key={paragraph} className="mt-3 leading-relaxed text-ink-soft">
                 {paragraph}
               </p>
             ))}
-
-            <Heading variant="card" className="mt-12">
+            <Heading variant="card" className="mt-8">
               {text.size}
             </Heading>
-            <p className="mt-4 leading-relaxed text-ink-soft">{page.size}</p>
-          </div>
-
-          <Card tone="paper" className="lg:col-span-5 lg:self-start">
-            <Heading variant="cardSmall">{text.whoItFits}</Heading>
-            <CheckList items={page.fits} className="mt-4 space-y-3 text-ink-soft" itemClassName="" />
-          </Card>
+            <p className="mt-3 leading-relaxed text-ink-soft">{page.size}</p>
+            <p className="mt-3 text-ink-soft">{text.specsLead}</p>
+            <div className="mt-4">
+              <SpecsTable machine={machine} />
+            </div>
+          </Fold>
         </Container>
       </Section>
 

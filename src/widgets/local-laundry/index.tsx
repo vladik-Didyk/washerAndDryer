@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { Card, Container, DotList, Heading, LangLink, MapPin, Nest, Section } from "~/shared/ui";
+import { Card, Container, DotList, Fold, Heading, LangLink, MapPin, Nest, Section } from "~/shared/ui";
 
-// Local detail for a city or district page: what homes are like there, the neighbourhoods we
-// deliver to, and what to check before calling. `neighbourhoodLinks` maps a neighbourhood name
+// Local detail for a city or district page: the neighbourhoods we deliver to, what to check
+// before calling, and what homes are like there (folded: still on the page for search). `neighbourhoodLinks` maps a neighbourhood name
 // to its own page (Toronto's districts). `children` go above the text (e.g. a note).
 export function LocalLaundry({
   area,
@@ -25,11 +25,6 @@ export function LocalLaundry({
         <div className="lg:col-span-7">
           {children}
           <Heading id="local-title">{format(text.localTitle, { place: area.name })}</Heading>
-          {area.homes.map((paragraph) => (
-            <p key={paragraph} className="lead mt-4">
-              {paragraph}
-            </p>
-          ))}
           <Nest>
             <Heading variant="item" className="mt-8">
               {format(text.localAreas, { place: area.name })}
@@ -49,6 +44,13 @@ export function LocalLaundry({
               </li>
             ))}
           </ul>
+          <Fold label={format(text.aboutHomes, { place: area.name })} className="mt-8">
+            {area.homes.map((paragraph) => (
+              <p key={paragraph} className="mt-3 leading-relaxed text-ink-soft first:mt-0">
+                {paragraph}
+              </p>
+            ))}
+          </Fold>
         </div>
 
         <Card tone="paper" className="lg:col-span-5 lg:self-start">

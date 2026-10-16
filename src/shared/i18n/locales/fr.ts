@@ -20,6 +20,7 @@ const fr: DeepPartial<Dictionary> = {
   },
 
   common: {
+    moreDetails: "Plus de détails",
     carousel: {
       previous: "Image précédente",
       next: "Image suivante",
@@ -611,6 +612,7 @@ const fr: DeepPartial<Dictionary> = {
       ctaText: "Envoyez une photo de l'espace par texto au {phoneSpan} et nous vous dirons ce qui convient.",
     },
     page: {
+      measureTip: "Mesurez la largeur, la hauteur et la profondeur de votre espace, ainsi que les portes sur le passage.",
       summaryTitle: "Prix et ce qui est inclus",
       forSet: "Pour l'ensemble laveuse et sécheuse.",
       forSingle: "Pour un appareil : une laveuse ou une sécheuse.",
@@ -1141,12 +1143,13 @@ const fr: DeepPartial<Dictionary> = {
       aroundLead: "À l'ouest dans la région de Peel et au nord dans la région de York.",
     },
     page: {
+      mapLabel: "{place} sur la carte des secteurs desservis",
+      aboutHomes: "Les logements à {place}",
       cityEyebrow: "{place} · {company}",
       districtEyebrow: "{place} · Toronto",
       title: "Location de laveuse et sécheuse à {place}",
       priceLabel: "par semaine pour un ensemble laveuse et sécheuse",
       otherPrice: "ou {singlePrice} par semaine pour un appareil",
-      photoCaption: "Photo d'exemple : {title}. Votre appareil peut être d'une autre marque.",
       otherAreasLabel: "Autres secteurs",
       torontoDistricts: "Districts de Toronto",
       otherAreas: "Autres secteurs desservis",

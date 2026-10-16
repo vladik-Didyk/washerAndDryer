@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router";
-import { cityPath, districtPath, findCity, getCities, getDistricts } from "~/entities/area";
+import { AreaMap, cityPath, districtPath, findCity, getCities, getDistricts } from "~/entities/area";
 import { usePrices } from "~/entities/offer";
 import { useI18n } from "~/shared/i18n";
 import { pagePaths } from "~/shared/config";
@@ -39,7 +39,7 @@ export default function CityPage() {
         eyebrow={format(text.cityEyebrow, { place: city.name })}
         title={format(text.title, { place: city.name })}
         intro={city.intro}
-        photo={city.photo}
+        visual={<AreaMap label={format(text.mapLabel, { place: city.name })} highlight={city.slug} />}
         price={money(prices.set.current)}
         wasPrice={<WasPrice price={prices.set} className="font-display text-lg font-bold text-ink-muted" />}
         priceLabel={text.priceLabel}

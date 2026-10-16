@@ -24,6 +24,7 @@ const en = {
   },
 
   common: {
+    moreDetails: "More details",
     // Carousel controls (shared/ui Carousel).
     carousel: {
       previous: "Previous slide",
@@ -648,6 +649,7 @@ const en = {
     },
     // /machines/<slug>/
     page: {
+      measureTip: "Measure the width, height and depth of your space, and the doorways on the way in.",
       summaryTitle: "Price and what's included",
       forSet: "For the washer and dryer set.",
       forSingle: "For one machine: a washer or a dryer.",
@@ -1186,12 +1188,13 @@ const en = {
     },
     // City and district pages.
     page: {
+      mapLabel: "{place} on the map of the areas we deliver to",
+      aboutHomes: "Homes in {place}",
       cityEyebrow: "{place} · {company}",
       districtEyebrow: "{place} · Toronto",
       title: "Washer & dryer rental in {place}",
       priceLabel: "a week for a washer + dryer set",
       otherPrice: "or {singlePrice} a week for one machine",
-      photoCaption: "Example photo: {title}. Your machine may be a different brand.",
       otherAreasLabel: "Other areas",
       torontoDistricts: "Toronto districts",
       otherAreas: "Other areas we serve",
