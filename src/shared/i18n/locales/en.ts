@@ -58,17 +58,17 @@ const en = {
     hoursSentence: "Mon–Sat {opens} – {closes}. Sunday closed.",
     hoursList: ["Mon–Sat: {opens} – {closes}", "Sunday: closed"],
     preferCallOrText: "Prefer to call or text?",
-    closetPhotoHelps: "A photo of the closet helps. You can text it to us.",
+    closetPhotoHelps: "A closet photo helps. Text it to us.",
     fartherAwayAsk: "Farther away? Ask us.",
-    fartherAwayCall: "Farther away? Call or text {phoneLink} and ask.",
+    fartherAwayCall: "Farther away? Call or text {phoneLink}.",
     allAreas: "All areas",
     compareAllTypes: "Compare all machine types",
     compareTypes: "Compare the machine types",
     examplePhotosNote:
-      "Photos are examples of each type, not our machines. Brand and model depend on what's available.",
-    textPhotoFits: "Not sure what you have? Text a photo of the space to {phoneLink} and we'll tell you what fits.",
+      "Example photos, not our machines. Brand and model depend on what's available.",
+    textPhotoFits: "Not sure what fits? Text a photo of the space to {phoneLink}. We'll tell you.",
     readyToRent: "Ready to rent?",
-    readyToRentText: "Tell us your area and your laundry space. We reply with the machine, the total and the start date.",
+    readyToRentText: "Send your area and your space. We reply with the machine, the total and the start date.",
     measureGuide: "How to measure your laundry space",
     howItWorks: "How it works",
     opensInNewTab: "(opens in a new tab)",
@@ -85,7 +85,7 @@ const en = {
     // How we work: confirmed facts only.
     howWeWork: [
       "We check each machine before it goes out.",
-      "We connect the water, drain, power and vent properly.",
+      "We hook up the water, drain, power and vent properly.",
       "We run a test cycle before we leave.",
       "We answer calls in English, Spanish and Russian.",
     ],
@@ -195,16 +195,16 @@ const en = {
       "first-week-free": {
         short: "First week free until {firstWeekFreeEndShort}",
         title: "First week free",
-        text: "New customers who start a rental by {firstWeekFreeEnd} pay no rent for the first week. It applies to washer and dryer sets and to single machines.",
+        text: "New customers who start a rental by {firstWeekFreeEnd} pay no rent for the first week. Sets and single machines both qualify.",
         stillPaid: "The {deposit} deposit and the delivery are still paid.",
         // Beside a price (machine type pages): the rent only.
-        note: "New customers who start by {firstWeekFreeEnd} pay no rent for the first week. The deposit and delivery are still paid.",
+        note: "New customers: start by {firstWeekFreeEnd} and pay no rent the first week. Deposit and delivery still apply.",
       },
     },
     referral: {
       short: "Refer a friend, get {referralAmount}",
       title: "Refer a friend",
-      text: "You get {referralAmount} when a friend you refer signs up for {referralMonths} months or more.",
+      text: "Get {referralAmount} when a friend you refer signs up for {referralMonths} months or more.",
     },
   },
 
@@ -421,22 +421,22 @@ const en = {
           metaDescription:
             "Rent a stackable washer and dryer in Toronto and the GTA for {setPrice} a week. Fits narrow closets. Repairs and old-machine haul-away included.",
           h1: "Stackable washer & dryer rental",
-          intro: "A front-load washer with the dryer on top: two full machines on the floor space of one.",
+          intro: "Washer below, dryer on top. Two full machines in the space of one.",
           whatItIs: [
-            "A stackable pair is a front-load washer and a matching dryer mounted on top of it with a stacking kit. You get two separate machines, each with its own controls, standing in one column.",
-            "Because only one machine touches the floor, a stackable pair fits closets where two machines side by side never would.",
+            "A front-load washer with a matching dryer mounted on top by a stacking kit. Two separate machines, each with its own controls, in one column.",
+            "Only one machine touches the floor. It fits closets where a side-by-side pair never would.",
           ],
           fits: [
             "Condo and apartment laundry closets",
-            "Narrow spaces with enough height for two machines, one above the other",
-            "Anyone who wants a front-load washer but has room for only one footprint",
+            "Narrow spaces tall enough for two machines",
+            "You want front-load but have room for one footprint",
           ],
-          size: "Compact stackable pairs are usually about 24 inches (61 cm) wide; full-size ones about 27 inches (69 cm). Measure the width, depth and height of the space, and the door you have to bring them through. Leave a few inches behind for the hoses and the dryer vent.",
+          size: "Compact pairs are usually about 24 inches (61 cm) wide; full-size ones about 27 inches (69 cm). Measure the width, depth and height, plus the door they come through. Leave a few inches behind for the hoses and the vent.",
         },
       },
       "laundry-centre": {
         title: "One-piece laundry centre",
-        description: "Washer and dryer in one unit. The usual condo-closet machine.",
+        description: "Washer and dryer in one unit. The usual condo-closet pick.",
         priceNote: "for the set",
         alt: "One-piece laundry centre: a dryer above a top-load washer in one cabinet",
         compare: {
@@ -458,17 +458,17 @@ const en = {
           metaDescription:
             "Rent a one-piece laundry centre (washer and dryer in one unit) in Toronto and the GTA for {setPrice} a week. 24″ or 27″ wide. Repairs included.",
           h1: "Laundry centre rental: washer & dryer in one unit",
-          intro: "A top-load washer and a dryer built into one cabinet. One machine to deliver, one footprint to fit.",
+          intro: "Top-load washer below, dryer above, one cabinet. One footprint to fit.",
           whatItIs: [
-            "A laundry centre is a single appliance with a top-load washer at the bottom and a dryer at the top. The controls for both sit on one panel.",
-            "Many condo closets were built around this machine, so it is often the simplest swap when an old unit needs replacing.",
+            "One appliance: a top-load washer at the bottom, a dryer on top. One panel runs both.",
+            "Many condo closets were built for this machine. It's often the easiest swap for an old unit.",
           ],
           fits: [
             "Condo closets built for a one-piece unit",
-            "Small laundry spaces with one set of water, drain and power hookups",
-            "People who prefer loading the washer from the top",
+            "Small spaces with one set of water, drain and power hookups",
+            "Anyone who likes loading from the top",
           ],
-          size: "Laundry centres come 24 or 27 inches (61 or 69 cm) wide. A 24-inch unit is about 70 inches (178 cm) tall. Measure the closet width and height, and check the depth with the doors closed.",
+          size: "Laundry centres come 24 or 27 inches (61 or 69 cm) wide. A 24-inch unit is about 70 inches (178 cm) tall. Measure the closet width and height. Check the depth with the doors closed.",
         },
       },
       "side-by-side-front-load": {
@@ -499,17 +499,17 @@ const en = {
             "Rent a side-by-side front-load washer and dryer in Toronto and the GTA for {setPrice} a week. Full-size drums for big loads. Repairs included.",
           h1: "Side-by-side front-load washer & dryer rental",
           intro:
-            "A front-load washer and a matching dryer standing next to each other. Full-size drums, a flat top to fold on.",
+            "A front-load washer and matching dryer, side by side. Full-size drums and a flat top for folding.",
           whatItIs: [
-            "Two separate full-size machines, both loading from the front, placed side by side. The tops stay free, so they double as a folding counter.",
-            "Front-load washers tumble the laundry through a small amount of water, which suits large loads like bedding and towels.",
+            "Two full-size front-loaders, side by side. The tops stay free, so you get a folding counter.",
+            "Front-loaders tumble laundry through a little water. That suits big loads like bedding and towels.",
           ],
           fits: [
-            "Houses with a laundry room or a basement laundry area",
+            "Houses with a laundry room or basement laundry area",
             "Bigger households that wash often",
-            "Spaces with room in front for both doors to swing open",
+            "Spaces with room for both doors to swing open",
           ],
-          size: "Full-size machines are usually about 27 inches (69 cm) wide each, so plan for roughly 55 inches (140 cm) of width plus a little space between and around them. Check that both doors can open fully.",
+          size: "Full-size machines are usually about 27 inches (69 cm) wide each. Plan for about 55 inches (140 cm), plus a little space around them. Make sure both doors open fully.",
         },
       },
       "side-by-side-top-load": {
@@ -538,22 +538,22 @@ const en = {
             "Rent a top-load washer and matching dryer in Toronto and the GTA for {setPrice} a week. Simple to use, less bending. Repairs and haul-away included.",
           h1: "Side-by-side top-load washer & dryer rental",
           intro:
-            "The classic pair: a top-load washer with a matching dryer next to it. Simple controls, less bending.",
+            "The classic pair: a top-load washer and a matching dryer. Simple controls, less bending.",
           whatItIs: [
-            "A top-load washer opens with a lid on top, so you load it standing up. The dryer next to it loads from the front.",
-            "Top-loaders have simple controls and a wide opening, which makes heavy, wet laundry easy to lift out.",
+            "The washer opens from the top, so you load it standing up. The dryer loads from the front.",
+            "Simple controls and a wide opening. Heavy, wet laundry lifts out easily.",
           ],
           fits: [
             "Basements and laundry rooms with open space above the washer",
             "Anyone who would rather not bend down to load the washer",
             "Households that want a simple, familiar machine",
           ],
-          size: "Full-size machines are usually about 27 inches (69 cm) wide each, so plan for roughly 55 inches (140 cm) of width. The washer lid needs clear space above it to open, so a low shelf over the washer can get in the way.",
+          size: "Full-size machines are usually about 27 inches (69 cm) wide each. Plan for about 55 inches (140 cm). The lid needs clear space above it, so a low shelf can get in the way.",
         },
       },
       "single-machine": {
         title: "Washer or dryer only",
-        description: "One machine to pair with the one you already have.",
+        description: "One machine. Pair it with the one you have.",
         priceNote: "for one machine",
         alt: "One washer next to the dashed outline of a machine you already have",
         compare: {
@@ -572,17 +572,17 @@ const en = {
           metaDescription:
             "Rent just a washer or just a dryer in Toronto and the GTA for {singlePrice} a week. Pair it with the machine you have. Repairs included.",
           h1: "Washer or dryer rental: one machine",
-          intro: "Just a washer or just a dryer, to pair with the machine you already have.",
+          intro: "Just a washer or just a dryer. Pair it with the machine you have.",
           whatItIs: [
-            "If one of your machines still works, you don't need a whole set. Rent the one you're missing, for half the price of a set.",
-            "Tell us what the other machine is (front-load or top-load, and its width) and we look for one that sits well next to it.",
+            "One machine still works? Skip the full set. Rent the one you're missing for half the price of a set.",
+            "Tell us about your other machine: front-load or top-load, and its width. We find one that sits well beside it.",
           ],
           fits: [
-            "Your washer broke but the dryer still works, or the other way round",
-            "You moved into a place that has only one machine",
+            "Your washer broke but the dryer works, or the other way round",
+            "Your new place has only one machine",
             "You want a washer now and a dryer later",
           ],
-          size: "Most full-size machines are about 27 inches (69 cm) wide; compact ones about 24 inches (61 cm). If you are renting a dryer to stack on your washer, tell us the washer's brand and model so we can check that they stack.",
+          size: "Most full-size machines are about 27 inches (69 cm) wide; compact ones about 24 inches (61 cm). Stacking a dryer on your washer? Send us the washer's brand and model so we can check they stack.",
         },
       },
     },
@@ -600,8 +600,8 @@ const en = {
       drawings: "Drawings",
     },
     showcase: {
-      title: "Find the type that fits your space",
-      lead: "Tell us your closet size and outlet type. We find a machine that fits, check it, deliver it and hook it up.",
+      title: "Pick the type that fits",
+      lead: "Send your closet size and outlet type. We find a machine that fits, check it, deliver it and hook it up.",
       photosNote: "Photos are examples of each type, not our machines. ",
       drawingsNote: "Drawings show the type, not a specific machine. ",
       availabilityNote: "Brand and model depend on what's available.",
@@ -623,10 +623,10 @@ const en = {
     index: {
       eyebrow: "Five types, two prices",
       title: "Washer & dryer types we rent",
-      lead: "Any washer and dryer set is {setPrice} a week. One machine on its own is {singlePrice} a week. Every type comes with repairs and old-machine haul-away included.",
+      lead: "Any set is {setPrice} a week. One machine is {singlePrice} a week. Repairs and old-machine haul-away always included.",
       compareTitle: "Compare the types",
       compareLead:
-        "Widths are typical; the exact size depends on the machine we have for you. Tell us your measurements and we check them first.",
+        "Widths are typical; yours depends on the machine we have. Send your measurements and we check them first.",
       columns: {
         type: "Type",
         width: "Width",
@@ -642,11 +642,11 @@ const en = {
         outlet: "3-prong or 4-prong dryer outlet?",
       },
       ctaTitle: "Not sure which type fits?",
-      ctaText: "Text a photo of the space to {phoneSpan} and we'll tell you what fits.",
+      ctaText: "Text a photo of the space to {phoneSpan}. We'll tell you what fits.",
     },
     // /machines/<slug>/
     page: {
-      measureTip: "Measure the width, height and depth of your space, and the doorways on the way in.",
+      measureTip: "Measure your space's width, height and depth, plus every doorway on the way in.",
       summaryTitle: "Price and what's included",
       forSet: "For the washer and dryer set.",
       forSingle: "For one machine: a washer or a dryer.",
@@ -657,16 +657,16 @@ const en = {
         "No credit check",
       ],
       terms: "{deposit} refundable deposit. {minWeeks}-week minimum, then week to week.",
-      needOne: "Need only one machine? {singlePrice} a week.",
-      needBoth: "Need both? A washer + dryer set is {setPrice} a week.",
+      needOne: "Only need one machine? {singlePrice} a week.",
+      needBoth: "Need both? Get the set for {setPrice} a week.",
       specsTitle: "Sizes and hookups",
-      specsLead: "Typical sizes. The exact size depends on the machine we have for you, so we check your measurements first.",
+      specsLead: "Typical sizes. Yours depends on the machine we have, so we check your measurements first.",
       specsCaption: "Typical sizes and hookups: {title}",
       loadsFrom: "Washer loads from",
       goodFor: "Good for",
       hookupsNeeded: "Hookups needed",
       fitTitle: "Not sure it fits?",
-      fitText: "Text a photo of the space to {phoneLink} and we'll check.",
+      fitText: "Text a photo of the space to {phoneLink}. We'll check.",
       whatItIs: "What it is",
       size: "Size",
       whoItFits: "Who it fits",
@@ -685,38 +685,38 @@ const en = {
       repairs: {
         eyebrow: "Repairs included",
         title: "If it breaks, we fix it",
-        text: "Repairs, or a replacement machine, at no charge for as long as you rent.",
-        cta: "How repairs work",
+        text: "Repairs or a replacement machine, at no charge, for as long as you rent.",
+        cta: "See how repairs work",
       },
       buildings: {
         eyebrow: "For buildings",
-        title: "Machines for your building's laundry room",
-        text: "We supply, install and repair the machines. Quoted per building after we see the room.",
-        cta: "Laundry rooms",
+        title: "Laundry room machines for buildings",
+        text: "We supply, install and repair them. Quoted per building after we see the room.",
+        cta: "See laundry rooms",
       },
     },
     // Three photo cards under the hero (widgets/included-cards).
     included: {
-      title: "What's included",
+      title: "Every rental includes",
       items: [
         {
           title: "Delivered and installed",
-          text: "We connect the water, drain, power and vent, and run a test cycle before we leave.",
+          text: "We hook up the water, drain, power and vent. Then we run a test cycle.",
         },
         {
           title: "Repairs included",
-          text: "If a machine stops working, we repair it or replace it at no charge.",
+          text: "Machine stops working? We repair or replace it at no charge.",
         },
         {
           title: "Old machine taken away",
-          text: "We take your old machine with us at no charge.",
+          text: "We haul your old machine away at no charge.",
         },
       ],
     },
     // The laundry-room photo carousel (widgets/rooms-carousel): captions by file name.
     rooms: {
-      title: "A machine for every kind of space",
-      lead: "Closets, condos, basements and laundry rooms: example photos of the spaces our machine types fit.",
+      title: "A machine for every space",
+      lead: "Closets, condos, basements, laundry rooms. Example photos of spaces our machine types fit.",
       captions: {
         "rooms/stacked-small-room": "A stackable pair in a narrow room",
         "rooms/washer-shelves": "One washer between the shelves",
@@ -733,7 +733,7 @@ const en = {
       // The line above the heading (the Spanish and Russian home pages: "We speak Spanish").
       eyebrow: "Local Toronto business",
       title: "Washer & dryer rental in Toronto & the GTA",
-      priceSummary: "{setPrice} a week for the set, or {singlePrice} a week for one machine.",
+      priceSummary: "{setPrice} a week for the set. {singlePrice} a week for one machine.",
       aWeek: "a week",
       forTheSet: "for the set",
       orSingle: "or {price} for one machine",
@@ -757,7 +757,7 @@ const en = {
       ],
     },
     prices: {
-      title: "Prices",
+      title: "Weekly prices",
       perWeek: "a week",
       forSet: "washer + dryer set",
       orSingle: "or {price} a week for one machine",
@@ -770,9 +770,9 @@ const en = {
     },
     landlordsTeaser: {
       title: "Landlord or building?",
-      text: "Machines for your units, or for your building's laundry room. Repairs included.",
-      link: "Laundry for landlords",
-      buildingsLink: "Laundry rooms",
+      text: "Machines for your units or your laundry room. Repairs included.",
+      link: "See landlord options",
+      buildingsLink: "See laundry rooms",
     },
     about: {
       title: "About us",
@@ -781,21 +781,21 @@ const en = {
         "{experienceYears}+ years fixing washers and dryers",
         "We speak {languages}",
       ],
-      more: "More about us",
+      more: "Read more about us",
     },
     serviceArea: {
-      title: "Service area",
-      allAreas: "All areas we deliver to",
+      title: "Where we deliver",
+      allAreas: "See all areas",
       mapLabel: "Map of the areas we deliver to",
       lake: "Lake Ontario",
     },
     faq: {
       title: "FAQ",
-      another: "Another question? Call or text {phoneLink}.",
-      all: "All questions and answers",
+      another: "More questions? Call or text {phoneLink}.",
+      all: "See all questions",
     },
     cta: {
-      title: "A washer and dryer for {setPrice} a week",
+      title: "Get a set for {setPrice} a week",
       text: "Repairs included. No HST charged.",
     },
     startRental: {
@@ -806,7 +806,7 @@ const en = {
         "Your space",
         "How to reach you",
       ],
-      nothingToPay: "Nothing to pay now. We confirm the machine, the total and the start date first.",
+      nothingToPay: "Pay nothing now. We confirm the machine, the total and the start date first.",
     },
   },
 
@@ -816,17 +816,17 @@ const en = {
     cities: {
       toronto: {
         name: "Toronto",
-        teaser: "The whole city: downtown, midtown, the east and west ends and the five districts.",
+        teaser: "The whole city: downtown, midtown, east and west ends, and all five districts.",
         metaTitle: "Washer & Dryer Rental Toronto | {setPrice}/week, Repairs Incl.",
         metaDescription:
           "Washer and dryer rental in Toronto, North York, Etobicoke, Scarborough, East York and York: {setPrice} a week for a set, {singlePrice} for one machine.",
         intro:
-          "We rent washers and dryers across the City of Toronto, including North York, Etobicoke, Scarborough, East York and York.",
+          "We rent washers and dryers across Toronto, including North York, Etobicoke, Scarborough, East York and York.",
         neighbourhoods: ["North York", "Etobicoke", "Scarborough", "East York", "York"],
         homes: [
-          "A lot of Toronto lives in condos and apartments. Condo laundry closets are usually narrow, so a 24-inch stackable pair or a one-piece laundry centre is the common fit.",
-          "Most condo buildings ask you to book the service elevator for a delivery. Book a slot with your building and tell us the time.",
-          "Houses with a basement laundry room usually have space for a side-by-side pair.",
+          "Many Torontonians live in condos and apartments. Condo closets are usually narrow. A 24-inch stackable pair or a one-piece laundry centre is the common fit.",
+          "Most condos ask you to book the service elevator for delivery. Book a slot and send us the time.",
+          "A house with a basement laundry room usually fits a side-by-side pair.",
         ],
         checklist: [
           "Closet width, depth and height, and the width of the closet door",
@@ -837,12 +837,12 @@ const en = {
       },
       mississauga: {
         name: "Mississauga",
-        teaser: "Condos around City Centre and the lakeshore, houses and townhouses elsewhere.",
+        teaser: "Condos by City Centre and the lakeshore. Houses and townhouses elsewhere.",
         metaTitle: "Washer & Dryer Rental Mississauga | {setPrice}/week",
         metaDescription:
           "Washer and dryer rental in Mississauga: {setPrice} a week for a set, {singlePrice} for one machine. Repairs and old-machine haul-away included. No credit check.",
         intro:
-          "We rent washers and dryers across Mississauga, from Port Credit to Meadowvale and from Malton to Erin Mills.",
+          "We rent washers and dryers across Mississauga, from Port Credit to Meadowvale, Malton to Erin Mills.",
         neighbourhoods: [
           "City Centre",
           "Port Credit",
@@ -854,8 +854,8 @@ const en = {
           "Malton",
         ],
         homes: [
-          "Mississauga mixes condo towers, around the City Centre and along the lakeshore, with houses and townhouses in neighbourhoods like Meadowvale, Erin Mills and Churchill Meadows.",
-          "In a condo, look at a stackable pair or a one-piece laundry centre. In a house or townhouse laundry room, a side-by-side pair often fits.",
+          "Mississauga has condo towers around City Centre and the lakeshore. Meadowvale, Erin Mills and Churchill Meadows are mostly houses and townhouses.",
+          "Condo? Look at a stackable pair or a one-piece laundry centre. House or townhouse? A side-by-side pair often fits.",
         ],
         checklist: [
           "Where the laundry is: closet, laundry room or basement",
@@ -866,7 +866,7 @@ const en = {
       },
       brampton: {
         name: "Brampton",
-        teaser: "Mostly houses and townhouses, with the laundry in the basement or on the main floor.",
+        teaser: "Mostly houses and townhouses. Laundry in the basement or on the main floor.",
         metaTitle: "Washer & Dryer Rental Brampton | {setPrice}/week",
         metaDescription:
           "Washer and dryer rental in Brampton: {setPrice} a week for a washer and dryer set, {singlePrice} for one machine. Repairs included. Call {phone}.",
@@ -882,8 +882,8 @@ const en = {
           "Castlemore",
         ],
         homes: [
-          "Most homes in Brampton are detached houses, semi-detached houses and townhouses. The laundry is often in the basement or on the main floor, where a full-size side-by-side pair usually fits.",
-          "Renting a basement unit? Check with your landlord which water, drain and power hookups you can use. Text us a photo and we'll tell you what fits.",
+          "Most Brampton homes are detached, semi-detached or townhouses. Laundry is often in the basement or on the main floor. A full-size side-by-side pair usually fits.",
+          "Renting a basement unit? Ask your landlord which water, drain and power hookups you can use. Text us a photo and we'll tell you what fits.",
         ],
         checklist: [
           "Which hookups you can use, if you rent a basement unit",
@@ -894,7 +894,7 @@ const en = {
       },
       vaughan: {
         name: "Vaughan",
-        teaser: "Woodbridge, Maple, Concord and Kleinburg, plus newer condos near Vaughan Metropolitan Centre.",
+        teaser: "Woodbridge, Maple, Concord, Kleinburg. Newer condos near Vaughan Metropolitan Centre.",
         metaTitle: "Washer & Dryer Rental Vaughan | {setPrice}/week",
         metaDescription:
           "Washer and dryer rental in Vaughan, Woodbridge, Maple and Concord: {setPrice} a week for a set, {singlePrice} for one machine. Repairs included.",
@@ -910,8 +910,8 @@ const en = {
           "Vaughan Metropolitan Centre",
         ],
         homes: [
-          "Much of Vaughan is houses with a full laundry room, where a side-by-side pair, front-load or top-load, fits well.",
-          "There are also newer condo towers, especially around the Vaughan Metropolitan Centre. New condo closets are often built for a 24-inch stackable pair or a one-piece unit.",
+          "Much of Vaughan is houses with a full laundry room. A side-by-side pair, front-load or top-load, fits well.",
+          "Vaughan also has newer condo towers, especially around Vaughan Metropolitan Centre. Their closets are often built for a 24-inch stackable pair or a one-piece unit.",
         ],
         checklist: [
           "Front-load or top-load: which do you prefer?",
@@ -922,7 +922,7 @@ const en = {
       },
       markham: {
         name: "Markham",
-        teaser: "Townhouses and houses in Unionville and Cornell, condos along Highway 7.",
+        teaser: "Townhouses and houses in Unionville and Cornell. Condos along Highway 7.",
         metaTitle: "Washer & Dryer Rental Markham | {setPrice}/week",
         metaDescription:
           "Washer and dryer rental in Markham and Unionville: {setPrice} a week for a set, {singlePrice} for one machine. Repairs and haul-away included. No credit check.",
@@ -938,8 +938,8 @@ const en = {
           "Thornhill (Markham side)",
         ],
         homes: [
-          "Markham has many townhouses and stacked townhouses, as well as condos around Downtown Markham and Highway 7.",
-          "In a townhouse the laundry is often in a closet upstairs or in the basement. Stairs change the delivery, so tell us how many flights there are and how tight the turns are.",
+          "Markham has many townhouses and stacked townhouses, plus condos around Downtown Markham and Highway 7.",
+          "Townhouse laundry is often in an upstairs closet or the basement. Stairs change the delivery. Tell us how many flights, and how tight the turns.",
         ],
         checklist: [
           "Which floor the laundry is on, and how many flights of stairs",
@@ -950,7 +950,7 @@ const en = {
       },
       "richmond-hill": {
         name: "Richmond Hill",
-        teaser: "Houses from Oak Ridges to Langstaff, condo towers along Yonge Street.",
+        teaser: "Houses from Oak Ridges to Langstaff. Condo towers along Yonge Street.",
         metaTitle: "Washer & Dryer Rental Richmond Hill | {setPrice}/week",
         metaDescription:
           "Washer and dryer rental in Richmond Hill and Oak Ridges: {setPrice} a week for a set, {singlePrice} for one machine. Repairs included. Call {phone}.",
@@ -958,8 +958,8 @@ const en = {
           "We rent washers and dryers across Richmond Hill, including Oak Ridges, Mill Pond, Bayview Hill, Richvale and Jefferson.",
         neighbourhoods: ["Oak Ridges", "Mill Pond", "Bayview Hill", "Richvale", "Jefferson", "Langstaff", "Elgin Mills"],
         homes: [
-          "Richmond Hill homes run from detached houses with basement laundry rooms to condo towers along Yonge Street and near Highway 7.",
-          "In a house, a side-by-side pair usually fits. In a condo closet, look at a stackable pair or a one-piece laundry centre.",
+          "Richmond Hill runs from detached houses with basement laundry to condo towers on Yonge Street and near Highway 7.",
+          "House? A side-by-side pair usually fits. Condo closet? Look at a stackable pair or a one-piece laundry centre.",
         ],
         checklist: [
           "House or condo, and where the laundry is",
@@ -976,7 +976,7 @@ const en = {
         metaTitle: "Washer & Dryer Rental North York, Toronto | {setPrice}/week",
         metaDescription:
           "Rent a washer and dryer in North York, from Willowdale and Don Mills to Downsview: {setPrice} a week for a set, {singlePrice} for one machine. Repairs included.",
-        teaser: "Condo towers along Yonge Street, houses with basement laundry on the side streets.",
+        teaser: "Condo towers on Yonge Street. Houses with basement laundry on the side streets.",
         intro:
           "We rent washers and dryers across North York, from Willowdale and Bayview Village to Don Mills, Downsview and Bathurst Manor.",
         neighbourhoods: [
@@ -992,8 +992,8 @@ const en = {
           "Newtonbrook",
         ],
         homes: [
-          "North York has two kinds of laundry space. Along Yonge Street, especially around North York Centre and Sheppard Avenue, many people live in condo towers, where the laundry is a closet inside the suite. Off the main streets, many homes are houses with the laundry in the basement.",
-          "There are also many older rental apartment buildings. Some of them have a shared laundry room and no washer or dryer hookups in the units, so check with your landlord before you book.",
+          "North York has two kinds of laundry space. Along Yonge Street, especially near North York Centre and Sheppard Avenue, many people live in condos with an in-suite laundry closet. Off the main streets, many homes are houses with basement laundry.",
+          "There are also many older rental apartment buildings. Some have a shared laundry room and no hookups in the units. Check with your landlord before you book.",
         ],
         fits: {
           stackable: "Narrow, tall condo closets near Yonge Street and Sheppard Avenue.",
@@ -1013,9 +1013,9 @@ const en = {
         metaTitle: "Washer & Dryer Rental Etobicoke, Toronto | {setPrice}/week",
         metaDescription:
           "Rent a washer and dryer in Etobicoke, from Humber Bay Shores and Mimico to Rexdale: {setPrice} a week for a set, {singlePrice} for one machine. Haul-away included.",
-        teaser: "Lakeshore condos, houses with basement laundry rooms, and apartment buildings.",
+        teaser: "Lakeshore condos, houses with basement laundry, and apartment buildings.",
         intro:
-          "We rent washers and dryers across Etobicoke, from the lakeshore at Humber Bay Shores, Mimico and Long Branch up to Islington Village and Rexdale.",
+          "We rent washers and dryers across Etobicoke, from Humber Bay Shores, Mimico and Long Branch up to Islington Village and Rexdale.",
         neighbourhoods: [
           "Humber Bay Shores",
           "Mimico",
@@ -1029,8 +1029,8 @@ const en = {
           "Thistletown",
         ],
         homes: [
-          "Many of Etobicoke's condo towers stand by the lake at Humber Bay Shores or near the Islington and Kipling subway stations. In those suites the laundry is usually a narrow closet.",
-          "Much of the rest of Etobicoke is houses, from bungalows to two-storey homes, along with low-rise and high-rise apartment buildings. In a house, the laundry is often in the basement, where a full-size side-by-side pair usually has room.",
+          "Many Etobicoke condo towers stand by the lake at Humber Bay Shores or near Islington and Kipling stations. Their laundry is usually a narrow closet.",
+          "Much of the rest is houses, from bungalows to two-storeys, plus low-rise and high-rise apartments. House laundry is often in the basement, where a full-size side-by-side pair usually has room.",
         ],
         fits: {
           stackable: "Condo closets by the lake and near the subway.",
@@ -1066,8 +1066,8 @@ const en = {
           "Highland Creek",
         ],
         homes: [
-          "Much of Scarborough is detached and semi-detached houses and townhouses. The laundry is usually in the basement or in a small room on the main floor, and a full-size side-by-side pair often fits.",
-          "Scarborough also has many apartment towers and some newer condos, including around Scarborough Town Centre. Some houses have a basement apartment: if you rent one, ask your landlord which water, drain and power hookups you can use.",
+          "Much of Scarborough is detached and semi-detached houses and townhouses. Laundry is usually in the basement or a small main-floor room. A full-size side-by-side pair often fits.",
+          "Scarborough also has many apartment towers and some newer condos, including around Scarborough Town Centre. Renting a basement apartment? Ask your landlord which water, drain and power hookups you can use.",
         ],
         fits: {
           "side-by-side-top-load": "Basement and main-floor laundry rooms in houses.",
@@ -1087,7 +1087,7 @@ const en = {
         metaTitle: "Washer & Dryer Rental East York, Toronto | {setPrice}/week",
         metaDescription:
           "Rent a washer and dryer in East York, Leaside and Thorncliffe Park: {setPrice} a week for a set, {singlePrice} for one machine. Repairs and haul-away included.",
-        teaser: "Streets of houses in Leaside and Pape Village, apartment towers in Thorncliffe Park.",
+        teaser: "Houses in Leaside and Pape Village. Apartment towers in Thorncliffe Park.",
         intro:
           "We rent washers and dryers across East York, including Leaside, Thorncliffe Park, Pape Village, Woodbine Heights and Crescent Town.",
         neighbourhoods: [
@@ -1101,8 +1101,8 @@ const en = {
           "Crescent Town",
         ],
         homes: [
-          "East York mixes quiet streets of detached and semi-detached houses, in areas like Leaside and Pape Village, with apartment towers in Thorncliffe Park and Crescent Town.",
-          "In an older house, the basement stairs can be narrow and steep, so measure them along with the laundry space. In an apartment, check first that your unit has hookups for a washer and dryer.",
+          "East York mixes quiet streets of houses, like Leaside and Pape Village, with apartment towers in Thorncliffe Park and Crescent Town.",
+          "Older houses can have narrow, steep basement stairs. Measure them with the laundry space. In an apartment, first check your unit has washer and dryer hookups.",
         ],
         fits: {
           "side-by-side-top-load": "Basement laundry areas in houses.",
@@ -1122,9 +1122,9 @@ const en = {
         metaTitle: "Washer & Dryer Rental York, Toronto | {setPrice}/week",
         metaDescription:
           "Rent a washer and dryer in York, Toronto, including Weston and Mount Dennis: {setPrice} a week for a set, {singlePrice} for one machine. Repairs included.",
-        teaser: "Older houses with basements, and apartment buildings along the main streets.",
+        teaser: "Older houses with basements. Apartment buildings on the main streets.",
         intro:
-          "We rent washers and dryers across York, the former City of York northwest of downtown Toronto, including Weston, Mount Dennis, Fairbank and Oakwood Village.",
+          "We rent washers and dryers across York, the former City of York northwest of downtown, including Weston, Mount Dennis, Fairbank and Oakwood Village.",
         neighbourhoods: [
           "Weston",
           "Mount Dennis",
@@ -1136,8 +1136,8 @@ const en = {
           "Humewood–Cedarvale",
         ],
         homes: [
-          "Much of York is older detached and semi-detached houses, many with a laundry area in the basement, plus apartment buildings along main streets such as Weston Road and Eglinton Avenue West.",
-          "Some houses here are split into separate units. If you rent one, check with your landlord which hookups you can use and whether a dryer can vent outside.",
+          "Much of York is older detached and semi-detached houses, many with basement laundry. Apartment buildings line main streets like Weston Road and Eglinton Avenue West.",
+          "Some houses here are split into units. Renting one? Ask your landlord which hookups you can use and whether a dryer can vent outside.",
         ],
         fits: {
           "side-by-side-front-load": "Basement laundry rooms in houses.",
@@ -1158,12 +1158,12 @@ const en = {
       eyebrow: "Toronto & the GTA",
       title: "Where we deliver",
       checkTitle: "Do we deliver to you?",
-      lead: "We deliver rental washers and dryers across Toronto and five cities around it. Type your postal code to check, or find your area below.",
+      lead: "We deliver across Toronto and five cities around it. Check your postal code, or find your area below.",
       samePrice: "Same price in every area: {setPrice} a week for a set, {singlePrice} for one machine.",
-      fartherText: "Farther away? Text us your address and we'll tell you.",
+      fartherText: "Farther away? Text us your address. We'll let you know.",
       torontoTitle: "Toronto",
       torontoLead:
-        "All of the City of Toronto. North York, Etobicoke, Scarborough, East York and York each have their own page.",
+        "All of Toronto. North York, Etobicoke, Scarborough, East York and York each have a page.",
       wholeCity: "Whole city",
       district: "Toronto district",
       aroundTitle: "Around Toronto",
@@ -1192,9 +1192,9 @@ const en = {
       localTitle: "Laundry in {place} homes",
       localAreas: "Areas of {place} we deliver to",
       beforeYouCall: "Before you call, check",
-      notSure: "Not sure? Text a photo to {phoneLink} and we'll tell you what fits.",
+      notSure: "Not sure? Text a photo to {phoneLink}. We'll tell you what fits.",
       deliveryTitle: "Do we deliver to you?",
-      deliveryLead: "Type your postal code. If the code doesn't tell us, text us your address and we'll confirm.",
+      deliveryLead: "Enter your postal code. Not clear? Text us your address and we'll confirm.",
     },
     districtsLabel: "Toronto districts",
   },
@@ -1214,12 +1214,12 @@ const en = {
       "minimum-term": {
         question: "How long is the rental?",
         answer:
-          "{minWeeks} weeks minimum. After that it continues week to week, and either side can end it with {noticeDays} days' notice. We pick the machine up.",
+          "{minWeeks} weeks minimum, then week to week. Either side can end it with {noticeDays} days' notice. We pick the machine up.",
       },
       ending: {
         question: "How do I end my rental?",
         answer:
-          "Text us at {phone}. After the {minWeeks}-week minimum, either side can end the rental with {noticeDays} days' notice, and we come and pick the machine up.",
+          "Text us at {phone}. After the {minWeeks}-week minimum, either side can end it with {noticeDays} days' notice. We pick the machine up.",
       },
       "machine-types": {
         question: "Which machines can I rent?",
@@ -1229,7 +1229,7 @@ const en = {
       },
       "new-machines": {
         question: "Are the machines new?",
-        answer: "No. They are pre-owned machines in good working order. Each one is checked before it goes out.",
+        answer: "No. They're pre-owned and in good working order. We check each one before it goes out.",
       },
       brands: {
         question: "Which brands do you have?",
@@ -1251,7 +1251,7 @@ const en = {
       price: {
         question: "How much does it cost?",
         answer:
-          "{setPrice} a week for a washer and dryer set, or {singlePrice} a week for one machine, in Canadian dollars. Rent is charged every week on the same weekday.",
+          "{setPrice} a week for a set, or {singlePrice} a week for one machine, in Canadian dollars. Rent is charged weekly, on the same weekday.",
       },
       tax: {
         question: "Do prices include tax?",
@@ -1263,7 +1263,7 @@ const en = {
       },
       payment: {
         question: "How do I pay?",
-        answer: "By Interac e-Transfer or credit card. To pay by card, use the payment link we send with your quote.",
+        answer: "Interac e-Transfer or credit card. For card, use the payment link we send with your quote.",
       },
       referral: {
         question: "Do you have a referral offer?",
@@ -1272,25 +1272,25 @@ const en = {
       "space-needs": {
         question: "What do I need in my laundry space?",
         answer:
-          "Water hookups (hot and cold), a drain, and the right outlet. Most electric dryers need a 240V outlet, 3- or 4-prong. A vented dryer also needs a vent to the outside. Send us a photo and we'll check.",
+          "Hot and cold water, a drain and the right outlet. Most electric dryers need a 240V outlet, 3- or 4-prong. A vented dryer also needs a vent to the outside. Send a photo and we'll check.",
         link: "How to measure your laundry space",
       },
       "delivery-cost": {
         question: "How much are delivery and installation?",
-        answer: "We quote it before you pay. It depends on the distance, the floor, stairs or elevator, and the hookups.",
+        answer: "We quote it before you pay. It depends on distance, floor, stairs or elevator, and hookups.",
       },
       "delivery-time": {
         question: "How soon can you deliver?",
-        answer: "Usually the same week. We confirm the date when we send the quote.",
+        answer: "Usually the same week. We confirm the date with your quote.",
       },
       installation: {
         question: "What does installation include?",
-        answer: "We check the space and connect the dryer to its own 240-volt outlet (3- or 4-prong). We run a 4-inch metal vent duct to the outside, clamped at both ends and without kinks: a crushed duct is a fire risk. We connect the hot and cold water and the drain, level the machine and run a test cycle before we leave.",
+        answer: "We check the space. We connect the dryer to its own 240-volt outlet (3- or 4-prong). We run a 4-inch metal vent duct outside, clamped at both ends, with no kinks: a crushed duct is a fire risk. We connect hot and cold water and the drain, level the machine and run a test cycle before we leave.",
       },
       condo: {
         question: "Can you deliver to a condo?",
         answer:
-          "Yes. Tell us the closet size and whether the building has a service elevator, and we plan the delivery.",
+          "Yes. Tell us the closet size and if there's a service elevator. We plan the delivery.",
         link: "Condo laundry checklist",
       },
       "haul-away": {
@@ -1305,12 +1305,12 @@ const en = {
       },
       breaks: {
         question: "What if the machine breaks?",
-        answer: "Call or text us. We arrange a repair or a replacement machine at no charge.",
+        answer: "Call or text us. We repair it or replace it at no charge.",
       },
       "repair-request": {
         question: "How do I ask for a repair?",
         answer:
-          "Call or text {phone}, or send the repair form with your address and what's wrong. Repairs are included while you rent.",
+          "Call or text {phone}, or send the repair form with your address and the problem. Repairs are included while you rent.",
         link: "Request a repair",
       },
       damage: {
@@ -1320,13 +1320,13 @@ const en = {
       "landlord-options": {
         question: "How do landlords work with you?",
         answer:
-          "Two ways. Your tenants rent from us directly: there's nothing for you to pay, you only allow the installation. Or you rent machines for your units: the list price is {setPrice} a week per set, and for {quoteUnits} or more units we quote per building after seeing it. Repairs are included either way.",
+          "Two ways. Your tenants rent from us directly: you pay nothing, you only allow the installation. Or you rent machines for your units: list price {setPrice} a week per set. For {quoteUnits} or more units, we quote per building after seeing it. Repairs are included either way.",
         link: "Washers and dryers for landlords",
       },
       "landlord-quote": {
         question: "How does a landlord get a quote?",
         answer:
-          "Send the landlord quote form with the address, the number of units and what's there now, or call or text {phone}.",
+          "Send the landlord quote form with the address, the number of units and what's there now. Or call or text {phone}.",
         link: "Landlord quote form",
       },
       "first-week-free": {
@@ -1336,32 +1336,32 @@ const en = {
       "first-week-free-costs": {
         question: "With the first week free, what do I still pay?",
         answer:
-          "The {deposit} refundable deposit and the delivery. From the second week, the weekly rent is charged as usual.",
+          "The {deposit} refundable deposit and the delivery. From week two, weekly rent is charged as usual.",
       },
     },
     // /faq/
     page: {
       eyebrow: "FAQ",
       title: "Questions and answers",
-      lead: "Renting, prices, delivery, repairs and landlords. Another question? Call or text {phoneLink}.",
+      lead: "Renting, prices, delivery, repairs and landlords. More questions? Call or text {phoneLink}.",
       topics: "Topics",
     },
   },
 
   landlords: {
     eyebrow: "For landlords",
-    title: "Washers and dryers for your rental units",
-    lead: "Two ways to put laundry in your units. Either way, we install the machines, take the old ones away, and repairs are included.",
+    title: "Laundry for your rental units",
+    lead: "Two ways to add laundry to your units. Either way, we install, haul the old machines away and include repairs.",
     option: "Option {number}",
     options: [
       {
         title: "Your tenants rent from us",
-        headline: "Nothing for you to pay",
+        headline: "You pay nothing",
         points: [
-          "Each tenant rents a washer and dryer from us and pays us directly.",
-          "There's nothing for you to pay.",
+          "Each tenant rents from us and pays us directly.",
+          "You pay nothing.",
           "You only allow the installation.",
-          "Repairs are included while the tenant rents.",
+          "Repairs included while the tenant rents.",
         ],
       },
       {
@@ -1369,9 +1369,9 @@ const en = {
         headline: "{setPrice} a week per set, list price",
         points: [
           "You rent the machines and include laundry with the unit.",
-          "List price: {setPrice} a week per washer and dryer set.",
+          "List price: {setPrice} a week per set.",
           "For {quoteUnits} or more units, we quote per building after we see it.",
-          "Repairs are included while you rent.",
+          "Repairs included while you rent.",
         ],
       },
     ],
@@ -1379,56 +1379,56 @@ const en = {
     includedTitle: "Included either way",
     includedLead: "Delivery and installation are quoted per job, before anyone pays.",
     included: [
-      "Installation: we connect the water, drain, power and vent, and run a test cycle before we leave.",
+      "Installation: we hook up the water, drain, power and vent, then run a test cycle.",
       "Old machines taken away at no charge.",
-      "Repairs, or a replacement machine, at no charge.",
-      "Pre-owned machines, each one checked before it goes out.",
+      "Repairs or a replacement machine, at no charge.",
+      "Pre-owned machines, each checked before it goes out.",
     ],
     stepsTitle: "How it works for a building",
     steps: [
       {
         title: "Tell us about the building",
-        text: "The address, how many units, and what's there now: no machines, old machines to replace, or hookups only.",
+        text: "The address, the number of units and what's there now: no machines, old ones to replace, or hookups only.",
       },
       {
         title: "We see the building",
-        text: "For {quoteUnits} or more units, we look at the building before we quote: the laundry spaces and the hookups.",
+        text: "For {quoteUnits} or more units, we check the laundry spaces and hookups before we quote.",
       },
       {
         title: "You get a quote",
-        text: "If your tenants rent directly, each tenant gets their own quote. If you rent the machines, you get a quote for the building.",
+        text: "Tenants who rent directly each get their own quote. If you rent the machines, you get one for the building.",
       },
       {
         title: "We install",
-        text: "We deliver, connect each machine, run a test cycle and take the old machines away.",
+        text: "We deliver, connect each machine, run a test cycle and haul the old ones away.",
       },
       {
-        title: "Repairs while the machines are in",
-        text: "Call or text us when a machine needs a repair. We repair it or replace it at no charge.",
+        title: "Repairs while they're in",
+        text: "Machine needs a repair? Call or text us. We repair or replace it at no charge.",
       },
     ],
-    startWithQuote: "Start with a quote",
+    startWithQuote: "Get your quote",
     unitNeedsTitle: "What each unit needs",
-    unitNeedsNote: "Tell us what each unit has, and we'll tell you what fits.",
+    unitNeedsNote: "Tell us what each unit has. We'll tell you what fits.",
     faqTitle: "Landlord questions",
     faqs: [
       {
         question: "Do I pay anything if my tenants rent from you?",
-        answer: "No. The tenant rents the machines and pays us. You allow the installation.",
+        answer: "No. The tenant rents and pays us. You allow the installation.",
       },
       {
         question: "What does it cost if I rent the machines?",
         answer:
-          "The list price is {setPrice} a week per washer and dryer set. For {quoteUnits} or more units, we quote per building after we see it. Delivery and installation are quoted before you pay.",
+          "List price: {setPrice} a week per set. For {quoteUnits} or more units, we quote per building after we see it. Delivery and installation are quoted before you pay.",
       },
       {
         question: "Who arranges repairs?",
-        answer: "Call or text {phone} when a machine needs a repair. Repairs are included in both options.",
+        answer: "Call or text {phone}. Repairs are included in both options.",
       },
       {
         question: "What if a unit has no hookups?",
         answer:
-          "A unit needs hot and cold water, a drain, the right outlet and, for a vented dryer, a vent to the outside. Tell us what each unit has and we'll tell you what fits.",
+          "Each unit needs hot and cold water, a drain, the right outlet and, for a vented dryer, a vent outside. Tell us what each unit has. We'll tell you what fits.",
       },
       {
         question: "Do my tenants need a credit check?",
@@ -1446,20 +1446,20 @@ const en = {
     moreAnswers: "More answers on the {faqLink}.",
     faqLink: "FAQ page",
     ctaTitle: "Get a quote for your building",
-    ctaText: "Tell us the address, the number of units and what's there now.",
+    ctaText: "Send the address, the number of units and what's there now.",
     // The link to /buildings/ for a shared laundry room.
     buildingsNote: "A shared laundry room in the building? {buildingsLink}.",
-    buildingsLink: "See the laundry room options",
+    buildingsLink: "See laundry room options",
     // /landlords/quote/
     quote: {
       eyebrow: "For landlords",
       title: "Get a quote for your building",
-      lead: "Tell us about the building and the units. In the units, your tenants can rent from us directly or you can rent the machines. For a shared laundry room, the building rents the machines or residents pay per load.",
+      lead: "Tell us about the building and units. In units, tenants rent from us directly or you rent the machines. In a shared laundry room, the building rents the machines or residents pay per load.",
       howOptionsWork: "How the two options work",
       nextTitle: "What happens next",
       next: [
         "We read your request and call or text you.",
-        "For {quoteUnits} or more units, we arrange a time to see the building.",
+        "For {quoteUnits} or more units, we book a time to see the building.",
         "You get a quote before anything is installed.",
       ],
       formTitle: "Your building",
@@ -1499,8 +1499,8 @@ const en = {
   // 2026-10-15).
   buildings: {
     eyebrow: "For residential buildings",
-    title: "Washers and dryers for your building's laundry room",
-    lead: "For apartment and condo buildings with a shared laundry room. We supply the machines, install them and repair them. Two ways to set it up, quoted per building after we see the room.",
+    title: "Machines for your laundry room",
+    lead: "For apartment and condo buildings with a shared laundry room. We supply, install and repair the machines. Two setups, quoted per building after we see the room.",
     option: "Option {number}",
     options: [
       {
@@ -1510,7 +1510,7 @@ const en = {
           "The building rents the machines for its laundry room.",
           "The building decides how residents use them.",
           "We quote after we see the room.",
-          "Repairs are included while you rent.",
+          "Repairs included while you rent.",
         ],
       },
       {
@@ -1520,18 +1520,18 @@ const en = {
           "We supply the machines at no cost to the building.",
           "Residents pay per load.",
           "The building gets a share of what the machines take in. We agree on the share before we install.",
-          "Repairs are included.",
+          "Repairs included.",
         ],
       },
     ],
-    optionsTitle: "Two ways to set up the laundry room",
+    optionsTitle: "Two ways to set it up",
     includedTitle: "Included either way",
-    includedLead: "Delivery and installation are in the quote, before anything is installed.",
+    includedLead: "Delivery and installation are in the quote, before anything goes in.",
     included: [
-      "We see the room first and tell you which machines fit.",
-      "Installation: we connect the water, drain, power and vent, and run a test cycle before we leave.",
+      "We see the room first and tell you what fits.",
+      "Installation: we hook up the water, drain, power and vent, then run a test cycle.",
       "Old machines taken away at no charge.",
-      "Repairs, or a replacement machine, at no charge.",
+      "Repairs or a replacement machine, at no charge.",
     ],
     stepsTitle: "How it works",
     steps: [
@@ -1541,25 +1541,25 @@ const en = {
       },
       {
         title: "We see the laundry room",
-        text: "We look at the space, the hookups and how many machines the room can take.",
+        text: "We check the space, the hookups and how many machines it can take.",
       },
       {
         title: "You get a quote",
-        text: "For the option you choose: the building rents the machines, or residents pay per load.",
+        text: "For your chosen option: the building rents the machines, or residents pay per load.",
       },
       {
         title: "We install",
-        text: "We deliver, connect each machine, run a test cycle and take the old machines away.",
+        text: "We deliver, connect each machine, run a test cycle and haul the old ones away.",
       },
       {
-        title: "Repairs while the machines are in",
-        text: "Call or text us when a machine needs a repair. We repair it or replace it at no charge.",
+        title: "Repairs while they're in",
+        text: "Machine needs a repair? Call or text us. We repair or replace it at no charge.",
       },
     ],
-    startWithQuote: "Start with a quote",
+    startWithQuote: "Get your quote",
     inSuiteTitle: "Machines in each unit instead?",
-    inSuiteText: "If the units have their own hookups, tenants can rent from us directly, or you can rent machines for the units.",
-    inSuiteLink: "Landlord options",
+    inSuiteText: "Units have their own hookups? Tenants can rent from us directly, or you rent machines for the units.",
+    inSuiteLink: "See landlord options",
     faqTitle: "Building questions",
     faqs: [
       {
@@ -1568,15 +1568,15 @@ const en = {
       },
       {
         question: "How does the pay-per-load option work?",
-        answer: "We supply the machines at no cost to the building, and residents pay per load. The building gets a share of what the machines take in. We agree on the share before we install.",
+        answer: "We supply the machines at no cost to the building. Residents pay per load. The building gets a share of what the machines take in, agreed before we install.",
       },
       {
         question: "Which machines do you put in?",
-        answer: "It depends on the room: the space, the hookups and how many residents use it. We tell you what fits after we see it.",
+        answer: "It depends on the space, the hookups and how many residents use it. We tell you what fits after we see it.",
       },
       {
         question: "Who arranges repairs?",
-        answer: "Call or text {phone} when a machine needs a repair. Repairs are included in both options.",
+        answer: "Call or text {phone}. Repairs are included in both options.",
       },
       {
         question: "Can you take the old machines away?",
@@ -1588,20 +1588,20 @@ const en = {
       },
     ],
     ctaTitle: "Get a quote for your laundry room",
-    ctaText: "Tell us the address, the number of units and what's in the laundry room now.",
+    ctaText: "Send the address, the number of units and what's in the laundry room now.",
   },
 
   about: {
     eyebrow: "About us",
     title: "About {company}",
-    lead: "{company} is a local Toronto business. We bring more than {experienceYears} years of hands-on experience installing and fixing washers and dryers.",
+    lead: "{company} is a local Toronto business. We have more than {experienceYears} years of hands-on experience installing and fixing washers and dryers.",
     howWeWork: "How we work",
     whatWeDo: "What we do",
     whatWeDoItems: [
       "We rent washers and dryers in Toronto and the GTA: stackable pairs, one-piece laundry centres, side-by-side pairs, or a single washer or dryer.",
-      "We only rent. We don't sell machines, and we don't rent other appliances.",
-      "The machines are pre-owned, checked, and in good working order. The brand and model depend on what's available.",
-      "Rent is {setPrice} a week for a set or {singlePrice} a week for one machine, with repairs and old-machine haul-away included.",
+      "We only rent. We don't sell machines or rent other appliances.",
+      "Our machines are pre-owned, checked and in good working order. Brand and model depend on what's available.",
+      "Rent is {setPrice} a week for a set, {singlePrice} a week for one machine. Repairs and old-machine haul-away included.",
     ],
     readMore: "Read more",
     links: {
@@ -1619,7 +1619,7 @@ const en = {
   contact: {
     eyebrow: "Call or text",
     title: "Contact us",
-    lead: "The fastest way is a call or a text. Or send the request form below and we reply with the machine, the total and the start date.",
+    lead: "A call or text is fastest. Or send the form below. We reply with the machine, the total and the start date.",
     reachLabel: "How to reach us",
     phoneTitle: "Phone and text",
     hours: "Hours",
@@ -1628,25 +1628,25 @@ const en = {
     whereTitle: "Where we deliver",
     somethingElse: "Something else?",
     other: [
-      { title: "A machine you rent needs a repair", label: "Request a repair" },
+      { title: "Your rental needs a repair", label: "Request a repair" },
       { title: "You're a landlord", label: "Landlord quote" },
-      { title: "You have a question first", label: "Questions and answers" },
+      { title: "A question first", label: "Questions and answers" },
     ],
   },
 
   repair: {
     eyebrow: "For customers renting from us",
     title: "Request a repair",
-    lead: "Is a machine you rent from us not working right? Repairs are included while you rent: we repair it or replace it at no charge.",
+    lead: "Machine not working right? Repairs are included while you rent. We repair or replace it at no charge.",
     sectionLabel: "Repair request",
     // The photo card at the top of /repair/: the button opens a text with `photoBody` typed in.
     photoTitle: "Send a photo of the problem",
-    photoText: "A photo or short video of the problem helps us see what's wrong before we come.",
+    photoText: "A photo or short video helps us see what's wrong before we come.",
     photoButton: "Text us a photo",
     photoBody: "Repair request – my address: ",
     fastest: "Fastest: call or text",
     leakTitle: "Water leaking?",
-    leakText: "Turn off the water taps behind the washer if you can reach them safely, then call us.",
+    leakText: "Turn off the taps behind the washer if you can reach them safely. Then call us.",
     helpsTitle: "What helps us",
     helps: [
       "What the machine does, or doesn't do",
@@ -1688,13 +1688,13 @@ const en = {
     lead: "Card payments go through Stripe. We never see your full card number.",
     sectionLabel: "Your rental",
     payTitle: "Pay by card",
-    payText: "Use the Stripe payment link we sent with your quote. Can't find it? Text us.",
+    payText: "Use the Stripe payment link from your quote. Can't find it? Text us.",
     portalTitle: "Your card and receipts",
-    portalText: "Change your card and see your receipts in the Stripe customer portal.",
+    portalText: "Change your card and see receipts in the Stripe customer portal.",
     portalButton: "Open the customer portal",
     endTitle: "End a rental",
     endText:
-      "Text us at {phone}. After the {minWeeks}-week minimum, either side can end the rental with {noticeDays} days' notice, and we pick the machine up.",
+      "Text us at {phone}. After the {minWeeks}-week minimum, either side can end the rental with {noticeDays} days' notice. We pick the machine up.",
     textUs: "Text us",
   },
 
@@ -1721,13 +1721,13 @@ const en = {
 
   notFound: {
     title: "Page not found",
-    text: "This page doesn't exist. Washer & dryer rental in Toronto and the GTA is {setPrice} a week for a set, {singlePrice} for one machine.",
+    text: "This page doesn't exist. Rent a washer and dryer set for {setPrice} a week, or one machine for {singlePrice}.",
     home: "Go to the home page",
   },
 
   error: {
     title: "Something went wrong",
-    text: "Please try again, or call or text {phoneLink}.",
+    text: "Try again, or call or text {phoneLink}.",
   },
 
   // The rental request at /start/ (processes/rental-request).
@@ -1759,7 +1759,7 @@ const en = {
     },
     machine: {
       title: "Which machine do you need?",
-      intro: "Not sure? Choose \"Not sure yet\": we help you pick from your closet size and hookups. {link}",
+      intro: "Not sure? Choose \"Not sure yet\". We help you pick by closet size and hookups. {link}",
       legend: "Machine type",
       setNote: "{setPrice}/week for the set",
       singleNote: "{singlePrice}/week",
@@ -1772,7 +1772,7 @@ const en = {
     },
     details: {
       title: "Tell us about your space",
-      intro: "You chose: {machine}. Now the space, so we bring a machine that fits.",
+      intro: "You chose: {machine}. Now your space, so we bring a machine that fits.",
       postal: "Postal code",
       postalPlaceholder: "e.g. M5V 2T6",
       width: "Closet or space width",
@@ -1824,13 +1824,13 @@ const en = {
     },
     done: {
       title: "Request sent.",
-      thanks: "Thank you, {name}. We'll call or text you at {customerPhone} with the machine, the total and the start date.",
+      thanks: "Thank you, {name}. We'll call or text {customerPhone} with the machine, the total and the start date.",
       photo: "A photo of the space helps. Text it to {phoneLink}.",
       textPhoto: "Text a photo",
       nextTitle: "What happens next",
       next: [
-        "We call or text you with the machine, the total and the start date.",
-        "You confirm, and pay through the secure link we send.",
+        "We call or text with the machine, the total and the start date.",
+        "You confirm and pay through the secure link we send.",
         "We deliver, hook it up and run a test cycle.",
       ],
       home: "Back to the home page",
