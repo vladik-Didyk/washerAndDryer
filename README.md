@@ -304,7 +304,8 @@ the forms registry), up to commit `8fba2f2`.
 the home page with about half the text: price card, icon steps, drawn service-area map. 2026-10-15,
 version `075598c3`: the postal-code check from every Ontario FSA (`pnpm postal-fsas`). 2026-10-15, version
 `d90383ed`: Unsplash laundry-room photos, the carousel, the three-slide hero and the photo cards. 2026-10-15,
-version `6d7ba02a`: real photos for the one-piece laundry centre.
+version `6d7ba02a`: real photos for the one-piece laundry centre. 2026-10-15, version `e4c746ad`:
+less text on machine, city, district and FAQ pages (folds, size diagram, map headers, FAQ tabs).
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
