@@ -272,8 +272,8 @@ stay off.
 washerrent.com is live. The Worker `washerrent` (Cloudflare account
 `06277ccde592d58901541d66461eae53`) answers on `washerrent.com`; `www.washerrent.com`
 redirects to it. Both are custom domains in `wrangler.jsonc`, and the DNS zone is on Cloudflare
-(nameservers moved from Namecheap on 2026-10-15). The secret `SESSION_SECRET` is set on the Worker (`WEB3FORMS_KEY` is
-no longer used and can be deleted); optional settings go in the same way
+(nameservers moved from Namecheap on 2026-10-15). The secret `SESSION_SECRET` is set on the Worker (`WEB3FORMS_KEY` was
+deleted on 2026-10-16); optional settings go in the same way
 (`pnpm exec wrangler secret put NAME`) or in the dashboard (Workers → washerrent → Settings →
 Variables).
 
