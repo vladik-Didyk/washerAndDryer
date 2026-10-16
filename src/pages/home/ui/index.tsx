@@ -2,7 +2,7 @@ import { useI18n } from "~/shared/i18n";
 import { AboutTeaser } from "~/widgets/about-teaser";
 import { CtaBand } from "~/widgets/cta-band";
 import { FaqSection } from "~/widgets/faq-section";
-import { Hero } from "~/widgets/hero";
+import { Hero, HeroTiles } from "~/widgets/hero";
 import { HowItWorks } from "~/widgets/how-it-works";
 import { IncludedCards } from "~/widgets/included-cards";
 import { LandlordsTeaser } from "~/widgets/landlords-teaser";
@@ -18,6 +18,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <HeroTiles />
       <IncludedCards />
       <MachineShowcase compact />
       <HowItWorks />
