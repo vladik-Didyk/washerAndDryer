@@ -107,6 +107,8 @@
   "/es/account/",
   "/ru/account/",
   "/fr/account/",
+  "/privacy/",
+  "/terms/",
   "/sitemap.xml",
   "/robots.txt",
   "/llms.txt"

@@ -298,6 +298,10 @@ deleted on 2026-10-16); optional settings go in the same way
 (`pnpm exec wrangler secret put NAME`) or in the dashboard (Workers → washerrent → Settings →
 Variables).
 
+`workers/app.ts` sends `http://washerrent.com` to `https://` (301) and adds
+`Strict-Transport-Security` (six months, subdomains) to every washerrent.com response, so the
+site is https-only even without the dashboard's "Always Use HTTPS" and HSTS switches.
+
 Ask the owner before anything goes live. Two ways to release:
 
 - **Check first, then publish** (preferred). Upload a version without sending traffic to it:

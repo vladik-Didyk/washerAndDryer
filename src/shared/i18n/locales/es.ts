@@ -336,6 +336,8 @@ const es: DeepPartial<Dictionary> = {
     requiredNote: "Los campos marcados con {star} son obligatorios.",
     sending: "Enviando…",
     sendError: "No se pudo enviar. Llame o escriba al {phoneLink}.",
+    privacyNote: "Usamos lo que nos envía solo para responderle. {privacyLink}.",
+    privacyLink: "Política de privacidad (en inglés)",
     sentTitle: "Solicitud enviada.",
     sentNote: "Le llamaremos o le escribiremos.",
     sendAnother: "Enviar otra",

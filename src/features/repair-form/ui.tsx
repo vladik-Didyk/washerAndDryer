@@ -6,6 +6,7 @@ import {
   RequiredNote,
   SendError,
   SentPanel,
+  PrivacyNote,
   SubmitButton,
   emptyValues,
   type FormActionData,
@@ -50,6 +51,7 @@ export function RepairForm({ result }: { result?: FormActionData }) {
       <Honeypot />
       {result?.status === "error" && <SendError />}
       <SubmitButton sending={sending}>{repair.submit}</SubmitButton>
+      <PrivacyNote />
     </Card>
   );
 }

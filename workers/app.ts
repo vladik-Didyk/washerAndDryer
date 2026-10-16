@@ -35,6 +35,31 @@ function canonicalRedirect(url: URL): Response | null {
   return Response.redirect(`${url.origin}${target}${url.search}`, 301);
 }
 
+// On washerrent.com, browsers are told to use https only (six months, subdomains too). Not on
+// the workers.dev previews or locally.
+const HSTS = "max-age=15552000; includeSubDomains";
+function withHsts(response: Response): Response {
+  const secured = new Response(response.body, response);
+  secured.headers.set("Strict-Transport-Security", HSTS);
+  return secured;
+}
+
+async function handle(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  const url = new URL(request.url);
+  if (request.method === "GET" || request.method === "HEAD") {
+    const redirect = canonicalRedirect(url);
+    if (redirect) return redirect;
+    // A page built ahead of time (react-router.config.ts), or its _.data: served as a file,
+    // without rendering. Anything else (the rental request, unknown URLs) renders below.
+    const asset = await env.ASSETS.fetch(request);
+    if (asset.status !== 404) return asset;
+  }
+  return requestHandler(request, {
+    cloudflare: { env: env as SiteEnv, ctx },
+    requestTime: Date.now(),
+  });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -42,17 +67,11 @@ export default {
     if (url.hostname === "www.washerrent.com") {
       return Response.redirect(`https://washerrent.com${url.pathname}${url.search}`, 301);
     }
-    if (request.method === "GET" || request.method === "HEAD") {
-      const redirect = canonicalRedirect(url);
-      if (redirect) return redirect;
-      // A page built ahead of time (react-router.config.ts), or its _.data: served as a file,
-      // without rendering. Anything else (the rental request, unknown URLs) renders below.
-      const asset = await env.ASSETS.fetch(request);
-      if (asset.status !== 404) return asset;
+    if (url.hostname !== "washerrent.com") return handle(request, env, ctx);
+    // http:// -> https://, before anything else.
+    if (url.protocol === "http:") {
+      return Response.redirect(`https://washerrent.com${url.pathname}${url.search}`, 301);
     }
-    return requestHandler(request, {
-      cloudflare: { env: env as SiteEnv, ctx },
-      requestTime: Date.now(),
-    });
+    return withHsts(await handle(request, env, ctx));
   },
 } satisfies ExportedHandler<Env>;

@@ -1,7 +1,7 @@
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
 import { useI18n } from "~/shared/i18n";
 import { Card, Heading } from "~/shared/ui";
-import { FormFields, Honeypot, RequiredNote, SendError, SubmitButton, type FieldErrors } from "~/shared/forms";
+import { FormFields, Honeypot, PrivacyNote, RequiredNote, SendError, SubmitButton, type FieldErrors } from "~/shared/forms";
 import type { contactAction } from "../actions.server";
 import type { contactLoader } from "../loaders.server";
 import { STEP_PATHS } from "../model";
@@ -47,6 +47,7 @@ export function ContactStep() {
         <Honeypot />
         {result && "status" in result && result.status === "error" && <SendError />}
         <SubmitButton sending={sending}>{text.submit}</SubmitButton>
+        <PrivacyNote />
       </Card>
     </StepShell>
   );

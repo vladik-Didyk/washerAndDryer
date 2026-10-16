@@ -6,6 +6,7 @@ import {
   RequiredNote,
   SendError,
   SentPanel,
+  PrivacyNote,
   SubmitButton,
   emptyValues,
   type FormActionData,
@@ -51,6 +52,7 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData }) {
       <Honeypot />
       {result?.status === "error" && <SendError />}
       <SubmitButton sending={sending}>{quote.submit}</SubmitButton>
+      <PrivacyNote />
     </Card>
   );
 }

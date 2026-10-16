@@ -37,23 +37,28 @@ describe("site catalog", () => {
     const paths = catalog(live).map((entry) => entry.path);
     expect(paths).not.toContain("/account/");
     expect(paths.filter((path) => path.startsWith("/guides/"))).toEqual([]);
-    expect(paths).not.toContain("/privacy/");
-    expect(paths).not.toContain("/terms/");
     expect(optionalPages(live).optionalPages["/guides/"]).toBe(false);
+  });
+
+  it("publishes the privacy policy and the rental terms (approved 2026-10-16)", () => {
+    const entries = catalog(live).filter((entry) => entry.path === "/privacy/" || entry.path === "/terms/");
+    expect(entries.map((entry) => [entry.path, entry.draft, entry.languages])).toEqual([
+      ["/privacy/", false, ["en"]],
+      ["/terms/", false, ["en"]],
+    ]);
   });
 
   it("shows drafts (marked) and /account/ when switched on", () => {
     const entries = catalog(preview);
-    expect(entries.find((entry) => entry.path === "/terms/")?.draft).toBe(true);
     expect(entries.find((entry) => entry.path === "/guides/")?.draft).toBe(true);
     expect(entries.some((entry) => entry.path === "/account/")).toBe(true);
-    expect(optionalPages(preview).draftPages).toContain("/privacy/");
+    expect(optionalPages(preview).draftPages).toContain("/guides/");
   });
 
   it("never lists drafts in the sitemap", () => {
     const xml = sitemapXml(catalog(preview));
     expect(xml).not.toContain("/guides/");
-    expect(xml).not.toContain("/terms/");
+    expect(xml).toContain("<loc>https://washerrent.com/terms/</loc>");
     expect(xml).toContain("<loc>https://washerrent.com/toronto/north-york/</loc>");
   });
 
@@ -110,7 +115,7 @@ describe("languages", () => {
     }
     expect(xml).toContain('<xhtml:link rel="alternate" hreflang="es" href="https://washerrent.com/es/faq/"/>');
     expect(xml).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://washerrent.com/faq/"/>');
-    expect(xml.match(/<loc>/g)?.length).toBe(catalog(live).length * 4);
+    expect(xml.match(/<loc>/g)?.length).toBe(catalog(live).reduce((sum, entry) => sum + entry.languages.length, 0));
   });
 
   it("gives each page hreflang links to its four versions, and a canonical in its own language", async () => {

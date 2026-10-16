@@ -320,6 +320,8 @@ const ru: DeepPartial<Dictionary> = {
     requiredNote: "Поля, отмеченные {star}, обязательны.",
     sending: "Отправляем…",
     sendError: "Не удалось отправить. Позвоните или напишите на {phoneLink}.",
+    privacyNote: "Мы используем ваши данные только для ответа вам. {privacyLink}.",
+    privacyLink: "Политика конфиденциальности (на английском)",
     sentTitle: "Заявка отправлена.",
     sentNote: "Мы позвоним или напишем вам.",
     sendAnother: "Отправить ещё одну",

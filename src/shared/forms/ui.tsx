@@ -8,7 +8,8 @@ import { useEffect, useRef, type ComponentPropsWithoutRef, type ReactNode } from
 import { siteConfig } from "../config/site";
 import { useI18n, type I18n } from "../i18n";
 import { describedBy } from "../lib/format";
-import { Button } from "../ui/actions";
+import { useSite } from "../lib/site-context";
+import { Button, LangLink } from "../ui/actions";
 import { Card, Heading, Nest } from "../ui/layout";
 import { ChevronDown, CircleAlert, CircleCheck, LoaderCircle, type LucideIcon } from "../ui/icons";
 import { fieldOptions, type FieldErrors, type FormValues, type ResolvedOption } from "./model";
@@ -38,6 +39,25 @@ export function RequiredNote() {
   return (
     <p className="text-sm text-ink-muted">
       {rich(d.forms.requiredNote, { star: <span className="text-red-700">*</span> })}
+    </p>
+  );
+}
+
+// Under the send button: what happens to what you send, with the privacy policy once it is
+// published.
+export function PrivacyNote() {
+  const site = useSite();
+  const { d, rich } = useI18n();
+  if (!site.isPublished("/privacy/")) return null;
+  return (
+    <p className="mt-3 text-sm text-ink-muted">
+      {rich(d.forms.privacyNote, {
+        privacyLink: (
+          <LangLink href="/privacy/" className="text-link">
+            {d.forms.privacyLink}
+          </LangLink>
+        ),
+      })}
     </p>
   );
 }

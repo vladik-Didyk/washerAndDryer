@@ -1,5 +1,5 @@
-// The privacy policy (/privacy/) and the rental terms summary (/terms/). Both are drafts until
-// the owner approves them: they exist only with PREVIEW_DRAFTS=1. The words are in shared/i18n
+// The privacy policy (/privacy/) and the rental terms summary (/terms/), published on
+// 2026-10-16 after the owner approved them (`draft: true` hides a page again). The words are in shared/i18n
 // (locales/en.server.ts legal), server only, so a draft's text never ships to a normal
 // deployment. Sections use the same blocks as the guides (widgets/article-body); a section
 // `id` is its anchor (e.g. /terms/#referral).
@@ -30,7 +30,7 @@ export interface LegalContext {
   analyticsOn: boolean;
 }
 
-const UPDATED = "2026-10-15";
+const UPDATED = "2026-10-16";
 
 function privacy(i18n: I18n, { analyticsOn }: LegalContext): LegalPage {
   const text = serverText(i18n).legal.privacy;
@@ -38,7 +38,7 @@ function privacy(i18n: I18n, { analyticsOn }: LegalContext): LegalPage {
   return {
     path: "/privacy/",
     kind: "privacy",
-    draft: true,
+    draft: false,
     updated: UPDATED,
     metaTitle: text.metaTitle,
     metaDescription: text.metaDescription,
@@ -59,7 +59,7 @@ function terms(i18n: I18n, { now }: LegalContext): LegalPage {
   return {
     path: "/terms/",
     kind: "terms",
-    draft: true,
+    draft: false,
     updated: UPDATED,
     metaTitle: text.metaTitle,
     metaDescription: text.metaDescription,

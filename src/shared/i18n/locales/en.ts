@@ -363,6 +363,8 @@ const en = {
     requiredNote: "Fields marked {star} are required.",
     sending: "Sending…",
     sendError: "Couldn't send. Call or text {phoneLink}.",
+    privacyNote: "We use what you send only to answer you. {privacyLink}.",
+    privacyLink: "Privacy policy",
     sentTitle: "Request sent.",
     sentNote: "We'll call or text you.",
     sendAnother: "Send another",

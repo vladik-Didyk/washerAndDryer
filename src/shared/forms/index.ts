@@ -35,4 +35,4 @@ export {
   type Validation,
   type ValidationContext,
 } from "./model";
-export { Field, FieldError, FormFields, Honeypot, RequiredNote, SendError, SentPanel, SubmitButton, type FieldProps } from "./ui";
+export { Field, FieldError, FormFields, Honeypot, PrivacyNote, RequiredNote, SendError, SentPanel, SubmitButton, type FieldProps } from "./ui";
