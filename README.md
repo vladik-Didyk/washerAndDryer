@@ -317,6 +317,10 @@ hidden, /account/ on (Stripe portal link in the `STRIPE_PORTAL_URL` setting). St
 $13.99 set and $7.99 one machine, each with the $200 deposit and a 7-day trial (remove the trial
 after Nov 30). Dashboard plan: docs/customer-dashboard-plan.md (sign-in by email link; start at
 about 25 customers).
+2026-10-16, version `d788b744`: no "Example photo" labels anywhere; every section ends with an
+action (shared `CtaRow`: Start your rental or Get a quote, plus Call); shorter, action-first copy in
+all four languages. A blue/orange and a midnight/starlight theme were tried and dropped: the
+green theme stays.
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
