@@ -1791,6 +1791,12 @@ const es: DeepPartial<Dictionary> = {
         "Gracias, {name}. Le llamaremos o le escribiremos al {customerPhone} con la máquina, el total y la fecha de inicio.",
       photo: "Una foto del espacio ayuda. Envíela al {phoneLink}.",
       textPhoto: "Enviar una foto",
+      nextTitle: "Qué pasa ahora",
+      next: [
+        "Le llamamos o le escribimos con la máquina, el total y la fecha de inicio.",
+        "Usted confirma y paga con el enlace seguro que le enviamos.",
+        "Entregamos, conectamos y hacemos un ciclo de prueba.",
+      ],
       home: "Volver a la página de inicio",
     },
     email: {

@@ -2,11 +2,11 @@ import { useEffect, useRef } from "react";
 import { useLoaderData } from "react-router";
 import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
-import { Button, Card, CircleCheck, PhoneButton } from "~/shared/ui";
+import { Button, Card, CircleCheck, Heading, PhoneButton } from "~/shared/ui";
 import type { doneLoader } from "../loaders.server";
 import { StepShell } from "./StepShell";
 
-// After sending: what happens next. Focus moves to the message so screen readers announce it.
+// After sending: thanks, the three steps that follow, and a way to send a photo. Focus moves to the message so screen readers announce it.
 export function DoneStep() {
   const { sent } = useLoaderData<typeof doneLoader>();
   const { phone } = siteConfig;
@@ -36,6 +36,22 @@ export function DoneStep() {
             ),
           })}
         </p>
+        <div className="mx-auto mt-8 max-w-md text-left">
+          <Heading variant="item">{text.nextTitle}</Heading>
+          <ol className="mt-4 space-y-4">
+            {text.next.map((line, index) => (
+              <li key={line} className="flex gap-3">
+                <span
+                  aria-hidden="true"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand font-display text-sm font-bold text-white"
+                >
+                  {index + 1}
+                </span>
+                <span className="pt-1 text-ink-soft">{line}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <PhoneButton kind="text" label={text.textPhoto} />
           <Button href={pagePaths.home}>{text.home}</Button>

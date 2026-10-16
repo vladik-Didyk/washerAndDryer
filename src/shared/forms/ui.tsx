@@ -353,5 +353,21 @@ export function Field({ name, ...props }: FieldProps) {
 // Every field of a form, in the order of its definition.
 export function FormFields(props: Omit<FieldProps, "name" | "id" | "label" | "className" | "control" | "after" | "bare">) {
   const i18n = useI18n();
+  // A send came back with errors: take the visitor to the first field that needs fixing (its
+  // message is tied to it with aria-describedby, so a screen reader reads it out).
+  const errorKeys = Object.keys(props.errors ?? {}).join();
+  useEffect(() => {
+    if (!errorKeys) return;
+    // The first message on the page, then its field: a group of choices (a fieldset) gets
+    // its first choice, any other field is the one the message describes.
+    const message = document.querySelector<HTMLElement>("main .field-error");
+    const group = message?.closest("fieldset");
+    const first = group
+      ? group.querySelector<HTMLElement>("input")
+      : (message?.id && document.querySelector<HTMLElement>(`[aria-describedby~="${message.id}"]`)) ||
+        document.querySelector<HTMLElement>('[aria-invalid="true"]');
+    first?.focus({ preventScroll: true });
+    first?.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [errorKeys]);
   return <>{formFields(props.form).map((def) => render(def, props, i18n, prefixOf(props.form)))}</>;
 }

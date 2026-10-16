@@ -1827,6 +1827,12 @@ const en = {
       thanks: "Thank you, {name}. We'll call or text you at {customerPhone} with the machine, the total and the start date.",
       photo: "A photo of the space helps. Text it to {phoneLink}.",
       textPhoto: "Text a photo",
+      nextTitle: "What happens next",
+      next: [
+        "We call or text you with the machine, the total and the start date.",
+        "You confirm, and pay through the secure link we send.",
+        "We deliver, hook it up and run a test cycle.",
+      ],
       home: "Back to the home page",
     },
     // The email the business gets.
