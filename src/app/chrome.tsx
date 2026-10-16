@@ -1,5 +1,5 @@
 // The frame around every page: skip link, draft ribbon, offer bar, header, breadcrumbs,
-// footer and the phone bar. What changes per page comes from the page loader's `head`
+// footer, the phone bar and the loader. What changes per page comes from the page loader's `head`
 // (kind, breadcrumbs, draft) and its `chrome` (the rental request asks for "Text us" in
 // the phone bar). Words and links follow the page's language (shared/i18n), all of it.
 import type { ReactNode } from "react";
@@ -12,6 +12,7 @@ import { Footer } from "~/widgets/footer";
 import { Header } from "~/widgets/header";
 import { MobileActionBar, type MobileAction } from "~/widgets/mobile-action-bar";
 import { OfferBar } from "~/widgets/offer-bar";
+import { RouteLoader } from "~/widgets/route-loader";
 
 export interface PageChrome {
   /** The phone bar's second button: "textUs" (a text message) instead of the page's default. */
@@ -63,6 +64,7 @@ export function SiteChrome({
         {children}
       </main>
       <Footer />
+      <RouteLoader />
       <MobileActionBar action={mobileActionFor(head?.kind, chrome, d.chrome.mobileBar)} />
     </>
   );

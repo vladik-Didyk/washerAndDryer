@@ -112,6 +112,7 @@ const fr: DeepPartial<Dictionary> = {
 
   chrome: {
     skipLink: "Aller au contenu",
+    loading: "Chargement…",
     ogImageAlt: "{company} : location de laveuse et sécheuse à Toronto et dans le GTA",
     breadcrumb: "Fil d'Ariane",
     mobileBar: {

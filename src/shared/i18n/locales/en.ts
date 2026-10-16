@@ -122,6 +122,8 @@ const en = {
   // The site frame: skip link, header, footer, offer bar, phone bar, breadcrumbs, draft ribbon.
   chrome: {
     skipLink: "Skip to content",
+    // The spinning logo while a page or a form takes a moment (widgets/route-loader).
+    loading: "Loading…",
     ogImageAlt: "{company}: washer and dryer rental in Toronto and the GTA",
     breadcrumb: "Breadcrumb",
     mobileBar: {

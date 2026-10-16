@@ -107,6 +107,7 @@ const ru: DeepPartial<Dictionary> = {
 
   chrome: {
     skipLink: "Перейти к содержанию",
+    loading: "Загрузка…",
     ogImageAlt: "{company}: аренда стиральных и сушильных машин в Торонто и GTA",
     breadcrumb: "Навигационная цепочка",
     mobileBar: {

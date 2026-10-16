@@ -107,6 +107,7 @@ const es: DeepPartial<Dictionary> = {
 
   chrome: {
     skipLink: "Ir al contenido",
+    loading: "Cargando…",
     ogImageAlt: "{company}: alquiler de lavadora y secadora en Toronto y el GTA",
     breadcrumb: "Ruta de navegación",
     mobileBar: {
