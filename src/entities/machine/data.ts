@@ -32,7 +32,7 @@ export interface MachineType extends Omit<MachineText, "photos"> {
 const machineFacts: Array<{ slug: MachineSlug; item: PriceItem; photos: string[]; drawing: string }> = [
   { slug: "stackable", item: "set", photos: ["stackable-1", "stackable", "rooms/stacked-small-room", "shared/stacked-dryers-tiles"], drawing: "types/stackable.svg" },
   // No photo yet: the drawing shows until this file is added (docs/photo-credits.md).
-  { slug: "laundry-centre", item: "set", photos: ["laundry-centre"], drawing: "types/one-piece.svg" },
+  { slug: "laundry-centre", item: "set", photos: ["laundry-centre", "laundry-centre-1", "laundry-centre-2"], drawing: "types/one-piece.svg" },
   {
     slug: "side-by-side-front-load",
     item: "set",

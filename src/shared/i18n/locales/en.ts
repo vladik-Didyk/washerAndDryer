@@ -451,6 +451,8 @@ const en = {
         ],
         photos: {
           "laundry-centre": "Example of a one-piece laundry centre: a dryer above a top-load washer in one cabinet",
+          "laundry-centre-1": "Example of a one-piece laundry centre in a closet beside beige cabinet doors",
+          "laundry-centre-2": "Example of a one-piece laundry centre in a hallway closet with its door open",
         },
         page: {
           metaTitle: "Laundry Centre Rental, Toronto | One-Piece Unit, {setPrice}/week",

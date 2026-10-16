@@ -19,7 +19,7 @@ Free stock photos from Pexels, used under the Pexels License (free for commercia
 
 Paths are under public/photos/. Each JPEG has a same-size WebP and smaller versions next to it (`<name>-600w.jpg` and `.webp`, and so on), made with `pnpm photos` (scripts/make-photo-versions.mjs, needs ImageMagick 7). Run it again after adding or replacing a photo, and commit the new files. Which photos each machine type shows, and their alt text, is set in src/content/machines.js.
 
-types/laundry-centre.jpg is not added yet: no suitable stock photo; waiting for the Kijiji seller's permission to use his photo of our GE unit. The drawing shows until then, marked "Drawing".
+types/laundry-centre.jpg, laundry-centre-1.jpg and laundry-centre-2.jpg are Unsplash photos (table below); they replaced the drawing on 2026-10-15.
 
 ## Unsplash (added 2026-10-15)
 
@@ -45,3 +45,6 @@ Free photos under the Unsplash License (https://unsplash.com/license: free for c
 | shared/washers-row-silver.jpg | https://unsplash.com/photos/AsBD_zNgTuE |
 | shared/washers-row-wide.jpg | https://unsplash.com/photos/z3QaK44YPYc |
 | shared/washers-row-wood-front.jpg | https://unsplash.com/photos/HkfI9i4g3-8 |
+| types/laundry-centre.jpg | https://unsplash.com/photos/a-white-machine-in-a-room-u_iAyixU_SU |
+| types/laundry-centre-1.jpg | https://unsplash.com/photos/a-washer-and-dryer-in-a-small-room-U6VZOrQinKs |
+| types/laundry-centre-2.jpg | https://unsplash.com/photos/a-white-room-with-a-mirror-and-a-washer-FMjIXcyjHqw |

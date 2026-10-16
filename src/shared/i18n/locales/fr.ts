@@ -414,6 +414,8 @@ const fr: DeepPartial<Dictionary> = {
         photos: {
           "laundry-centre":
             "Exemple de centre de lavage monobloc : une sécheuse au-dessus d'une laveuse à chargement par le haut, dans un seul boîtier",
+          "laundry-centre-1": "Exemple d'un centre de lavage monobloc dans un placard, à côté de portes d'armoire beiges",
+          "laundry-centre-2": "Exemple d'un centre de lavage monobloc dans un placard de couloir, porte ouverte",
         },
         page: {
           metaTitle: "Centre de lavage monobloc à louer, Toronto | {setPrice}/sem.",

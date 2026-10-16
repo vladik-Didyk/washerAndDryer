@@ -424,6 +424,8 @@ const es: DeepPartial<Dictionary> = {
         photos: {
           "laundry-centre":
             "Ejemplo de centro de lavado de una pieza: una secadora sobre una lavadora de carga superior en un solo gabinete",
+          "laundry-centre-1": "Ejemplo de un centro de lavado de una pieza en un clóset junto a puertas de gabinete beige",
+          "laundry-centre-2": "Ejemplo de un centro de lavado de una pieza en un clóset del pasillo con la puerta abierta",
         },
         page: {
           metaTitle: "Centro de lavado en alquiler, Toronto | {setPrice}/semana",
