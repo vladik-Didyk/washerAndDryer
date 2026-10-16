@@ -93,6 +93,11 @@
     @apply bg-action text-brand-dark shadow-[0_8px_20px_-8px_rgb(255_122_26/0.7)] hover:bg-action-light hover:shadow-[0_10px_24px_-8px_rgb(255_122_26/0.8)];
   }
 
+  /* Solid blue: the phone buttons, so orange stays for "start" */
+  .btn-blue {
+    @apply bg-brand text-white hover:bg-brand-dark;
+  }
+
   .btn-secondary {
     @apply border-2 border-brand bg-white text-brand hover:bg-brand-mint;
   }
