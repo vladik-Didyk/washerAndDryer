@@ -675,7 +675,7 @@ const fr: DeepPartial<Dictionary> = {
     },
     rooms: {
       title: "Un appareil pour chaque espace",
-      lead: "Placards, condos, sous-sols, buanderies. Des photos d'exemple d'espaces où vont nos types d'appareils.",
+      lead: "Placards, condos, sous-sols, buanderies. Voyez où vont nos appareils.",
       captions: {
         "rooms/stacked-small-room": "Un ensemble superposable dans une pièce étroite",
         "rooms/washer-shelves": "Une laveuse entre les tablettes",

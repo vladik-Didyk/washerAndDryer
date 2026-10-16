@@ -716,7 +716,7 @@ const en = {
     // The laundry-room photo carousel (widgets/rooms-carousel): captions by file name.
     rooms: {
       title: "A machine for every space",
-      lead: "Closets, condos, basements, laundry rooms. Example photos of spaces our machine types fit.",
+      lead: "Closets, condos, basements, laundry rooms. See where our machines fit.",
       captions: {
         "rooms/stacked-small-room": "A stackable pair in a narrow room",
         "rooms/washer-shelves": "One washer between the shelves",

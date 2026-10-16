@@ -683,7 +683,7 @@ const es: DeepPartial<Dictionary> = {
     },
     rooms: {
       title: "Una máquina para cada espacio",
-      lead: "Clósets, condominios, sótanos, lavanderías. Fotos de ejemplo de espacios donde caben nuestros tipos de máquina.",
+      lead: "Clósets, condominios, sótanos, lavanderías. Vea dónde caben nuestras máquinas.",
       captions: {
         "rooms/stacked-small-room": "Un juego apilable en un cuarto angosto",
         "rooms/washer-shelves": "Una lavadora entre los estantes",
