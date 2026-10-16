@@ -50,15 +50,12 @@ function HeroPhoto({ className = "" }: { className?: string }) {
           className={photoClass + " object-[50%_88%] sm:object-[40%_60%] lg:object-[40%_50%]"}
         />
       </picture>
-      <figcaption className={captionClass}>{d.home.hero.photoCaption}</figcaption>
     </figure>
   );
 }
 
 const photoClass =
   "aspect-[16/10] w-full object-cover sm:aspect-[2/1] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:rounded-bl-[3rem]";
-const captionClass =
-  "absolute bottom-3 right-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-medium text-white sm:bottom-4 sm:right-4";
 
 // Home hero: the weekly price and the two ways to start, beside the laundry-room photo. It
 // stands still (no carousel): phones get the text first, so the price and both buttons fit

@@ -1639,6 +1639,11 @@ const en = {
     title: "Request a repair",
     lead: "Is a machine you rent from us not working right? Repairs are included while you rent: we repair it or replace it at no charge.",
     sectionLabel: "Repair request",
+    // The photo card at the top of /repair/: the button opens a text with `photoBody` typed in.
+    photoTitle: "Send a photo of the problem",
+    photoText: "A photo or short video of the problem helps us see what's wrong before we come.",
+    photoButton: "Text us a photo",
+    photoBody: "Repair request – my address: ",
     fastest: "Fastest: call or text",
     leakTitle: "Water leaking?",
     leakText: "Turn off the water taps behind the washer if you can reach them safely, then call us.",

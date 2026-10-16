@@ -4,6 +4,7 @@ export {
   ArrowRight,
   BadgeCheck,
   BookOpen,
+  Camera,
   Building2,
   Check,
   ChevronDown,
