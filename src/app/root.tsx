@@ -175,11 +175,12 @@ export default function App() {
 }
 
 // Unknown URLs (and drafts or /account/ where they don't exist) render the 404 page with the
-// status 404; anything else is a short error page with the phone number.
+// status 404; anything else is a short error page with the phone number. Only real errors are
+// logged: not a 4xx such as the 405 of a POST to a page without a form.
 export function ErrorBoundary() {
   const error = useRouteError();
   const notFound = isRouteErrorResponse(error) && error.status === 404;
-  if (!notFound) console.error(error);
+  if (!isRouteErrorResponse(error) || error.status >= 500) console.error(error);
   return <Frame>{notFound ? <NotFoundPage /> : <ErrorMessage />}</Frame>;
 }
 
