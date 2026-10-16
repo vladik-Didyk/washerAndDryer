@@ -321,6 +321,8 @@ about 25 customers).
 action (shared `CtaRow`: Start your rental or Get a quote, plus Call); shorter, action-first copy in
 all four languages. A blue/orange and a midnight/starlight theme were tried and dropped: the
 green theme stays.
+2026-10-16, version `04d9d0bc`: forms emailed through Cloudflare (`FORM_MAILER` binding) instead
+of Web3Forms, whose free plan refused every server-sent request; a test repair request arrived.
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
