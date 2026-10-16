@@ -9,8 +9,8 @@ import {
   CircleHelp,
   Clock,
   Container,
-  CreditCard,
   LangLink,
+  LogIn,
   Logo,
   MapPin,
   Menu,
@@ -34,14 +34,15 @@ const NAV_ICONS: Record<(typeof siteConfig.navigation)[number]["key"], LucideIco
 };
 
 // Secondary links: in a thin row above the header on wide screens (with the language
-// switcher), and in the mobile menu. Guides and Pay / manage appear only when their pages
-// exist in this deployment. The main row keeps to the menu, the phone and "Start your rental".
+// switcher), and in the mobile menu. Guides appear only when their pages exist in this
+// deployment. "Sign in" (/account/) is in the phone menu here; wide screens show it in the
+// main row, beside the phone number.
 function utilityLinks(site: Site, nav: Dictionary["nav"]) {
   const links: Array<{ label: string; href: string; Icon: LucideIcon }> = [
     { label: nav.repair, href: "/repair/", Icon: Wrench },
   ];
   if (site.has("/guides/")) links.push({ label: nav.guides, href: "/guides/", Icon: BookOpen });
-  if (site.has("/account/")) links.push({ label: nav.account, href: "/account/", Icon: CreditCard });
+  if (site.has("/account/")) links.push({ label: nav.account, href: "/account/", Icon: LogIn });
   return links;
 }
 
@@ -103,7 +104,7 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
           </p>
           <nav aria-label={d.nav.more}>
             <ul className="flex items-center gap-5">
-              {utility.map(({ label, href, Icon }) => (
+              {utility.filter(({ href }) => href !== pagePaths.account).map(({ label, href, Icon }) => (
                 <li key={href}>
                   <LangLink
                     href={href}
@@ -177,6 +178,14 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
           {/* Phones have the call bar at the bottom instead (widgets/mobile-action-bar). From 768px:
               the phone (an icon, then the number from 1024px) and the main call to action. */}
           <div className="flex shrink-0 items-center gap-2">
+            <LangLink
+              href={pagePaths.account}
+              aria-current={here(pagePaths.account)}
+              className="hidden h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 font-display text-[15px] font-semibold text-ink-soft transition-colors hover:bg-brand-mint hover:text-brand-dark aria-[current=page]:text-brand-dark lg:inline-flex"
+            >
+              <LogIn className="h-[18px] w-[18px]" aria-hidden="true" />
+              {d.nav.account}
+            </LangLink>
             <a
               href={phone.tel}
               aria-label={d.header.callAria}

@@ -151,7 +151,7 @@ const en = {
     faq: "FAQ",
     repair: "Request a repair",
     guides: "Guides",
-    account: "Pay / manage",
+    account: "Sign in",
   },
 
   header: {
@@ -179,7 +179,7 @@ const en = {
     buildings: "Laundry rooms",
     repair: "Request a repair",
     guides: "Guides",
-    account: "Pay / manage",
+    account: "Sign in",
     privacy: "Privacy",
     terms: "Rental terms",
     copyright: "© {year} {company}",
@@ -282,11 +282,11 @@ const en = {
         "Renting a washer or dryer from us and it stopped working? Repairs are included. Send a repair request, or call or text {phone}.",
     },
     account: {
-      name: "Pay or manage",
-      llmsNote: "paying by card, the Stripe customer portal, ending a rental",
-      title: "Pay or Manage Your Rental | {company}",
+      name: "Sign in",
+      llmsNote: "customer sign-in; card and receipts in the Stripe customer portal",
+      title: "Sign In | {company}",
       description:
-        "Pay with the link sent with your quote, manage your card and receipts in the Stripe customer portal, or text us to end a rental.",
+        "Sign in to your customer account at {company}: your rentals, repair requests and billing in one place.",
     },
     start: {
       name: "Start your rental",
@@ -1685,19 +1685,29 @@ const en = {
   },
 
   account: {
-    eyebrow: "For customers renting from us",
-    title: "Pay or manage your rental",
-    lead: "Card payments go through Stripe. We never see your full card number.",
-    sectionLabel: "Your rental",
-    payTitle: "Pay by card",
-    payText: "Use the Stripe payment link from your quote. Can't find it? Text us.",
-    portalTitle: "Your card and receipts",
-    portalText: "Change your card and see receipts in the Stripe customer portal.",
-    portalButton: "Open the customer portal",
-    endTitle: "End a rental",
-    endText:
-      "Text us at {phone}. After the {minWeeks}-week minimum, either side can end the rental with {noticeDays} days' notice. We pick the machine up.",
+    eyebrow: "Customer account",
+    title: "Sign in",
+    lead: "Enter your email. We'll send you a sign-in link. No password needed.",
+    formLabel: "Sign in",
+    emailLabel: "Email",
+    emailInvalid: "Enter a valid email address.",
+    submit: "Send sign-in link",
+    soonTitle: "Customer accounts open soon",
+    soonText: "Until then, change your card and see receipts in the billing portal. For anything else, text us.",
+    portalButton: "Open billing portal",
     textUs: "Text us",
+    tryAgain: "Use another email",
+    newCustomer: "New customer? {startLink}",
+    secure: "Card payments are secured by Stripe. We never see your full card number.",
+    panelTitle: "Your rental, in one place",
+    available: "Available now",
+    coming: "Coming soon",
+    features: {
+      billing: { title: "Billing", text: "Your card, receipts and payment history." },
+      machines: { title: "Your machines", text: "What you rent, where, and the next payment." },
+      repairs: { title: "Repairs with photos", text: "Report a problem and follow it until it's fixed." },
+      messages: { title: "Messages", text: "Write to us and get answers in one thread." },
+    },
   },
 
   guides: {

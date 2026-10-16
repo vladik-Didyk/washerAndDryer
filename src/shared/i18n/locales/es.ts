@@ -135,7 +135,7 @@ const es: DeepPartial<Dictionary> = {
     faq: "Preguntas",
     repair: "Pedir una reparación",
     guides: "Guías",
-    account: "Pagar / gestionar",
+    account: "Iniciar sesión",
   },
 
   header: {
@@ -162,7 +162,7 @@ const es: DeepPartial<Dictionary> = {
     buildings: "Lavanderías",
     repair: "Pedir una reparación",
     guides: "Guías",
-    account: "Pagar / gestionar",
+    account: "Iniciar sesión",
     privacy: "Privacidad",
     terms: "Condiciones del alquiler",
     copyright: "© {year} {company}",
@@ -256,11 +256,11 @@ const es: DeepPartial<Dictionary> = {
         "¿Nos alquila una lavadora o secadora y dejó de funcionar? Las reparaciones están incluidas. Envíe una solicitud, o llame o escriba al {phone}.",
     },
     account: {
-      name: "Pagar o gestionar",
-      llmsNote: "pago con tarjeta, el portal de clientes de Stripe, terminar un alquiler",
-      title: "Pagar o gestionar su alquiler | {company}",
+      name: "Iniciar sesión",
+      llmsNote: "acceso de clientes; tarjeta y recibos en el portal de clientes de Stripe",
+      title: "Iniciar sesión | {company}",
       description:
-        "Pague con el enlace que enviamos con su cotización, gestione su tarjeta y recibos en el portal de Stripe, o escríbanos para terminar el alquiler.",
+        "Inicie sesión en su cuenta de cliente de {company}: sus alquileres, reparaciones y pagos en un solo lugar.",
     },
     start: {
       name: "Empezar el alquiler",
@@ -1644,19 +1644,29 @@ const es: DeepPartial<Dictionary> = {
   },
 
   account: {
-    eyebrow: "Para clientes que nos alquilan",
-    title: "Pagar o gestionar su alquiler",
-    lead: "Los pagos con tarjeta se hacen a través de Stripe. Nunca vemos el número completo de su tarjeta.",
-    sectionLabel: "Su alquiler",
-    payTitle: "Pagar con tarjeta",
-    payText: "Use el enlace de pago de Stripe de su cotización. ¿No lo encuentra? Escríbanos.",
-    portalTitle: "Su tarjeta y sus recibos",
-    portalText: "Cambie su tarjeta y vea los recibos en el portal de clientes de Stripe.",
-    portalButton: "Abrir el portal de clientes",
-    endTitle: "Terminar un alquiler",
-    endText:
-      "Envíenos un mensaje al {phone}. Después del mínimo de {minWeeks} semanas, cualquiera de las partes puede terminar el alquiler con {noticeDays} días de aviso. Nosotros recogemos la máquina.",
-    textUs: "Escríbanos",
+    eyebrow: "Cuenta de cliente",
+    title: "Iniciar sesión",
+    lead: "Escriba su correo. Le enviaremos un enlace para entrar. Sin contraseña.",
+    formLabel: "Iniciar sesión",
+    emailLabel: "Correo electrónico",
+    emailInvalid: "Escriba un correo electrónico válido.",
+    submit: "Enviar enlace de acceso",
+    soonTitle: "Las cuentas de cliente abren pronto",
+    soonText: "Mientras tanto, cambie su tarjeta y vea sus recibos en el portal de pagos. Para todo lo demás, envíenos un mensaje.",
+    portalButton: "Abrir portal de pagos",
+    textUs: "Envíenos un mensaje",
+    tryAgain: "Usar otro correo",
+    newCustomer: "¿Cliente nuevo? {startLink}",
+    secure: "Los pagos con tarjeta están protegidos por Stripe. Nunca vemos el número completo de su tarjeta.",
+    panelTitle: "Su alquiler, en un solo lugar",
+    available: "Disponible ya",
+    coming: "Muy pronto",
+    features: {
+      billing: { title: "Pagos", text: "Su tarjeta, recibos e historial de pagos." },
+      machines: { title: "Sus máquinas", text: "Qué alquila, dónde y el próximo pago." },
+      repairs: { title: "Reparaciones con fotos", text: "Reporte un problema y sígalo hasta que esté resuelto." },
+      messages: { title: "Mensajes", text: "Escríbanos y reciba respuestas en una sola conversación." },
+    },
   },
 
   guides: {

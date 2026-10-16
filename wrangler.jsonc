@@ -17,6 +17,9 @@
     "run_worker_first": ["/*", "!/assets/*", "!/photos/*", "!/brand/*", "!/types/*", "!/favicon.png", "!/apple-touch-icon.png", "!/og-image.jpg"]
   },
   "upload_source_maps": true,
+  // `wrangler dev` (pnpm preview) would otherwise present local requests as
+  // http://washerrent.com (the first route), and workers/app.ts sends those to https.
+  "dev": { "host": "localhost" },
   "workers_dev": true,
   "preview_urls": true,
   // The forms' email (src/shared/api/email.server.ts): free sending to the business's own

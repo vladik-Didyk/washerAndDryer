@@ -352,6 +352,9 @@ of Web3Forms, whose free plan refused every server-sent request; a test repair r
 about 1 in 4 page loads before; 0 in 72 after); Stripe portal link in `siteConfig`.
 2026-10-16, version `778433e3`: privacy policy and rental terms published (owner approved),
 privacy line under every form, http → https redirect and HSTS from the Worker.
+2026-10-16: customer sign-in at `/account/` (email only; noindex, not in the sitemap; "Sign in"
+in the header and phone menu). Accounts are not built yet: the form answers "opening soon" and
+links the Stripe billing portal and a text (src/pages/account/action.ts keeps no address).
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.

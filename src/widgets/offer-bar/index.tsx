@@ -1,5 +1,5 @@
 import { promotionText, useActivePromotions } from "~/entities/offer";
-import { useI18n } from "~/shared/i18n";
+import { DEFAULT_LANG, useI18n } from "~/shared/i18n";
 import { useSite } from "~/shared/lib";
 import { Container, Gift, LangLink, type LucideIcon, UserPlus } from "~/shared/ui";
 
@@ -7,13 +7,15 @@ import { Container, Gift, LangLink, type LucideIcon, UserPlus } from "~/shared/u
 // Which promotions run is decided on the server for each request (the root loader's time,
 // entities/offer), so the HTML and the hydrated page always match and an offer disappears on
 // its own when it ends. The referral offer always shows.
-// Each offer links to its answer on /faq/, or to the rental terms once those are published.
+// Each offer links to its answer on /faq/, or, in English, to the rental terms once those are
+// published (the terms are English only: the FAQ answers in the page's language).
 export function OfferBar() {
   const site = useSite();
   const i18n = useI18n();
   const { d } = i18n;
   const promotions = useActivePromotions();
-  const offerHref = (anchor: string) => `${site.isPublished("/terms/") ? "/terms/" : "/faq/"}#${anchor}`;
+  const toTerms = i18n.lang === DEFAULT_LANG && site.isPublished("/terms/");
+  const offerHref = (anchor: string) => `${toTerms ? "/terms/" : "/faq/"}#${anchor}`;
 
   const offers: Array<{ id: string; Icon: LucideIcon; text: string }> = [
     ...promotions.map((promotion) => ({ id: promotion.id, Icon: Gift, text: promotionText(promotion, i18n).short })),

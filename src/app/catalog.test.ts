@@ -59,6 +59,8 @@ describe("site catalog", () => {
     const xml = sitemapXml(catalog(preview));
     expect(xml).not.toContain("/guides/");
     expect(xml).toContain("<loc>https://washerrent.com/terms/</loc>");
+    // The customer sign-in exists here (preview) but is noindex: never in the sitemap.
+    expect(xml).not.toContain("/account/");
     expect(xml).toContain("<loc>https://washerrent.com/toronto/north-york/</loc>");
   });
 

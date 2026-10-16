@@ -1,4 +1,5 @@
-// /sitemap.xml: published pages only; drafts are never listed, even in a preview deployment.
+// /sitemap.xml: published pages only; drafts are never listed, even in a preview deployment,
+// and neither is the customer sign-in.
 // Every page in each of its languages, each URL with the hreflang alternates of the others
 // (xhtml:link, as Google reads them) and x-default = the English page.
 import type { LoaderFunctionArgs } from "react-router";
@@ -13,7 +14,8 @@ const url = (path: string) => `${siteConfig.siteUrl}${path}`;
 export function sitemapXml(entries: CatalogEntry[]): string {
   const lastmod = isoDate(siteConfig.lastUpdated);
   const urls = entries
-    .filter((entry) => !entry.draft)
+    // Drafts, and the customer sign-in (noindex), are left out.
+    .filter((entry) => !entry.draft && entry.kind !== "account")
     .flatMap((entry) => {
       const alternates =
         entry.languages.length > 1

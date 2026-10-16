@@ -140,7 +140,7 @@ const fr: DeepPartial<Dictionary> = {
     faq: "FAQ",
     repair: "Demander une réparation",
     guides: "Guides",
-    account: "Payer / gérer",
+    account: "Se connecter",
   },
 
   header: {
@@ -167,7 +167,7 @@ const fr: DeepPartial<Dictionary> = {
     buildings: "Salles de lavage",
     repair: "Demander une réparation",
     guides: "Guides",
-    account: "Payer / gérer",
+    account: "Se connecter",
     privacy: "Confidentialité",
     terms: "Conditions de location",
     copyright: "© {year} {company}",
@@ -252,10 +252,11 @@ const fr: DeepPartial<Dictionary> = {
         "Vous louez une laveuse ou une sécheuse chez nous et elle ne fonctionne plus? Réparations incluses. Envoyez une demande ou appelez le {phone}.",
     },
     account: {
-      name: "Payer ou gérer",
-      title: "Payer ou gérer votre location | {company}",
+      name: "Se connecter",
+      llmsNote: "connexion client; carte et reçus dans le portail client Stripe",
+      title: "Se connecter | {company}",
       description:
-        "Payez avec le lien reçu avec votre soumission, gérez votre carte et vos reçus dans le portail client Stripe, ou écrivez-nous pour terminer une location.",
+        "Connectez-vous à votre compte client {company} : vos locations, réparations et paiements au même endroit.",
     },
     start: {
       name: "Commencer la location",
@@ -1640,19 +1641,29 @@ const fr: DeepPartial<Dictionary> = {
   },
 
   account: {
-    eyebrow: "Pour les clients qui louent chez nous",
-    title: "Payer ou gérer votre location",
-    lead: "Les paiements par carte passent par Stripe. Nous ne voyons jamais votre numéro de carte complet.",
-    sectionLabel: "Votre location",
-    payTitle: "Payer par carte",
-    payText: "Utilisez le lien de paiement Stripe de votre soumission. Vous ne le trouvez pas? Écrivez-nous par texto.",
-    portalTitle: "Votre carte et vos reçus",
-    portalText: "Changez de carte et consultez les reçus dans le portail client Stripe.",
-    portalButton: "Ouvrir le portail client",
-    endTitle: "Mettre fin à une location",
-    endText:
-      "Écrivez-nous par texto au {phone}. Après le minimum de {minWeeks} semaines, chaque partie peut mettre fin à la location avec un préavis de {noticeDays} jours. Nous venons reprendre l'appareil.",
-    textUs: "Nous écrire par texto",
+    eyebrow: "Compte client",
+    title: "Se connecter",
+    lead: "Entrez votre courriel. Nous vous enverrons un lien de connexion. Pas de mot de passe.",
+    formLabel: "Se connecter",
+    emailLabel: "Courriel",
+    emailInvalid: "Entrez une adresse courriel valide.",
+    submit: "Envoyer le lien de connexion",
+    soonTitle: "Les comptes clients ouvrent bientôt",
+    soonText: "D'ici là, changez votre carte et consultez vos reçus dans le portail de facturation. Pour tout le reste, écrivez-nous par texto.",
+    portalButton: "Ouvrir le portail de facturation",
+    textUs: "Écrivez-nous",
+    tryAgain: "Utiliser un autre courriel",
+    newCustomer: "Nouveau client ? {startLink}",
+    secure: "Les paiements par carte sont sécurisés par Stripe. Nous ne voyons jamais le numéro complet de votre carte.",
+    panelTitle: "Votre location, au même endroit",
+    available: "Disponible",
+    coming: "Bientôt",
+    features: {
+      billing: { title: "Facturation", text: "Votre carte, vos reçus et l'historique des paiements." },
+      machines: { title: "Vos appareils", text: "Ce que vous louez, où, et le prochain paiement." },
+      repairs: { title: "Réparations avec photos", text: "Signalez un problème et suivez-le jusqu'à la réparation." },
+      messages: { title: "Messages", text: "Écrivez-nous et recevez les réponses dans un seul fil." },
+    },
   },
 
   guides: {
