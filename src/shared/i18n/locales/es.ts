@@ -47,19 +47,19 @@ const es: DeepPartial<Dictionary> = {
     hoursSentence: "Lunes a sábado, {opens} – {closes}; domingo cerrado.",
     hoursList: ["Lun–Sáb: {opens} – {closes}", "Domingo: cerrado"],
     preferCallOrText: "¿Prefiere llamar o escribir?",
-    closetPhotoHelps: "Una foto del clóset ayuda. Puede enviárnosla por mensaje de texto.",
+    closetPhotoHelps: "Una foto del clóset ayuda. Envíenosla por mensaje.",
     fartherAwayAsk: "¿Vive más lejos? Pregúntenos.",
-    fartherAwayCall: "¿Vive más lejos? Llame o escriba al {phoneLink} y pregúntenos.",
+    fartherAwayCall: "¿Vive más lejos? Llame o escriba al {phoneLink}.",
     allAreas: "Todas las zonas",
     compareAllTypes: "Comparar todos los tipos de máquinas",
     compareTypes: "Comparar los tipos de máquinas",
     examplePhotosNote:
-      "Las fotos son ejemplos de cada tipo, no nuestras máquinas. La marca y el modelo dependen de lo que haya disponible.",
+      "Fotos de ejemplo, no de nuestras máquinas. La marca y el modelo dependen de lo que haya disponible.",
     textPhotoFits:
-      "¿No sabe qué tiene? Envíe una foto del espacio al {phoneLink} y le decimos qué máquina cabe.",
+      "¿No sabe qué cabe? Envíe una foto del espacio al {phoneLink}. Le decimos.",
     readyToRent: "¿Listo para alquilar?",
     readyToRentText:
-      "Díganos su zona y su espacio de lavandería. Le respondemos con la máquina, el total y la fecha de inicio.",
+      "Envíe su zona y su espacio. Le respondemos con la máquina, el total y la fecha de inicio.",
     measureGuide: "Cómo medir su espacio de lavandería",
     howItWorks: "Cómo funciona",
     opensInNewTab: "(se abre en una pestaña nueva)",
@@ -173,15 +173,15 @@ const es: DeepPartial<Dictionary> = {
       "first-week-free": {
         short: "Primera semana gratis hasta el {firstWeekFreeEndShort}",
         title: "Primera semana gratis",
-        text: "Los clientes nuevos que empiecen su alquiler hasta el {firstWeekFreeEnd} no pagan la renta de la primera semana. Aplica a juegos de lavadora y secadora y a máquinas individuales.",
+        text: "Los clientes nuevos que empiecen su alquiler hasta el {firstWeekFreeEnd} no pagan la renta de la primera semana. Aplica a juegos y a máquinas individuales.",
         stillPaid: "El depósito de {deposit} y la entrega se pagan normalmente.",
-        note: "Primera semana gratis para clientes nuevos que empiecen su alquiler hasta el {firstWeekFreeEnd}. El depósito y la entrega se pagan normalmente.",
+        note: "Clientes nuevos: empiece hasta el {firstWeekFreeEnd} y no pague renta la primera semana. El depósito y la entrega se pagan igual.",
       },
     },
     referral: {
       short: "Recomiende a un amigo y reciba {referralAmount}",
       title: "Recomiende a un amigo",
-      text: "Usted recibe {referralAmount} cuando un amigo que recomendó alquila con nosotros por {referralMonths} meses o más.",
+      text: "Reciba {referralAmount} cuando un amigo que recomendó alquile con nosotros por {referralMonths} meses o más.",
     },
   },
 
@@ -392,22 +392,22 @@ const es: DeepPartial<Dictionary> = {
           metaDescription:
             "Alquile lavadora y secadora apilables en Toronto y el GTA por {setPrice} por semana. Caben en clósets angostos. Incluye reparaciones y retiro.",
           h1: "Alquiler de lavadora y secadora apilables",
-          intro: "Una lavadora de carga frontal con la secadora encima: dos máquinas completas en el espacio de una.",
+          intro: "Lavadora abajo, secadora arriba. Dos máquinas completas en el espacio de una.",
           whatItIs: [
-            "Un par apilable es una lavadora de carga frontal con una secadora del mismo tamaño montada encima con un kit de apilamiento. Son dos máquinas separadas, cada una con sus propios controles, en una sola columna.",
-            "Como solo una máquina toca el piso, un par apilable cabe en clósets donde dos máquinas lado a lado nunca cabrían.",
+            "Una lavadora de carga frontal con una secadora del mismo tamaño montada encima con un kit de apilamiento. Dos máquinas separadas, cada una con sus propios controles, en una sola columna.",
+            "Solo una máquina toca el piso. Cabe en clósets donde un par lado a lado nunca cabría.",
           ],
           fits: [
             "Clósets de lavandería en condominios y apartamentos",
-            "Espacios angostos con altura suficiente para dos máquinas, una sobre otra",
-            "Quien quiere una lavadora de carga frontal pero solo tiene espacio para una máquina",
+            "Espacios angostos con altura para dos máquinas",
+            "Quiere carga frontal pero solo tiene espacio para una máquina",
           ],
-          size: "Los pares apilables compactos suelen medir unas 24 pulgadas (61 cm) de ancho; los de tamaño completo, unas 27 pulgadas (69 cm). Mida el ancho, la profundidad y la altura del espacio, y la puerta por donde tienen que pasar. Deje unas pulgadas atrás para las mangueras y el ducto de la secadora.",
+          size: "Los pares compactos suelen medir unas 24 pulgadas (61 cm) de ancho; los de tamaño completo, unas 27 pulgadas (69 cm). Mida el ancho, la profundidad y la altura, y la puerta por donde entran. Deje unas pulgadas atrás para las mangueras y el ducto.",
         },
       },
       "laundry-centre": {
         title: "Centro de lavado de una pieza (lavadora y secadora en una unidad)",
-        description: "Lavadora y secadora en una sola unidad. La máquina típica de los clósets de condominio.",
+        description: "Lavadora y secadora en una sola unidad. La opción típica de los clósets de condominio.",
         priceNote: "por el juego",
         alt: "Centro de lavado de una pieza: una secadora sobre una lavadora de carga superior en un solo gabinete",
         compare: {
@@ -431,17 +431,17 @@ const es: DeepPartial<Dictionary> = {
             "Alquile un centro de lavado (lavadora y secadora en una unidad) en Toronto y el GTA por {setPrice} por semana. 24″ o 27″. Reparaciones incluidas.",
           h1: "Alquiler de centro de lavado: lavadora y secadora en una unidad",
           intro:
-            "Una lavadora de carga superior y una secadora en un solo gabinete. Una sola máquina para entregar y un solo espacio que llenar.",
+            "Lavadora de carga superior abajo, secadora arriba, en un solo gabinete. Un solo espacio que llenar.",
           whatItIs: [
-            "Un centro de lavado es un solo aparato con una lavadora de carga superior abajo y una secadora arriba. Los controles de ambas están en un mismo panel.",
-            "Muchos clósets de condominio se construyeron para esta máquina, así que suele ser el cambio más sencillo cuando hay que reemplazar una unidad vieja.",
+            "Un solo aparato: una lavadora de carga superior abajo y una secadora arriba. Un solo panel controla ambas.",
+            "Muchos clósets de condominio se construyeron para esta máquina. Suele ser el cambio más fácil para una unidad vieja.",
           ],
           fits: [
             "Clósets de condominio hechos para una unidad de una pieza",
-            "Espacios de lavandería pequeños con una sola toma de agua, desagüe y electricidad",
-            "Quien prefiere cargar la lavadora por arriba",
+            "Espacios pequeños con una sola toma de agua, desagüe y electricidad",
+            "Quien prefiere cargar por arriba",
           ],
-          size: "Los centros de lavado miden 24 o 27 pulgadas (61 o 69 cm) de ancho. Una unidad de 24 pulgadas mide unas 70 pulgadas (178 cm) de alto. Mida el ancho y la altura del clóset, y revise la profundidad con las puertas cerradas.",
+          size: "Los centros de lavado miden 24 o 27 pulgadas (61 o 69 cm) de ancho. Una unidad de 24 pulgadas mide unas 70 pulgadas (178 cm) de alto. Mida el ancho y la altura del clóset. Revise la profundidad con las puertas cerradas.",
         },
       },
       "side-by-side-front-load": {
@@ -472,17 +472,17 @@ const es: DeepPartial<Dictionary> = {
             "Alquile lavadora y secadora de carga frontal, lado a lado, en Toronto y el GTA por {setPrice} por semana. Tambores grandes. Reparaciones incluidas.",
           h1: "Alquiler de lavadora y secadora lado a lado, carga frontal",
           intro:
-            "Una lavadora de carga frontal y una secadora del mismo estilo, una al lado de la otra. Tambores de tamaño completo y una superficie plana para doblar ropa.",
+            "Una lavadora de carga frontal y su secadora, lado a lado. Tambores de tamaño completo y una superficie plana para doblar ropa.",
           whatItIs: [
-            "Dos máquinas separadas de tamaño completo, ambas de carga frontal, colocadas lado a lado. La parte de arriba queda libre y sirve como mesa para doblar ropa.",
-            "Las lavadoras de carga frontal mueven la ropa en poca agua, lo que va bien con cargas grandes como ropa de cama y toallas.",
+            "Dos máquinas de carga frontal de tamaño completo, lado a lado. La parte de arriba queda libre y le sirve como mesa para doblar.",
+            "Las de carga frontal mueven la ropa en poca agua. Eso va bien con cargas grandes como ropa de cama y toallas.",
           ],
           fits: [
             "Casas con cuarto de lavado o zona de lavado en el sótano",
             "Hogares grandes que lavan seguido",
-            "Espacios con lugar al frente para que ambas puertas abran",
+            "Espacios con lugar para que ambas puertas abran",
           ],
-          size: "Las máquinas de tamaño completo suelen medir unas 27 pulgadas (69 cm) de ancho cada una, así que calcule unas 55 pulgadas (140 cm) de ancho más un poco de espacio entre ellas y alrededor. Verifique que ambas puertas puedan abrir por completo.",
+          size: "Las máquinas de tamaño completo suelen medir unas 27 pulgadas (69 cm) de ancho cada una. Calcule unas 55 pulgadas (140 cm), más un poco de espacio alrededor. Verifique que ambas puertas abran por completo.",
         },
       },
       "side-by-side-top-load": {
@@ -511,22 +511,22 @@ const es: DeepPartial<Dictionary> = {
             "Alquile lavadora de carga superior y su secadora en Toronto y el GTA por {setPrice} por semana. Fácil de usar. Incluye reparaciones y retiro.",
           h1: "Alquiler de lavadora y secadora lado a lado, carga superior",
           intro:
-            "El par clásico: una lavadora de carga superior con su secadora al lado. Controles sencillos y menos necesidad de agacharse.",
+            "El par clásico: una lavadora de carga superior y su secadora. Controles sencillos y menos agacharse.",
           whatItIs: [
-            "Una lavadora de carga superior se abre con una tapa arriba, así que se carga de pie. La secadora de al lado se carga por el frente.",
-            "Las lavadoras de carga superior tienen controles sencillos y una abertura amplia, así que es fácil sacar la ropa mojada y pesada.",
+            "La lavadora se abre por arriba, así que se carga de pie. La secadora se carga por el frente.",
+            "Controles sencillos y una abertura amplia. La ropa mojada y pesada sale fácil.",
           ],
           fits: [
             "Sótanos y cuartos de lavado con espacio libre sobre la lavadora",
             "Quien prefiere no agacharse para cargar la lavadora",
             "Hogares que quieren una máquina sencilla y conocida",
           ],
-          size: "Las máquinas de tamaño completo suelen medir unas 27 pulgadas (69 cm) de ancho cada una, así que calcule unas 55 pulgadas (140 cm) de ancho. La tapa de la lavadora necesita espacio libre arriba para abrir, así que una repisa baja encima puede estorbar.",
+          size: "Las máquinas de tamaño completo suelen medir unas 27 pulgadas (69 cm) de ancho cada una. Calcule unas 55 pulgadas (140 cm). La tapa necesita espacio libre arriba, así que una repisa baja puede estorbar.",
         },
       },
       "single-machine": {
         title: "Solo lavadora o solo secadora",
-        description: "Una máquina para combinar con la que ya tiene.",
+        description: "Una máquina. Combínela con la que ya tiene.",
         priceNote: "por una máquina",
         alt: "Una lavadora junto al contorno punteado de una máquina que usted ya tiene",
         compare: {
@@ -545,17 +545,17 @@ const es: DeepPartial<Dictionary> = {
           metaDescription:
             "Alquile solo una lavadora o solo una secadora en Toronto y el GTA por {singlePrice} por semana. Combínela con la que ya tiene. Reparaciones incluidas.",
           h1: "Alquiler de lavadora o secadora: una máquina",
-          intro: "Solo una lavadora o solo una secadora, para combinar con la máquina que ya tiene.",
+          intro: "Solo una lavadora o solo una secadora. Combínela con la máquina que ya tiene.",
           whatItIs: [
-            "Si una de sus máquinas todavía funciona, no necesita un juego completo. Alquile la que le falta, por la mitad del precio de un juego.",
-            "Díganos cómo es la otra máquina (carga frontal o superior, y su ancho) y buscamos una que quede bien a su lado.",
+            "¿Una máquina todavía funciona? No necesita el juego completo. Alquile la que le falta por la mitad del precio de un juego.",
+            "Cuéntenos de su otra máquina: carga frontal o superior, y su ancho. Buscamos una que quede bien a su lado.",
           ],
           fits: [
-            "Su lavadora se dañó pero la secadora todavía funciona, o al revés",
-            "Se mudó a un lugar que tiene solo una máquina",
+            "Su lavadora se dañó pero la secadora funciona, o al revés",
+            "Su nuevo hogar tiene solo una máquina",
             "Quiere una lavadora ahora y una secadora después",
           ],
-          size: "La mayoría de las máquinas de tamaño completo miden unas 27 pulgadas (69 cm) de ancho; las compactas, unas 24 pulgadas (61 cm). Si alquila una secadora para apilarla sobre su lavadora, díganos la marca y el modelo de la lavadora para verificar que se puedan apilar.",
+          size: "La mayoría de las máquinas de tamaño completo miden unas 27 pulgadas (69 cm) de ancho; las compactas, unas 24 pulgadas (61 cm). ¿Va a apilar una secadora sobre su lavadora? Envíenos la marca y el modelo de la lavadora para verificar que se puedan apilar.",
         },
       },
     },
@@ -572,8 +572,8 @@ const es: DeepPartial<Dictionary> = {
       drawings: "Dibujos",
     },
     showcase: {
-      title: "Encuentre el tipo que cabe en su espacio",
-      lead: "Díganos el tamaño de su clóset y el tipo de tomacorriente. Buscamos una máquina que quepa, la revisamos, la entregamos y la conectamos.",
+      title: "Elija el tipo que cabe",
+      lead: "Envíe el tamaño de su clóset y el tipo de tomacorriente. Buscamos una máquina que quepa, la revisamos, la entregamos y la conectamos.",
       photosNote: "Las fotos son ejemplos de cada tipo, no nuestras máquinas. ",
       drawingsNote: "Los dibujos muestran el tipo, no una máquina específica. ",
       availabilityNote: "La marca y el modelo dependen de lo que haya disponible.",
@@ -594,10 +594,10 @@ const es: DeepPartial<Dictionary> = {
     index: {
       eyebrow: "Cinco tipos, dos precios",
       title: "Tipos de lavadoras y secadoras que alquilamos",
-      lead: "Cualquier juego de lavadora y secadora cuesta {setPrice} por semana. Una sola máquina cuesta {singlePrice} por semana. Todos los tipos incluyen reparaciones y el retiro de la máquina vieja.",
+      lead: "Cualquier juego cuesta {setPrice} por semana. Una máquina cuesta {singlePrice} por semana. Reparaciones y retiro de la máquina vieja siempre incluidos.",
       compareTitle: "Compare los tipos",
       compareLead:
-        "Los anchos son típicos; el tamaño exacto depende de la máquina que tengamos para usted. Díganos sus medidas y las revisamos primero.",
+        "Los anchos son típicos; el suyo depende de la máquina que tengamos. Envíe sus medidas y las revisamos primero.",
       columns: {
         type: "Tipo",
         width: "Ancho",
@@ -613,10 +613,10 @@ const es: DeepPartial<Dictionary> = {
         outlet: "¿Tomacorriente de secadora de 3 o de 4 clavijas?",
       },
       ctaTitle: "¿No sabe qué tipo le cabe?",
-      ctaText: "Envíe una foto del espacio al {phoneSpan} y le decimos qué máquina cabe.",
+      ctaText: "Envíe una foto del espacio al {phoneSpan}. Le decimos qué máquina cabe.",
     },
     page: {
-      measureTip: "Mida el ancho, la altura y la profundidad de su espacio, y las puertas por donde pasará la máquina.",
+      measureTip: "Mida el ancho, la altura y la profundidad de su espacio, y cada puerta por donde pasará la máquina.",
       summaryTitle: "Precio y qué incluye",
       forSet: "Por el juego de lavadora y secadora.",
       forSingle: "Por una máquina: una lavadora o una secadora.",
@@ -627,17 +627,17 @@ const es: DeepPartial<Dictionary> = {
         "Sin verificación de crédito",
       ],
       terms: "Depósito reembolsable de {deposit}. Mínimo {minWeeks} semanas, después semana a semana.",
-      needOne: "¿Necesita solo una máquina? {singlePrice} por semana.",
-      needBoth: "¿Necesita las dos? Un juego de lavadora y secadora cuesta {setPrice} por semana.",
+      needOne: "¿Solo necesita una máquina? {singlePrice} por semana.",
+      needBoth: "¿Necesita las dos? Lleve el juego por {setPrice} por semana.",
       specsTitle: "Medidas y conexiones",
       specsLead:
-        "Medidas típicas. El tamaño exacto depende de la máquina que tengamos para usted, así que primero revisamos sus medidas.",
+        "Medidas típicas. Las suyas dependen de la máquina que tengamos, así que primero revisamos sus medidas.",
       specsCaption: "Medidas y conexiones típicas: {title}",
       loadsFrom: "La lavadora se carga por",
       goodFor: "Ideal para",
       hookupsNeeded: "Conexiones necesarias",
       fitTitle: "¿No sabe si cabe?",
-      fitText: "Envíe una foto del espacio al {phoneLink} y lo revisamos.",
+      fitText: "Envíe una foto del espacio al {phoneLink}. Lo revisamos.",
       whatItIs: "Qué es",
       size: "Tamaño",
       whoItFits: "Para quién es",
@@ -654,26 +654,26 @@ const es: DeepPartial<Dictionary> = {
       repairs: {
         eyebrow: "Reparaciones incluidas",
         title: "Si se daña, la reparamos",
-        text: "Reparaciones, o una máquina de reemplazo, sin costo mientras dure el alquiler.",
-        cta: "Cómo funcionan las reparaciones",
+        text: "Reparaciones o una máquina de reemplazo, sin costo, mientras dure el alquiler.",
+        cta: "Vea cómo funcionan las reparaciones",
       },
       buildings: {
         eyebrow: "Para edificios",
-        title: "Máquinas para la lavandería de su edificio",
-        text: "Ponemos, instalamos y reparamos las máquinas. Cotización por edificio después de ver la lavandería.",
-        cta: "Lavanderías",
+        title: "Máquinas de lavandería para edificios",
+        text: "Las ponemos, instalamos y reparamos. Cotización por edificio después de ver la lavandería.",
+        cta: "Ver lavanderías",
       },
     },
     included: {
-      title: "Qué incluye",
+      title: "Cada alquiler incluye",
       items: [
         {
           title: "Entrega e instalación",
-          text: "Conectamos el agua, el desagüe, la electricidad y la ventilación, y hacemos un ciclo de prueba antes de irnos.",
+          text: "Conectamos el agua, el desagüe, la electricidad y la ventilación. Después hacemos un ciclo de prueba.",
         },
         {
           title: "Reparaciones incluidas",
-          text: "Si una máquina deja de funcionar, la reparamos o la reemplazamos sin costo.",
+          text: "¿Una máquina deja de funcionar? La reparamos o la reemplazamos sin costo.",
         },
         {
           title: "Retiro de la máquina vieja",
@@ -682,8 +682,8 @@ const es: DeepPartial<Dictionary> = {
       ],
     },
     rooms: {
-      title: "Una máquina para cada tipo de espacio",
-      lead: "Clósets, condominios, sótanos y lavanderías: fotos de ejemplo de los espacios donde caben nuestros tipos de máquina.",
+      title: "Una máquina para cada espacio",
+      lead: "Clósets, condominios, sótanos, lavanderías. Fotos de ejemplo de espacios donde caben nuestros tipos de máquina.",
       captions: {
         "rooms/stacked-small-room": "Un juego apilable en un cuarto angosto",
         "rooms/washer-shelves": "Una lavadora entre los estantes",
@@ -699,7 +699,7 @@ const es: DeepPartial<Dictionary> = {
     hero: {
       eyebrow: "Hablamos español",
       title: "Alquiler de lavadora y secadora en Toronto y el GTA",
-      priceSummary: "{setPrice} por semana el juego, o {singlePrice} por semana una sola máquina.",
+      priceSummary: "{setPrice} por semana el juego. {singlePrice} por semana una sola máquina.",
       aWeek: "por semana",
       forTheSet: "por el juego",
       orSingle: "o {price} por una máquina",
@@ -723,7 +723,7 @@ const es: DeepPartial<Dictionary> = {
       ],
     },
     prices: {
-      title: "Precios",
+      title: "Precios por semana",
       perWeek: "por semana",
       forSet: "juego de lavadora y secadora",
       orSingle: "o {price} por semana por una máquina",
@@ -736,9 +736,9 @@ const es: DeepPartial<Dictionary> = {
     },
     landlordsTeaser: {
       title: "¿Propietario o edificio?",
-      text: "Máquinas para sus unidades o para la lavandería de su edificio. Reparaciones incluidas.",
-      link: "Lavandería para propietarios",
-      buildingsLink: "Lavanderías",
+      text: "Máquinas para sus unidades o su lavandería. Reparaciones incluidas.",
+      link: "Ver opciones para propietarios",
+      buildingsLink: "Ver lavanderías",
     },
     about: {
       title: "Quiénes somos",
@@ -747,21 +747,21 @@ const es: DeepPartial<Dictionary> = {
         "Más de {experienceYears} años reparando lavadoras y secadoras",
         "Hablamos {languages}",
       ],
-      more: "Más sobre nosotros",
+      more: "Lea más sobre nosotros",
     },
     serviceArea: {
-      title: "Zona de servicio",
-      allAreas: "Todas las zonas donde entregamos",
+      title: "Dónde entregamos",
+      allAreas: "Ver todas las zonas",
       mapLabel: "Mapa de las zonas donde entregamos",
       lake: "Lago Ontario",
     },
     faq: {
       title: "Preguntas frecuentes",
-      another: "¿Otra pregunta? Llame o escriba al {phoneLink}.",
-      all: "Todas las preguntas y respuestas",
+      another: "¿Más preguntas? Llame o escriba al {phoneLink}.",
+      all: "Ver todas las preguntas",
     },
     cta: {
-      title: "Una lavadora y una secadora por {setPrice} por semana",
+      title: "Alquile un juego por {setPrice} por semana",
       text: "Reparaciones incluidas. No se cobra HST.",
     },
     startRental: {
@@ -785,12 +785,12 @@ const es: DeepPartial<Dictionary> = {
         metaDescription:
           "Alquiler de lavadora y secadora en Toronto, North York, Etobicoke, Scarborough, East York y York: {setPrice} por semana el juego, {singlePrice} una máquina.",
         intro:
-          "Alquilamos lavadoras y secadoras en toda la ciudad de Toronto, incluidos North York, Etobicoke, Scarborough, East York y York.",
+          "Alquilamos lavadoras y secadoras en todo Toronto, incluidos North York, Etobicoke, Scarborough, East York y York.",
         neighbourhoods: ["North York", "Etobicoke", "Scarborough", "East York", "York"],
         homes: [
-          "Mucha gente en Toronto vive en condominios y apartamentos. Los clósets de lavandería de los condominios suelen ser angostos, así que lo común es un par apilable de 24 pulgadas o un centro de lavado de una pieza.",
-          "La mayoría de los edificios de condominios piden reservar el ascensor de servicio para una entrega. Reserve un horario con su edificio y díganos la hora.",
-          "Las casas con cuarto de lavado en el sótano suelen tener espacio para un par lado a lado.",
+          "Mucha gente en Toronto vive en condominios y apartamentos. Los clósets de los condominios suelen ser angostos. Lo común es un par apilable de 24 pulgadas o un centro de lavado de una pieza.",
+          "La mayoría de los condominios piden reservar el ascensor de servicio para la entrega. Reserve un horario y envíenos la hora.",
+          "Una casa con cuarto de lavado en el sótano suele tener espacio para un par lado a lado.",
         ],
         checklist: [
           "Ancho, profundidad y altura del clóset, y el ancho de su puerta",
@@ -801,12 +801,12 @@ const es: DeepPartial<Dictionary> = {
       },
       mississauga: {
         name: "Mississauga",
-        teaser: "Condominios cerca de City Centre y del lago; casas y townhouses en el resto.",
+        teaser: "Condominios cerca de City Centre y del lago. Casas y townhouses en el resto.",
         metaTitle: "Lavadora y secadora en alquiler, Mississauga | {setPrice}/sem.",
         metaDescription:
           "Alquiler de lavadora y secadora en Mississauga: {setPrice} por semana el juego, {singlePrice} una máquina. Incluye reparaciones y retiro. Sin crédito.",
         intro:
-          "Alquilamos lavadoras y secadoras en todo Mississauga, de Port Credit a Meadowvale y de Malton a Erin Mills.",
+          "Alquilamos lavadoras y secadoras en todo Mississauga, de Port Credit a Meadowvale, de Malton a Erin Mills.",
         neighbourhoods: [
           "City Centre",
           "Port Credit",
@@ -818,8 +818,8 @@ const es: DeepPartial<Dictionary> = {
           "Malton",
         ],
         homes: [
-          "Mississauga combina torres de condominios, alrededor de City Centre y junto al lago, con casas y townhouses en barrios como Meadowvale, Erin Mills y Churchill Meadows.",
-          "En un condominio, considere un par apilable o un centro de lavado de una pieza. En el cuarto de lavado de una casa o townhouse, muchas veces cabe un par lado a lado.",
+          "Mississauga tiene torres de condominios alrededor de City Centre y junto al lago. Meadowvale, Erin Mills y Churchill Meadows son sobre todo casas y townhouses.",
+          "¿Condominio? Considere un par apilable o un centro de lavado de una pieza. ¿Casa o townhouse? Muchas veces cabe un par lado a lado.",
         ],
         checklist: [
           "Dónde está la lavandería: clóset, cuarto de lavado o sótano",
@@ -830,7 +830,7 @@ const es: DeepPartial<Dictionary> = {
       },
       brampton: {
         name: "Brampton",
-        teaser: "Sobre todo casas y townhouses, con la lavandería en el sótano o en la planta baja.",
+        teaser: "Sobre todo casas y townhouses. La lavandería, en el sótano o en la planta baja.",
         metaTitle: "Lavadora y secadora en alquiler, Brampton | {setPrice}/semana",
         metaDescription:
           "Alquiler de lavadora y secadora en Brampton: {setPrice} por semana el juego, {singlePrice} una máquina. Reparaciones incluidas. Llame al {phone}.",
@@ -846,7 +846,7 @@ const es: DeepPartial<Dictionary> = {
           "Castlemore",
         ],
         homes: [
-          "La mayoría de las viviendas en Brampton son casas independientes, casas pareadas y townhouses. La lavandería suele estar en el sótano o en la planta baja, donde normalmente cabe un par lado a lado de tamaño completo.",
+          "La mayoría de las viviendas en Brampton son casas independientes, pareadas o townhouses. La lavandería suele estar en el sótano o en la planta baja. Normalmente cabe un par lado a lado de tamaño completo.",
           "¿Alquila un apartamento en un sótano? Pregunte a su propietario qué tomas de agua, desagüe y electricidad puede usar. Envíenos una foto y le decimos qué cabe.",
         ],
         checklist: [
@@ -858,7 +858,7 @@ const es: DeepPartial<Dictionary> = {
       },
       vaughan: {
         name: "Vaughan",
-        teaser: "Woodbridge, Maple, Concord y Kleinburg, más condominios nuevos cerca de Vaughan Metropolitan Centre.",
+        teaser: "Woodbridge, Maple, Concord, Kleinburg. Condominios nuevos cerca de Vaughan Metropolitan Centre.",
         metaTitle: "Lavadora y secadora en alquiler, Vaughan | {setPrice}/semana",
         metaDescription:
           "Alquiler de lavadora y secadora en Vaughan, Woodbridge, Maple y Concord: {setPrice} por semana el juego, {singlePrice} una máquina. Reparaciones incluidas.",
@@ -874,8 +874,8 @@ const es: DeepPartial<Dictionary> = {
           "Vaughan Metropolitan Centre",
         ],
         homes: [
-          "Gran parte de Vaughan son casas con cuarto de lavado completo, donde cabe bien un par lado a lado, de carga frontal o superior.",
-          "También hay torres de condominios nuevas, sobre todo cerca de Vaughan Metropolitan Centre. Los clósets de los condominios nuevos suelen estar hechos para un par apilable de 24 pulgadas o una unidad de una pieza.",
+          "Gran parte de Vaughan son casas con cuarto de lavado completo. Cabe bien un par lado a lado, de carga frontal o superior.",
+          "Vaughan también tiene torres de condominios nuevas, sobre todo cerca de Vaughan Metropolitan Centre. Sus clósets suelen estar hechos para un par apilable de 24 pulgadas o una unidad de una pieza.",
         ],
         checklist: [
           "Carga frontal o superior: ¿cuál prefiere?",
@@ -886,7 +886,7 @@ const es: DeepPartial<Dictionary> = {
       },
       markham: {
         name: "Markham",
-        teaser: "Townhouses y casas en Unionville y Cornell, condominios a lo largo de Highway 7.",
+        teaser: "Townhouses y casas en Unionville y Cornell. Condominios a lo largo de Highway 7.",
         metaTitle: "Lavadora y secadora en alquiler, Markham | {setPrice}/semana",
         metaDescription:
           "Alquiler de lavadora y secadora en Markham y Unionville: {setPrice} por semana el juego, {singlePrice} una máquina. Incluye reparaciones y retiro.",
@@ -903,7 +903,7 @@ const es: DeepPartial<Dictionary> = {
         ],
         homes: [
           "Markham tiene muchos townhouses y stacked townhouses, además de condominios cerca de Downtown Markham y Highway 7.",
-          "En un townhouse, la lavandería suele estar en un clóset del piso de arriba o en el sótano. Las escaleras cambian la entrega, así que díganos cuántos tramos hay y qué tan cerradas son las vueltas.",
+          "En un townhouse, la lavandería suele estar en un clóset del piso de arriba o en el sótano. Las escaleras cambian la entrega. Díganos cuántos tramos hay y qué tan cerradas son las vueltas.",
         ],
         checklist: [
           "En qué piso está la lavandería y cuántos tramos de escalera hay",
@@ -914,7 +914,7 @@ const es: DeepPartial<Dictionary> = {
       },
       "richmond-hill": {
         name: "Richmond Hill",
-        teaser: "Casas de Oak Ridges a Langstaff, torres de condominios sobre Yonge Street.",
+        teaser: "Casas de Oak Ridges a Langstaff. Torres de condominios sobre Yonge Street.",
         metaTitle: "Lavadora y secadora, Richmond Hill | {setPrice}/semana",
         metaDescription:
           "Alquiler de lavadora y secadora en Richmond Hill y Oak Ridges: {setPrice}/semana el juego, {singlePrice} una máquina. Reparaciones incluidas. Llame al {phone}.",
@@ -922,8 +922,8 @@ const es: DeepPartial<Dictionary> = {
           "Alquilamos lavadoras y secadoras en todo Richmond Hill, incluidos Oak Ridges, Mill Pond, Bayview Hill, Richvale y Jefferson.",
         neighbourhoods: ["Oak Ridges", "Mill Pond", "Bayview Hill", "Richvale", "Jefferson", "Langstaff", "Elgin Mills"],
         homes: [
-          "En Richmond Hill hay desde casas independientes con cuarto de lavado en el sótano hasta torres de condominios sobre Yonge Street y cerca de Highway 7.",
-          "En una casa, normalmente cabe un par lado a lado. En el clóset de un condominio, considere un par apilable o un centro de lavado de una pieza.",
+          "Richmond Hill va desde casas independientes con lavandería en el sótano hasta torres de condominios sobre Yonge Street y cerca de Highway 7.",
+          "¿Casa? Normalmente cabe un par lado a lado. ¿Clóset de condominio? Considere un par apilable o un centro de lavado de una pieza.",
         ],
         checklist: [
           "Casa o condominio, y dónde está la lavandería",
@@ -939,7 +939,7 @@ const es: DeepPartial<Dictionary> = {
         metaTitle: "Lavadora y secadora en alquiler, North York | {setPrice}/sem.",
         metaDescription:
           "Alquile lavadora y secadora en North York, de Willowdale y Don Mills a Downsview: {setPrice} por semana el juego, {singlePrice} una máquina.",
-        teaser: "Torres de condominios sobre Yonge Street, casas con lavandería en el sótano en las calles laterales.",
+        teaser: "Torres de condominios sobre Yonge Street. Casas con lavandería en el sótano en las calles laterales.",
         intro:
           "Alquilamos lavadoras y secadoras en todo North York, de Willowdale y Bayview Village a Don Mills, Downsview y Bathurst Manor.",
         neighbourhoods: [
@@ -955,8 +955,8 @@ const es: DeepPartial<Dictionary> = {
           "Newtonbrook",
         ],
         homes: [
-          "North York tiene dos tipos de espacio de lavandería. Sobre Yonge Street, sobre todo cerca de North York Centre y Sheppard Avenue, mucha gente vive en torres de condominios, donde la lavandería es un clóset dentro de la unidad. Lejos de las calles principales, muchas viviendas son casas con la lavandería en el sótano.",
-          "También hay muchos edificios de apartamentos en alquiler más antiguos. Algunos tienen una lavandería compartida y no tienen conexiones para lavadora ni secadora en las unidades, así que consulte con su propietario antes de reservar.",
+          "North York tiene dos tipos de espacio de lavandería. Sobre Yonge Street, sobre todo cerca de North York Centre y Sheppard Avenue, mucha gente vive en condominios con un clóset de lavandería dentro de la unidad. Lejos de las calles principales, muchas viviendas son casas con lavandería en el sótano.",
+          "También hay muchos edificios de apartamentos en alquiler más antiguos. Algunos tienen una lavandería compartida y no tienen conexiones en las unidades. Consulte con su propietario antes de reservar.",
         ],
         fits: {
           stackable: "Clósets de condominio angostos y altos cerca de Yonge Street y Sheppard Avenue.",
@@ -976,9 +976,9 @@ const es: DeepPartial<Dictionary> = {
         metaTitle: "Lavadora y secadora en alquiler, Etobicoke | {setPrice}/semana",
         metaDescription:
           "Alquile lavadora y secadora en Etobicoke, de Humber Bay Shores y Mimico a Rexdale: {setPrice} por semana el juego, {singlePrice} una máquina.",
-        teaser: "Condominios junto al lago, casas con cuarto de lavado en el sótano y edificios de apartamentos.",
+        teaser: "Condominios junto al lago, casas con lavandería en el sótano y edificios de apartamentos.",
         intro:
-          "Alquilamos lavadoras y secadoras en todo Etobicoke, desde el lago en Humber Bay Shores, Mimico y Long Branch hasta Islington Village y Rexdale.",
+          "Alquilamos lavadoras y secadoras en todo Etobicoke, desde Humber Bay Shores, Mimico y Long Branch hasta Islington Village y Rexdale.",
         neighbourhoods: [
           "Humber Bay Shores",
           "Mimico",
@@ -992,8 +992,8 @@ const es: DeepPartial<Dictionary> = {
           "Thistletown",
         ],
         homes: [
-          "Muchas de las torres de condominios de Etobicoke están junto al lago en Humber Bay Shores o cerca de las estaciones de metro Islington y Kipling. En esas unidades, la lavandería suele ser un clóset angosto.",
-          "Gran parte del resto de Etobicoke son casas, desde bungalows hasta casas de dos pisos, junto con edificios de apartamentos bajos y altos. En una casa, la lavandería suele estar en el sótano, donde normalmente cabe un par lado a lado de tamaño completo.",
+          "Muchas torres de condominios de Etobicoke están junto al lago en Humber Bay Shores o cerca de las estaciones Islington y Kipling. Su lavandería suele ser un clóset angosto.",
+          "Gran parte del resto son casas, desde bungalows hasta casas de dos pisos, además de edificios de apartamentos bajos y altos. En una casa, la lavandería suele estar en el sótano, donde normalmente cabe un par lado a lado de tamaño completo.",
         ],
         fits: {
           stackable: "Clósets de condominio junto al lago y cerca del metro.",
@@ -1029,8 +1029,8 @@ const es: DeepPartial<Dictionary> = {
           "Highland Creek",
         ],
         homes: [
-          "Gran parte de Scarborough son casas independientes, casas pareadas y townhouses. La lavandería suele estar en el sótano o en un cuarto pequeño de la planta baja, y muchas veces cabe un par lado a lado de tamaño completo.",
-          "Scarborough también tiene muchas torres de apartamentos y algunos condominios nuevos, incluso cerca de Scarborough Town Centre. Algunas casas tienen un apartamento en el sótano: si alquila uno, pregunte a su propietario qué tomas de agua, desagüe y electricidad puede usar.",
+          "Gran parte de Scarborough son casas independientes, casas pareadas y townhouses. La lavandería suele estar en el sótano o en un cuarto pequeño de la planta baja. Muchas veces cabe un par lado a lado de tamaño completo.",
+          "Scarborough también tiene muchas torres de apartamentos y algunos condominios nuevos, incluso cerca de Scarborough Town Centre. ¿Alquila un apartamento en un sótano? Pregunte a su propietario qué tomas de agua, desagüe y electricidad puede usar.",
         ],
         fits: {
           "side-by-side-top-load": "Cuartos de lavado en el sótano o en la planta baja de las casas.",
@@ -1050,7 +1050,7 @@ const es: DeepPartial<Dictionary> = {
         metaTitle: "Lavadora y secadora en alquiler, East York | {setPrice}/semana",
         metaDescription:
           "Alquile lavadora y secadora en East York, Leaside y Thorncliffe Park: {setPrice} por semana el juego, {singlePrice} una máquina. Incluye reparaciones.",
-        teaser: "Calles de casas en Leaside y Pape Village, torres de apartamentos en Thorncliffe Park.",
+        teaser: "Casas en Leaside y Pape Village. Torres de apartamentos en Thorncliffe Park.",
         intro:
           "Alquilamos lavadoras y secadoras en todo East York, incluidos Leaside, Thorncliffe Park, Pape Village, Woodbine Heights y Crescent Town.",
         neighbourhoods: [
@@ -1064,8 +1064,8 @@ const es: DeepPartial<Dictionary> = {
           "Crescent Town",
         ],
         homes: [
-          "East York combina calles tranquilas de casas independientes y pareadas, en zonas como Leaside y Pape Village, con torres de apartamentos en Thorncliffe Park y Crescent Town.",
-          "En una casa antigua, las escaleras del sótano pueden ser angostas y empinadas, así que mídalas junto con el espacio de lavandería. En un apartamento, verifique primero que su unidad tenga conexiones para lavadora y secadora.",
+          "East York combina calles tranquilas de casas, como Leaside y Pape Village, con torres de apartamentos en Thorncliffe Park y Crescent Town.",
+          "Las casas antiguas pueden tener escaleras de sótano angostas y empinadas. Mídalas junto con el espacio de lavandería. En un apartamento, verifique primero que su unidad tenga conexiones para lavadora y secadora.",
         ],
         fits: {
           "side-by-side-top-load": "Zonas de lavado en el sótano de las casas.",
@@ -1085,9 +1085,9 @@ const es: DeepPartial<Dictionary> = {
         metaTitle: "Lavadora y secadora en alquiler, York, Toronto | {setPrice}/sem.",
         metaDescription:
           "Alquile lavadora y secadora en York, Toronto, incluidos Weston y Mount Dennis: {setPrice} por semana el juego, {singlePrice} una máquina.",
-        teaser: "Casas antiguas con sótano y edificios de apartamentos sobre las calles principales.",
+        teaser: "Casas antiguas con sótano. Edificios de apartamentos sobre las calles principales.",
         intro:
-          "Alquilamos lavadoras y secadoras en todo York, la antigua ciudad de York al noroeste del centro de Toronto, incluidos Weston, Mount Dennis, Fairbank y Oakwood Village.",
+          "Alquilamos lavadoras y secadoras en todo York, la antigua ciudad de York al noroeste del centro, incluidos Weston, Mount Dennis, Fairbank y Oakwood Village.",
         neighbourhoods: [
           "Weston",
           "Mount Dennis",
@@ -1099,8 +1099,8 @@ const es: DeepPartial<Dictionary> = {
           "Humewood–Cedarvale",
         ],
         homes: [
-          "Gran parte de York son casas independientes y pareadas antiguas, muchas con zona de lavado en el sótano, además de edificios de apartamentos sobre calles principales como Weston Road y Eglinton Avenue West.",
-          "Algunas casas aquí están divididas en unidades separadas. Si alquila una, pregunte a su propietario qué conexiones puede usar y si la secadora puede ventilar hacia afuera.",
+          "Gran parte de York son casas independientes y pareadas antiguas, muchas con lavandería en el sótano. Hay edificios de apartamentos sobre calles principales como Weston Road y Eglinton Avenue West.",
+          "Algunas casas aquí están divididas en unidades. ¿Alquila una? Pregunte a su propietario qué conexiones puede usar y si la secadora puede ventilar hacia afuera.",
         ],
         fits: {
           "side-by-side-front-load": "Cuartos de lavado en el sótano de las casas.",
@@ -1120,12 +1120,12 @@ const es: DeepPartial<Dictionary> = {
       eyebrow: "Toronto y el GTA",
       title: "Dónde entregamos",
       checkTitle: "¿Entregamos en su zona?",
-      lead: "Entregamos lavadoras y secadoras en alquiler en todo Toronto y en cinco ciudades a su alrededor. Escriba su código postal para verificar, o busque su zona abajo.",
+      lead: "Entregamos en todo Toronto y en cinco ciudades a su alrededor. Verifique su código postal, o busque su zona abajo.",
       samePrice: "El mismo precio en todas las zonas: {setPrice} por semana el juego, {singlePrice} una máquina.",
-      fartherText: "¿Vive más lejos? Envíenos su dirección por mensaje y le decimos.",
+      fartherText: "¿Vive más lejos? Envíenos su dirección por mensaje. Le avisamos.",
       torontoTitle: "Toronto",
       torontoLead:
-        "Toda la ciudad de Toronto. North York, Etobicoke, Scarborough, East York y York tienen cada uno su propia página.",
+        "Todo Toronto. North York, Etobicoke, Scarborough, East York y York tienen cada uno su página.",
       wholeCity: "Toda la ciudad",
       district: "Distrito de Toronto",
       aroundTitle: "Alrededor de Toronto",
@@ -1153,10 +1153,10 @@ const es: DeepPartial<Dictionary> = {
       localTitle: "La lavandería en las viviendas de {place}",
       localAreas: "Zonas de {place} donde entregamos",
       beforeYouCall: "Antes de llamar, revise",
-      notSure: "¿No está seguro? Envíe una foto al {phoneLink} y le decimos qué cabe.",
+      notSure: "¿No está seguro? Envíe una foto al {phoneLink}. Le decimos qué cabe.",
       deliveryTitle: "¿Entregamos en su zona?",
       deliveryLead:
-        "Escriba su código postal. Si con el código no podemos saberlo, envíenos su dirección por mensaje y le confirmamos.",
+        "Ingrese su código postal. ¿No queda claro? Envíenos su dirección por mensaje y le confirmamos.",
     },
     districtsLabel: "Distritos de Toronto",
   },
@@ -1174,12 +1174,12 @@ const es: DeepPartial<Dictionary> = {
       "minimum-term": {
         question: "¿Cuánto dura el alquiler?",
         answer:
-          "Mínimo {minWeeks} semanas. Después continúa semana a semana, y cualquiera de las partes puede terminarlo con {noticeDays} días de aviso. Nosotros recogemos la máquina.",
+          "Mínimo {minWeeks} semanas, después semana a semana. Cualquiera de las partes puede terminarlo con {noticeDays} días de aviso. Nosotros recogemos la máquina.",
       },
       ending: {
         question: "¿Cómo termino mi alquiler?",
         answer:
-          "Envíenos un mensaje al {phone}. Después del mínimo de {minWeeks} semanas, cualquiera de las partes puede terminar el alquiler con {noticeDays} días de aviso, y nosotros pasamos a recoger la máquina.",
+          "Envíenos un mensaje al {phone}. Después del mínimo de {minWeeks} semanas, cualquiera de las partes puede terminarlo con {noticeDays} días de aviso. Nosotros recogemos la máquina.",
       },
       "machine-types": {
         question: "¿Qué máquinas puedo alquilar?",
@@ -1189,7 +1189,7 @@ const es: DeepPartial<Dictionary> = {
       },
       "new-machines": {
         question: "¿Las máquinas son nuevas?",
-        answer: "No. Son máquinas usadas en buen estado de funcionamiento. Revisamos cada una antes de que salga.",
+        answer: "No. Son usadas y están en buen estado de funcionamiento. Revisamos cada una antes de que salga.",
       },
       brands: {
         question: "¿Qué marcas tienen?",
@@ -1211,7 +1211,7 @@ const es: DeepPartial<Dictionary> = {
       price: {
         question: "¿Cuánto cuesta?",
         answer:
-          "{setPrice} por semana un juego de lavadora y secadora, o {singlePrice} por semana una sola máquina, en dólares canadienses. La renta se cobra cada semana el mismo día.",
+          "{setPrice} por semana un juego, o {singlePrice} por semana una sola máquina, en dólares canadienses. La renta se cobra cada semana, el mismo día.",
       },
       tax: {
         question: "¿Los precios incluyen impuestos?",
@@ -1224,7 +1224,7 @@ const es: DeepPartial<Dictionary> = {
       payment: {
         question: "¿Cómo pago?",
         answer:
-          "Por Interac e-Transfer o con tarjeta de crédito. Para pagar con tarjeta, use el enlace de pago que enviamos con su cotización.",
+          "Interac e-Transfer o tarjeta de crédito. Para tarjeta, use el enlace de pago que enviamos con su cotización.",
       },
       referral: {
         question: "¿Tienen alguna oferta por recomendar?",
@@ -1233,7 +1233,7 @@ const es: DeepPartial<Dictionary> = {
       "space-needs": {
         question: "¿Qué necesito en mi espacio de lavandería?",
         answer:
-          "Tomas de agua (caliente y fría), un desagüe y el tomacorriente adecuado. La mayoría de las secadoras eléctricas necesitan un tomacorriente de 240V, de 3 o 4 clavijas. Una secadora con ventilación también necesita un ducto de salida al exterior. Envíenos una foto y lo revisamos.",
+          "Agua caliente y fría, un desagüe y el tomacorriente adecuado. La mayoría de las secadoras eléctricas necesitan un tomacorriente de 240V, de 3 o 4 clavijas. Una secadora con ventilación también necesita un ducto de salida al exterior. Envíe una foto y lo revisamos.",
         link: "Cómo medir su espacio de lavandería",
       },
       "delivery-cost": {
@@ -1243,16 +1243,16 @@ const es: DeepPartial<Dictionary> = {
       },
       "delivery-time": {
         question: "¿Qué tan pronto pueden entregar?",
-        answer: "Normalmente la misma semana. Confirmamos la fecha cuando enviamos la cotización.",
+        answer: "Normalmente la misma semana. Confirmamos la fecha con su cotización.",
       },
       installation: {
         question: "¿Qué incluye la instalación?",
-        answer: "Revisamos el espacio y conectamos la secadora a su propio tomacorriente de 240 voltios (de 3 o 4 clavijas). Instalamos un ducto de ventilación metálico de 4 pulgadas hacia afuera, con abrazaderas en ambos extremos y sin dobleces: un ducto aplastado es un riesgo de incendio. Conectamos el agua caliente y fría y el desagüe, nivelamos la máquina y hacemos un ciclo de prueba antes de irnos.",
+        answer: "Revisamos el espacio. Conectamos la secadora a su propio tomacorriente de 240 voltios (de 3 o 4 clavijas). Instalamos un ducto de ventilación metálico de 4 pulgadas hacia afuera, con abrazaderas en ambos extremos, sin dobleces: un ducto aplastado es un riesgo de incendio. Conectamos el agua caliente y fría y el desagüe, nivelamos la máquina y hacemos un ciclo de prueba antes de irnos.",
       },
       condo: {
         question: "¿Pueden entregar en un condominio?",
         answer:
-          "Sí. Díganos el tamaño del clóset y si el edificio tiene ascensor de servicio, y planeamos la entrega.",
+          "Sí. Díganos el tamaño del clóset y si hay ascensor de servicio. Planeamos la entrega.",
         link: "Lista para la lavandería de un condominio",
       },
       "haul-away": {
@@ -1267,12 +1267,12 @@ const es: DeepPartial<Dictionary> = {
       },
       breaks: {
         question: "¿Y si la máquina se daña?",
-        answer: "Llámenos o escríbanos. Organizamos la reparación o una máquina de reemplazo sin costo.",
+        answer: "Llámenos o escríbanos. La reparamos o la reemplazamos sin costo.",
       },
       "repair-request": {
         question: "¿Cómo pido una reparación?",
         answer:
-          "Llame o escriba al {phone}, o envíe el formulario de reparación con su dirección y lo que pasa. Las reparaciones están incluidas mientras alquila.",
+          "Llame o escriba al {phone}, o envíe el formulario de reparación con su dirección y el problema. Las reparaciones están incluidas mientras alquila.",
         link: "Pedir una reparación",
       },
       damage: {
@@ -1283,13 +1283,13 @@ const es: DeepPartial<Dictionary> = {
       "landlord-options": {
         question: "¿Cómo trabajan con los propietarios?",
         answer:
-          "De dos formas. Sus inquilinos nos alquilan directamente: usted no paga nada, solo permite la instalación. O usted alquila las máquinas para sus unidades: el precio de lista es {setPrice} por semana por juego, y con {quoteUnits} o más unidades cotizamos por edificio después de verlo. En ambos casos, las reparaciones están incluidas.",
+          "De dos formas. Sus inquilinos nos alquilan directamente: usted no paga nada, solo permite la instalación. O usted alquila las máquinas para sus unidades: precio de lista {setPrice} por semana por juego. Con {quoteUnits} o más unidades, cotizamos por edificio después de verlo. En ambos casos, las reparaciones están incluidas.",
         link: "Lavadoras y secadoras para propietarios",
       },
       "landlord-quote": {
         question: "¿Cómo pide una cotización un propietario?",
         answer:
-          "Envíe el formulario de cotización para propietarios con la dirección, el número de unidades y lo que hay ahora, o llame o escriba al {phone}.",
+          "Envíe el formulario de cotización para propietarios con la dirección, el número de unidades y lo que hay ahora. O llame o escriba al {phone}.",
         link: "Formulario de cotización para propietarios",
       },
       "first-week-free": {
@@ -1305,25 +1305,25 @@ const es: DeepPartial<Dictionary> = {
     page: {
       eyebrow: "Preguntas frecuentes",
       title: "Preguntas y respuestas",
-      lead: "Alquiler, precios, entrega, reparaciones y propietarios. ¿Otra pregunta? Llame o escriba al {phoneLink}.",
+      lead: "Alquiler, precios, entrega, reparaciones y propietarios. ¿Más preguntas? Llame o escriba al {phoneLink}.",
       topics: "Temas",
     },
   },
 
   landlords: {
     eyebrow: "Para propietarios",
-    title: "Lavadoras y secadoras para sus unidades en alquiler",
-    lead: "Dos formas de tener lavandería en sus unidades. En ambos casos, instalamos las máquinas, nos llevamos las viejas y las reparaciones están incluidas.",
+    title: "Lavandería para sus unidades en alquiler",
+    lead: "Dos formas de agregar lavandería a sus unidades. En ambos casos, instalamos, nos llevamos las máquinas viejas e incluimos las reparaciones.",
     option: "Opción {number}",
     options: [
       {
         title: "Sus inquilinos nos alquilan",
         headline: "Usted no paga nada",
         points: [
-          "Cada inquilino nos alquila una lavadora y una secadora y nos paga directamente.",
+          "Cada inquilino nos alquila y nos paga directamente.",
           "Usted no paga nada.",
           "Solo permite la instalación.",
-          "Las reparaciones están incluidas mientras el inquilino alquila.",
+          "Reparaciones incluidas mientras el inquilino alquila.",
         ],
       },
       {
@@ -1331,9 +1331,9 @@ const es: DeepPartial<Dictionary> = {
         headline: "{setPrice} por semana por juego, precio de lista",
         points: [
           "Usted alquila las máquinas e incluye la lavandería con la unidad.",
-          "Precio de lista: {setPrice} por semana por juego de lavadora y secadora.",
+          "Precio de lista: {setPrice} por semana por juego.",
           "Con {quoteUnits} o más unidades, cotizamos por edificio después de verlo.",
-          "Las reparaciones están incluidas mientras alquila.",
+          "Reparaciones incluidas mientras alquila.",
         ],
       },
     ],
@@ -1341,57 +1341,57 @@ const es: DeepPartial<Dictionary> = {
     includedTitle: "Incluido en ambos casos",
     includedLead: "La entrega y la instalación se cotizan por trabajo, antes de que nadie pague.",
     included: [
-      "Instalación: conectamos el agua, el desagüe, la electricidad y la ventilación, y hacemos un ciclo de prueba antes de irnos.",
+      "Instalación: conectamos el agua, el desagüe, la electricidad y la ventilación, y después hacemos un ciclo de prueba.",
       "Nos llevamos las máquinas viejas sin costo.",
-      "Reparaciones, o una máquina de reemplazo, sin costo.",
+      "Reparaciones o una máquina de reemplazo, sin costo.",
       "Máquinas usadas, cada una revisada antes de salir.",
     ],
     stepsTitle: "Cómo funciona para un edificio",
     steps: [
       {
         title: "Cuéntenos sobre el edificio",
-        text: "La dirección, cuántas unidades y qué hay ahora: sin máquinas, máquinas viejas para reemplazar o solo las conexiones.",
+        text: "La dirección, el número de unidades y qué hay ahora: sin máquinas, unas viejas para reemplazar o solo las conexiones.",
       },
       {
         title: "Vemos el edificio",
-        text: "Con {quoteUnits} o más unidades, vemos el edificio antes de cotizar: los espacios de lavandería y las conexiones.",
+        text: "Con {quoteUnits} o más unidades, revisamos los espacios de lavandería y las conexiones antes de cotizar.",
       },
       {
         title: "Recibe una cotización",
-        text: "Si sus inquilinos alquilan directamente, cada uno recibe su propia cotización. Si usted alquila las máquinas, recibe una cotización para el edificio.",
+        text: "Los inquilinos que alquilan directamente reciben cada uno su propia cotización. Si usted alquila las máquinas, recibe una para el edificio.",
       },
       {
         title: "Instalamos",
-        text: "Entregamos, conectamos cada máquina, hacemos un ciclo de prueba y nos llevamos las máquinas viejas.",
+        text: "Entregamos, conectamos cada máquina, hacemos un ciclo de prueba y nos llevamos las viejas.",
       },
       {
-        title: "Reparaciones mientras tenga las máquinas",
-        text: "Llámenos o escríbanos cuando una máquina necesite reparación. La reparamos o la cambiamos sin costo.",
+        title: "Reparaciones mientras estén instaladas",
+        text: "¿Una máquina necesita reparación? Llámenos o escríbanos. La reparamos o la cambiamos sin costo.",
       },
     ],
-    startWithQuote: "Empiece con una cotización",
+    startWithQuote: "Pida su cotización",
     unitNeedsTitle: "Lo que necesita cada unidad",
-    unitNeedsNote: "Díganos qué tiene cada unidad y le decimos qué cabe.",
+    unitNeedsNote: "Díganos qué tiene cada unidad. Le decimos qué cabe.",
     faqTitle: "Preguntas de propietarios",
     faqs: [
       {
         question: "¿Pago algo si mis inquilinos les alquilan a ustedes?",
-        answer: "No. El inquilino alquila las máquinas y nos paga. Usted permite la instalación.",
+        answer: "No. El inquilino alquila y nos paga. Usted permite la instalación.",
       },
       {
         question: "¿Cuánto cuesta si yo alquilo las máquinas?",
         answer:
-          "El precio de lista es {setPrice} por semana por juego de lavadora y secadora. Con {quoteUnits} o más unidades, cotizamos por edificio después de verlo. La entrega y la instalación se cotizan antes de que pague.",
+          "Precio de lista: {setPrice} por semana por juego. Con {quoteUnits} o más unidades, cotizamos por edificio después de verlo. La entrega y la instalación se cotizan antes de que pague.",
       },
       {
         question: "¿Quién organiza las reparaciones?",
         answer:
-          "Llame o escriba al {phone} cuando una máquina necesite reparación. Las reparaciones están incluidas en las dos opciones.",
+          "Llame o escriba al {phone}. Las reparaciones están incluidas en las dos opciones.",
       },
       {
         question: "¿Y si una unidad no tiene conexiones?",
         answer:
-          "Una unidad necesita agua caliente y fría, un desagüe, el tomacorriente adecuado y, para una secadora con ventilación, un ducto de salida al exterior. Díganos qué tiene cada unidad y le decimos qué cabe.",
+          "Cada unidad necesita agua caliente y fría, un desagüe, el tomacorriente adecuado y, para una secadora con ventilación, un ducto hacia afuera. Díganos qué tiene cada unidad. Le decimos qué cabe.",
       },
       {
         question: "¿Mis inquilinos necesitan una verificación de crédito?",
@@ -1409,18 +1409,18 @@ const es: DeepPartial<Dictionary> = {
     moreAnswers: "Más respuestas en la {faqLink}.",
     faqLink: "página de preguntas frecuentes",
     ctaTitle: "Pida una cotización para su edificio",
-    ctaText: "Díganos la dirección, el número de unidades y lo que hay ahora.",
+    ctaText: "Envíe la dirección, el número de unidades y lo que hay ahora.",
     buildingsNote: "¿Una lavandería compartida en el edificio? {buildingsLink}.",
-    buildingsLink: "Vea las opciones para lavanderías",
+    buildingsLink: "Ver opciones para lavanderías",
     quote: {
       eyebrow: "Para propietarios",
       title: "Pida una cotización para su edificio",
-      lead: "Cuéntenos sobre el edificio y las unidades. En las unidades, sus inquilinos pueden alquilarnos directamente o usted puede alquilar las máquinas. Para una lavandería compartida, el edificio alquila las máquinas o los residentes pagan por carga.",
+      lead: "Cuéntenos sobre el edificio y las unidades. En las unidades, los inquilinos nos alquilan directamente o usted alquila las máquinas. En una lavandería compartida, el edificio alquila las máquinas o los residentes pagan por carga.",
       howOptionsWork: "Cómo funcionan las dos opciones",
       nextTitle: "Qué pasa después",
       next: [
         "Leemos su solicitud y le llamamos o le escribimos.",
-        "Con {quoteUnits} o más unidades, acordamos una hora para ver el edificio.",
+        "Con {quoteUnits} o más unidades, reservamos una hora para ver el edificio.",
         "Recibe una cotización antes de que se instale nada.",
       ],
       formTitle: "Su edificio",
@@ -1459,8 +1459,8 @@ const es: DeepPartial<Dictionary> = {
   },
   buildings: {
     eyebrow: "Para edificios residenciales",
-    title: "Lavadoras y secadoras para la lavandería de su edificio",
-    lead: "Para edificios de apartamentos y condominios con una lavandería compartida. Nosotros ponemos las máquinas, las instalamos y las reparamos. Hay dos formas de hacerlo, y cotizamos por edificio después de ver la lavandería.",
+    title: "Máquinas para su lavandería",
+    lead: "Para edificios de apartamentos y condominios con una lavandería compartida. Ponemos, instalamos y reparamos las máquinas. Dos opciones, cotizadas por edificio después de ver la lavandería.",
     option: "Opción {number}",
     options: [
       {
@@ -1484,14 +1484,14 @@ const es: DeepPartial<Dictionary> = {
         ],
       },
     ],
-    optionsTitle: "Dos formas de equipar la lavandería",
+    optionsTitle: "Dos formas de hacerlo",
     includedTitle: "Incluido en ambos casos",
     includedLead: "La entrega y la instalación van en la cotización, antes de instalar nada.",
     included: [
-      "Primero vemos la lavandería y le decimos qué máquinas caben.",
-      "Instalación: conectamos el agua, el desagüe, la electricidad y la ventilación, y hacemos un ciclo de prueba antes de irnos.",
+      "Primero vemos la lavandería y le decimos qué cabe.",
+      "Instalación: conectamos el agua, el desagüe, la electricidad y la ventilación, y después hacemos un ciclo de prueba.",
       "Retiramos las máquinas viejas sin costo.",
-      "Reparaciones, o una máquina de reemplazo, sin costo.",
+      "Reparaciones o una máquina de reemplazo, sin costo.",
     ],
     stepsTitle: "Cómo funciona",
     steps: [
@@ -1509,17 +1509,17 @@ const es: DeepPartial<Dictionary> = {
       },
       {
         title: "Instalamos",
-        text: "Entregamos, conectamos cada máquina, hacemos un ciclo de prueba y retiramos las máquinas viejas.",
+        text: "Entregamos, conectamos cada máquina, hacemos un ciclo de prueba y retiramos las viejas.",
       },
       {
-        title: "Reparaciones mientras las máquinas estén",
-        text: "Llámenos o escríbanos cuando una máquina necesite reparación. La reparamos o la reemplazamos sin costo.",
+        title: "Reparaciones mientras estén instaladas",
+        text: "¿Una máquina necesita reparación? Llámenos o escríbanos. La reparamos o la reemplazamos sin costo.",
       },
     ],
-    startWithQuote: "Empiece con una cotización",
+    startWithQuote: "Pida su cotización",
     inSuiteTitle: "¿Prefiere máquinas en cada unidad?",
-    inSuiteText: "Si las unidades tienen sus propias conexiones, los inquilinos pueden alquilarnos directamente, o usted puede alquilar máquinas para las unidades.",
-    inSuiteLink: "Opciones para propietarios",
+    inSuiteText: "¿Las unidades tienen sus propias conexiones? Los inquilinos pueden alquilarnos directamente, o usted alquila máquinas para las unidades.",
+    inSuiteLink: "Ver opciones para propietarios",
     faqTitle: "Preguntas sobre edificios",
     faqs: [
       {
@@ -1528,15 +1528,15 @@ const es: DeepPartial<Dictionary> = {
       },
       {
         question: "¿Cómo funciona la opción de pago por carga?",
-        answer: "Ponemos las máquinas sin costo para el edificio, y los residentes pagan por carga. El edificio recibe una parte de lo que recaudan las máquinas. Acordamos esa parte antes de instalar.",
+        answer: "Ponemos las máquinas sin costo para el edificio. Los residentes pagan por carga. El edificio recibe una parte de lo que recaudan las máquinas, acordada antes de instalar.",
       },
       {
         question: "¿Qué máquinas instalan?",
-        answer: "Depende de la lavandería: el espacio, las conexiones y cuántos residentes la usan. Le decimos qué cabe después de verla.",
+        answer: "Depende del espacio, las conexiones y cuántos residentes la usan. Le decimos qué cabe después de verla.",
       },
       {
         question: "¿Quién se encarga de las reparaciones?",
-        answer: "Llame o escriba al {phone} cuando una máquina necesite reparación. Las reparaciones están incluidas en ambas opciones.",
+        answer: "Llame o escriba al {phone}. Las reparaciones están incluidas en ambas opciones.",
       },
       {
         question: "¿Pueden retirar las máquinas viejas?",
@@ -1548,7 +1548,7 @@ const es: DeepPartial<Dictionary> = {
       },
     ],
     ctaTitle: "Pida una cotización para su lavandería",
-    ctaText: "Díganos la dirección, el número de unidades y lo que hay ahora en la lavandería.",
+    ctaText: "Envíe la dirección, el número de unidades y lo que hay ahora en la lavandería.",
   },
 
   about: {
@@ -1560,8 +1560,8 @@ const es: DeepPartial<Dictionary> = {
     whatWeDoItems: [
       "Alquilamos lavadoras y secadoras en Toronto y el GTA: pares apilables, centros de lavado de una pieza, pares lado a lado, o una sola lavadora o secadora.",
       "Solo alquilamos. No vendemos máquinas ni alquilamos otros electrodomésticos.",
-      "Las máquinas son usadas, revisadas y en buen estado de funcionamiento. La marca y el modelo dependen de lo que haya disponible.",
-      "La renta es {setPrice} por semana por un juego o {singlePrice} por semana por una máquina, con reparaciones y retiro de la máquina vieja incluidos.",
+      "Nuestras máquinas son usadas, revisadas y en buen estado de funcionamiento. La marca y el modelo dependen de lo que haya disponible.",
+      "La renta es {setPrice} por semana por un juego, {singlePrice} por semana por una máquina. Reparaciones y retiro de la máquina vieja incluidos.",
     ],
     readMore: "Más información",
     links: {
@@ -1579,7 +1579,7 @@ const es: DeepPartial<Dictionary> = {
   contact: {
     eyebrow: "Llame o envíe un mensaje de texto",
     title: "Contáctenos",
-    lead: "Lo más rápido es una llamada o un mensaje de texto. O envíe el formulario de abajo y le respondemos con la máquina, el total y la fecha de inicio.",
+    lead: "Una llamada o un mensaje de texto es lo más rápido. O envíe el formulario de abajo. Le respondemos con la máquina, el total y la fecha de inicio.",
     reachLabel: "Cómo contactarnos",
     phoneTitle: "Teléfono y mensajes",
     hours: "Horario",
@@ -1588,24 +1588,24 @@ const es: DeepPartial<Dictionary> = {
     whereTitle: "Dónde entregamos",
     somethingElse: "¿Otra cosa?",
     other: [
-      { title: "Una máquina que alquila necesita reparación", label: "Pedir una reparación" },
+      { title: "Su máquina alquilada necesita reparación", label: "Pedir una reparación" },
       { title: "Es propietario", label: "Cotización para propietarios" },
-      { title: "Primero tiene una pregunta", label: "Preguntas y respuestas" },
+      { title: "Primero una pregunta", label: "Preguntas y respuestas" },
     ],
   },
 
   repair: {
     eyebrow: "Para clientes que nos alquilan",
     title: "Pedir una reparación",
-    lead: "¿Una máquina que nos alquila no funciona bien? Las reparaciones están incluidas mientras alquila: la reparamos o la cambiamos sin costo.",
+    lead: "¿La máquina no funciona bien? Las reparaciones están incluidas mientras alquila. La reparamos o la cambiamos sin costo.",
     sectionLabel: "Solicitud de reparación",
     photoTitle: "Envíenos una foto del problema",
-    photoText: "Una foto o un video corto del problema nos ayuda a ver qué pasa antes de ir.",
+    photoText: "Una foto o un video corto nos ayuda a ver qué pasa antes de ir.",
     photoButton: "Enviar una foto por mensaje",
     photoBody: "Solicitud de reparación – mi dirección: ",
     fastest: "Lo más rápido: llamar o escribir",
     leakTitle: "¿Hay una fuga de agua?",
-    leakText: "Cierre las llaves de agua detrás de la lavadora si puede alcanzarlas sin peligro, y después llámenos.",
+    leakText: "Cierre las llaves detrás de la lavadora si puede alcanzarlas sin peligro. Después llámenos.",
     helpsTitle: "Lo que nos ayuda",
     helps: [
       "Qué hace la máquina, o qué no hace",
@@ -1647,13 +1647,13 @@ const es: DeepPartial<Dictionary> = {
     lead: "Los pagos con tarjeta se hacen a través de Stripe. Nunca vemos el número completo de su tarjeta.",
     sectionLabel: "Su alquiler",
     payTitle: "Pagar con tarjeta",
-    payText: "Use el enlace de pago de Stripe que le enviamos con su cotización. ¿No lo encuentra? Escríbanos.",
+    payText: "Use el enlace de pago de Stripe de su cotización. ¿No lo encuentra? Escríbanos.",
     portalTitle: "Su tarjeta y sus recibos",
-    portalText: "Cambie su tarjeta y vea sus recibos en el portal de clientes de Stripe.",
+    portalText: "Cambie su tarjeta y vea los recibos en el portal de clientes de Stripe.",
     portalButton: "Abrir el portal de clientes",
     endTitle: "Terminar un alquiler",
     endText:
-      "Envíenos un mensaje al {phone}. Después del mínimo de {minWeeks} semanas, cualquiera de las partes puede terminar el alquiler con {noticeDays} días de aviso, y nosotros recogemos la máquina.",
+      "Envíenos un mensaje al {phone}. Después del mínimo de {minWeeks} semanas, cualquiera de las partes puede terminar el alquiler con {noticeDays} días de aviso. Nosotros recogemos la máquina.",
     textUs: "Escríbanos",
   },
 
@@ -1680,7 +1680,7 @@ const es: DeepPartial<Dictionary> = {
 
   notFound: {
     title: "Página no encontrada",
-    text: "Esta página no existe. El alquiler de lavadora y secadora en Toronto y el GTA cuesta {setPrice} por semana el juego, {singlePrice} una máquina.",
+    text: "Esta página no existe. Alquile un juego de lavadora y secadora por {setPrice} por semana, o una máquina por {singlePrice}.",
     home: "Ir a la página de inicio",
   },
 
@@ -1720,7 +1720,7 @@ const es: DeepPartial<Dictionary> = {
     machine: {
       title: "¿Qué máquina necesita?",
       intro:
-        "¿No está seguro? Elija \"Todavía no lo sé\": le ayudamos a elegir según el tamaño de su clóset y sus conexiones. {link}",
+        "¿No está seguro? Elija \"Todavía no lo sé\". Le ayudamos a elegir según el tamaño de su clóset y sus conexiones. {link}",
       legend: "Tipo de máquina",
       setNote: "{setPrice}/semana por el juego",
       singleNote: "{singlePrice}/semana",
@@ -1733,7 +1733,7 @@ const es: DeepPartial<Dictionary> = {
     },
     details: {
       title: "Cuéntenos sobre su espacio",
-      intro: "Eligió: {machine}. Ahora el espacio, para llevarle una máquina que quepa.",
+      intro: "Eligió: {machine}. Ahora su espacio, para llevarle una máquina que quepa.",
       postal: "Código postal",
       postalPlaceholder: "p. ej. M5V 2T6",
       width: "Ancho del clóset o del espacio",
