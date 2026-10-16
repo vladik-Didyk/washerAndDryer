@@ -129,7 +129,7 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
 
       <header
         className={`sticky top-0 z-40 border-b bg-paper/95 backdrop-blur-md transition-shadow duration-200 ${
-          scrolled ? "border-transparent shadow-[0_6px_20px_-12px_rgb(7_63_50/0.35)]" : "border-line"
+          scrolled ? "border-transparent shadow-[0_6px_20px_-12px_rgb(16_42_110/0.30)]" : "border-line"
         }`}
       >
         <Container

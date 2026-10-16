@@ -38,7 +38,6 @@ export function SharedRooms() {
             />
           ))}
         </Carousel>
-        <p className="mt-4 text-sm text-ink-muted">{sharedRooms.note}</p>
       </Container>
     </Section>
   );

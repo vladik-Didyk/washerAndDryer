@@ -88,8 +88,9 @@
     @apply active:scale-[0.98];
   }
 
+  /* The main call to action: sunny orange, navy text, a soft orange glow */
   .btn-primary {
-    @apply bg-brand text-white hover:bg-brand-dark;
+    @apply bg-action text-brand-dark shadow-[0_8px_20px_-8px_rgb(255_122_26/0.7)] hover:bg-action-light hover:shadow-[0_10px_24px_-8px_rgb(255_122_26/0.8)];
   }
 
   .btn-secondary {

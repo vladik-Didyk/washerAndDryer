@@ -7,24 +7,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // GTA Washer & Dryer Rentals brand, taken from the logo.
+        // GTA Washer & Dryer Rentals: trustworthy blue for the brand, sunny orange for every
+        // "do it now" button, a warm white page. (The names brand/mint/gold are kept from the
+        // first, green theme so every component keeps working; only the values changed.)
         brand: {
-          DEFAULT: "#0B5B47", // deep green, primary
-          dark: "#073F32",
-          mint: "#E6F0EB", // light green tint for panels
-          "mint-strong": "#CFE3D9",
+          DEFAULT: "#2357D8", // royal blue, primary (6.5:1 on white)
+          dark: "#102A6E", // navy: footer, text on tints
+          mint: "#EAF1FF", // light blue tint for panels
+          "mint-strong": "#D3E2FF",
+        },
+        // The call-to-action colour: orange buttons with navy text (5:1).
+        action: {
+          DEFAULT: "#FF7A1A",
+          light: "#FF8F3D", // hover: lighter, so the navy text keeps its contrast
         },
         gold: {
-          DEFAULT: "#F2B33D", // accent; never as text on light backgrounds
-          dark: "#E0A12B",
+          DEFAULT: "#FFC93C", // sunshine accent: badges, icons on blue; never as text on light
+          dark: "#F5B521",
         },
-        paper: "#FAF8F2", // page background
+        paper: "#FFFBF5", // page background, warm white
         ink: {
-          DEFAULT: "#14211D", // body text
-          soft: "#3D4A45",
-          muted: "#5E6A64", // small print, still 5:1 on paper
+          DEFAULT: "#141B33", // body text, navy-black
+          soft: "#3C4560",
+          muted: "#5D6680", // small print, 5.8:1 on paper
         },
-        line: "#E3DED1", // hairlines and card borders
+        line: "#E9E3D8", // hairlines and card borders
       },
       fontFamily: {
         sans: [

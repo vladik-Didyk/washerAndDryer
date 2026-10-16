@@ -53,3 +53,7 @@ worker-configuration.d.ts
 .dev.vars.*
 !.dev.vars.example
 *.tsbuildinfo
+
+# graphify knowledge-graph output (local only)
+graphify-out/
+src/graphify-out/

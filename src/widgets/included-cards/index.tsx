@@ -2,7 +2,7 @@ import { useI18n } from "~/shared/i18n";
 import { Container, Heading, Nest, Photo, Section } from "~/shared/ui";
 
 // Three photo cards under the home hero: what every rental includes. The photos are
-// examples (Unsplash, docs/photo-credits.md) and the band says so.
+// examples (Unsplash, docs/photo-credits.md).
 const PHOTOS = ["rooms/laundry-room-shirts", "rooms/drum-empty", "rooms/washer-basket-sock"] as const;
 
 export function IncludedCards() {
@@ -34,7 +34,6 @@ export function IncludedCards() {
             );
           })}
         </ul>
-        {/* <p className="mt-4 text-sm text-ink-muted">{d.common.examplePhotos}</p> */}
       </Container>
     </Section>
   );

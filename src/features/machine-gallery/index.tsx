@@ -10,7 +10,6 @@ const frame = "relative aspect-[5/6] overflow-hidden rounded-3xl bg-brand-mint";
 // there are more, a row of thumbnail buttons that switch it. The buttons are ordinary buttons (Tab, then Enter or Space);
 // the one showing is marked aria-current. The server HTML shows the first photo. A type with
 // no photo in the build shows its drawing, tagged and captioned as a drawing.
-// Every photo here is an example, and the caption says so.
 export function MachineGallery({ machine, className = "" }: { machine: MachineType; className?: string }) {
   const { d, format } = useI18n();
   const photos = machinePhotos(machine);
@@ -75,7 +74,6 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
         </ul>
       )}
 
-      <figcaption className="mt-3 text-sm text-ink-muted">{d.machines.photoCaption}</figcaption>
     </figure>
   );
 }
