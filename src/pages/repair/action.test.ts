@@ -52,4 +52,16 @@ describe("repair action", () => {
       "Best time: Evening",
     ]);
   });
+
+  it("reports a send error when the email can't be sent", async () => {
+    const { data, status } = unwrap<{ status: string }>(await run(valid, { FORM_MAILER: mockMailer(true).mailer }));
+    expect(status).toBe(502);
+    expect(data.status).toBe("error");
+  });
+
+  it("does not send without the email binding", async () => {
+    const { data } = unwrap<{ status: string }>(await run(valid, { FORM_MAILER: undefined }));
+    expect(data.status).toBe("error");
+    expect(mail.calls).toHaveLength(0);
+  });
 });

@@ -1,9 +1,9 @@
 // Business facts used across the site. Change them here, not in the components.
 // Only verified facts belong in this file: no invented numbers, claims or reviews.
 // Words live in shared/i18n (one dictionary per language); prices and promotions in
-// ./pricing.ts. Secrets and per-deployment settings (the session secret, the Stripe portal
-// link, the analytics token, search-engine verification codes) come from the environment
-// instead: see ./env.ts and README.md.
+// ./pricing.ts. Secrets and per-deployment settings (the session secret, the analytics token,
+// search-engine verification codes) come from the environment instead: see ./env.ts and
+// README.md.
 import type { Dictionary } from "../i18n";
 
 export const siteConfig = {
@@ -29,6 +29,9 @@ export const siteConfig = {
     closes: "19:00",
   },
   facebook: "https://www.facebook.com/profile.php?id=61588384887072",
+  // The Stripe customer portal's sign-in page (card, invoices): linked from /account/. Here,
+  // not in the environment, because the pages are built ahead of time (react-router.config.ts).
+  stripePortalUrl: "https://billing.stripe.com/p/login/8x24gyfyRaszdBB3DW2Ji00",
   // Languages we answer calls in (ISO codes, for JSON-LD).
   spokenLanguages: ["en", "es", "ru"],
   // Where we deliver, in this order: the cities (one page each, entities/area) and Toronto's

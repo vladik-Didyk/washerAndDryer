@@ -2,6 +2,7 @@
 // Nothing secret is ever written in the source: README.md lists every variable.
 import type { AppLoadContext } from "react-router";
 import type { FormMailer } from "../api/email.server";
+import { siteConfig } from "./site";
 
 export interface SiteEnv {
   /** Cloudflare email binding (wrangler.jsonc send_email): the forms' email delivery. */
@@ -12,8 +13,6 @@ export interface SiteEnv {
   FORMS_DRY_RUN?: string;
   /** "1": draft pages (guides, /privacy/, /terms/) are shown, with a Draft ribbon and noindex. */
   PREVIEW_DRAFTS?: string;
-  /** Stripe customer portal login link. While empty, /account/ doesn't exist. */
-  STRIPE_PORTAL_URL?: string;
   /** Cloudflare Web Analytics token. While empty, no beacon is added. */
   CF_ANALYTICS_TOKEN?: string;
   /** Google Search Console: the content="" value only. */
@@ -38,7 +37,7 @@ export function readFlags(env: SiteEnv): SiteFlags {
   const analyticsToken = orNull(env.CF_ANALYTICS_TOKEN);
   return {
     previewDrafts: isOn(env.PREVIEW_DRAFTS),
-    stripePortalUrl: orNull(env.STRIPE_PORTAL_URL),
+    stripePortalUrl: siteConfig.stripePortalUrl,
     // The token goes into an HTML attribute: anything unexpected is dropped.
     analyticsToken: analyticsToken && /^[\w-]+$/.test(analyticsToken) ? analyticsToken : null,
     googleVerification: orNull(env.GOOGLE_SITE_VERIFICATION),

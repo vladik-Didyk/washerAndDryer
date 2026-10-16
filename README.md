@@ -259,13 +259,34 @@ its own at its dates (decided on the server, so the HTML and the hydrated page a
 | `SESSION_SECRET` | secret, required | signs the rental-request cookie (any long random string) |
 | `FORMS_DRY_RUN` | optional, `1` | log submissions instead of sending (testing only) |
 | `PREVIEW_DRAFTS` | optional, `1` | show the draft guides, `/privacy/` and `/terms/` (ribbon + noindex) |
-| `STRIPE_PORTAL_URL` | optional | Stripe customer portal link; turns on `/account/` |
 | `CF_ANALYTICS_TOKEN` | optional | Cloudflare Web Analytics token; adds the cookie-free beacon |
 | `GOOGLE_SITE_VERIFICATION` | optional | Search Console code (content value only) |
 | `BING_SITE_VERIFICATION` | optional | Bing Webmaster code (content value only) |
 
-Locally these go in `.dev.vars` (gitignored). Without them, drafts, `/account/` and analytics
-stay off.
+Locally these go in `.dev.vars` (gitignored). Without them, drafts and analytics stay off.
+The Stripe customer portal link is not a setting: it is `siteConfig.stripePortalUrl`
+(src/shared/config/site.ts), because the pages are built ahead of time.
+
+The published pages are built without any of these settings (next section), so
+`PREVIEW_DRAFTS`, `CF_ANALYTICS_TOKEN` and the verification codes reach only the pages the
+Worker renders (the rental request, the 404 page, drafts in `pnpm dev`). A value every page
+needs, like the analytics token, belongs in `siteConfig` instead.
+
+## Pages built ahead of time
+
+The Workers free plan allows 10 ms of CPU per request, and rendering a page takes more: on
+2026-10-16 about 1 in 4 page loads (the FAQ 8 in 8) ended in Cloudflare error 1102. So
+`pnpm run build` renders every published page in every language into `build/client` (its
+`index.html` and the `_.data` that client-side navigation fetches), plus sitemap.xml,
+robots.txt and llms.txt. `workers/app.ts` serves those files from `ASSETS`; it renders only the
+rental request (`/start/`, a session per visitor), form submissions and unknown URLs.
+
+- The list is `src/app/prerender.json`. `src/app/prerender.test.ts` compares it with the site
+  catalog and, when a page is added or removed, fails and prints the new list to paste in.
+- The build has no Cloudflare environment: no drafts, no `.dev.vars`.
+- **Dates are those of the build.** The offer bar, prices after promotions and the footer year
+  are fixed when the pages are built: rebuild and release when an offer starts or ends (the
+  first week free ends on November 30, 2026: release a new build on December 1).
 
 ## Deploy
 

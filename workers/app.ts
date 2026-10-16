@@ -13,10 +13,13 @@ declare module "react-router" {
   }
 }
 
-const requestHandler = createRequestHandler(
-  () => import("virtual:react-router/server-build"),
-  import.meta.env.MODE,
-);
+// Loaded up front (top-level await), not on the first request: the app is evaluated while the
+// Worker starts, which doesn't count toward a request's 10 ms of CPU (loading it lazily made
+// the first request after a cold start fail). It stays a dynamic import: React Router builds
+// it as its own chunk.
+const serverBuild = await import("virtual:react-router/server-build");
+
+const requestHandler = createRequestHandler(serverBuild, import.meta.env.MODE);
 
 // Every page URL ends with a slash, as on the old static site: "/toronto" and
 // "/toronto/index.html" redirect to "/toronto/". Files (a dot in the last segment) and
@@ -42,6 +45,10 @@ export default {
     if (request.method === "GET" || request.method === "HEAD") {
       const redirect = canonicalRedirect(url);
       if (redirect) return redirect;
+      // A page built ahead of time (react-router.config.ts), or its _.data: served as a file,
+      // without rendering. Anything else (the rental request, unknown URLs) renders below.
+      const asset = await env.ASSETS.fetch(request);
+      if (asset.status !== 404) return asset;
     }
     return requestHandler(request, {
       cloudflare: { env: env as SiteEnv, ctx },
