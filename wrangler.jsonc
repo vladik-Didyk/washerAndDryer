@@ -12,6 +12,9 @@
   "upload_source_maps": true,
   "workers_dev": true,
   "preview_urls": true,
+  // The forms' email (src/shared/api/email.server.ts): free sending to the business's own
+  // address, verified in Cloudflare Email Routing. This binding can send to that address only.
+  "send_email": [{ "name": "FORM_MAILER", "destination_address": "vladik.didyk@gmail.com" }],
   // washerrent.com and www (www redirects to the apex in workers/app.ts). The workers.dev
   // address stays on as a preview; its pages carry the washerrent.com canonical.
   "routes": [

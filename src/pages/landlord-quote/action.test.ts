@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { TEST_KEY, mockWeb3Forms, post, testContext, unwrap } from "~/test/context";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { mockMailer, post, testContext, unwrap } from "~/test/context";
 import { action } from "./action";
 
 const valid = {
@@ -14,16 +14,14 @@ const valid = {
   notes: "",
 };
 
+let mail = mockMailer();
 const run = (fields: Record<string, string>, env = {}) =>
-  action({ request: post("/landlords/quote/", fields), context: testContext(env), params: {} } as never);
+  action({ request: post("/landlords/quote/", fields), context: testContext({ FORM_MAILER: mail.mailer, ...env }), params: {} } as never);
 
 describe("landlord quote action", () => {
-  let web3: ReturnType<typeof mockWeb3Forms>;
   beforeEach(() => {
-    web3 = mockWeb3Forms();
-    vi.stubGlobal("fetch", vi.fn(web3.fetchMock));
+    mail = mockMailer();
   });
-  afterEach(() => vi.unstubAllGlobals());
 
   it("returns field errors and sends nothing when the form is empty", async () => {
     const { data, status } = unwrap<{ status: string; errors: Record<string, string> }>(await run({}));
@@ -37,7 +35,7 @@ describe("landlord quote action", () => {
       setup: "Choose what's there now.",
       option: "Choose how you'd like to do it.",
     });
-    expect(web3.calls).toHaveLength(0);
+    expect(mail.calls).toHaveLength(0);
   });
 
   it("checks the phone, email and units", async () => {
@@ -51,58 +49,58 @@ describe("landlord quote action", () => {
     });
   });
 
-  it("posts the quote to Web3Forms with the key from the environment", async () => {
-    const result = unwrap<{ status: string }>(await run(valid));
+  it("emails the quote to the business, in English, one line per field", async () => {
+    const result = unwrap<{ status: string }>(await run({ ...valid, email: "pat@example.com" }));
     expect(result.data.status).toBe("sent");
-    expect(web3.calls).toHaveLength(1);
-    expect(web3.calls[0].url).toBe("https://api.web3forms.com/submit");
-    expect(web3.calls[0].body).toEqual({
-      access_key: TEST_KEY,
-      from_name: "GTA Washer & Dryer Rentals website",
-      language: "English",
-      subject: "Landlord quote request — Pat Landlord",
-      name: "Pat Landlord",
-      phone: "(416) 555-0199",
-      email: "Not given",
-      building: "12 Example St, Toronto",
-      units: "4",
-      current_setup: "Hookups only",
-      machine_type: "Stackable pair",
-      option: "I rent the machines for my units",
-      notes: "None",
-    });
+    expect(mail.calls).toHaveLength(1);
+    const message = mail.calls[0];
+    expect(message.to).toBe("vladik.didyk@gmail.com");
+    expect(message.from).toEqual({ email: "forms@nearbygta.com", name: "GTA Washer & Dryer Rentals website" });
+    expect(message.replyTo).toBe("pat@example.com");
+    expect(message.subject).toBe("Landlord quote request — Pat Landlord");
+    expect(message.text.split("\n")).toEqual([
+      "Language: English",
+      "Name: Pat Landlord",
+      "Phone: (416) 555-0199",
+      "Email: pat@example.com",
+      "Building: 12 Example St, Toronto",
+      "Units: 4",
+      "Current setup: Hookups only",
+      "Machine type: Stackable pair",
+      "Option: I rent the machines for my units",
+      "Notes: None",
+    ]);
   });
 
-  it("uses whatever key the environment holds (never one from the source)", async () => {
-    await run(valid, { WEB3FORMS_KEY: "another-key" });
-    expect(web3.calls[0].body.access_key).toBe("another-key");
+  it("has no Reply-To when the customer gave no email", async () => {
+    await run(valid);
+    expect(mail.calls[0].replyTo).toBeUndefined();
   });
 
-  it("reports a send error when Web3Forms refuses", async () => {
-    vi.stubGlobal("fetch", vi.fn(mockWeb3Forms(false).fetchMock));
-    const { data, status } = unwrap<{ status: string }>(await run(valid));
+  it("reports a send error when the email can't be sent", async () => {
+    const { data, status } = unwrap<{ status: string }>(await run(valid, { FORM_MAILER: mockMailer(true).mailer }));
     expect(status).toBe(502);
     expect(data.status).toBe("error");
   });
 
-  it("does not send without a key", async () => {
-    const { data } = unwrap<{ status: string }>(await run(valid, { WEB3FORMS_KEY: "" }));
+  it("does not send without the email binding", async () => {
+    const { data } = unwrap<{ status: string }>(await run(valid, { FORM_MAILER: undefined }));
     expect(data.status).toBe("error");
-    expect(web3.calls).toHaveLength(0);
+    expect(mail.calls).toHaveLength(0);
   });
 
   it("logs instead of sending with FORMS_DRY_RUN=1", async () => {
     const log = vi.spyOn(console, "log").mockImplementation(() => {});
     const { data } = unwrap<{ status: string }>(await run(valid, { FORMS_DRY_RUN: "1" }));
     expect(data.status).toBe("sent");
-    expect(web3.calls).toHaveLength(0);
-    expect(log.mock.calls[0][1]).not.toContain(TEST_KEY);
+    expect(mail.calls).toHaveLength(0);
+    expect(log.mock.calls[0][1]).toContain("Landlord quote request");
     log.mockRestore();
   });
 
   it("drops a submission with the honeypot ticked", async () => {
     const { data } = unwrap<{ status: string }>(await run({ ...valid, botcheck: "on" }));
     expect(data.status).toBe("sent");
-    expect(web3.calls).toHaveLength(0);
+    expect(mail.calls).toHaveLength(0);
   });
 });

@@ -1,6 +1,7 @@
 // Helpers for server tests: a load context like the Worker's (workers/app.ts), and form posts.
 import type { AppLoadContext } from "react-router";
 import { i18nAt } from "~/entities/offer";
+import type { FormMessage } from "~/shared/api/email.server";
 import type { SiteEnv } from "~/shared/config";
 import type { Lang } from "~/shared/i18n";
 
@@ -10,13 +11,12 @@ export const TEST_NOW = Date.parse("2026-10-15T15:00:00Z");
 // The text of a request at `now` (prices and offers filled in), as the loaders get it.
 export const testI18n = (lang: Lang = "en", now = TEST_NOW) => i18nAt(lang, now);
 
-export const TEST_KEY = "test-web3forms-key-not-real";
 export const TEST_SECRET = "test-session-secret";
 
 export function testContext(env: SiteEnv = {}, requestTime = TEST_NOW): AppLoadContext {
   return {
     cloudflare: {
-      env: { WEB3FORMS_KEY: TEST_KEY, SESSION_SECRET: TEST_SECRET, ...env },
+      env: { SESSION_SECRET: TEST_SECRET, ...env },
       ctx: {} as ExecutionContext,
     },
     requestTime,
@@ -48,15 +48,15 @@ export function unwrap<T>(result: unknown): { data: T; status: number } {
   return { data: result as T, status: 200 };
 }
 
-// A Web3Forms stand-in: records each request, answers "success".
-export function mockWeb3Forms(success = true) {
-  const calls: Array<{ url: string; body: Record<string, string> }> = [];
-  const fetchMock = async (input: RequestInfo | URL, init?: RequestInit) => {
-    calls.push({ url: String(input), body: JSON.parse(String(init?.body ?? "{}")) });
-    return new Response(JSON.stringify({ success, message: success ? "ok" : "refused" }), {
-      status: success ? 200 : 400,
-      headers: { "Content-Type": "application/json" },
-    });
+// A stand-in for the FORM_MAILER email binding: records each message; with `fail` its send()
+// throws the way the binding does (an Error with a code).
+export function mockMailer(fail = false) {
+  const calls: FormMessage[] = [];
+  const mailer = {
+    async send(message: FormMessage) {
+      if (fail) throw Object.assign(new Error("refused"), { code: "E_TEST_REFUSED" });
+      calls.push(message);
+    },
   };
-  return { calls, fetchMock };
+  return { calls, mailer };
 }

@@ -3,11 +3,11 @@
 # (or as plain variables in the Cloudflare dashboard for the non-secret ones).
 
 # Secrets
-WEB3FORMS_KEY=
+
 SESSION_SECRET=
 
 # Optional settings ("1" turns a switch on)
-# FORMS_DRY_RUN=1          # log form submissions instead of sending them to Web3Forms
+# FORMS_DRY_RUN=1          # log form emails instead of sending them
 # PREVIEW_DRAFTS=1         # show draft pages (guides, /privacy/, /terms/) with a Draft ribbon
 # STRIPE_PORTAL_URL=       # https://billing.stripe.com/p/login/... ; enables /account/
 # CF_ANALYTICS_TOKEN=      # Cloudflare Web Analytics token; adds the beacon

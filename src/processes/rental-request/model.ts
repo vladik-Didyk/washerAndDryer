@@ -122,7 +122,7 @@ export const accessLabel = (i18n: I18n, value: string | undefined) => optionLabe
 // "Oakville" outside them, null when we can't tell.
 export const postalCity = (i18n: I18n, postal: string) => checkPostalCode(postal, i18n).place ?? null;
 
-// The email the business gets (through Web3Forms), one line per answer, in English whatever
+// The email the business gets (shared/api/email.server.ts), one line per answer, in English whatever
 // the language of the page (with that language on the first line).
 export function rentalRequestFields(
   draft: Required<RentalDraft>,

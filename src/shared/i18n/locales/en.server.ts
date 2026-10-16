@@ -508,7 +508,7 @@ const enServer = {
         {
           heading: "How forms reach us",
           blocks: [
-            "Forms are delivered to us by email through Web3Forms, a form service. Web3Forms receives what you send so it can pass it on to us.",
+            "Forms are delivered to us by email through Cloudflare, which hosts this site.",
           ],
         },
         {

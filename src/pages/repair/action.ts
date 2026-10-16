@@ -1,8 +1,8 @@
 // Server action of /repair/ (and /es/, /ru/): checks the posted form against its definition
-// (shared/forms, form "repair") and sends it through Web3Forms, in English.
+// (shared/forms, form "repair") and emails it to the business, in English.
 import { data, type ActionFunctionArgs } from "react-router";
 import { requestI18n } from "~/entities/offer";
-import { submitToWeb3Forms } from "~/shared/api/web3forms.server";
+import { sendFormEmail } from "~/shared/api/email.server";
 import { envOf } from "~/shared/config";
 import {
   englishOf,
@@ -41,7 +41,7 @@ export async function action(args: ActionFunctionArgs) {
   // A bot ticked the hidden box: answer as if sent, send nothing.
   if (isBot(form)) return { status: "sent" } satisfies FormActionData;
 
-  const sent = await submitToWeb3Forms(envOf(context), repairEmail(checked.values, i18n));
+  const sent = await sendFormEmail(envOf(context), repairEmail(checked.values, i18n));
   if (!sent.ok) return data<FormActionData>({ status: "error", values: checked.values }, { status: 502 });
   return { status: "sent" } satisfies FormActionData;
 }

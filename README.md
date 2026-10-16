@@ -15,7 +15,7 @@ prices and promotions decided per request from one config file.
 
 ```bash
 pnpm install
-cp .dev.vars.example .dev.vars   # then fill in WEB3FORMS_KEY and SESSION_SECRET
+cp .dev.vars.example .dev.vars   # then fill in SESSION_SECRET
 pnpm dev                         # dev server with hot reload, http://localhost:8790
 pnpm test                        # Vitest: postal codes, rental steps, forms, catalog, prices, dictionaries
 pnpm typecheck                   # wrangler types + react-router typegen + tsc
@@ -29,7 +29,7 @@ never breaks it. `pnpm preview` serves `build/`, and any later build replaces th
 it (pages then load without styles until it is restarted), so use it only for a final check.
 
 To try forms locally without sending email, add `FORMS_DRY_RUN=1` to `.dev.vars`: the
-server logs the submission (key masked) instead of posting to Web3Forms.
+server logs the email instead of sending it.
 
 To run the built Worker with other settings, e.g. drafts on:
 
@@ -44,7 +44,7 @@ pnpm exec wrangler dev -c build/server/wrangler.json --port 8791 \
 Layers import only from layers below them (app → processes → pages → widgets → features →
 entities → shared), never sideways within a layer, and only through a slice's `index.ts`.
 Files ending in `.server.ts` are server-only: React Router refuses to put them in the browser
-bundle (secrets, Web3Forms, guide and policy drafts).
+bundle (secrets, form email, guide and policy drafts).
 
 - **app/** — the document (`root.tsx`: `<html>`, shared head tags, the site frame, 404/error
   page, analytics beacon), `routes.ts` (every URL), `entry.server.tsx`, `entry.client.tsx`
@@ -75,7 +75,7 @@ bundle (secrets, Web3Forms, guide and policy drafts).
   forms (every form field and form, see "Forms"), ui (the page blocks: Container, Section,
   Heading, SectionHeader, Card, Button, LangLink, PhoneButton, CallCard, lists; Photo with
   WebP/srcset, icons, the struck-through old price), seo (meta, hreflang + JSON-LD builders),
-  api (`web3forms.server.ts`), lib (dates, the per-request site context).
+  api (`email.server.ts`: form emails), lib (dates, the per-request site context).
 
 ### Page blocks (shared/ui)
 
@@ -217,7 +217,7 @@ option posts the English text of its label (or its own `value`), whatever the pa
   form's action if the business needs it.
 - **Add a form**: add an entry to `forms`; in the page, `<Form method="post">` with
   `<FormFields form="...">`, `<Honeypot />` and `<SubmitButton>`; in the action,
-  `validateForm`, then `submitToWeb3Forms(env, formEmail(i18n, { subject, ... }))` with the
+  `validateForm`, then `sendFormEmail(env, formEmail(i18n, { subject, ... }))` with the
   email built from `englishOf(i18n)`.
 
 ## Prices and promotions
@@ -255,7 +255,7 @@ its own at its dates (decided on the server, so the HTML and the hydrated page a
 
 | Name | Kind | What it does |
 |---|---|---|
-| `WEB3FORMS_KEY` | secret, required | Web3Forms access key; forms are emailed through it |
+| `FORM_MAILER` | binding (wrangler.jsonc) | Cloudflare `send_email`: forms are emailed from forms@nearbygta.com to vladik.didyk@gmail.com (verified in Email Routing; free) |
 | `SESSION_SECRET` | secret, required | signs the rental-request cookie (any long random string) |
 | `FORMS_DRY_RUN` | optional, `1` | log submissions instead of sending (testing only) |
 | `PREVIEW_DRAFTS` | optional, `1` | show the draft guides, `/privacy/` and `/terms/` (ribbon + noindex) |
@@ -272,8 +272,8 @@ stay off.
 washerrent.com is live. The Worker `washerrent` (Cloudflare account
 `06277ccde592d58901541d66461eae53`) answers on `washerrent.com`; `www.washerrent.com`
 redirects to it. Both are custom domains in `wrangler.jsonc`, and the DNS zone is on Cloudflare
-(nameservers moved from Namecheap on 2026-10-15). The secrets `WEB3FORMS_KEY` and
-`SESSION_SECRET` are set on the Worker; optional settings go in the same way
+(nameservers moved from Namecheap on 2026-10-15). The secret `SESSION_SECRET` is set on the Worker (`WEB3FORMS_KEY` is
+no longer used and can be deleted); optional settings go in the same way
 (`pnpm exec wrangler secret put NAME`) or in the dashboard (Workers → washerrent → Settings →
 Variables).
 

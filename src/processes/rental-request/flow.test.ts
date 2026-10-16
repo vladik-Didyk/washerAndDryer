@@ -1,11 +1,12 @@
 // The whole rental request, step by step, as a browser without JavaScript would do it:
 // form posts, redirects and the session cookie.
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { TEST_KEY, cookieFrom, get, mockWeb3Forms, post, testContext, unwrap } from "~/test/context";
+import { beforeEach, describe, expect, it } from "vitest";
+import { cookieFrom, get, mockMailer, post, testContext, unwrap } from "~/test/context";
 import { contactAction, detailsAction, machineAction } from "./actions.server";
 import { contactLoader, detailsLoader, doneLoader } from "./loaders.server";
 
-const context = testContext();
+const mail = mockMailer();
+const context = testContext({ FORM_MAILER: mail.mailer });
 const args = (request: Request) => ({ request, context, params: {} }) as never;
 
 async function expectRedirect(promise: Promise<unknown>, location: string) {
@@ -22,12 +23,9 @@ async function expectRedirect(promise: Promise<unknown>, location: string) {
 }
 
 describe("rental request flow", () => {
-  let web3: ReturnType<typeof mockWeb3Forms>;
   beforeEach(() => {
-    web3 = mockWeb3Forms();
-    vi.stubGlobal("fetch", vi.fn(web3.fetchMock));
+    mail.calls.length = 0;
   });
-  afterEach(() => vi.unstubAllGlobals());
 
   it("sends later steps back to the start without a session", async () => {
     await expectRedirect(detailsLoader(args(get("/start/details/"))), "/start/");
@@ -61,24 +59,25 @@ describe("rental request flow", () => {
     const invalid = unwrap<{ errors: Record<string, string> }>(await contactAction(args(post("/start/contact/", {}, cookie))));
     expect(invalid.status).toBe(400);
     expect(Object.keys(invalid.data.errors).sort()).toEqual(["name", "phone"]);
-    expect(web3.calls).toHaveLength(0);
+    expect(mail.calls).toHaveLength(0);
 
     response = await expectRedirect(
       contactAction(args(post("/start/contact/", { name: "Alex", phone: "416-555-0123", preferredDay: "2026-10-20" }, cookie))),
       "/start/done/",
     );
     cookie = cookieFrom(response);
-    expect(web3.calls).toHaveLength(1);
-    expect(web3.calls[0].body).toMatchObject({
-      access_key: TEST_KEY,
-      subject: "New rental request — Alex",
-      machine_type: "Stackable pair",
-      postal_code: "M2N 6K1",
-      area: "North York, Toronto",
-      dryer_outlet: "3-prong",
-      access: "Elevator",
-      preferred_day: "2026-10-20",
-    });
+    expect(mail.calls).toHaveLength(1);
+    expect(mail.calls[0].subject).toBe("New rental request — Alex");
+    for (const line of [
+      "Machine type: Stackable pair",
+      "Postal code: M2N 6K1",
+      "Area: North York, Toronto",
+      "Dryer outlet: 3-prong",
+      "Access: Elevator",
+      "Preferred day: 2026-10-20",
+    ]) {
+      expect(mail.calls[0].text).toContain(line);
+    }
 
     // Done: shown once, and the answers are gone.
     const done = unwrap<{ sent: { name: string } }>(await doneLoader(args(get("/start/done/", cookie))));
@@ -86,8 +85,9 @@ describe("rental request flow", () => {
     await expectRedirect(contactLoader(args(get("/start/contact/", cookie))), "/start/");
   });
 
-  it("keeps the answers and shows an error when Web3Forms fails", async () => {
-    vi.stubGlobal("fetch", vi.fn(mockWeb3Forms(false).fetchMock));
+  it("keeps the answers and shows an error when the email can't be sent", async () => {
+    const failing = testContext({ FORM_MAILER: mockMailer(true).mailer });
+    const args = (request: Request) => ({ request, context: failing, params: {} }) as never;
     let response = await expectRedirect(machineAction(args(post("/start/", { machine: "not-sure" }))), "/start/details/");
     response = await expectRedirect(
       detailsAction(args(post("/start/details/", { postal: "L4K 2Z2", closetWidth: "not sure", outlet: "not-sure", access: "ground" }, cookieFrom(response)))),

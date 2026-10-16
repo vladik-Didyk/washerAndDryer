@@ -86,7 +86,7 @@ describe("progress and the email", () => {
     expect(firstOpenStep({ machine: { machine: "stackable" } })).toBe("details");
   });
 
-  it("builds the Web3Forms fields from all three steps", () => {
+  it("builds the email fields from all three steps", () => {
     const fields = rentalRequestFields(
       {
         machine: { machine: "washer-only" },

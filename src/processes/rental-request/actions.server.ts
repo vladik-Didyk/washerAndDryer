@@ -1,10 +1,10 @@
 // The server actions of the three steps. Each checks its fields (./model.ts): errors go back
 // to the same page with what was typed (status 400); a valid step is saved in the session and
-// the visitor moves on. The last step sends the request through Web3Forms and clears the
+// the visitor moves on. The last step emails the request to the business and clears the
 // session. No JavaScript needed: these are plain form posts.
 import { data, redirect, type ActionFunctionArgs } from "react-router";
 import { requestI18n } from "~/entities/offer";
-import { submitToWeb3Forms } from "~/shared/api/web3forms.server";
+import { sendFormEmail } from "~/shared/api/email.server";
 import { envOf, requestTimeOf } from "~/shared/config";
 import { isBot } from "~/shared/forms";
 import { torontoDate } from "~/shared/lib";
@@ -61,7 +61,7 @@ export async function contactAction(args: ActionFunctionArgs) {
 
   // A bot ticked the hidden box: finish as if sent, send nothing.
   if (!isBot(form)) {
-    const sent = await submitToWeb3Forms(
+    const sent = await sendFormEmail(
       envOf(context),
       rentalRequestFields(draft as Required<RentalDraft>, checked.fields, i18n),
     );

@@ -1,10 +1,11 @@
-// Environment of the Worker (wrangler secrets and variables; locally .dev.vars).
+// Environment of the Worker (wrangler secrets, variables and bindings; locally .dev.vars).
 // Nothing secret is ever written in the source: README.md lists every variable.
 import type { AppLoadContext } from "react-router";
+import type { FormMailer } from "../api/email.server";
 
 export interface SiteEnv {
-  /** Web3Forms access key: the forms' email delivery. Secret. */
-  WEB3FORMS_KEY?: string;
+  /** Cloudflare email binding (wrangler.jsonc send_email): the forms' email delivery. */
+  FORM_MAILER?: FormMailer;
   /** Signs the rental-request session cookie. Secret. */
   SESSION_SECRET?: string;
   /** "1": log form submissions instead of sending them (local checks, tests). */

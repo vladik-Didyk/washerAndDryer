@@ -148,7 +148,7 @@ export function validateForm(
   return Object.keys(errors).length ? { ok: false, values, errors } : { ok: true, values };
 }
 
-// The email the business gets (Web3Forms): English whatever the page's language, with the
+// The email the business gets (shared/api/email.server.ts): English whatever the page's language, with the
 // language the visitor wrote in on the first line.
 export function formEmail(i18n: I18n, fields: Record<string, string>): Record<string, string> {
   return { language: i18n.language.englishName, ...fields };

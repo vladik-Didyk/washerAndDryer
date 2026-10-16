@@ -1,7 +1,7 @@
 // Business facts used across the site. Change them here, not in the components.
 // Only verified facts belong in this file: no invented numbers, claims or reviews.
 // Words live in shared/i18n (one dictionary per language); prices and promotions in
-// ./pricing.ts. Secrets and per-deployment settings (the Web3Forms key, the Stripe portal
+// ./pricing.ts. Secrets and per-deployment settings (the session secret, the Stripe portal
 // link, the analytics token, search-engine verification codes) come from the environment
 // instead: see ./env.ts and README.md.
 import type { Dictionary } from "../i18n";
