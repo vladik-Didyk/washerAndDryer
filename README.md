@@ -306,6 +306,7 @@ version `075598c3`: the postal-code check from every Ontario FSA (`pnpm postal-f
 `d90383ed`: Unsplash laundry-room photos, the carousel, the three-slide hero and the photo cards. 2026-10-15,
 version `6d7ba02a`: real photos for the one-piece laundry centre. 2026-10-15, version `e4c746ad`:
 less text on machine, city, district and FAQ pages (folds, size diagram, map headers, FAQ tabs).
+2026-10-15, version `92ea2f78`: the YouTube installation videos removed from the home page.
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
