@@ -307,6 +307,7 @@ version `075598c3`: the postal-code check from every Ontario FSA (`pnpm postal-f
 version `6d7ba02a`: real photos for the one-piece laundry centre. 2026-10-15, version `e4c746ad`:
 less text on machine, city, district and FAQ pages (folds, size diagram, map headers, FAQ tabs).
 2026-10-15, version `92ea2f78`: the YouTube installation videos removed from the home page.
+2026-10-15, version `963cd487`: weekly prices $13.99 (set) and $7.99 (one machine), new share image.
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
