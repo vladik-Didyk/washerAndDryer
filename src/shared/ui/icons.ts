@@ -34,6 +34,7 @@ export {
   Truck,
   UserPlus,
   Wallet,
+  WashingMachine,
   Wrench,
   X,
   type LucideIcon,
