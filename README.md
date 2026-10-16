@@ -308,6 +308,10 @@ version `6d7ba02a`: real photos for the one-piece laundry centre. 2026-10-15, ve
 less text on machine, city, district and FAQ pages (folds, size diagram, map headers, FAQ tabs).
 2026-10-15, version `92ea2f78`: the YouTube installation videos removed from the home page.
 2026-10-15, version `963cd487`: weekly prices $13.99 (set) and $7.99 (one machine), new share image.
+2026-10-15, version `3268bb19`: UX pass: fixed hero with two tiles (no hero carousel), carousels
+that never move by themselves (arrows on photos, counter, peek), spinning-logo loader,
+shrinking header and slide-in phone menu, router links with cross-fade, scroll-in sections,
+error focus and next steps in the rental form.
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.

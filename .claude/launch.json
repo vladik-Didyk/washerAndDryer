@@ -4,14 +4,30 @@
     {
       "name": "washerrent-dev",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
+      "runtimeArgs": [
+        "dev"
+      ],
       "port": 8790
     },
     {
       "name": "washerrent-preview",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["preview"],
+      "runtimeArgs": [
+        "preview"
+      ],
       "port": 8791
+    },
+    {
+      "name": "washerrent-worktree",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "exec",
+        "react-router",
+        "dev",
+        "--port",
+        "8792"
+      ],
+      "port": 8792
     }
   ]
 }
