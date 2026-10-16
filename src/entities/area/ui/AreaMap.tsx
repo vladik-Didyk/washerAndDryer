@@ -4,8 +4,7 @@ import { cityPath, getCities, type City, type CitySlug } from "../data";
 // A drawn map of where we deliver: Toronto on the lake and the five cities around it. It is a
 // sketch, not a survey map (our own drawing; no map service, no cookies). Each city is a link
 // to its page. `highlight` lights one city up (its page); `pin` marks a spot with a label (a
-// Toronto district). With neither, every city is drawn the same, Toronto in blue. The land is
-// warm cream so it reads apart from the blue lake.
+// Toronto district). With neither, every city is drawn the same, Toronto darker.
 type Shape = { points: string; label: [x: number, y: number] };
 
 const SHAPES: Record<CitySlug, Shape> = {
@@ -67,7 +66,7 @@ export function AreaMap({
               points={shape.points}
               strokeLinejoin="round"
               className={`stroke-white stroke-[4] transition-colors duration-150 group-hover:fill-gold group-focus-visible:fill-gold ${
-                lit ? "fill-brand" : highlight ? "fill-[#F6F0E6]" : "fill-[#EADFCC]"
+                lit ? "fill-brand" : highlight ? "fill-brand-mint" : "fill-brand-mint-strong"
               }`}
             />
             {pinned !== city.slug && <MapLabel name={city.name} x={shape.label[0]} y={shape.label[1]} light={lit} />}

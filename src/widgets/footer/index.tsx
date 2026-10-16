@@ -80,7 +80,7 @@ export function Footer() {
         <Container className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-12 lg:gap-8 lg:py-16">
           <div className="col-span-2 lg:col-span-4">
             <LangLink href={pagePaths.home} className="inline-flex items-center gap-3 rounded-xl">
-              {/* White tile keeps the blue logo visible on the navy footer. */}
+              {/* White tile keeps the green logo visible on the dark footer. */}
               <span className="rounded-xl bg-white p-1">
                 <Logo className="h-11 w-11" />
               </span>

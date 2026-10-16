@@ -6,7 +6,7 @@ import { Button, Card, Container, Heading, KeepWordsWhole, PhoneButton, Photo, S
 
 // The closing call to action of a page, in one of two shapes:
 // - "photo" (default): a band near the bottom of the main pages, the home page's laundry-room
-//   photo under a dark navy overlay, one short line, and the two ways to start. The overlay
+//   photo under a dark green overlay, one short line, and the two ways to start. The overlay
 //   keeps white text well above 4.5:1 wherever it sits: solid enough over the whole photo on
 //   phones, darkest behind the text from 1024px.
 // - "panel": a mint card, heading and lead on the left, `children` on the right (buttons, the

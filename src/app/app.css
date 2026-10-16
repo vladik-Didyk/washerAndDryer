@@ -32,7 +32,7 @@
     outline-offset: 3px;
   }
 
-  /* Midnight and blue sections: a sky ring stays visible there */
+  /* Dark green sections: a gold ring stays visible there */
   .on-dark :focus-visible {
     outline-color: theme("colors.gold.DEFAULT");
   }
@@ -88,14 +88,8 @@
     @apply active:scale-[0.98];
   }
 
-  /* The main call to action: calm blue pill, white text */
   .btn-primary {
-    @apply bg-action text-white hover:bg-action-light;
-  }
-
-  /* Solid midnight: the phone buttons, beside the blue "start" */
-  .btn-blue {
-    @apply bg-brand-dark text-white hover:bg-black;
+    @apply bg-brand text-white hover:bg-brand-dark;
   }
 
   .btn-secondary {
@@ -106,7 +100,7 @@
     @apply bg-gold text-ink hover:bg-gold-dark;
   }
 
-  /* Secondary button on midnight or blue, or on a photo under a dark overlay */
+  /* Secondary button on dark green or on a photo under a dark overlay */
   .btn-outline-light {
     @apply border-2 border-white/85 text-white hover:bg-white hover:text-brand-dark;
   }

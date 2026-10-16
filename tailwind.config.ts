@@ -7,32 +7,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        // GTA Washer & Dryer Rentals, "midnight and starlight": a calm blue for every action, midnight
-        // for the header and dark bands, a warm starlight page. Apple-like: quiet colour, white
-        // cards, the photos do the work. (The names brand/mint/gold/action are kept from earlier
-        // themes so every component keeps working; only the values changed.)
+        // GTA Washer & Dryer Rentals brand, taken from the logo.
         brand: {
-          DEFAULT: "#3A6EA5", // calm blue: buttons, links, the price (5.4:1 on white)
-          dark: "#232A35", // midnight: header, footer, dark bands
-          mint: "#EDE6DA", // starlight tint for panels
-          "mint-strong": "#E0D6C5",
-        },
-        // The call-to-action colour: the same calm blue, white text.
-        action: {
-          DEFAULT: "#3A6EA5",
-          light: "#2F5C8C", // hover: a shade deeper
+          DEFAULT: "#0B5B47", // deep green, primary
+          dark: "#073F32",
+          mint: "#E6F0EB", // light green tint for panels
+          "mint-strong": "#CFE3D9",
         },
         gold: {
-          DEFAULT: "#9CC3F5", // soft sky: icons and badges on midnight; never as text on light
-          dark: "#86B3EC",
+          DEFAULT: "#F2B33D", // accent; never as text on light backgrounds
+          dark: "#E0A12B",
         },
-        paper: "#F4EEE4", // page background, starlight
+        paper: "#FAF8F2", // page background
         ink: {
-          DEFAULT: "#1F2530", // body text
-          soft: "#4A505B",
-          muted: "#5C5F66", // small print, 5.7:1 on the page
+          DEFAULT: "#14211D", // body text
+          soft: "#3D4A45",
+          muted: "#5E6A64", // small print, still 5:1 on paper
         },
-        line: "#E2D9CB", // hairlines and card borders
+        line: "#E3DED1", // hairlines and card borders
       },
       fontFamily: {
         sans: [
@@ -43,7 +35,7 @@ export default {
           "Segoe UI",
           "sans-serif",
         ],
-        display: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Poppins", "Inter", "system-ui", "sans-serif"],
       },
       keyframes: {
         "rise-in": {

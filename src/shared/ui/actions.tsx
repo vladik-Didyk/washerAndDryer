@@ -44,7 +44,6 @@ export function LangLink({ href, children, ...rest }: LangLinkProps) {
 // Button looks, as class names (defined in src/app/app.css), for <a> and <button> alike.
 export const buttonClass = {
   primary: "btn btn-primary",
-  blue: "btn btn-blue",
   secondary: "btn btn-secondary",
   gold: "btn btn-gold",
   outlineLight: "btn btn-outline-light",
@@ -83,7 +82,7 @@ export function Button({ variant = "primary", className = "", children, ...props
 // (common.callOrText, "Call {phone}"...).
 export function PhoneButton({
   kind = "call",
-  variant = kind === "call" ? "blue" : "secondary",
+  variant = kind === "call" ? "primary" : "secondary",
   label,
   className,
   ...rest

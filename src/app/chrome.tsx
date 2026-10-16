@@ -71,6 +71,6 @@ export function SiteChrome({
 }
 
 export const fontStylesheet =
-  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap";
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap";
 
 export const ogImage = siteConfig.ogImage;

@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="480" viewBox="0 0 400 480" fill="none">
 <title>One machine, shown next to the outline of the one you already have</title>
-<ellipse cx="110" cy="453" rx="100" ry="7" fill="#3A6EA5" fill-opacity="0.12"/>
-<rect x="44" y="442" width="22" height="10" rx="3" fill="#3A6EA5"/>
-<rect x="154" y="442" width="22" height="10" rx="3" fill="#3A6EA5"/>
-<path d="M26 210L38 182H182L194 210Z" fill="#E6EDF5" stroke="#3A6EA5" stroke-width="6" stroke-linejoin="round"/>
-<path d="M26 210 H194  V432 A12 12 0 0 1 182 444 H38 A12 12 0 0 1 26 432 V210  Z" fill="#FFFFFF" stroke="#3A6EA5" stroke-width="6" stroke-linejoin="round"/>
-<path d="M26 256H194" fill="none" stroke="#3A6EA5" stroke-width="5" stroke-linecap="round"/>
-<rect x="40" y="222" width="50" height="22" rx="5" fill="#FFFFFF" stroke="#3A6EA5" stroke-width="4"/>
-<circle cx="120" cy="233" r="4" fill="#3A6EA5"/>
-<circle cx="136" cy="233" r="4" fill="#3A6EA5"/>
-<circle cx="164" cy="233" r="12" fill="#9CC3F5" stroke="#3A6EA5" stroke-width="4"/>
-<path d="M164 233V225" stroke="#3A6EA5" stroke-width="4" stroke-linecap="round"/>
-<circle cx="110" cy="350" r="64" fill="#FFFFFF" stroke="#3A6EA5" stroke-width="6"/>
-<circle cx="110" cy="350" r="55" fill="none" stroke="#9CC3F5" stroke-width="7"/>
-<circle cx="110" cy="350" r="45" fill="#E6EDF5"/>
-<path d="M65.3 355.4Q76.5 345.4 87.7 355.4Q98.8 365.4 110 355.4Q121.2 345.4 132.3 355.4Q143.5 365.4 154.7 355.4A45 45 0 0 1 65.3 355.4Z" fill="#C9D8E8"/>
-<circle cx="110" cy="350" r="45" fill="none" stroke="#3A6EA5" stroke-width="4"/>
+<ellipse cx="110" cy="453" rx="100" ry="7" fill="#0B5B47" fill-opacity="0.12"/>
+<rect x="44" y="442" width="22" height="10" rx="3" fill="#0B5B47"/>
+<rect x="154" y="442" width="22" height="10" rx="3" fill="#0B5B47"/>
+<path d="M26 210L38 182H182L194 210Z" fill="#DDECE5" stroke="#0B5B47" stroke-width="6" stroke-linejoin="round"/>
+<path d="M26 210 H194  V432 A12 12 0 0 1 182 444 H38 A12 12 0 0 1 26 432 V210  Z" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6" stroke-linejoin="round"/>
+<path d="M26 256H194" fill="none" stroke="#0B5B47" stroke-width="5" stroke-linecap="round"/>
+<rect x="40" y="222" width="50" height="22" rx="5" fill="#FFFFFF" stroke="#0B5B47" stroke-width="4"/>
+<circle cx="120" cy="233" r="4" fill="#0B5B47"/>
+<circle cx="136" cy="233" r="4" fill="#0B5B47"/>
+<circle cx="164" cy="233" r="12" fill="#F2B33D" stroke="#0B5B47" stroke-width="4"/>
+<path d="M164 233V225" stroke="#0B5B47" stroke-width="4" stroke-linecap="round"/>
+<circle cx="110" cy="350" r="64" fill="#FFFFFF" stroke="#0B5B47" stroke-width="6"/>
+<circle cx="110" cy="350" r="55" fill="none" stroke="#F2B33D" stroke-width="7"/>
+<circle cx="110" cy="350" r="45" fill="#DDECE5"/>
+<path d="M65.3 355.4Q76.5 345.4 87.7 355.4Q98.8 365.4 110 355.4Q121.2 345.4 132.3 355.4Q143.5 365.4 154.7 355.4A45 45 0 0 1 65.3 355.4Z" fill="#BFDACD"/>
+<circle cx="110" cy="350" r="45" fill="none" stroke="#0B5B47" stroke-width="4"/>
 <path d="M76.2 337.7A36 36 0 0 1 94.8 317.4" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
-<path d="M206 210L218 182H362L374 210" stroke="#3A6EA5" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="206" y="210" width="168" height="234" rx="12" stroke="#3A6EA5" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
-<path d="M206 256H374" stroke="#3A6EA5" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
-<circle cx="290" cy="350" r="64" stroke="#3A6EA5" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path d="M206 210L218 182H362L374 210" stroke="#0B5B47" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="206" y="210" width="168" height="234" rx="12" stroke="#0B5B47" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path d="M206 256H374" stroke="#0B5B47" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+<circle cx="290" cy="350" r="64" stroke="#0B5B47" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
 </svg>
