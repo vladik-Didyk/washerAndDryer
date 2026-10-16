@@ -302,7 +302,8 @@ the forms registry), up to commit `8fba2f2`.
 2026-10-15, version `aa0c470e`: the share image with the weekly price. 2026-10-15, version
 `0d34ed11`: Canadian French (`/fr/`) and the laundry room page (`/buildings/`). 2026-10-15, version `4af5668a`:
 the home page with about half the text: price card, icon steps, drawn service-area map. 2026-10-15,
-version `075598c3`: the postal-code check from every Ontario FSA (`pnpm postal-fsas`).
+version `075598c3`: the postal-code check from every Ontario FSA (`pnpm postal-fsas`). 2026-10-15, version
+`d90383ed`: Unsplash laundry-room photos, the carousel, the three-slide hero and the photo cards.
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
