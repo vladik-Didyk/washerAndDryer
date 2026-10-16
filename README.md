@@ -312,6 +312,11 @@ less text on machine, city, district and FAQ pages (folds, size diagram, map hea
 that never move by themselves (arrows on photos, counter, peek), spinning-logo loader,
 shrinking header and slide-in phone menu, router links with cross-fade, scroll-in sections,
 error focus and next steps in the rental form.
+2026-10-15, version `9bc352f6`: "Text us a photo" card on /repair/, example-photo notes and hero tag
+hidden, /account/ on (Stripe portal link in the `STRIPE_PORTAL_URL` setting). Stripe: weekly links
+$13.99 set and $7.99 one machine, each with the $200 deposit and a 7-day trial (remove the trial
+after Nov 30). Dashboard plan: docs/customer-dashboard-plan.md (sign-in by email link; start at
+about 25 customers).
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
