@@ -30,10 +30,6 @@ const en = {
       previous: "Previous slide",
       next: "Next slide",
       slideOf: "{index} of {count}",
-      goTo: "Go to slide {index} of {count}",
-      slides: "Slides",
-      pause: "Pause the slideshow",
-      play: "Play the slideshow",
     },
     examplePhotos: "Example photos, not our machines or buildings.",
     sharedRooms: {
@@ -598,7 +594,6 @@ const en = {
     drawingCaption: "A drawing of this type, not a photo. Brand and model depend on what's available.",
     galleryLabel: "Photos of this type",
     galleryShow: "Show photo {index} of {count}",
-    galleryCounter: "{index} / {count}",
     view: {
       label: "Show machines as",
       photos: "Photos",

@@ -20,10 +20,6 @@ const ru: DeepPartial<Dictionary> = {
       previous: "Предыдущий слайд",
       next: "Следующий слайд",
       slideOf: "{index} из {count}",
-      goTo: "Перейти к слайду {index} из {count}",
-      slides: "Слайды",
-      pause: "Остановить показ",
-      play: "Продолжить показ",
     },
     examplePhotos: "Фото для примера, не наши машины и не наши дома.",
     sharedRooms: {
@@ -554,7 +550,6 @@ const ru: DeepPartial<Dictionary> = {
     drawingCaption: "Рисунок этого типа, а не фото. Марка и модель зависят от наличия.",
     galleryLabel: "Фото этого типа",
     galleryShow: "Показать фото {index} из {count}",
-    galleryCounter: "{index} / {count}",
     view: {
       label: "Показать машины как",
       photos: "Фото",

@@ -20,10 +20,6 @@ const es: DeepPartial<Dictionary> = {
       previous: "Imagen anterior",
       next: "Imagen siguiente",
       slideOf: "{index} de {count}",
-      goTo: "Ir a la imagen {index} de {count}",
-      slides: "Imágenes",
-      pause: "Pausar la presentación",
-      play: "Reanudar la presentación",
     },
     examplePhotos: "Fotos de ejemplo, no de nuestras máquinas ni edificios.",
     sharedRooms: {
@@ -570,7 +566,6 @@ const es: DeepPartial<Dictionary> = {
     drawingCaption: "Un dibujo de este tipo, no una foto. La marca y el modelo dependen de lo que haya disponible.",
     galleryLabel: "Fotos de este tipo",
     galleryShow: "Mostrar la foto {index} de {count}",
-    galleryCounter: "{index} / {count}",
     view: {
       label: "Mostrar las máquinas como",
       photos: "Fotos",

@@ -25,10 +25,6 @@ const fr: DeepPartial<Dictionary> = {
       previous: "Image précédente",
       next: "Image suivante",
       slideOf: "{index} de {count}",
-      goTo: "Aller à l'image {index} de {count}",
-      slides: "Images",
-      pause: "Mettre le diaporama en pause",
-      play: "Relancer le diaporama",
     },
     examplePhotos: "Photos d'exemple, pas nos appareils ni nos immeubles.",
     sharedRooms: {
@@ -562,7 +558,6 @@ const fr: DeepPartial<Dictionary> = {
     drawingCaption: "Un dessin de ce type, pas une photo. La marque et le modèle dépendent de ce qui est disponible.",
     galleryLabel: "Photos de ce type",
     galleryShow: "Afficher la photo {index} sur {count}",
-    galleryCounter: "{index} / {count}",
     view: {
       label: "Afficher les appareils en",
       photos: "Photos",
