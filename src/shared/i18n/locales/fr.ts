@@ -20,6 +20,20 @@ const fr: DeepPartial<Dictionary> = {
   },
 
   common: {
+    carousel: {
+      previous: "Image précédente",
+      next: "Image suivante",
+      slideOf: "{index} de {count}",
+      goTo: "Aller à l'image {index} de {count}",
+      slides: "Images",
+      pause: "Mettre le diaporama en pause",
+      play: "Relancer le diaporama",
+    },
+    examplePhotos: "Photos d'exemple, pas nos appareils ni nos immeubles.",
+    sharedRooms: {
+      title: "Salles de lavage communes",
+      note: "Photos d'exemple de salles de lavage communes, pas d'immeubles que nous desservons.",
+    },
     languages: "anglais, espagnol et russe",
     tagline: "Location de laveuse et sécheuse à Toronto et dans le GTA",
     location: "Toronto · service dans tout le GTA",
@@ -72,6 +86,27 @@ const fr: DeepPartial<Dictionary> = {
       "Nous répondons aux appels en anglais, en espagnol et en russe.",
     ],
     logoAlt: "{company}",
+  },
+
+  photos: {
+    "rooms/washer-dryer-shelving": "Exemple : une laveuse blanche à chargement frontal sous des tablettes de bois dans une buanderie lumineuse",
+    "rooms/washer-shelves": "Exemple : une laveuse blanche à chargement frontal entre un panier et des tablettes ouvertes",
+    "rooms/drum-empty": "Exemple : le tambour en acier vide d'une laveuse à chargement frontal, vu par la porte ouverte",
+    "rooms/washer-basket-sock": "Exemple : une laveuse blanche avec un panier à linge dessus et une chaussette sur la porte",
+    "rooms/washer-cabinet-plants": "Exemple : une laveuse blanche à chargement frontal sous un comptoir, à côté d'une armoire et de plantes",
+    "rooms/dark-set-laundry-room": "Exemple : une laveuse et une sécheuse gris foncé à chargement frontal, côte à côte sous une tablette",
+    "rooms/grey-set-laundry-room": "Exemple : une laveuse et une sécheuse grises à chargement frontal, côte à côte, avec un panier dessus",
+    "rooms/drum-open-door": "Exemple : une laveuse à chargement frontal porte ouverte, montrant le tambour",
+    "rooms/laundry-room-shirts": "Exemple : une laveuse blanche à chargement frontal dans une buanderie, des chemises suspendues au-dessus",
+    "rooms/black-washer-basket": "Exemple : une laveuse noire à chargement frontal avec un panier à linge blanc devant",
+    "rooms/stacked-small-room": "Exemple : une sécheuse blanche superposée à une laveuse à chargement frontal dans une petite pièce blanche",
+    "shared/stacked-dryers-tiles": "Exemple de salle de lavage commune : laveuses et sécheuses superposées le long d'un mur carrelé",
+    "shared/stacked-dryers-row": "Exemple de salle de lavage commune : une rangée de sécheuses superposées à portes rondes",
+    "shared/washers-row-silver": "Exemple de salle de lavage commune : une rangée de laveuses argentées à chargement frontal",
+    "shared/washers-and-dryers-rows": "Exemple de salle de lavage commune : une rangée de laveuses devant une rangée de sécheuses",
+    "shared/washers-row-beige": "Exemple de salle de lavage commune : une rangée de laveuses beiges à chargement frontal, portes lettrées",
+    "shared/washers-row-wood-front": "Exemple de salle de lavage commune : des laveuses à chargement frontal à façade de bois",
+    "shared/washers-row-wide": "Exemple de salle de lavage commune : une longue rangée de laveuses à chargement frontal",
   },
 
   chrome: {
@@ -606,6 +641,53 @@ const fr: DeepPartial<Dictionary> = {
   },
 
   home: {
+    heroSlides: {
+      label: "En vedette",
+      repairs: {
+        eyebrow: "Réparations incluses",
+        title: "S'il brise, nous le réparons",
+        text: "Réparations, ou appareil de remplacement, sans frais pendant toute la location.",
+        cta: "Comment fonctionnent les réparations",
+      },
+      buildings: {
+        eyebrow: "Pour les immeubles",
+        title: "Des appareils pour la salle de lavage de votre immeuble",
+        text: "Nous fournissons, installons et réparons les appareils. Soumission par immeuble après avoir vu la salle.",
+        cta: "Salles de lavage",
+      },
+    },
+    included: {
+      title: "Ce qui est inclus",
+      items: [
+        {
+          title: "Livraison et installation",
+          text: "Nous raccordons l'eau, le drain, l'électricité et l'évent, puis faisons un cycle d'essai avant de partir.",
+        },
+        {
+          title: "Réparations incluses",
+          text: "Si un appareil cesse de fonctionner, nous le réparons ou le remplaçons sans frais.",
+        },
+        {
+          title: "Ancien appareil enlevé",
+          text: "Nous emportons votre ancien appareil sans frais.",
+        },
+      ],
+    },
+    rooms: {
+      title: "Un appareil pour chaque type d'espace",
+      lead: "Placards, condos, sous-sols et buanderies : des photos d'exemple des espaces où vont nos types d'appareils.",
+      captions: {
+        "rooms/stacked-small-room": "Un ensemble superposable dans une pièce étroite",
+        "rooms/washer-shelves": "Une laveuse entre les tablettes",
+        "rooms/dark-set-laundry-room": "Un ensemble à chargement frontal sous une tablette",
+        "rooms/laundry-room-shirts": "Une laveuse dans une buanderie commune",
+        "rooms/grey-set-laundry-room": "Un ensemble à chargement frontal avec comptoir de pliage",
+        "rooms/washer-cabinet-plants": "Une laveuse sous le comptoir de cuisine",
+        "rooms/washer-dryer-shelving": "Une laveuse avec des tablettes au-dessus",
+        "rooms/black-washer-basket": "Une seule laveuse dans un coin",
+        "rooms/washer-basket-sock": "Une laveuse prête pour la prochaine brassée",
+      },
+    },
     hero: {
       // We don't speak French: the eyebrow stays the English-default line, translated.
       eyebrow: "Entreprise locale de Toronto",

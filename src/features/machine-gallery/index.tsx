@@ -2,12 +2,12 @@ import { useState } from "react";
 import { DrawingTag, machinePhotos, type MachineType } from "~/entities/machine";
 import { useI18n } from "~/shared/i18n";
 import { galleryPhotoSizes } from "~/shared/lib";
-import { Photo } from "~/shared/ui";
+import { Carousel, Photo } from "~/shared/ui";
 
 const frame = "relative aspect-[5/6] overflow-hidden rounded-3xl bg-brand-mint";
 
-// The photos of a machine type page: the main photo and, when there are more, a row of
-// thumbnail buttons that switch it. The buttons are ordinary buttons (Tab, then Enter or Space);
+// The photos of a machine type page: the main photo, which swipes (a carousel), and, when
+// there are more, a row of thumbnail buttons that switch it. The buttons are ordinary buttons (Tab, then Enter or Space);
 // the one showing is marked aria-current. The server HTML shows the first photo. A type with
 // no photo in the build shows its drawing, tagged and captioned as a drawing.
 // Every photo here is an example, and the caption says so.
@@ -15,9 +15,7 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
   const { d, format } = useI18n();
   const photos = machinePhotos(machine);
   const [shown, setShown] = useState(0);
-  const photo = photos[shown];
-
-  if (!photo) {
+  if (!photos.length) {
     return (
       <figure className={className}>
         <div className={frame}>
@@ -39,18 +37,23 @@ export function MachineGallery({ machine, className = "" }: { machine: MachineTy
 
   return (
     <figure className={className}>
-      <div className={frame}>
-        <Photo
-          src={photo.src}
-          alt={photo.alt}
-          sizes={galleryPhotoSizes}
-          priority
-          className="h-full w-full object-cover"
-        />
+      <div className="relative">
+        <Carousel label={d.machines.galleryLabel} index={shown} onChange={setShown} trackClassName={`${frame} rounded-3xl`}>
+          {photos.map((item, index) => (
+            <Photo
+              key={item.src}
+              src={item.src}
+              alt={item.alt}
+              sizes={galleryPhotoSizes}
+              priority={index === 0}
+              className="aspect-[5/6] h-full w-full object-cover"
+            />
+          ))}
+        </Carousel>
         {photos.length > 1 && (
           <p
             aria-hidden="true"
-            className="absolute bottom-3 right-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-semibold text-white"
+            className="pointer-events-none absolute bottom-16 right-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-semibold text-white"
           >
             {format(d.machines.galleryCounter, { index: shown + 1, count: photos.length })}
           </p>

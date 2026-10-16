@@ -24,6 +24,21 @@ const en = {
   },
 
   common: {
+    // Carousel controls (shared/ui Carousel).
+    carousel: {
+      previous: "Previous slide",
+      next: "Next slide",
+      slideOf: "{index} of {count}",
+      goTo: "Go to slide {index} of {count}",
+      slides: "Slides",
+      pause: "Pause the slideshow",
+      play: "Play the slideshow",
+    },
+    examplePhotos: "Example photos, not our machines or buildings.",
+    sharedRooms: {
+      title: "Shared laundry rooms",
+      note: "Example photos of shared laundry rooms, not buildings we serve.",
+    },
     languages: "English, Spanish & Russian",
     tagline: "Washer & dryer rental in Toronto & the GTA",
     location: "Toronto · serving the GTA",
@@ -78,6 +93,29 @@ const en = {
       "We answer calls in English, Spanish and Russian.",
     ],
     logoAlt: "{company}",
+  },
+
+  // Alt text of the laundry-room photos (public/photos/rooms and /shared, Unsplash, see
+  // docs/photo-credits.md), by file name without the extension. Every one is an example.
+  photos: {
+    "rooms/washer-dryer-shelving": "Example: a white front-load washer under wooden shelving in a bright laundry room",
+    "rooms/washer-shelves": "Example: a white front-load washer between a basket and open shelves",
+    "rooms/drum-empty": "Example: the empty stainless drum of a front-load washer, seen through the open door",
+    "rooms/washer-basket-sock": "Example: a white washer with a laundry basket on top and a sock on the door",
+    "rooms/washer-cabinet-plants": "Example: a white front-load washer under a counter, beside a cabinet with plants",
+    "rooms/dark-set-laundry-room": "Example: a dark grey front-load washer and dryer side by side under a shelf",
+    "rooms/grey-set-laundry-room": "Example: a grey front-load washer and dryer side by side with a basket on top",
+    "rooms/drum-open-door": "Example: a front-load washer with its door open, showing the drum",
+    "rooms/laundry-room-shirts": "Example: a white front-load washer in a laundry room with shirts hanging above it",
+    "rooms/black-washer-basket": "Example: a black front-load washer with a white laundry basket in front of it",
+    "rooms/stacked-small-room": "Example: a white dryer stacked on a front-load washer in a small white room",
+    "shared/stacked-dryers-tiles": "Example of a shared laundry room: stacked washers and dryers along a tiled wall",
+    "shared/stacked-dryers-row": "Example of a shared laundry room: a row of stacked dryers with round doors",
+    "shared/washers-row-silver": "Example of a shared laundry room: a row of silver front-load washers",
+    "shared/washers-and-dryers-rows": "Example of a shared laundry room: a row of washers in front of a row of dryers",
+    "shared/washers-row-beige": "Example of a shared laundry room: a row of beige front-load washers with lettered doors",
+    "shared/washers-row-wood-front": "Example of a shared laundry room: front-load washers with wood-panel fronts",
+    "shared/washers-row-wide": "Example of a shared laundry room: a long row of front-load washers",
   },
 
   // The site frame: skip link, header, footer, offer bar, phone bar, breadcrumbs, draft ribbon.
@@ -640,6 +678,56 @@ const en = {
 
   // Home page sections and the shared bands (widgets).
   home: {
+    // The two slides after the price slide of the home hero (widgets/hero).
+    heroSlides: {
+      label: "Highlights",
+      repairs: {
+        eyebrow: "Repairs included",
+        title: "If it breaks, we fix it",
+        text: "Repairs, or a replacement machine, at no charge for as long as you rent.",
+        cta: "How repairs work",
+      },
+      buildings: {
+        eyebrow: "For buildings",
+        title: "Machines for your building's laundry room",
+        text: "We supply, install and repair the machines. Quoted per building after we see the room.",
+        cta: "Laundry rooms",
+      },
+    },
+    // Three photo cards under the hero (widgets/included-cards).
+    included: {
+      title: "What's included",
+      items: [
+        {
+          title: "Delivered and installed",
+          text: "We connect the water, drain, power and vent, and run a test cycle before we leave.",
+        },
+        {
+          title: "Repairs included",
+          text: "If a machine stops working, we repair it or replace it at no charge.",
+        },
+        {
+          title: "Old machine taken away",
+          text: "We take your old machine with us at no charge.",
+        },
+      ],
+    },
+    // The laundry-room photo carousel (widgets/rooms-carousel): captions by file name.
+    rooms: {
+      title: "A machine for every kind of space",
+      lead: "Closets, condos, basements and laundry rooms: example photos of the spaces our machine types fit.",
+      captions: {
+        "rooms/stacked-small-room": "A stackable pair in a narrow room",
+        "rooms/washer-shelves": "One washer between the shelves",
+        "rooms/dark-set-laundry-room": "A front-load set under a shelf",
+        "rooms/laundry-room-shirts": "A washer in a shared hallway room",
+        "rooms/grey-set-laundry-room": "A front-load set with a folding counter",
+        "rooms/washer-cabinet-plants": "A washer under the kitchen counter",
+        "rooms/washer-dryer-shelving": "A washer with shelving above",
+        "rooms/black-washer-basket": "A single washer in a corner",
+        "rooms/washer-basket-sock": "A washer ready for the next load",
+      },
+    },
     hero: {
       // The line above the heading (the Spanish and Russian home pages: "We speak Spanish").
       eyebrow: "Local Toronto business",

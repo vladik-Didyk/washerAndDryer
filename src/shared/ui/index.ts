@@ -30,3 +30,4 @@ export {
   type LangLinkProps,
 } from "./actions";
 export * from "./icons";
+export { Carousel } from "./Carousel";

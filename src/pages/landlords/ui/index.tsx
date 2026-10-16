@@ -17,6 +17,7 @@ import {
 } from "~/shared/ui";
 import { CtaBand } from "~/widgets/cta-band";
 import { PageIntro } from "~/widgets/page-intro";
+import { SharedRooms } from "~/widgets/shared-rooms";
 
 const QUOTE_PATH = pagePaths.landlordQuote;
 
@@ -83,6 +84,8 @@ export default function LandlordsPage() {
           </p>
         </Container>
       </Section>
+
+      <SharedRooms />
 
       <Section aria-labelledby="included-title">
         <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">

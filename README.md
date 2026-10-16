@@ -91,8 +91,17 @@ Pages stay readable JSX, built from a few blocks instead of repeated class strin
 - `<Button href variant>` is a link (kept in the page's language) or a `<button>`;
   `<PhoneButton kind="call|text">` and `<CallCard>` ("Prefer to call or text?") carry the
   phone number. `<LangLink>` is the plain link. The rental request is `pagePaths.start`.
+- `<Carousel label auto>`: a row of slides that swipes, with arrows and dots; `auto` moves it on
+  by itself (paused under the pointer, off with "reduce motion"). Without JavaScript it is a
+  plain scrolling row. The home hero, the laundry-room carousels and the machine gallery use it.
 - `widgets/cta-band`: the closing call to action, `variant="photo"` (the dark photo band) or
   `variant="panel"` (the mint panel with buttons or the postal-code checker).
+
+Photos: `public/photos/types/` (machine types, Pexels), `rooms/` and `shared/` (laundry
+spaces and shared laundry rooms, Unsplash); sources in `docs/photo-credits.md`. Add a JPEG,
+run `pnpm photos` for its WebP and smaller versions, give it alt text (`photos.<name>` in the
+dictionary for rooms/ and shared/), and commit the files. Every photo is an example and the
+page says so.
 
 Content rules from the old site still hold: verified facts only, no owner name, prices in
 CAD, "No HST charged".

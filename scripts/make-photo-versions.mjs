@@ -21,6 +21,10 @@ const force = process.argv.includes("--force");
 const WIDTHS = {
   types: [240, 600],
   hero: [480, 720, 960, 1440],
+  // Laundry-room photos: the hero slides and the carousels (full width on phones, up to
+  // about 1100px on desktops); the first ones double as machine type photos (600).
+  rooms: [480, 600, 720, 960, 1440],
+  shared: [480, 720, 960, 1440],
 };
 const WEBP = ["-quality", "76", "-define", "webp:method=6"];
 const JPEG = ["-quality", "80", "-sampling-factor", "4:2:0", "-interlace", "JPEG"];

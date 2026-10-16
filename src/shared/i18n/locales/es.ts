@@ -15,6 +15,20 @@ const es: DeepPartial<Dictionary> = {
   },
 
   common: {
+    carousel: {
+      previous: "Imagen anterior",
+      next: "Imagen siguiente",
+      slideOf: "{index} de {count}",
+      goTo: "Ir a la imagen {index} de {count}",
+      slides: "Imágenes",
+      pause: "Pausar la presentación",
+      play: "Reanudar la presentación",
+    },
+    examplePhotos: "Fotos de ejemplo, no de nuestras máquinas ni edificios.",
+    sharedRooms: {
+      title: "Lavanderías compartidas",
+      note: "Fotos de ejemplo de lavanderías compartidas, no de edificios que atendemos.",
+    },
     languages: "inglés, español y ruso",
     tagline: "Alquiler de lavadora y secadora en Toronto y el GTA",
     location: "Toronto · servicio en todo el GTA",
@@ -67,6 +81,27 @@ const es: DeepPartial<Dictionary> = {
       "Atendemos llamadas en inglés, español y ruso.",
     ],
     logoAlt: "{company}",
+  },
+
+  photos: {
+    "rooms/washer-dryer-shelving": "Ejemplo: una lavadora blanca de carga frontal bajo estantes de madera en una lavandería luminosa",
+    "rooms/washer-shelves": "Ejemplo: una lavadora blanca de carga frontal entre una canasta y estantes abiertos",
+    "rooms/drum-empty": "Ejemplo: el tambor de acero vacío de una lavadora de carga frontal, visto por la puerta abierta",
+    "rooms/washer-basket-sock": "Ejemplo: una lavadora blanca con una canasta de ropa encima y un calcetín en la puerta",
+    "rooms/washer-cabinet-plants": "Ejemplo: una lavadora blanca de carga frontal bajo un mesón, junto a un mueble con plantas",
+    "rooms/dark-set-laundry-room": "Ejemplo: lavadora y secadora gris oscuro de carga frontal, lado a lado bajo una repisa",
+    "rooms/grey-set-laundry-room": "Ejemplo: lavadora y secadora grises de carga frontal, lado a lado con una canasta encima",
+    "rooms/drum-open-door": "Ejemplo: una lavadora de carga frontal con la puerta abierta, mostrando el tambor",
+    "rooms/laundry-room-shirts": "Ejemplo: una lavadora blanca de carga frontal en una lavandería con camisas colgadas arriba",
+    "rooms/black-washer-basket": "Ejemplo: una lavadora negra de carga frontal con una canasta blanca delante",
+    "rooms/stacked-small-room": "Ejemplo: una secadora blanca sobre una lavadora de carga frontal en un cuarto pequeño y blanco",
+    "shared/stacked-dryers-tiles": "Ejemplo de lavandería compartida: lavadoras y secadoras apiladas junto a una pared de azulejos",
+    "shared/stacked-dryers-row": "Ejemplo de lavandería compartida: una fila de secadoras apiladas con puertas redondas",
+    "shared/washers-row-silver": "Ejemplo de lavandería compartida: una fila de lavadoras plateadas de carga frontal",
+    "shared/washers-and-dryers-rows": "Ejemplo de lavandería compartida: una fila de lavadoras frente a una fila de secadoras",
+    "shared/washers-row-beige": "Ejemplo de lavandería compartida: una fila de lavadoras beige de carga frontal con letras en las puertas",
+    "shared/washers-row-wood-front": "Ejemplo de lavandería compartida: lavadoras de carga frontal con frentes de madera",
+    "shared/washers-row-wide": "Ejemplo de lavandería compartida: una larga fila de lavadoras de carga frontal",
   },
 
   chrome: {
@@ -614,6 +649,53 @@ const es: DeepPartial<Dictionary> = {
   },
 
   home: {
+    heroSlides: {
+      label: "Destacados",
+      repairs: {
+        eyebrow: "Reparaciones incluidas",
+        title: "Si se daña, la reparamos",
+        text: "Reparaciones, o una máquina de reemplazo, sin costo mientras dure el alquiler.",
+        cta: "Cómo funcionan las reparaciones",
+      },
+      buildings: {
+        eyebrow: "Para edificios",
+        title: "Máquinas para la lavandería de su edificio",
+        text: "Ponemos, instalamos y reparamos las máquinas. Cotización por edificio después de ver la lavandería.",
+        cta: "Lavanderías",
+      },
+    },
+    included: {
+      title: "Qué incluye",
+      items: [
+        {
+          title: "Entrega e instalación",
+          text: "Conectamos el agua, el desagüe, la electricidad y la ventilación, y hacemos un ciclo de prueba antes de irnos.",
+        },
+        {
+          title: "Reparaciones incluidas",
+          text: "Si una máquina deja de funcionar, la reparamos o la reemplazamos sin costo.",
+        },
+        {
+          title: "Retiro de la máquina vieja",
+          text: "Nos llevamos su máquina vieja sin costo.",
+        },
+      ],
+    },
+    rooms: {
+      title: "Una máquina para cada tipo de espacio",
+      lead: "Clósets, condominios, sótanos y lavanderías: fotos de ejemplo de los espacios donde caben nuestros tipos de máquina.",
+      captions: {
+        "rooms/stacked-small-room": "Un juego apilable en un cuarto angosto",
+        "rooms/washer-shelves": "Una lavadora entre los estantes",
+        "rooms/dark-set-laundry-room": "Un juego de carga frontal bajo una repisa",
+        "rooms/laundry-room-shirts": "Una lavadora en un cuarto de lavado compartido",
+        "rooms/grey-set-laundry-room": "Un juego de carga frontal con mesa para doblar",
+        "rooms/washer-cabinet-plants": "Una lavadora bajo el mesón de la cocina",
+        "rooms/washer-dryer-shelving": "Una lavadora con estantes arriba",
+        "rooms/black-washer-basket": "Una sola lavadora en un rincón",
+        "rooms/washer-basket-sock": "Una lavadora lista para la próxima carga",
+      },
+    },
     hero: {
       eyebrow: "Hablamos español",
       title: "Alquiler de lavadora y secadora en Toronto y el GTA",

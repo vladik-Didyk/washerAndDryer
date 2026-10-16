@@ -30,13 +30,19 @@ export interface MachineType extends Omit<MachineText, "photos"> {
 }
 
 const machineFacts: Array<{ slug: MachineSlug; item: PriceItem; photos: string[]; drawing: string }> = [
-  { slug: "stackable", item: "set", photos: ["stackable-1", "stackable"], drawing: "types/stackable.svg" },
+  { slug: "stackable", item: "set", photos: ["stackable-1", "stackable", "rooms/stacked-small-room", "shared/stacked-dryers-tiles"], drawing: "types/stackable.svg" },
   // No photo yet: the drawing shows until this file is added (docs/photo-credits.md).
   { slug: "laundry-centre", item: "set", photos: ["laundry-centre"], drawing: "types/one-piece.svg" },
   {
     slug: "side-by-side-front-load",
     item: "set",
-    photos: ["side-by-side-front-load-1", "side-by-side-front-load-2", "side-by-side-front-load"],
+    photos: [
+      "side-by-side-front-load-1",
+      "side-by-side-front-load-2",
+      "side-by-side-front-load",
+      "rooms/dark-set-laundry-room",
+      "rooms/grey-set-laundry-room",
+    ],
     drawing: "types/side-by-side-front.svg",
   },
   {
@@ -48,7 +54,14 @@ const machineFacts: Array<{ slug: MachineSlug; item: PriceItem; photos: string[]
   {
     slug: "single-machine",
     item: "single",
-    photos: ["single-machine-washer", "single-machine-dryer", "single-machine"],
+    photos: [
+      "single-machine-washer",
+      "single-machine-dryer",
+      "single-machine",
+      "rooms/washer-shelves",
+      "rooms/washer-cabinet-plants",
+      "rooms/black-washer-basket",
+    ],
     drawing: "types/single.svg",
   },
 ];
@@ -67,7 +80,13 @@ export function getMachineTypes(d: Dictionary): MachineType[] {
       return {
         ...text,
         ...facts,
-        photos: facts.photos.map((name) => ({ src: `photos/types/${name}.jpg`, alt: alts[name] ?? "" })),
+        // A name with a folder ("rooms/washer-shelves") is a laundry-room photo (alt text in
+        // the photos namespace); a bare name is in photos/types/ (alt text with the type).
+        photos: facts.photos.map((name) =>
+          name.includes("/")
+            ? { src: `photos/${name}.jpg`, alt: (d.photos as Record<string, string>)[name] ?? "" }
+            : { src: `photos/types/${name}.jpg`, alt: alts[name] ?? "" },
+        ),
       };
     });
     built.set(d, types);
