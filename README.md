@@ -350,6 +350,8 @@ green theme stays.
 of Web3Forms, whose free plan refused every server-sent request; a test repair request arrived.
 2026-10-16, version `cf4fdb2d` (first as `a39deb77`, which missed the bot-POST fix): pages built ahead of time and served as files (error 1102 on
 about 1 in 4 page loads before; 0 in 72 after); Stripe portal link in `siteConfig`.
+2026-10-16, version `778433e3`: privacy policy and rental terms published (owner approved),
+privacy line under every form, http → https redirect and HSTS from the Worker.
 
 `main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
 before merging this branch into `main`.
