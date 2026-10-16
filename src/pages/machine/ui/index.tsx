@@ -323,7 +323,7 @@ export default function MachinePage() {
               <TypeCard key={other.slug} machine={other} price={prices[other.item]} sizes={TYPE_CARD_SIZES_4UP} />
             ))}
           </ul>
-          <p className="mt-6 text-sm text-ink-muted">{d.common.examplePhotosNote}</p>
+          {/* <p className="mt-6 text-sm text-ink-muted">{d.common.examplePhotosNote}</p> */}
           <LinkList
             id="areas-links-title"
             title={text.whereWeDeliver}

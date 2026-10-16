@@ -29,7 +29,7 @@ export function MachineFits({ title, fits }: { title: string; fits: Array<{ mach
             ) : null;
           })}
         </ul>
-        <p className="mt-6 text-sm text-ink-muted">{d.common.examplePhotosNote}</p>
+        {/* <p className="mt-6 text-sm text-ink-muted">{d.common.examplePhotosNote}</p> */}
       </Container>
     </Section>
   );

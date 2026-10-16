@@ -34,7 +34,7 @@ export function IncludedCards() {
             );
           })}
         </ul>
-        <p className="mt-4 text-sm text-ink-muted">{d.common.examplePhotos}</p>
+        {/* <p className="mt-4 text-sm text-ink-muted">{d.common.examplePhotos}</p> */}
       </Container>
     </Section>
   );

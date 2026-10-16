@@ -44,7 +44,7 @@ export function RoomsCarousel() {
             </figure>
           ))}
         </Carousel>
-        <p className="mt-4 text-sm text-ink-muted">{d.common.examplePhotos}</p>
+        {/* <p className="mt-4 text-sm text-ink-muted">{d.common.examplePhotos}</p> */}
       </Container>
     </Section>
   );
