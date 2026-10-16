@@ -126,7 +126,7 @@ export function Hero() {
             <p aria-hidden="true" className="mt-3 text-lg text-ink-soft">
               {rich(hero.orSingle, { price: <span className="font-semibold text-ink">{hero.singlePrice}</span> })}
             </p>
-            <p className="mt-2 text-sm text-ink-muted">{d.common.pricesNote}</p>
+            {/* <p className="mt-2 text-sm text-ink-muted">{d.common.pricesNote}</p> */}
           </div>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

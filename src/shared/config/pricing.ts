@@ -33,7 +33,7 @@ export interface Promotion {
 
 export const pricing = {
   // Weekly rent: a washer + dryer set, or one machine.
-  weekly: { set: 12.5, single: 6.25 } satisfies Record<PriceItem, number>,
+  weekly: { set: 13.99, single: 7.99 } satisfies Record<PriceItem, number>,
   // Refundable deposit.
   deposit: 200,
   // A friend you refer signs up for `minMonths` months or more: you get `amount`.

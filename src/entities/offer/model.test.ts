@@ -29,7 +29,7 @@ describe("first week free", () => {
       text: expect.stringContaining("start a rental by November 30, 2026 pay no rent"),
       stillPaid: "The $200 deposit and the delivery are still paid.",
     });
-    expect(getPrice("set", END - 1)).toMatchObject({ base: 12.5, current: 12.5 });
+    expect(getPrice("set", END - 1)).toMatchObject({ base: 13.99, current: 13.99 });
   });
 });
 
@@ -47,28 +47,28 @@ describe("promotions", () => {
   const after = Date.parse("2027-02-01T05:00:00Z");
 
   it("lowers the price only inside its window, and only for what it applies to", () => {
-    expect(getPrice("set", inside, [january])).toMatchObject({ base: 12.5, current: 11.25 });
-    expect(getPrice("single", inside, [january])).toMatchObject({ base: 6.25, current: 6.25 });
-    expect(getPrice("set", before, [january]).current).toBe(12.5);
-    expect(getPrice("set", after, [january]).current).toBe(12.5);
+    expect(getPrice("set", inside, [january])).toMatchObject({ base: 13.99, current: 12.59 });
+    expect(getPrice("single", inside, [january])).toMatchObject({ base: 7.99, current: 7.99 });
+    expect(getPrice("set", before, [january]).current).toBe(13.99);
+    expect(getPrice("set", after, [january]).current).toBe(13.99);
   });
 
   it("changes every price in the text while it runs", async () => {
     await testI18n();
     const during = createI18n("en", offerFacts(inside, [january]));
     const outside = createI18n("en", offerFacts(before, [january]));
-    expect(during.d.pages.home.title).toBe("Washer & Dryer Rental Toronto & GTA | $11.25/week");
-    expect(during.d.machines.types.stackable.page.metaTitle).toContain("$11.25/week");
-    expect(during.amount("setPrice")).toBe(11.25);
-    expect(outside.d.pages.home.title).toBe("Washer & Dryer Rental Toronto & GTA | $12.50/week");
+    expect(during.d.pages.home.title).toBe("Washer & Dryer Rental Toronto & GTA | $12.59/week");
+    expect(during.d.machines.types.stackable.page.metaTitle).toContain("$12.59/week");
+    expect(during.amount("setPrice")).toBe(12.59);
+    expect(outside.d.pages.home.title).toBe("Washer & Dryer Rental Toronto & GTA | $13.99/week");
   });
 
   it("knows each kind", () => {
     const kinds: Array<[Promotion["kind"], number, number]> = [
-      ["percentOff", 20, 10],
-      ["amountOff", 2.5, 10],
+      ["percentOff", 20, 11.19],
+      ["amountOff", 2.5, 11.49],
       ["fixedPrice", 9.99, 9.99],
-      ["freeWeeks", 1, 12.5],
+      ["freeWeeks", 1, 13.99],
     ];
     for (const [kind, value, expected] of kinds) {
       const promotion: Promotion = { id: "first-week-free", kind, value, appliesTo: ["set"] };

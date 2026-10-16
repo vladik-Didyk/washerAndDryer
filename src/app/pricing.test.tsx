@@ -53,8 +53,8 @@ function serverOutput(now = TEST_NOW) {
 
 describe("changing a base price", () => {
   it("shows today's prices everywhere", () => {
-    expect(render(<HomePage />)).toContain("$12.50");
-    expect(serverOutput()).toContain("$12.50");
+    expect(render(<HomePage />)).toContain("$13.99");
+    expect(serverOutput()).toContain("$13.99");
   });
 
   it("changes every rendered occurrence and leaves no stale price", () => {
@@ -91,18 +91,18 @@ describe("a percent-off promotion", () => {
   it("shows the lower price, with the list price struck through, while it runs", () => {
     promotions.splice(0, promotions.length, tenOff);
     const home = render(<HomePage />);
-    expect(home).toContain("$11.25");
-    expect(home).toContain('<span class="sr-only">was $12.50</span><s aria-hidden="true">$12.50</s>');
-    expect(serverOutput()).toContain("| $11.25/week");
+    expect(home).toContain("$12.59");
+    expect(home).toContain('<span class="sr-only">was $13.99</span><s aria-hidden="true">$13.99</s>');
+    expect(serverOutput()).toContain("| $12.59/week");
   });
 
   it("changes nothing outside its window", () => {
     promotions.splice(0, promotions.length, tenOff);
     const later = Date.parse("2026-11-15T15:00:00Z");
     const home = render(<HomePage />, { now: later });
-    expect(home).not.toContain("$11.25");
-    expect(home).not.toContain("was $12.50");
-    expect(serverOutput(later)).not.toContain("11.25");
+    expect(home).not.toContain("$12.59");
+    expect(home).not.toContain("was $13.99");
+    expect(serverOutput(later)).not.toContain("12.59");
   });
 });
 
