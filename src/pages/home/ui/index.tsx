@@ -5,7 +5,6 @@ import { FaqSection } from "~/widgets/faq-section";
 import { Hero } from "~/widgets/hero";
 import { HowItWorks } from "~/widgets/how-it-works";
 import { IncludedCards } from "~/widgets/included-cards";
-import { InstallVideos } from "~/widgets/install-videos";
 import { LandlordsTeaser } from "~/widgets/landlords-teaser";
 import { MachineShowcase } from "~/widgets/machine-showcase";
 import { Prices } from "~/widgets/prices";
@@ -23,7 +22,6 @@ export default function HomePage() {
       <MachineShowcase compact />
       <HowItWorks />
       <RoomsCarousel />
-      <InstallVideos />
       <Prices />
       <LandlordsTeaser />
       <AboutTeaser />

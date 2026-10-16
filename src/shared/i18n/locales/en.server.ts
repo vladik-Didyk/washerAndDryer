@@ -532,7 +532,6 @@ const enServer = {
               list: [
                 "The site runs on Cloudflare. Like any web host, it may keep standard server logs, such as IP addresses.",
                 "Fonts load from Google Fonts, so your browser connects to Google's servers when a page opens.",
-                "The home page shows two manufacturer videos from YouTube in privacy-enhanced mode. If you play one, YouTube's own privacy policy applies.",
               ],
             },
           ],

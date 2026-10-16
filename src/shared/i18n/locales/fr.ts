@@ -719,20 +719,6 @@ const fr: DeepPartial<Dictionary> = {
         "Réparations à nos frais",
       ],
     },
-    videos: {
-      title: "Comment se passe l'installation",
-      source: "Vidéo : {source}",
-      items: {
-        "veEH0wF9LEU": {
-          title: "Installer un centre de lavage (laveuse et sécheuse en un seul appareil)",
-          source: "W Service sur YouTube",
-        },
-        "h-co6mCEKNk": {
-          title: "Raccorder le conduit d'évacuation de la sécheuse avec des colliers",
-          source: "Imperial Manufacturing Group sur YouTube",
-        },
-      },
-    },
     prices: {
       title: "Prix",
       perWeek: "par semaine",

@@ -709,20 +709,6 @@ const ru: DeepPartial<Dictionary> = {
         "Ремонт за наш счёт",
       ],
     },
-    videos: {
-      title: "Как проходит установка",
-      source: "Видео: {source}",
-      items: {
-        "veEH0wF9LEU": {
-          title: "Установка моноблока (стиральная и сушильная машина в одном корпусе)",
-          source: "W Service на YouTube",
-        },
-        "h-co6mCEKNk": {
-          title: "Подключение вытяжного рукава сушилки с хомутами",
-          source: "Imperial Manufacturing Group на YouTube",
-        },
-      },
-    },
     prices: {
       title: "Цены",
       perWeek: "в неделю",

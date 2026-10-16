@@ -726,20 +726,6 @@ const es: DeepPartial<Dictionary> = {
         "Reparaciones por nuestra cuenta",
       ],
     },
-    videos: {
-      title: "Cómo se hace la instalación",
-      source: "Video: {source}",
-      items: {
-        veEH0wF9LEU: {
-          title: "Instalación de un centro de lavado (lavadora y secadora en una unidad)",
-          source: "W Service en YouTube",
-        },
-        "h-co6mCEKNk": {
-          title: "Cómo conectar el ducto de la secadora con abrazaderas",
-          source: "Imperial Manufacturing Group en YouTube",
-        },
-      },
-    },
     prices: {
       title: "Precios",
       perWeek: "por semana",

@@ -759,20 +759,6 @@ const en = {
         "Repairs on us",
       ],
     },
-    videos: {
-      title: "How installation works",
-      source: "Video: {source}",
-      items: {
-        "veEH0wF9LEU": {
-          title: "Installing a laundry centre (washer and dryer in one unit)",
-          source: "W Service on YouTube",
-        },
-        "h-co6mCEKNk": {
-          title: "Connecting the dryer vent duct with clamps",
-          source: "Imperial Manufacturing Group on YouTube",
-        },
-      },
-    },
     prices: {
       title: "Prices",
       perWeek: "a week",
