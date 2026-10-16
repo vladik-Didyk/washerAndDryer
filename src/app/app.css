@@ -32,7 +32,7 @@
     outline-offset: 3px;
   }
 
-  /* Blue and navy sections: a sunshine ring stays visible there */
+  /* Midnight and blue sections: a sky ring stays visible there */
   .on-dark :focus-visible {
     outline-color: theme("colors.gold.DEFAULT");
   }
@@ -88,14 +88,14 @@
     @apply active:scale-[0.98];
   }
 
-  /* The main call to action: sunny orange, navy text, a soft orange glow */
+  /* The main call to action: calm blue pill, white text */
   .btn-primary {
-    @apply bg-action text-brand-dark shadow-[0_8px_20px_-8px_rgb(255_122_26/0.7)] hover:bg-action-light hover:shadow-[0_10px_24px_-8px_rgb(255_122_26/0.8)];
+    @apply bg-action text-white hover:bg-action-light;
   }
 
-  /* Solid blue: the phone buttons, so orange stays for "start" */
+  /* Solid midnight: the phone buttons, beside the blue "start" */
   .btn-blue {
-    @apply bg-brand text-white hover:bg-brand-dark;
+    @apply bg-brand-dark text-white hover:bg-black;
   }
 
   .btn-secondary {
@@ -106,7 +106,7 @@
     @apply bg-gold text-ink hover:bg-gold-dark;
   }
 
-  /* Secondary button on blue or navy, or on a photo under a dark overlay */
+  /* Secondary button on midnight or blue, or on a photo under a dark overlay */
   .btn-outline-light {
     @apply border-2 border-white/85 text-white hover:bg-white hover:text-brand-dark;
   }

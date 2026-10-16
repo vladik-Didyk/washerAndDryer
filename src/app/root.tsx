@@ -117,7 +117,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Meta />
-        <meta name="theme-color" content="#FFFBF5" />
+        <meta name="theme-color" content="#F4EEE4" />
         <meta property="og:site_name" content={siteConfig.companyName} />
         <meta property="og:image" content={ogImage} />
         <meta property="og:image:alt" content={i18n.d.chrome.ogImageAlt} />

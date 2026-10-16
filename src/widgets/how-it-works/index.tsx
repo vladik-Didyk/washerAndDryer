@@ -1,7 +1,7 @@
 import { useI18n } from "~/shared/i18n";
 import { Container, CtaRow, FileText, Heading, Nest, Ruler, Section, Truck, Wrench, type LucideIcon } from "~/shared/ui";
 
-// The four steps of renting, on the blue band (home, city and machine pages): one icon
+// The four steps of renting, on the midnight band (home, city and machine pages): one icon
 // and a few words each. The details are on the FAQ page.
 const STEP_ICONS: LucideIcon[] = [Ruler, FileText, Truck, Wrench];
 
@@ -9,7 +9,7 @@ export function HowItWorks() {
   const { d } = useI18n();
   const { steps } = d.home.how;
   return (
-    <Section id="how" aria-labelledby="how-title" className="on-dark bg-brand text-white">
+    <Section id="how" aria-labelledby="how-title" className="on-dark bg-brand-dark text-white">
       <Container>
         <Heading id="how-title" className="text-white">
           {d.common.howItWorks}
@@ -24,7 +24,7 @@ export function HowItWorks() {
                   <Icon className="h-9 w-9 text-gold sm:h-11 sm:w-11" aria-hidden="true" />
                   <span
                     aria-hidden="true"
-                    className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-gold font-display text-sm font-bold text-brand"
+                    className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-gold font-display text-sm font-bold text-brand-dark"
                   >
                     {index + 1}
                   </span>

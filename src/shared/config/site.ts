@@ -13,7 +13,7 @@ export const siteConfig = {
   // The picture shown when a page is shared (Facebook, WhatsApp...) and in JSON-LD. It shows
   // the weekly price, so remake public/og-image.jpg when a price changes, and change `v`:
   // Facebook keeps the old picture for a URL it has already seen.
-  ogImage: "https://washerrent.com/og-image.jpg?v=2026-10-16",
+  ogImage: "https://washerrent.com/og-image.jpg?v=2026-10-16b",
   // The date the page content last changed; used as <lastmod> in the generated sitemap.xml.
   lastUpdated: "2026-10-15",
   phone: {

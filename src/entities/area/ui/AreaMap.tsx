@@ -67,7 +67,7 @@ export function AreaMap({
               points={shape.points}
               strokeLinejoin="round"
               className={`stroke-white stroke-[4] transition-colors duration-150 group-hover:fill-gold group-focus-visible:fill-gold ${
-                lit ? "fill-brand" : highlight ? "fill-[#FFF4DC]" : "fill-[#FFE6B0]"
+                lit ? "fill-brand" : highlight ? "fill-[#F6F0E6]" : "fill-[#EADFCC]"
               }`}
             />
             {pinned !== city.slug && <MapLabel name={city.name} x={shape.label[0]} y={shape.label[1]} light={lit} />}

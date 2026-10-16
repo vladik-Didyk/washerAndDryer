@@ -128,8 +128,8 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
       </div>
 
       <header
-        className={`sticky top-0 z-40 border-b bg-paper/95 backdrop-blur-md transition-shadow duration-200 ${
-          scrolled ? "border-transparent shadow-[0_6px_20px_-12px_rgb(16_42_110/0.30)]" : "border-line"
+        className={`on-dark sticky top-0 z-40 border-b border-white/10 bg-brand-dark/95 text-white backdrop-blur-md transition-shadow duration-200 ${
+          scrolled ? "shadow-[0_6px_20px_-10px_rgb(0_0_0/0.45)]" : ""
         }`}
       >
         <Container
@@ -142,12 +142,12 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
             onClick={closeMenu}
             className="flex min-w-0 items-center gap-3 rounded-xl"
           >
-            <Logo className={`transition-[width,height] duration-200 motion-reduce:transition-none ${scrolled ? "h-9 w-9" : "h-11 w-11"}`} />
+            <Logo className={`rounded-full bg-white p-0.5 transition-[width,height] duration-200 motion-reduce:transition-none ${scrolled ? "h-9 w-9" : "h-11 w-11"}`} />
             {/* The logo's alt text already names the business for screen readers. */}
             {/* Hidden from 1024 to 1279px, where the menu and both buttons need the room. */}
             <span
               aria-hidden="true"
-              className="font-display text-[15px] font-bold leading-tight tracking-tight text-ink sm:text-[1.0625rem] lg:hidden xl:block"
+              className="font-display text-[15px] font-bold leading-tight tracking-tight text-white sm:text-[1.0625rem] lg:hidden xl:block"
             >
               {siteConfig.companyName}
             </span>
@@ -162,8 +162,8 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
                     <LangLink
                       href={link.href}
                       aria-current={current}
-                      className={`whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium transition-colors hover:bg-brand-mint hover:text-brand-dark ${
-                        current ? "bg-brand-mint text-brand-dark" : "text-ink-soft"
+                      className={`whitespace-nowrap rounded-full px-3 py-2 text-[15px] font-medium transition-colors hover:bg-white/10 hover:text-white ${
+                        current ? "bg-white/15 text-white" : "text-white/80"
                       }`}
                     >
                       {d.nav[link.key]}
@@ -180,7 +180,7 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
             <a
               href={phone.tel}
               aria-label={d.header.callAria}
-              className="hidden h-11 min-w-[2.75rem] items-center justify-center gap-2 rounded-full border border-line bg-white px-3 font-display text-[15px] font-semibold text-brand transition-colors hover:bg-brand-mint md:inline-flex lg:border-transparent lg:bg-transparent"
+              className="hidden h-11 min-w-[2.75rem] items-center justify-center gap-2 rounded-full border border-white/25 px-3 font-display text-[15px] font-semibold text-white transition-colors hover:bg-white/10 md:inline-flex lg:border-transparent"
             >
               <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
               <span className="hidden whitespace-nowrap lg:inline">{phone.display}</span>
@@ -195,7 +195,7 @@ export function Header({ currentPath = "/", requestHref = pagePaths.start }: { c
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? d.header.closeMenu : d.header.openMenu}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink transition-colors hover:bg-brand-mint lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10 lg:hidden"
             >
               {menuOpen ? (
                 <X className="h-5 w-5" aria-hidden="true" />

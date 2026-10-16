@@ -7,31 +7,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        // GTA Washer & Dryer Rentals: trustworthy blue for the brand, sunny orange for every
-        // "do it now" button, a warm white page. (The names brand/mint/gold are kept from the
-        // first, green theme so every component keeps working; only the values changed.)
+        // GTA Washer & Dryer Rentals, "midnight and starlight": a calm blue for every action, midnight
+        // for the header and dark bands, a warm starlight page. Apple-like: quiet colour, white
+        // cards, the photos do the work. (The names brand/mint/gold/action are kept from earlier
+        // themes so every component keeps working; only the values changed.)
         brand: {
-          DEFAULT: "#2357D8", // royal blue, primary (6.5:1 on white)
-          dark: "#102A6E", // navy: footer, text on tints
-          mint: "#EAF1FF", // light blue tint for panels
-          "mint-strong": "#D3E2FF",
+          DEFAULT: "#3A6EA5", // calm blue: buttons, links, the price (5.4:1 on white)
+          dark: "#232A35", // midnight: header, footer, dark bands
+          mint: "#EDE6DA", // starlight tint for panels
+          "mint-strong": "#E0D6C5",
         },
-        // The call-to-action colour: orange buttons with navy text (5:1).
+        // The call-to-action colour: the same calm blue, white text.
         action: {
-          DEFAULT: "#FF7A1A",
-          light: "#FF8F3D", // hover: lighter, so the navy text keeps its contrast
+          DEFAULT: "#3A6EA5",
+          light: "#2F5C8C", // hover: a shade deeper
         },
         gold: {
-          DEFAULT: "#FFC93C", // sunshine accent: badges, icons on blue; never as text on light
-          dark: "#F5B521",
+          DEFAULT: "#9CC3F5", // soft sky: icons and badges on midnight; never as text on light
+          dark: "#86B3EC",
         },
-        paper: "#FFFBF5", // page background, warm white
+        paper: "#F4EEE4", // page background, starlight
         ink: {
-          DEFAULT: "#141B33", // body text, navy-black
-          soft: "#3C4560",
-          muted: "#5D6680", // small print, 5.8:1 on paper
+          DEFAULT: "#1F2530", // body text
+          soft: "#4A505B",
+          muted: "#5C5F66", // small print, 5.7:1 on the page
         },
-        line: "#E9E3D8", // hairlines and card borders
+        line: "#E2D9CB", // hairlines and card borders
       },
       fontFamily: {
         sans: [
@@ -42,7 +43,7 @@ export default {
           "Segoe UI",
           "sans-serif",
         ],
-        display: ["Poppins", "Inter", "system-ui", "sans-serif"],
+        display: ["Inter", "system-ui", "-apple-system", "sans-serif"],
       },
       keyframes: {
         "rise-in": {

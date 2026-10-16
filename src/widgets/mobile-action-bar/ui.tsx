@@ -16,7 +16,7 @@ export function MobileActionBar({ action }: { action: MobileAction }) {
   return (
     <aside
       aria-label={mobileBar.label}
-      className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-6px_20px_rgba(16,42,110,0.10)] backdrop-blur-md transition-[transform,visibility] duration-200 md:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-6px_20px_rgba(35,42,53,0.10)] backdrop-blur-md transition-[transform,visibility] duration-200 md:hidden ${
         typing ? "invisible translate-y-full" : "visible"
       }`}
     >
