@@ -52,19 +52,19 @@ const fr: DeepPartial<Dictionary> = {
     hoursSentence: "Du lundi au samedi, de {opens} à {closes}. Fermé le dimanche.",
     hoursList: ["Lun.–sam. : {opens} – {closes}", "Dimanche : fermé"],
     preferCallOrText: "Vous préférez appeler ou écrire par texto?",
-    closetPhotoHelps: "Une photo du placard nous aide. Vous pouvez nous l'envoyer par texto.",
+    closetPhotoHelps: "Une photo du placard aide. Envoyez-la par texto.",
     fartherAwayAsk: "Plus loin? Demandez-nous.",
-    fartherAwayCall: "Plus loin? Appelez ou écrivez par texto au {phoneLink} pour nous le demander.",
+    fartherAwayCall: "Plus loin? Appelez ou écrivez par texto au {phoneLink}.",
     allAreas: "Tous les secteurs",
     compareAllTypes: "Comparer tous les types d'appareils",
     compareTypes: "Comparer les types d'appareils",
     examplePhotosNote:
-      "Les photos sont des exemples de chaque type, pas nos appareils. La marque et le modèle dépendent de ce qui est disponible.",
+      "Photos d'exemple, pas nos appareils. La marque et le modèle dépendent de ce qui est disponible.",
     textPhotoFits:
-      "Vous ne savez pas ce que vous avez? Envoyez une photo de l'espace par texto au {phoneLink} et nous vous dirons ce qui convient.",
+      "Vous ne savez pas ce qui entre? Envoyez une photo de l'espace par texto au {phoneLink}. Nous vous le dirons.",
     readyToRent: "Prêt à louer?",
     readyToRentText:
-      "Indiquez-nous votre secteur et votre espace de lavage. Nous vous répondons avec l'appareil, le total et la date de début.",
+      "Envoyez votre secteur et votre espace. Nous répondons avec l'appareil, le total et la date de début.",
     measureGuide: "Comment mesurer votre espace de lavage",
     howItWorks: "Comment ça fonctionne",
     opensInNewTab: "(s'ouvre dans un nouvel onglet)",
@@ -78,7 +78,7 @@ const fr: DeepPartial<Dictionary> = {
     ],
     howWeWork: [
       "Nous vérifions chaque appareil avant qu'il parte.",
-      "Nous raccordons correctement l'eau, le drain, l'électricité et le conduit d'évacuation.",
+      "Nous branchons correctement l'eau, le drain, l'électricité et le conduit d'évacuation.",
       "Nous faisons un cycle d'essai avant de partir.",
       "Nous répondons aux appels en anglais, en espagnol et en russe.",
     ],
@@ -178,15 +178,15 @@ const fr: DeepPartial<Dictionary> = {
       "first-week-free": {
         short: "Première semaine gratuite jusqu'au {firstWeekFreeEndShort}",
         title: "Première semaine gratuite",
-        text: "Les nouveaux clients qui commencent une location au plus tard le {firstWeekFreeEnd} ne paient pas la location de la première semaine. L'offre s'applique aux ensembles laveuse-sécheuse et aux appareils seuls.",
+        text: "Les nouveaux clients qui commencent une location au plus tard le {firstWeekFreeEnd} ne paient pas la location de la première semaine. Les ensembles comme les appareils seuls sont admissibles.",
         stillPaid: "Le dépôt de {deposit} et la livraison restent à payer.",
-        note: "Les nouveaux clients qui commencent au plus tard le {firstWeekFreeEnd} ne paient pas la location de la première semaine. Le dépôt et la livraison restent à payer.",
+        note: "Nouveaux clients : commencez au plus tard le {firstWeekFreeEnd} et ne payez pas la location de la première semaine. Le dépôt et la livraison restent à payer.",
       },
     },
     referral: {
       short: "Recommandez un ami, recevez {referralAmount}",
       title: "Recommandez un ami",
-      text: "Vous recevez {referralAmount} quand un ami que vous recommandez s'engage pour {referralMonths} mois ou plus.",
+      text: "Recevez {referralAmount} quand un ami que vous recommandez s'engage pour {referralMonths} mois ou plus.",
     },
   },
 
@@ -382,22 +382,22 @@ const fr: DeepPartial<Dictionary> = {
           metaDescription:
             "Louez une laveuse et sécheuse superposables à Toronto et dans le GTA pour {setPrice} par semaine. Pour placards étroits. Réparations et reprise incluses.",
           h1: "Location de laveuse et sécheuse superposables",
-          intro: "Une laveuse à chargement frontal avec la sécheuse par-dessus : deux appareils complets sur la surface d'un seul.",
+          intro: "Laveuse en bas, sécheuse en haut. Deux appareils complets sur la surface d'un seul.",
           whatItIs: [
-            "Un ensemble superposable, c'est une laveuse à chargement frontal et une sécheuse assortie fixée au-dessus avec une trousse de superposition. Vous avez deux appareils distincts, chacun avec ses commandes, en une seule colonne.",
-            "Comme un seul appareil touche le plancher, un ensemble superposable entre dans des placards où deux appareils côte à côte n'entreraient jamais.",
+            "Une laveuse à chargement frontal avec une sécheuse assortie fixée au-dessus par une trousse de superposition. Deux appareils distincts, chacun avec ses commandes, en une seule colonne.",
+            "Un seul appareil touche le plancher. Il entre dans des placards où deux appareils côte à côte n'entreraient jamais.",
           ],
           fits: [
             "Placards de lavage de condos et d'appartements",
-            "Espaces étroits assez hauts pour deux appareils, l'un au-dessus de l'autre",
-            "Ceux qui veulent une laveuse à chargement frontal mais n'ont la place que pour un appareil",
+            "Espaces étroits assez hauts pour deux appareils",
+            "Vous voulez le chargement frontal, mais n'avez la place que pour un appareil",
           ],
-          size: "Les ensembles superposables compacts mesurent en général environ 24 pouces (61 cm) de large; les pleine grandeur, environ 27 pouces (69 cm). Mesurez la largeur, la profondeur et la hauteur de l'espace, ainsi que la porte par laquelle ils doivent passer. Laissez quelques pouces à l'arrière pour les tuyaux et le conduit de la sécheuse.",
+          size: "Les ensembles compacts mesurent en général environ 24 pouces (61 cm) de large; les pleine grandeur, environ 27 pouces (69 cm). Mesurez la largeur, la profondeur et la hauteur, ainsi que la porte par laquelle ils passent. Laissez quelques pouces à l'arrière pour les tuyaux et le conduit.",
         },
       },
       "laundry-centre": {
         title: "Centre de lavage monobloc",
-        description: "Laveuse et sécheuse en un seul appareil. L'appareil habituel des placards de condo.",
+        description: "Laveuse et sécheuse en un seul appareil. Le choix habituel des placards de condo.",
         priceNote: "pour l'ensemble",
         alt: "Centre de lavage monobloc : une sécheuse au-dessus d'une laveuse à chargement par le haut, dans un seul boîtier",
         compare: {
@@ -421,17 +421,17 @@ const fr: DeepPartial<Dictionary> = {
             "Louez un centre de lavage monobloc (laveuse et sécheuse en un appareil) à Toronto et dans le GTA pour {setPrice} par semaine. 24″ ou 27″. Réparations incluses.",
           h1: "Location de centre de lavage : laveuse et sécheuse en un seul appareil",
           intro:
-            "Une laveuse à chargement par le haut et une sécheuse dans un seul boîtier. Un appareil à livrer, une seule surface à prévoir.",
+            "Laveuse à chargement par le haut en bas, sécheuse en haut, un seul boîtier. Une seule surface à prévoir.",
           whatItIs: [
-            "Un centre de lavage est un seul appareil, avec une laveuse à chargement par le haut en bas et une sécheuse en haut. Les commandes des deux sont sur un même panneau.",
-            "Beaucoup de placards de condo ont été conçus pour cet appareil; c'est donc souvent le remplacement le plus simple quand un vieil appareil doit être changé.",
+            "Un seul appareil : une laveuse à chargement par le haut en bas, une sécheuse en haut. Un seul panneau commande les deux.",
+            "Beaucoup de placards de condo ont été conçus pour cet appareil. C'est souvent le remplacement le plus simple pour un vieil appareil.",
           ],
           fits: [
             "Placards de condo conçus pour un appareil monobloc",
-            "Petits espaces de lavage avec un seul jeu de raccordements d'eau, de drain et d'électricité",
-            "Ceux qui préfèrent charger la laveuse par le haut",
+            "Petits espaces avec un seul jeu de raccordements d'eau, de drain et d'électricité",
+            "Ceux qui aiment charger par le haut",
           ],
-          size: "Les centres de lavage font 24 ou 27 pouces (61 ou 69 cm) de large. Un appareil de 24 pouces mesure environ 70 pouces (178 cm) de haut. Mesurez la largeur et la hauteur du placard, et vérifiez la profondeur portes fermées.",
+          size: "Les centres de lavage font 24 ou 27 pouces (61 ou 69 cm) de large. Un appareil de 24 pouces mesure environ 70 pouces (178 cm) de haut. Mesurez la largeur et la hauteur du placard. Vérifiez la profondeur portes fermées.",
         },
       },
       "side-by-side-front-load": {
@@ -462,17 +462,17 @@ const fr: DeepPartial<Dictionary> = {
             "Louez une laveuse et une sécheuse à chargement frontal côte à côte à Toronto et dans le GTA pour {setPrice} par semaine. Grands tambours. Réparations incluses.",
           h1: "Location de laveuse et sécheuse à chargement frontal côte à côte",
           intro:
-            "Une laveuse à chargement frontal et une sécheuse assortie, l'une à côté de l'autre. Tambours pleine grandeur, dessus plat pour plier.",
+            "Une laveuse à chargement frontal et une sécheuse assortie, côte à côte. Tambours pleine grandeur et dessus plat pour plier.",
           whatItIs: [
-            "Deux appareils pleine grandeur distincts, tous deux à chargement frontal, placés côte à côte. Le dessus reste libre et sert aussi de comptoir pour plier.",
-            "Une laveuse à chargement frontal fait culbuter le linge dans un peu d'eau, ce qui convient aux grandes brassées comme la literie et les serviettes.",
+            "Deux appareils pleine grandeur à chargement frontal, côte à côte. Le dessus reste libre : vous avez un comptoir pour plier.",
+            "Une laveuse à chargement frontal fait culbuter le linge dans peu d'eau. Idéal pour les grandes brassées comme la literie et les serviettes.",
           ],
           fits: [
             "Maisons avec une salle de lavage ou un coin lavage au sous-sol",
             "Familles nombreuses qui lavent souvent",
-            "Espaces avec de la place devant pour ouvrir les deux portes",
+            "Espaces où les deux portes peuvent s'ouvrir",
           ],
-          size: "Les appareils pleine grandeur font en général environ 27 pouces (69 cm) de large chacun : prévoyez environ 55 pouces (140 cm) de largeur, plus un peu d'espace entre et autour. Vérifiez que les deux portes peuvent s'ouvrir complètement.",
+          size: "Les appareils pleine grandeur font en général environ 27 pouces (69 cm) de large chacun. Prévoyez environ 55 pouces (140 cm), plus un peu d'espace autour. Assurez-vous que les deux portes s'ouvrent complètement.",
         },
       },
       "side-by-side-top-load": {
@@ -503,22 +503,22 @@ const fr: DeepPartial<Dictionary> = {
             "Louez une laveuse à chargement par le haut et une sécheuse assortie à Toronto et dans le GTA pour {setPrice} par semaine. Simple, moins de flexions.",
           h1: "Location de laveuse à chargement par le haut et sécheuse côte à côte",
           intro:
-            "L'ensemble classique : une laveuse à chargement par le haut avec une sécheuse assortie à côté. Commandes simples, moins besoin de se pencher.",
+            "L'ensemble classique : une laveuse à chargement par le haut et une sécheuse assortie. Commandes simples, moins besoin de se pencher.",
           whatItIs: [
-            "Une laveuse à chargement par le haut s'ouvre par un couvercle sur le dessus : on la remplit debout. La sécheuse à côté se charge par l'avant.",
-            "Les laveuses à chargement par le haut ont des commandes simples et une grande ouverture, ce qui rend le linge lourd et mouillé facile à sortir.",
+            "La laveuse s'ouvre par le haut : vous la remplissez debout. La sécheuse se charge par l'avant.",
+            "Commandes simples et grande ouverture. Le linge lourd et mouillé se sort facilement.",
           ],
           fits: [
             "Sous-sols et salles de lavage avec de l'espace libre au-dessus de la laveuse",
             "Ceux qui préfèrent ne pas se pencher pour charger la laveuse",
             "Les ménages qui veulent un appareil simple et familier",
           ],
-          size: "Les appareils pleine grandeur font en général environ 27 pouces (69 cm) de large chacun : prévoyez environ 55 pouces (140 cm) de largeur. Le couvercle de la laveuse a besoin d'espace libre au-dessus pour s'ouvrir; une tablette basse au-dessus de la laveuse peut donc nuire.",
+          size: "Les appareils pleine grandeur font en général environ 27 pouces (69 cm) de large chacun. Prévoyez environ 55 pouces (140 cm). Le couvercle a besoin d'espace libre au-dessus; une tablette basse peut donc nuire.",
         },
       },
       "single-machine": {
         title: "Laveuse ou sécheuse seule",
-        description: "Un seul appareil, à jumeler avec celui que vous avez déjà.",
+        description: "Un seul appareil. Jumelez-le avec celui que vous avez.",
         priceNote: "pour un appareil",
         alt: "Une laveuse à côté du contour pointillé d'un appareil que vous avez déjà",
         compare: {
@@ -537,17 +537,17 @@ const fr: DeepPartial<Dictionary> = {
           metaDescription:
             "Louez seulement une laveuse ou seulement une sécheuse à Toronto et dans le GTA pour {singlePrice} par semaine. Jumelez-la à votre appareil. Réparations incluses.",
           h1: "Location de laveuse ou de sécheuse : un seul appareil",
-          intro: "Seulement une laveuse ou seulement une sécheuse, à jumeler avec l'appareil que vous avez déjà.",
+          intro: "Seulement une laveuse ou seulement une sécheuse. Jumelez-la avec l'appareil que vous avez.",
           whatItIs: [
-            "Si l'un de vos appareils fonctionne encore, vous n'avez pas besoin d'un ensemble complet. Louez celui qui vous manque, pour la moitié du prix d'un ensemble.",
-            "Dites-nous quel est l'autre appareil (chargement frontal ou par le haut, et sa largeur) et nous en cherchons un qui ira bien à côté.",
+            "Un de vos appareils fonctionne encore? Pas besoin d'un ensemble complet. Louez celui qui vous manque, pour la moitié du prix d'un ensemble.",
+            "Parlez-nous de votre autre appareil : chargement frontal ou par le haut, et sa largeur. Nous en trouvons un qui ira bien à côté.",
           ],
           fits: [
-            "Votre laveuse est brisée mais la sécheuse fonctionne encore, ou l'inverse",
-            "Vous avez emménagé dans un logement qui n'a qu'un seul appareil",
+            "Votre laveuse est brisée mais la sécheuse fonctionne, ou l'inverse",
+            "Votre nouveau logement n'a qu'un seul appareil",
             "Vous voulez une laveuse maintenant et une sécheuse plus tard",
           ],
-          size: "La plupart des appareils pleine grandeur font environ 27 pouces (69 cm) de large; les compacts, environ 24 pouces (61 cm). Si vous louez une sécheuse à superposer sur votre laveuse, donnez-nous la marque et le modèle de la laveuse pour que nous vérifiions qu'elles se superposent.",
+          size: "La plupart des appareils pleine grandeur font environ 27 pouces (69 cm) de large; les compacts, environ 24 pouces (61 cm). Vous superposez une sécheuse sur votre laveuse? Envoyez-nous la marque et le modèle de la laveuse pour que nous vérifiions qu'elles se superposent.",
         },
       },
     },
@@ -564,8 +564,8 @@ const fr: DeepPartial<Dictionary> = {
       drawings: "Dessins",
     },
     showcase: {
-      title: "Trouvez le type qui convient à votre espace",
-      lead: "Indiquez-nous la taille de votre placard et le type de prise. Nous trouvons un appareil qui convient, le vérifions, le livrons et le raccordons.",
+      title: "Choisissez le type qui convient",
+      lead: "Envoyez la taille de votre placard et le type de prise. Nous trouvons un appareil qui convient, le vérifions, le livrons et le raccordons.",
       photosNote: "Les photos sont des exemples de chaque type, pas nos appareils. ",
       drawingsNote: "Les dessins montrent le type, pas un appareil précis. ",
       availabilityNote: "La marque et le modèle dépendent de ce qui est disponible.",
@@ -586,10 +586,10 @@ const fr: DeepPartial<Dictionary> = {
     index: {
       eyebrow: "Cinq types, deux prix",
       title: "Les types de laveuses et sécheuses que nous louons",
-      lead: "Tout ensemble laveuse et sécheuse coûte {setPrice} par semaine. Un appareil seul coûte {singlePrice} par semaine. Chaque type comprend les réparations et la reprise de l'ancien appareil.",
+      lead: "Tout ensemble coûte {setPrice} par semaine. Un appareil coûte {singlePrice} par semaine. Réparations et reprise de l'ancien appareil toujours incluses.",
       compareTitle: "Comparer les types",
       compareLead:
-        "Les largeurs sont typiques; la taille exacte dépend de l'appareil que nous avons pour vous. Donnez-nous vos mesures et nous les vérifions d'abord.",
+        "Les largeurs sont typiques; la vôtre dépend de l'appareil que nous avons. Envoyez vos mesures et nous les vérifions d'abord.",
       columns: {
         type: "Type",
         width: "Largeur",
@@ -605,10 +605,10 @@ const fr: DeepPartial<Dictionary> = {
         outlet: "Prise de sécheuse à 3 ou à 4 broches?",
       },
       ctaTitle: "Vous ne savez pas quel type convient?",
-      ctaText: "Envoyez une photo de l'espace par texto au {phoneSpan} et nous vous dirons ce qui convient.",
+      ctaText: "Envoyez une photo de l'espace par texto au {phoneSpan}. Nous vous dirons ce qui convient.",
     },
     page: {
-      measureTip: "Mesurez la largeur, la hauteur et la profondeur de votre espace, ainsi que les portes sur le passage.",
+      measureTip: "Mesurez la largeur, la hauteur et la profondeur de votre espace, ainsi que chaque porte sur le passage.",
       summaryTitle: "Prix et ce qui est inclus",
       forSet: "Pour l'ensemble laveuse et sécheuse.",
       forSingle: "Pour un appareil : une laveuse ou une sécheuse.",
@@ -619,17 +619,17 @@ const fr: DeepPartial<Dictionary> = {
         "Aucune vérification de crédit",
       ],
       terms: "Dépôt remboursable de {deposit}. Minimum de {minWeeks} semaines, puis à la semaine.",
-      needOne: "Besoin d'un seul appareil? {singlePrice} par semaine.",
-      needBoth: "Besoin des deux? Un ensemble laveuse et sécheuse coûte {setPrice} par semaine.",
+      needOne: "Un seul appareil suffit? {singlePrice} par semaine.",
+      needBoth: "Besoin des deux? Prenez l'ensemble pour {setPrice} par semaine.",
       specsTitle: "Dimensions et raccordements",
       specsLead:
-        "Dimensions typiques. La taille exacte dépend de l'appareil que nous avons pour vous; nous vérifions donc vos mesures d'abord.",
+        "Dimensions typiques. Les vôtres dépendent de l'appareil que nous avons; nous vérifions donc vos mesures d'abord.",
       specsCaption: "Dimensions typiques et raccordements : {title}",
       loadsFrom: "Chargement de la laveuse",
       goodFor: "Idéal pour",
       hookupsNeeded: "Raccordements nécessaires",
       fitTitle: "Vous ne savez pas si ça entre?",
-      fitText: "Envoyez une photo de l'espace par texto au {phoneLink} et nous vérifierons.",
+      fitText: "Envoyez une photo de l'espace par texto au {phoneLink}. Nous vérifierons.",
       whatItIs: "Ce que c'est",
       size: "Dimensions",
       whoItFits: "Pour qui",
@@ -646,36 +646,36 @@ const fr: DeepPartial<Dictionary> = {
       repairs: {
         eyebrow: "Réparations incluses",
         title: "S'il brise, nous le réparons",
-        text: "Réparations, ou appareil de remplacement, sans frais pendant toute la location.",
-        cta: "Comment fonctionnent les réparations",
+        text: "Réparations ou appareil de remplacement, sans frais, pendant toute la location.",
+        cta: "Voir comment fonctionnent les réparations",
       },
       buildings: {
         eyebrow: "Pour les immeubles",
-        title: "Des appareils pour la salle de lavage de votre immeuble",
-        text: "Nous fournissons, installons et réparons les appareils. Soumission par immeuble après avoir vu la salle.",
-        cta: "Salles de lavage",
+        title: "Des appareils pour les salles de lavage d'immeubles",
+        text: "Nous les fournissons, les installons et les réparons. Soumission par immeuble après avoir vu la salle.",
+        cta: "Voir les salles de lavage",
       },
     },
     included: {
-      title: "Ce qui est inclus",
+      title: "Chaque location comprend",
       items: [
         {
           title: "Livraison et installation",
-          text: "Nous raccordons l'eau, le drain, l'électricité et l'évent, puis faisons un cycle d'essai avant de partir.",
+          text: "Nous raccordons l'eau, le drain, l'électricité et l'évent. Puis nous faisons un cycle d'essai.",
         },
         {
           title: "Réparations incluses",
-          text: "Si un appareil cesse de fonctionner, nous le réparons ou le remplaçons sans frais.",
+          text: "Un appareil cesse de fonctionner? Nous le réparons ou le remplaçons sans frais.",
         },
         {
           title: "Ancien appareil enlevé",
-          text: "Nous emportons votre ancien appareil sans frais.",
+          text: "Nous enlevons votre ancien appareil sans frais.",
         },
       ],
     },
     rooms: {
-      title: "Un appareil pour chaque type d'espace",
-      lead: "Placards, condos, sous-sols et buanderies : des photos d'exemple des espaces où vont nos types d'appareils.",
+      title: "Un appareil pour chaque espace",
+      lead: "Placards, condos, sous-sols, buanderies. Des photos d'exemple d'espaces où vont nos types d'appareils.",
       captions: {
         "rooms/stacked-small-room": "Un ensemble superposable dans une pièce étroite",
         "rooms/washer-shelves": "Une laveuse entre les tablettes",
@@ -692,7 +692,7 @@ const fr: DeepPartial<Dictionary> = {
       // We don't speak French: the eyebrow stays the English-default line, translated.
       eyebrow: "Entreprise locale de Toronto",
       title: "Location de laveuse et sécheuse à Toronto et dans le GTA",
-      priceSummary: "{setPrice} par semaine pour l'ensemble, ou {singlePrice} par semaine pour un appareil.",
+      priceSummary: "{setPrice} par semaine pour l'ensemble. {singlePrice} par semaine pour un appareil.",
       aWeek: "par semaine",
       forTheSet: "pour l'ensemble",
       orSingle: "ou {price} pour un appareil",
@@ -716,7 +716,7 @@ const fr: DeepPartial<Dictionary> = {
       ],
     },
     prices: {
-      title: "Prix",
+      title: "Prix hebdomadaires",
       perWeek: "par semaine",
       forSet: "pour l'ensemble laveuse + sécheuse",
       orSingle: "ou {price} par semaine pour un appareil",
@@ -729,9 +729,9 @@ const fr: DeepPartial<Dictionary> = {
     },
     landlordsTeaser: {
       title: "Propriétaire ou immeuble?",
-      text: "Des appareils pour vos logements, ou pour la salle de lavage de votre immeuble. Réparations incluses.",
-      link: "Lavage pour les propriétaires",
-      buildingsLink: "Salles de lavage",
+      text: "Des appareils pour vos logements ou votre salle de lavage. Réparations incluses.",
+      link: "Voir les options pour propriétaires",
+      buildingsLink: "Voir les salles de lavage",
     },
     about: {
       title: "À propos de nous",
@@ -743,18 +743,18 @@ const fr: DeepPartial<Dictionary> = {
       more: "En savoir plus sur nous",
     },
     serviceArea: {
-      title: "Zone de service",
-      allAreas: "Tous les secteurs où nous livrons",
+      title: "Où nous livrons",
+      allAreas: "Voir tous les secteurs",
       mapLabel: "Carte des secteurs desservis",
       lake: "Lac Ontario",
     },
     faq: {
       title: "FAQ",
-      another: "Une autre question? Appelez ou écrivez par texto au {phoneLink}.",
-      all: "Toutes les questions et réponses",
+      another: "D'autres questions? Appelez ou écrivez par texto au {phoneLink}.",
+      all: "Voir toutes les questions",
     },
     cta: {
-      title: "Une laveuse et une sécheuse pour {setPrice} par semaine",
+      title: "Obtenez un ensemble pour {setPrice} par semaine",
       text: "Réparations incluses. TVH non facturée.",
     },
     startRental: {
@@ -765,7 +765,7 @@ const fr: DeepPartial<Dictionary> = {
         "Votre espace",
         "Comment vous joindre",
       ],
-      nothingToPay: "Rien à payer maintenant. Nous confirmons d'abord l'appareil, le total et la date de début.",
+      nothingToPay: "Ne payez rien maintenant. Nous confirmons d'abord l'appareil, le total et la date de début.",
     },
   },
 
@@ -778,12 +778,12 @@ const fr: DeepPartial<Dictionary> = {
         metaDescription:
           "Location de laveuse et sécheuse à Toronto, North York, Etobicoke, Scarborough, East York et York : {setPrice}/sem. l'ensemble, {singlePrice} un appareil.",
         intro:
-          "Nous louons des laveuses et des sécheuses dans toute la Ville de Toronto, y compris North York, Etobicoke, Scarborough, East York et York.",
+          "Nous louons des laveuses et des sécheuses dans tout Toronto, y compris North York, Etobicoke, Scarborough, East York et York.",
         neighbourhoods: ["North York", "Etobicoke", "Scarborough", "East York", "York"],
         homes: [
-          "Une grande partie de Toronto vit en condo ou en appartement. Les placards de lavage des condos sont souvent étroits : un ensemble superposable de 24 pouces ou un centre de lavage monobloc est le choix habituel.",
-          "La plupart des immeubles en copropriété demandent de réserver l'ascenseur de service pour une livraison. Réservez une plage horaire auprès de votre immeuble et indiquez-nous l'heure.",
-          "Les maisons avec une salle de lavage au sous-sol ont en général la place pour deux appareils côte à côte.",
+          "Beaucoup de Torontois vivent en condo ou en appartement. Les placards des condos sont souvent étroits. Un ensemble superposable de 24 pouces ou un centre de lavage monobloc est le choix habituel.",
+          "La plupart des condos demandent de réserver l'ascenseur de service pour la livraison. Réservez une plage horaire et envoyez-nous l'heure.",
+          "Une maison avec une salle de lavage au sous-sol a en général la place pour deux appareils côte à côte.",
         ],
         checklist: [
           "La largeur, la profondeur et la hauteur du placard, et la largeur de sa porte",
@@ -794,12 +794,12 @@ const fr: DeepPartial<Dictionary> = {
       },
       mississauga: {
         name: "Mississauga",
-        teaser: "Des condos autour de City Centre et au bord du lac, des maisons et des maisons en rangée ailleurs.",
+        teaser: "Des condos près de City Centre et du bord du lac. Des maisons et des maisons en rangée ailleurs.",
         metaTitle: "Location laveuse et sécheuse Mississauga | {setPrice}/sem.",
         metaDescription:
           "Location de laveuse et sécheuse à Mississauga : {setPrice}/sem. l'ensemble, {singlePrice} un appareil. Réparations et reprise incluses. Sans vérification de crédit.",
         intro:
-          "Nous louons des laveuses et des sécheuses dans tout Mississauga, de Port Credit à Meadowvale et de Malton à Erin Mills.",
+          "Nous louons des laveuses et des sécheuses dans tout Mississauga, de Port Credit à Meadowvale, de Malton à Erin Mills.",
         neighbourhoods: [
           "City Centre",
           "Port Credit",
@@ -811,8 +811,8 @@ const fr: DeepPartial<Dictionary> = {
           "Malton",
         ],
         homes: [
-          "Mississauga mêle des tours de condos, autour de City Centre et au bord du lac, et des maisons et maisons en rangée dans des quartiers comme Meadowvale, Erin Mills et Churchill Meadows.",
-          "En condo, pensez à un ensemble superposable ou à un centre de lavage monobloc. Dans la salle de lavage d'une maison ou d'une maison en rangée, deux appareils côte à côte entrent souvent.",
+          "Mississauga a des tours de condos autour de City Centre et au bord du lac. Meadowvale, Erin Mills et Churchill Meadows comptent surtout des maisons et des maisons en rangée.",
+          "En condo? Pensez à un ensemble superposable ou à un centre de lavage monobloc. Maison ou maison en rangée? Deux appareils côte à côte entrent souvent.",
         ],
         checklist: [
           "L'emplacement du lavage : placard, salle de lavage ou sous-sol",
@@ -823,7 +823,7 @@ const fr: DeepPartial<Dictionary> = {
       },
       brampton: {
         name: "Brampton",
-        teaser: "Surtout des maisons et des maisons en rangée, avec le lavage au sous-sol ou au rez-de-chaussée.",
+        teaser: "Surtout des maisons et des maisons en rangée. Le lavage au sous-sol ou au rez-de-chaussée.",
         metaTitle: "Location laveuse et sécheuse Brampton | {setPrice}/sem.",
         metaDescription:
           "Location de laveuse et sécheuse à Brampton : {setPrice}/sem. l'ensemble, {singlePrice} un appareil. Réparations incluses. Appelez le {phone}.",
@@ -839,8 +839,8 @@ const fr: DeepPartial<Dictionary> = {
           "Castlemore",
         ],
         homes: [
-          "À Brampton, la plupart des logements sont des maisons individuelles, des maisons jumelées et des maisons en rangée. Le lavage se trouve souvent au sous-sol ou au rez-de-chaussée, où deux appareils pleine grandeur côte à côte entrent en général.",
-          "Vous louez un logement au sous-sol? Vérifiez avec votre propriétaire quels raccordements d'eau, de drain et d'électricité vous pouvez utiliser. Envoyez-nous une photo par texto et nous vous dirons ce qui convient.",
+          "À Brampton, la plupart des logements sont des maisons individuelles, jumelées ou en rangée. Le lavage est souvent au sous-sol ou au rez-de-chaussée. Deux appareils pleine grandeur côte à côte entrent en général.",
+          "Vous louez un logement au sous-sol? Demandez à votre propriétaire quels raccordements d'eau, de drain et d'électricité vous pouvez utiliser. Envoyez-nous une photo par texto et nous vous dirons ce qui convient.",
         ],
         checklist: [
           "Les raccordements que vous pouvez utiliser, si vous louez un logement au sous-sol",
@@ -851,7 +851,7 @@ const fr: DeepPartial<Dictionary> = {
       },
       vaughan: {
         name: "Vaughan",
-        teaser: "Woodbridge, Maple, Concord et Kleinburg, et des condos récents près du Vaughan Metropolitan Centre.",
+        teaser: "Woodbridge, Maple, Concord, Kleinburg. Des condos récents près du Vaughan Metropolitan Centre.",
         metaTitle: "Location laveuse et sécheuse Vaughan | {setPrice}/sem.",
         metaDescription:
           "Location de laveuse et sécheuse à Vaughan, Woodbridge, Maple et Concord : {setPrice}/sem. l'ensemble, {singlePrice} un appareil. Réparations incluses.",
@@ -867,8 +867,8 @@ const fr: DeepPartial<Dictionary> = {
           "Vaughan Metropolitan Centre",
         ],
         homes: [
-          "Une grande partie de Vaughan est faite de maisons avec une vraie salle de lavage, où deux appareils côte à côte, à chargement frontal ou par le haut, entrent bien.",
-          "Il y a aussi des tours de condos récentes, surtout autour du Vaughan Metropolitan Centre. Les placards des condos récents sont souvent conçus pour un ensemble superposable de 24 pouces ou un appareil monobloc.",
+          "Une grande partie de Vaughan est faite de maisons avec une vraie salle de lavage. Deux appareils côte à côte, à chargement frontal ou par le haut, y entrent bien.",
+          "Vaughan a aussi des tours de condos récentes, surtout autour du Vaughan Metropolitan Centre. Leurs placards sont souvent conçus pour un ensemble superposable de 24 pouces ou un appareil monobloc.",
         ],
         checklist: [
           "Chargement frontal ou par le haut : lequel préférez-vous?",
@@ -879,7 +879,7 @@ const fr: DeepPartial<Dictionary> = {
       },
       markham: {
         name: "Markham",
-        teaser: "Des maisons en rangée et des maisons à Unionville et Cornell, des condos le long de l'autoroute 7.",
+        teaser: "Des maisons en rangée et des maisons à Unionville et Cornell. Des condos le long de l'autoroute 7.",
         metaTitle: "Location laveuse et sécheuse Markham | {setPrice}/sem.",
         metaDescription:
           "Location de laveuse et sécheuse à Markham et Unionville : {setPrice}/sem. l'ensemble, {singlePrice} un appareil. Réparations et reprise incluses.",
@@ -895,8 +895,8 @@ const fr: DeepPartial<Dictionary> = {
           "Thornhill (côté Markham)",
         ],
         homes: [
-          "Markham compte beaucoup de maisons en rangée et de maisons en rangée superposées, ainsi que des condos autour de Downtown Markham et de l'autoroute 7.",
-          "Dans une maison en rangée, le lavage est souvent dans un placard à l'étage ou au sous-sol. Les escaliers changent la livraison : dites-nous combien il y a d'étages à monter ou descendre et à quel point les virages sont serrés.",
+          "Markham compte beaucoup de maisons en rangée et de maisons en rangée superposées, plus des condos autour de Downtown Markham et de l'autoroute 7.",
+          "Dans une maison en rangée, le lavage est souvent dans un placard à l'étage ou au sous-sol. Les escaliers changent la livraison. Dites-nous combien d'étages, et à quel point les virages sont serrés.",
         ],
         checklist: [
           "L'étage du lavage, et le nombre d'escaliers",
@@ -907,7 +907,7 @@ const fr: DeepPartial<Dictionary> = {
       },
       "richmond-hill": {
         name: "Richmond Hill",
-        teaser: "Des maisons d'Oak Ridges à Langstaff, des tours de condos le long de Yonge Street.",
+        teaser: "Des maisons d'Oak Ridges à Langstaff. Des tours de condos le long de Yonge Street.",
         metaTitle: "Location laveuse et sécheuse Richmond Hill | {setPrice}/sem.",
         metaDescription:
           "Location de laveuse et sécheuse à Richmond Hill et Oak Ridges : {setPrice}/sem. l'ensemble, {singlePrice} un appareil. Réparations incluses. Appelez le {phone}.",
@@ -915,8 +915,8 @@ const fr: DeepPartial<Dictionary> = {
           "Nous louons des laveuses et des sécheuses dans tout Richmond Hill, y compris Oak Ridges, Mill Pond, Bayview Hill, Richvale et Jefferson.",
         neighbourhoods: ["Oak Ridges", "Mill Pond", "Bayview Hill", "Richvale", "Jefferson", "Langstaff", "Elgin Mills"],
         homes: [
-          "À Richmond Hill, on trouve aussi bien des maisons individuelles avec une salle de lavage au sous-sol que des tours de condos le long de Yonge Street et près de l'autoroute 7.",
-          "Dans une maison, deux appareils côte à côte entrent en général. Dans un placard de condo, pensez à un ensemble superposable ou à un centre de lavage monobloc.",
+          "Richmond Hill va des maisons individuelles avec lavage au sous-sol aux tours de condos sur Yonge Street et près de l'autoroute 7.",
+          "Maison? Deux appareils côte à côte entrent en général. Placard de condo? Pensez à un ensemble superposable ou à un centre de lavage monobloc.",
         ],
         checklist: [
           "Maison ou condo, et l'emplacement du lavage",
@@ -932,7 +932,7 @@ const fr: DeepPartial<Dictionary> = {
         metaTitle: "Location laveuse et sécheuse North York | {setPrice}/sem.",
         metaDescription:
           "Louez une laveuse et une sécheuse à North York, de Willowdale et Don Mills à Downsview : {setPrice}/sem. l'ensemble, {singlePrice} un appareil.",
-        teaser: "Des tours de condos le long de Yonge Street, des maisons avec lavage au sous-sol dans les rues voisines.",
+        teaser: "Des tours de condos sur Yonge Street. Des maisons avec lavage au sous-sol dans les rues voisines.",
         intro:
           "Nous louons des laveuses et des sécheuses dans tout North York, de Willowdale et Bayview Village à Don Mills, Downsview et Bathurst Manor.",
         neighbourhoods: [
@@ -948,8 +948,8 @@ const fr: DeepPartial<Dictionary> = {
           "Newtonbrook",
         ],
         homes: [
-          "North York a deux sortes d'espaces de lavage. Le long de Yonge Street, surtout autour de North York Centre et de Sheppard Avenue, beaucoup de gens vivent dans des tours de condos, où le lavage est un placard dans le logement. À l'écart des grandes artères, beaucoup de logements sont des maisons avec le lavage au sous-sol.",
-          "Il y a aussi beaucoup d'immeubles d'appartements locatifs plus anciens. Certains ont une salle de lavage commune et aucun raccordement pour laveuse ou sécheuse dans les logements : vérifiez avec votre propriétaire avant de réserver.",
+          "North York a deux sortes d'espaces de lavage. Le long de Yonge Street, surtout près de North York Centre et de Sheppard Avenue, beaucoup de gens vivent en condo, avec un placard de lavage dans le logement. À l'écart des grandes artères, beaucoup de logements sont des maisons avec lavage au sous-sol.",
+          "Il y a aussi beaucoup d'immeubles d'appartements locatifs plus anciens. Certains ont une salle de lavage commune et aucun raccordement dans les logements. Vérifiez avec votre propriétaire avant de réserver.",
         ],
         fits: {
           stackable: "Placards de condo étroits et hauts près de Yonge Street et de Sheppard Avenue.",
@@ -969,9 +969,9 @@ const fr: DeepPartial<Dictionary> = {
         metaTitle: "Location laveuse et sécheuse Etobicoke | {setPrice}/sem.",
         metaDescription:
           "Louez une laveuse et une sécheuse à Etobicoke, de Humber Bay Shores et Mimico à Rexdale : {setPrice}/sem. l'ensemble, {singlePrice} un appareil.",
-        teaser: "Des condos au bord du lac, des maisons avec salle de lavage au sous-sol et des immeubles d'appartements.",
+        teaser: "Des condos au bord du lac, des maisons avec lavage au sous-sol et des immeubles d'appartements.",
         intro:
-          "Nous louons des laveuses et des sécheuses dans tout Etobicoke, du bord du lac à Humber Bay Shores, Mimico et Long Branch jusqu'à Islington Village et Rexdale.",
+          "Nous louons des laveuses et des sécheuses dans tout Etobicoke, de Humber Bay Shores, Mimico et Long Branch jusqu'à Islington Village et Rexdale.",
         neighbourhoods: [
           "Humber Bay Shores",
           "Mimico",
@@ -985,8 +985,8 @@ const fr: DeepPartial<Dictionary> = {
           "Thistletown",
         ],
         homes: [
-          "Beaucoup de tours de condos d'Etobicoke se trouvent au bord du lac, à Humber Bay Shores, ou près des stations de métro Islington et Kipling. Dans ces logements, le lavage est en général un placard étroit.",
-          "Le reste d'Etobicoke est en grande partie fait de maisons, du bungalow à la maison à deux étages, avec des immeubles d'appartements bas et hauts. Dans une maison, le lavage est souvent au sous-sol, où deux appareils pleine grandeur côte à côte ont en général la place.",
+          "Beaucoup de tours de condos d'Etobicoke se trouvent au bord du lac, à Humber Bay Shores, ou près des stations Islington et Kipling. Leur lavage est en général un placard étroit.",
+          "Le reste est en grande partie fait de maisons, du bungalow à la maison à deux étages, plus des immeubles d'appartements bas et hauts. Dans une maison, le lavage est souvent au sous-sol, où deux appareils pleine grandeur côte à côte ont en général la place.",
         ],
         fits: {
           stackable: "Placards de condo au bord du lac et près du métro.",
@@ -1022,8 +1022,8 @@ const fr: DeepPartial<Dictionary> = {
           "Highland Creek",
         ],
         homes: [
-          "Scarborough est en grande partie fait de maisons individuelles, de maisons jumelées et de maisons en rangée. Le lavage se trouve en général au sous-sol ou dans une petite pièce au rez-de-chaussée, et deux appareils pleine grandeur côte à côte entrent souvent.",
-          "Scarborough compte aussi beaucoup de tours d'appartements et quelques condos récents, notamment autour du Scarborough Town Centre. Certaines maisons ont un appartement au sous-sol : si vous en louez un, demandez à votre propriétaire quels raccordements d'eau, de drain et d'électricité vous pouvez utiliser.",
+          "Scarborough est en grande partie fait de maisons individuelles, de maisons jumelées et de maisons en rangée. Le lavage est en général au sous-sol ou dans une petite pièce au rez-de-chaussée. Deux appareils pleine grandeur côte à côte entrent souvent.",
+          "Scarborough compte aussi beaucoup de tours d'appartements et quelques condos récents, notamment autour du Scarborough Town Centre. Vous louez un appartement au sous-sol? Demandez à votre propriétaire quels raccordements d'eau, de drain et d'électricité vous pouvez utiliser.",
         ],
         fits: {
           "side-by-side-top-load": "Salles de lavage au sous-sol ou au rez-de-chaussée des maisons.",
@@ -1043,7 +1043,7 @@ const fr: DeepPartial<Dictionary> = {
         metaTitle: "Location laveuse et sécheuse East York | {setPrice}/sem.",
         metaDescription:
           "Louez une laveuse et une sécheuse à East York, Leaside et Thorncliffe Park : {setPrice}/sem. l'ensemble, {singlePrice} un appareil. Réparations incluses.",
-        teaser: "Des rues de maisons à Leaside et Pape Village, des tours d'appartements à Thorncliffe Park.",
+        teaser: "Des maisons à Leaside et Pape Village. Des tours d'appartements à Thorncliffe Park.",
         intro:
           "Nous louons des laveuses et des sécheuses dans tout East York, y compris Leaside, Thorncliffe Park, Pape Village, Woodbine Heights et Crescent Town.",
         neighbourhoods: [
@@ -1057,8 +1057,8 @@ const fr: DeepPartial<Dictionary> = {
           "Crescent Town",
         ],
         homes: [
-          "East York mêle des rues tranquilles de maisons individuelles et jumelées, dans des secteurs comme Leaside et Pape Village, et des tours d'appartements à Thorncliffe Park et Crescent Town.",
-          "Dans une maison ancienne, l'escalier du sous-sol peut être étroit et raide : mesurez-le en même temps que l'espace de lavage. En appartement, vérifiez d'abord que votre logement a des raccordements pour une laveuse et une sécheuse.",
+          "East York mêle des rues tranquilles de maisons, comme à Leaside et Pape Village, et des tours d'appartements à Thorncliffe Park et Crescent Town.",
+          "Une maison ancienne peut avoir un escalier de sous-sol étroit et raide. Mesurez-le avec l'espace de lavage. En appartement, vérifiez d'abord que votre logement a des raccordements pour laveuse et sécheuse.",
         ],
         fits: {
           "side-by-side-top-load": "Coins lavage au sous-sol des maisons.",
@@ -1078,9 +1078,9 @@ const fr: DeepPartial<Dictionary> = {
         metaTitle: "Location laveuse et sécheuse York, Toronto | {setPrice}/sem.",
         metaDescription:
           "Louez une laveuse et une sécheuse à York, Toronto, y compris Weston et Mount Dennis : {setPrice}/sem. l'ensemble, {singlePrice} un appareil.",
-        teaser: "Des maisons anciennes avec sous-sol, et des immeubles d'appartements le long des grandes artères.",
+        teaser: "Des maisons anciennes avec sous-sol. Des immeubles d'appartements sur les grandes artères.",
         intro:
-          "Nous louons des laveuses et des sécheuses dans tout York, l'ancienne Ville de York au nord-ouest du centre-ville de Toronto, y compris Weston, Mount Dennis, Fairbank et Oakwood Village.",
+          "Nous louons des laveuses et des sécheuses dans tout York, l'ancienne Ville de York au nord-ouest du centre-ville, y compris Weston, Mount Dennis, Fairbank et Oakwood Village.",
         neighbourhoods: [
           "Weston",
           "Mount Dennis",
@@ -1092,8 +1092,8 @@ const fr: DeepPartial<Dictionary> = {
           "Humewood–Cedarvale",
         ],
         homes: [
-          "York est en grande partie fait de maisons individuelles et jumelées anciennes, dont beaucoup ont un coin lavage au sous-sol, ainsi que d'immeubles d'appartements le long de grandes artères comme Weston Road et Eglinton Avenue West.",
-          "Certaines maisons y sont divisées en logements séparés. Si vous en louez un, vérifiez avec votre propriétaire quels raccordements vous pouvez utiliser et si une sécheuse peut évacuer vers l'extérieur.",
+          "York est en grande partie fait de maisons individuelles et jumelées anciennes, dont beaucoup ont le lavage au sous-sol. Des immeubles d'appartements bordent de grandes artères comme Weston Road et Eglinton Avenue West.",
+          "Certaines maisons y sont divisées en logements. Vous en louez un? Demandez à votre propriétaire quels raccordements vous pouvez utiliser et si une sécheuse peut évacuer vers l'extérieur.",
         ],
         fits: {
           "side-by-side-front-load": "Salles de lavage au sous-sol des maisons.",
@@ -1113,12 +1113,12 @@ const fr: DeepPartial<Dictionary> = {
       eyebrow: "Toronto et le GTA",
       title: "Où nous livrons",
       checkTitle: "Livrons-nous chez vous?",
-      lead: "Nous livrons des laveuses et sécheuses en location dans tout Toronto et dans cinq villes autour. Entrez votre code postal pour vérifier, ou trouvez votre secteur ci-dessous.",
+      lead: "Nous livrons dans tout Toronto et dans cinq villes autour. Vérifiez votre code postal, ou trouvez votre secteur ci-dessous.",
       samePrice: "Même prix dans tous les secteurs : {setPrice} par semaine pour un ensemble, {singlePrice} pour un appareil.",
-      fartherText: "Plus loin? Envoyez-nous votre adresse par texto et nous vous le dirons.",
+      fartherText: "Plus loin? Envoyez-nous votre adresse par texto. Nous vous le dirons.",
       torontoTitle: "Toronto",
       torontoLead:
-        "Toute la Ville de Toronto. North York, Etobicoke, Scarborough, East York et York ont chacun leur page.",
+        "Tout Toronto. North York, Etobicoke, Scarborough, East York et York ont chacun leur page.",
       wholeCity: "Toute la ville",
       district: "District de Toronto",
       aroundTitle: "Autour de Toronto",
@@ -1146,10 +1146,10 @@ const fr: DeepPartial<Dictionary> = {
       localTitle: "Le lavage dans les logements de {place}",
       localAreas: "Les secteurs de {place} où nous livrons",
       beforeYouCall: "Avant d'appeler, vérifiez",
-      notSure: "Vous hésitez? Envoyez une photo par texto au {phoneLink} et nous vous dirons ce qui convient.",
+      notSure: "Vous hésitez? Envoyez une photo par texto au {phoneLink}. Nous vous dirons ce qui convient.",
       deliveryTitle: "Livrons-nous chez vous?",
       deliveryLead:
-        "Entrez votre code postal. S'il ne suffit pas, envoyez-nous votre adresse par texto et nous vous le confirmerons.",
+        "Entrez votre code postal. Pas clair? Envoyez-nous votre adresse par texto et nous confirmerons.",
     },
     districtsLabel: "Districts de Toronto",
   },
@@ -1167,12 +1167,12 @@ const fr: DeepPartial<Dictionary> = {
       "minimum-term": {
         question: "Quelle est la durée de la location?",
         answer:
-          "{minWeeks} semaines minimum. Ensuite, la location continue à la semaine, et chaque partie peut y mettre fin avec un préavis de {noticeDays} jours. Nous venons reprendre l'appareil.",
+          "{minWeeks} semaines minimum, puis à la semaine. Chaque partie peut y mettre fin avec un préavis de {noticeDays} jours. Nous venons reprendre l'appareil.",
       },
       ending: {
         question: "Comment mettre fin à ma location?",
         answer:
-          "Écrivez-nous par texto au {phone}. Après le minimum de {minWeeks} semaines, chaque partie peut mettre fin à la location avec un préavis de {noticeDays} jours, et nous venons reprendre l'appareil.",
+          "Écrivez-nous par texto au {phone}. Après le minimum de {minWeeks} semaines, chaque partie peut y mettre fin avec un préavis de {noticeDays} jours. Nous venons reprendre l'appareil.",
       },
       "machine-types": {
         question: "Quels appareils puis-je louer?",
@@ -1182,7 +1182,7 @@ const fr: DeepPartial<Dictionary> = {
       },
       "new-machines": {
         question: "Les appareils sont-ils neufs?",
-        answer: "Non. Ce sont des appareils usagés en bon état de marche. Chacun est vérifié avant de partir.",
+        answer: "Non. Ils sont usagés et en bon état de marche. Nous vérifions chacun avant qu'il parte.",
       },
       brands: {
         question: "Quelles marques avez-vous?",
@@ -1204,7 +1204,7 @@ const fr: DeepPartial<Dictionary> = {
       price: {
         question: "Combien ça coûte?",
         answer:
-          "{setPrice} par semaine pour un ensemble laveuse et sécheuse, ou {singlePrice} par semaine pour un appareil, en dollars canadiens. La location est facturée chaque semaine, le même jour de la semaine.",
+          "{setPrice} par semaine pour un ensemble, ou {singlePrice} par semaine pour un appareil, en dollars canadiens. La location est facturée chaque semaine, le même jour.",
       },
       tax: {
         question: "Les prix comprennent-ils les taxes?",
@@ -1217,7 +1217,7 @@ const fr: DeepPartial<Dictionary> = {
       payment: {
         question: "Comment puis-je payer?",
         answer:
-          "Par virement Interac ou par carte de crédit. Pour payer par carte, utilisez le lien de paiement que nous envoyons avec votre soumission.",
+          "Virement Interac ou carte de crédit. Pour la carte, utilisez le lien de paiement que nous envoyons avec votre soumission.",
       },
       referral: {
         question: "Avez-vous une offre de recommandation?",
@@ -1226,26 +1226,26 @@ const fr: DeepPartial<Dictionary> = {
       "space-needs": {
         question: "Que me faut-il dans mon espace de lavage?",
         answer:
-          "Des raccordements d'eau (chaude et froide), un drain et la bonne prise. La plupart des sécheuses électriques ont besoin d'une prise de 240 V, à 3 ou 4 broches. Une sécheuse à évacuation a aussi besoin d'un conduit vers l'extérieur. Envoyez-nous une photo et nous vérifierons.",
+          "De l'eau chaude et froide, un drain et la bonne prise. La plupart des sécheuses électriques ont besoin d'une prise de 240 V, à 3 ou 4 broches. Une sécheuse à évacuation a aussi besoin d'un conduit vers l'extérieur. Envoyez une photo et nous vérifierons.",
         link: "Comment mesurer votre espace de lavage",
       },
       "delivery-cost": {
         question: "Combien coûtent la livraison et l'installation?",
         answer:
-          "Nous vous donnons le prix avant que vous payiez. Il dépend de la distance, de l'étage, des escaliers ou de l'ascenseur, et des raccordements.",
+          "Nous vous donnons le prix avant que vous payiez. Il dépend de la distance, de l'étage, des escaliers ou de l'ascenseur et des raccordements.",
       },
       "delivery-time": {
         question: "En combien de temps pouvez-vous livrer?",
-        answer: "En général la même semaine. Nous confirmons la date en envoyant la soumission.",
+        answer: "En général la même semaine. Nous confirmons la date avec votre soumission.",
       },
       installation: {
         question: "Que comprend l'installation?",
-        answer: "Nous vérifions l'espace et branchons la sécheuse sur sa propre prise de 240 volts (3 ou 4 broches). Nous installons un conduit d'évacuation métallique de 4 pouces vers l'extérieur, fixé par un collier aux deux bouts et sans pli : un conduit écrasé est un risque d'incendie. Nous raccordons l'eau chaude et froide et le drain, mettons l'appareil de niveau et faisons un cycle d'essai avant de partir.",
+        answer: "Nous vérifions l'espace. Nous branchons la sécheuse sur sa propre prise de 240 volts (3 ou 4 broches). Nous installons un conduit d'évacuation métallique de 4 pouces vers l'extérieur, fixé par un collier aux deux bouts, sans pli : un conduit écrasé est un risque d'incendie. Nous raccordons l'eau chaude et froide et le drain, mettons l'appareil de niveau et faisons un cycle d'essai avant de partir.",
       },
       condo: {
         question: "Pouvez-vous livrer dans un condo?",
         answer:
-          "Oui. Indiquez-nous la taille du placard et si l'immeuble a un ascenseur de service, et nous planifions la livraison.",
+          "Oui. Indiquez-nous la taille du placard et s'il y a un ascenseur de service. Nous planifions la livraison.",
         link: "Liste de vérification pour condo",
       },
       "haul-away": {
@@ -1261,7 +1261,7 @@ const fr: DeepPartial<Dictionary> = {
       breaks: {
         question: "Et si l'appareil brise?",
         answer:
-          "Appelez-nous ou écrivez-nous par texto. Nous organisons une réparation ou un appareil de remplacement sans frais.",
+          "Appelez-nous ou écrivez-nous par texto. Nous le réparons ou le remplaçons sans frais.",
       },
       "repair-request": {
         question: "Comment demander une réparation?",
@@ -1277,13 +1277,13 @@ const fr: DeepPartial<Dictionary> = {
       "landlord-options": {
         question: "Comment les propriétaires travaillent-ils avec vous?",
         answer:
-          "De deux façons. Vos locataires louent directement chez nous : vous n'avez rien à payer, vous autorisez seulement l'installation. Ou vous louez les appareils pour vos logements : le prix courant est de {setPrice} par semaine par ensemble, et à partir de {quoteUnits} logements, nous faisons une soumission par immeuble après l'avoir visité. Les réparations sont incluses dans les deux cas.",
+          "De deux façons. Vos locataires louent directement chez nous : vous ne payez rien, vous autorisez seulement l'installation. Ou vous louez les appareils pour vos logements : prix courant de {setPrice} par semaine par ensemble. À partir de {quoteUnits} logements, nous faisons une soumission par immeuble après l'avoir visité. Les réparations sont incluses dans les deux cas.",
         link: "Laveuses et sécheuses pour propriétaires",
       },
       "landlord-quote": {
         question: "Comment un propriétaire obtient-il une soumission?",
         answer:
-          "Envoyez le formulaire de soumission pour propriétaires avec l'adresse, le nombre de logements et ce qui s'y trouve maintenant, ou appelez ou écrivez par texto au {phone}.",
+          "Envoyez le formulaire de soumission pour propriétaires avec l'adresse, le nombre de logements et ce qui s'y trouve maintenant. Ou appelez ou écrivez par texto au {phone}.",
         link: "Formulaire de soumission pour propriétaires",
       },
       "first-week-free": {
@@ -1293,31 +1293,31 @@ const fr: DeepPartial<Dictionary> = {
       "first-week-free-costs": {
         question: "Avec la première semaine gratuite, que dois-je payer?",
         answer:
-          "Le dépôt remboursable de {deposit} et la livraison. À partir de la deuxième semaine, la location hebdomadaire est facturée normalement.",
+          "Le dépôt remboursable de {deposit} et la livraison. Dès la deuxième semaine, la location hebdomadaire est facturée normalement.",
       },
     },
     page: {
       eyebrow: "FAQ",
       title: "Questions et réponses",
-      lead: "Location, prix, livraison, réparations et propriétaires. Une autre question? Appelez ou écrivez par texto au {phoneLink}.",
+      lead: "Location, prix, livraison, réparations et propriétaires. D'autres questions? Appelez ou écrivez par texto au {phoneLink}.",
       topics: "Sujets",
     },
   },
 
   landlords: {
     eyebrow: "Pour les propriétaires",
-    title: "Des laveuses et sécheuses pour vos logements locatifs",
-    lead: "Deux façons d'équiper vos logements. Dans les deux cas, nous installons les appareils, reprenons les anciens, et les réparations sont incluses.",
+    title: "Du lavage pour vos logements locatifs",
+    lead: "Deux façons d'ajouter le lavage à vos logements. Dans les deux cas, nous installons, reprenons les anciens appareils et incluons les réparations.",
     option: "Option {number}",
     options: [
       {
         title: "Vos locataires louent chez nous",
-        headline: "Rien à payer pour vous",
+        headline: "Vous ne payez rien",
         points: [
-          "Chaque locataire loue une laveuse et une sécheuse chez nous et nous paie directement.",
-          "Vous n'avez rien à payer.",
+          "Chaque locataire loue chez nous et nous paie directement.",
+          "Vous ne payez rien.",
           "Vous autorisez seulement l'installation.",
-          "Les réparations sont incluses pendant la location du locataire.",
+          "Réparations incluses pendant la location du locataire.",
         ],
       },
       {
@@ -1325,9 +1325,9 @@ const fr: DeepPartial<Dictionary> = {
         headline: "{setPrice} par semaine par ensemble, prix courant",
         points: [
           "Vous louez les appareils et incluez le lavage dans le logement.",
-          "Prix courant : {setPrice} par semaine par ensemble laveuse et sécheuse.",
+          "Prix courant : {setPrice} par semaine par ensemble.",
           "À partir de {quoteUnits} logements, nous faisons une soumission par immeuble après l'avoir visité.",
-          "Les réparations sont incluses pendant la location.",
+          "Réparations incluses pendant la location.",
         ],
       },
     ],
@@ -1335,57 +1335,57 @@ const fr: DeepPartial<Dictionary> = {
     includedTitle: "Inclus dans les deux cas",
     includedLead: "La livraison et l'installation sont chiffrées pour chaque travail, avant tout paiement.",
     included: [
-      "Installation : nous raccordons l'eau, le drain, l'électricité et le conduit d'évacuation, et faisons un cycle d'essai avant de partir.",
+      "Installation : nous raccordons l'eau, le drain, l'électricité et le conduit d'évacuation, puis faisons un cycle d'essai.",
       "Reprise des anciens appareils sans frais.",
-      "Réparations, ou un appareil de remplacement, sans frais.",
+      "Réparations ou appareil de remplacement, sans frais.",
       "Des appareils usagés, chacun vérifié avant de partir.",
     ],
     stepsTitle: "Comment ça se passe pour un immeuble",
     steps: [
       {
         title: "Parlez-nous de l'immeuble",
-        text: "L'adresse, le nombre de logements et ce qui s'y trouve maintenant : aucun appareil, de vieux appareils à remplacer, ou seulement les raccordements.",
+        text: "L'adresse, le nombre de logements et ce qui s'y trouve maintenant : aucun appareil, des anciens à remplacer, ou seulement les raccordements.",
       },
       {
         title: "Nous visitons l'immeuble",
-        text: "À partir de {quoteUnits} logements, nous visitons l'immeuble avant de faire la soumission : les espaces de lavage et les raccordements.",
+        text: "À partir de {quoteUnits} logements, nous vérifions les espaces de lavage et les raccordements avant la soumission.",
       },
       {
         title: "Vous recevez une soumission",
-        text: "Si vos locataires louent directement, chaque locataire reçoit sa propre soumission. Si vous louez les appareils, vous recevez une soumission pour l'immeuble.",
+        text: "Les locataires qui louent directement reçoivent chacun leur soumission. Si vous louez les appareils, vous en recevez une pour l'immeuble.",
       },
       {
         title: "Nous installons",
-        text: "Nous livrons, raccordons chaque appareil, faisons un cycle d'essai et reprenons les anciens appareils.",
+        text: "Nous livrons, raccordons chaque appareil, faisons un cycle d'essai et reprenons les anciens.",
       },
       {
-        title: "Les réparations, tant que les appareils sont là",
-        text: "Appelez-nous ou écrivez-nous par texto quand un appareil a besoin d'une réparation. Nous le réparons ou le remplaçons sans frais.",
+        title: "Les réparations, tant qu'ils sont là",
+        text: "Un appareil a besoin d'une réparation? Appelez-nous ou écrivez-nous par texto. Nous le réparons ou le remplaçons sans frais.",
       },
     ],
-    startWithQuote: "Commencer par une soumission",
+    startWithQuote: "Obtenir votre soumission",
     unitNeedsTitle: "Ce qu'il faut dans chaque logement",
-    unitNeedsNote: "Dites-nous ce que chaque logement a, et nous vous dirons ce qui convient.",
+    unitNeedsNote: "Dites-nous ce que chaque logement a. Nous vous dirons ce qui convient.",
     faqTitle: "Questions des propriétaires",
     faqs: [
       {
         question: "Est-ce que je paie quelque chose si mes locataires louent chez vous?",
-        answer: "Non. Le locataire loue les appareils et nous paie. Vous autorisez l'installation.",
+        answer: "Non. Le locataire loue et nous paie. Vous autorisez l'installation.",
       },
       {
         question: "Combien ça coûte si je loue les appareils?",
         answer:
-          "Le prix courant est de {setPrice} par semaine par ensemble laveuse et sécheuse. À partir de {quoteUnits} logements, nous faisons une soumission par immeuble après l'avoir visité. La livraison et l'installation sont chiffrées avant que vous payiez.",
+          "Prix courant : {setPrice} par semaine par ensemble. À partir de {quoteUnits} logements, nous faisons une soumission par immeuble après l'avoir visité. La livraison et l'installation sont chiffrées avant que vous payiez.",
       },
       {
         question: "Qui s'occupe des réparations?",
         answer:
-          "Appelez ou écrivez par texto au {phone} quand un appareil a besoin d'une réparation. Les réparations sont incluses dans les deux options.",
+          "Appelez ou écrivez par texto au {phone}. Les réparations sont incluses dans les deux options.",
       },
       {
         question: "Et si un logement n'a pas de raccordements?",
         answer:
-          "Un logement a besoin d'eau chaude et froide, d'un drain, de la bonne prise et, pour une sécheuse à évacuation, d'un conduit vers l'extérieur. Dites-nous ce que chaque logement a et nous vous dirons ce qui convient.",
+          "Chaque logement a besoin d'eau chaude et froide, d'un drain, de la bonne prise et, pour une sécheuse à évacuation, d'un conduit vers l'extérieur. Dites-nous ce que chaque logement a. Nous vous dirons ce qui convient.",
       },
       {
         question: "Mes locataires doivent-ils passer une vérification de crédit?",
@@ -1403,18 +1403,18 @@ const fr: DeepPartial<Dictionary> = {
     moreAnswers: "D'autres réponses dans la {faqLink}.",
     faqLink: "page FAQ",
     ctaTitle: "Obtenez une soumission pour votre immeuble",
-    ctaText: "Indiquez-nous l'adresse, le nombre de logements et ce qui s'y trouve maintenant.",
+    ctaText: "Envoyez l'adresse, le nombre de logements et ce qui s'y trouve maintenant.",
     buildingsNote: "Une salle de lavage commune dans l'immeuble? {buildingsLink}.",
-    buildingsLink: "Voir les options pour les salles de lavage",
+    buildingsLink: "Voir les options de salles de lavage",
     quote: {
       eyebrow: "Pour les propriétaires",
       title: "Obtenez une soumission pour votre immeuble",
-      lead: "Parlez-nous de l'immeuble et des logements. Dans les logements, vos locataires peuvent louer directement chez nous, ou vous pouvez louer les appareils. Pour une salle de lavage commune, l'immeuble loue les appareils ou les résidents paient à la brassée.",
+      lead: "Parlez-nous de l'immeuble et des logements. Dans les logements, les locataires louent directement chez nous ou vous louez les appareils. Dans une salle de lavage commune, l'immeuble loue les appareils ou les résidents paient à la brassée.",
       howOptionsWork: "Comment fonctionnent les deux options",
       nextTitle: "La suite",
       next: [
         "Nous lisons votre demande et vous appelons ou vous écrivons par texto.",
-        "À partir de {quoteUnits} logements, nous fixons un moment pour visiter l'immeuble.",
+        "À partir de {quoteUnits} logements, nous réservons un moment pour visiter l'immeuble.",
         "Vous recevez une soumission avant toute installation.",
       ],
       formTitle: "Votre immeuble",
@@ -1454,8 +1454,8 @@ const fr: DeepPartial<Dictionary> = {
   },
   buildings: {
     eyebrow: "Pour les immeubles résidentiels",
-    title: "Laveuses et sécheuses pour la salle de lavage de votre immeuble",
-    lead: "Pour les immeubles d'appartements et de condos qui ont une salle de lavage commune. Nous fournissons les appareils, les installons et les réparons. Deux façons de faire, avec une soumission par immeuble après avoir vu la salle.",
+    title: "Des appareils pour votre salle de lavage",
+    lead: "Pour les immeubles d'appartements et de condos qui ont une salle de lavage commune. Nous fournissons, installons et réparons les appareils. Deux formules, avec soumission par immeuble après avoir vu la salle.",
     option: "Option {number}",
     options: [
       {
@@ -1479,14 +1479,14 @@ const fr: DeepPartial<Dictionary> = {
         ],
       },
     ],
-    optionsTitle: "Deux façons d'équiper la salle de lavage",
+    optionsTitle: "Deux façons de l'organiser",
     includedTitle: "Inclus dans les deux cas",
-    includedLead: "La livraison et l'installation sont dans la soumission, avant toute installation.",
+    includedLead: "La livraison et l'installation sont dans la soumission, avant que rien ne soit installé.",
     included: [
-      "Nous voyons d'abord la salle et vous disons quels appareils conviennent.",
-      "Installation : nous raccordons l'eau, le drain, l'électricité et l'évent, puis faisons un cycle d'essai avant de partir.",
+      "Nous voyons d'abord la salle et vous disons ce qui convient.",
+      "Installation : nous raccordons l'eau, le drain, l'électricité et l'évent, puis faisons un cycle d'essai.",
       "Vieux appareils enlevés sans frais.",
-      "Réparations, ou appareil de remplacement, sans frais.",
+      "Réparations ou appareil de remplacement, sans frais.",
     ],
     stepsTitle: "Comment ça fonctionne",
     steps: [
@@ -1496,25 +1496,25 @@ const fr: DeepPartial<Dictionary> = {
       },
       {
         title: "Nous voyons la salle de lavage",
-        text: "Nous regardons l'espace, les raccordements et combien d'appareils la salle peut accueillir.",
+        text: "Nous vérifions l'espace, les raccordements et combien d'appareils elle peut accueillir.",
       },
       {
         title: "Vous recevez une soumission",
-        text: "Pour l'option choisie : l'immeuble loue les appareils, ou les résidents paient à la brassée.",
+        text: "Pour l'option de votre choix : l'immeuble loue les appareils, ou les résidents paient à la brassée.",
       },
       {
         title: "Nous installons",
-        text: "Nous livrons, raccordons chaque appareil, faisons un cycle d'essai et enlevons les vieux appareils.",
+        text: "Nous livrons, raccordons chaque appareil, faisons un cycle d'essai et enlevons les anciens.",
       },
       {
-        title: "Réparations tant que les appareils sont là",
-        text: "Appelez-nous ou textez-nous quand un appareil a besoin d'une réparation. Nous le réparons ou le remplaçons sans frais.",
+        title: "Réparations tant qu'ils sont là",
+        text: "Un appareil a besoin d'une réparation? Appelez-nous ou textez-nous. Nous le réparons ou le remplaçons sans frais.",
       },
     ],
-    startWithQuote: "Commencer par une soumission",
+    startWithQuote: "Obtenir votre soumission",
     inSuiteTitle: "Plutôt des appareils dans chaque logement?",
-    inSuiteText: "Si les logements ont leurs propres raccordements, les locataires peuvent louer directement chez nous, ou vous pouvez louer des appareils pour les logements.",
-    inSuiteLink: "Options pour les propriétaires",
+    inSuiteText: "Les logements ont leurs propres raccordements? Les locataires peuvent louer directement chez nous, ou vous louez des appareils pour les logements.",
+    inSuiteLink: "Voir les options pour propriétaires",
     faqTitle: "Questions sur les immeubles",
     faqs: [
       {
@@ -1523,15 +1523,15 @@ const fr: DeepPartial<Dictionary> = {
       },
       {
         question: "Comment fonctionne l'option du paiement à la brassée?",
-        answer: "Nous fournissons les appareils sans frais pour l'immeuble, et les résidents paient à la brassée. L'immeuble reçoit une part de ce que rapportent les appareils. Nous convenons de cette part avant l'installation.",
+        answer: "Nous fournissons les appareils sans frais pour l'immeuble. Les résidents paient à la brassée. L'immeuble reçoit une part de ce que rapportent les appareils, convenue avant l'installation.",
       },
       {
         question: "Quels appareils installez-vous?",
-        answer: "Ça dépend de la salle : l'espace, les raccordements et le nombre de résidents qui l'utilisent. Nous vous disons ce qui convient après l'avoir vue.",
+        answer: "Ça dépend de l'espace, des raccordements et du nombre de résidents qui l'utilisent. Nous vous disons ce qui convient après l'avoir vue.",
       },
       {
         question: "Qui s'occupe des réparations?",
-        answer: "Appelez ou textez le {phone} quand un appareil a besoin d'une réparation. Les réparations sont incluses dans les deux options.",
+        answer: "Appelez ou textez le {phone}. Les réparations sont incluses dans les deux options.",
       },
       {
         question: "Pouvez-vous enlever les vieux appareils?",
@@ -1543,7 +1543,7 @@ const fr: DeepPartial<Dictionary> = {
       },
     ],
     ctaTitle: "Demandez une soumission pour votre salle de lavage",
-    ctaText: "Indiquez-nous l'adresse, le nombre de logements et ce qu'il y a maintenant dans la salle de lavage.",
+    ctaText: "Envoyez l'adresse, le nombre de logements et ce qu'il y a maintenant dans la salle de lavage.",
   },
 
   about: {
@@ -1554,9 +1554,9 @@ const fr: DeepPartial<Dictionary> = {
     whatWeDo: "Ce que nous faisons",
     whatWeDoItems: [
       "Nous louons des laveuses et des sécheuses à Toronto et dans le GTA : ensembles superposables, centres de lavage monoblocs, appareils côte à côte, ou une laveuse ou une sécheuse seule.",
-      "Nous faisons seulement de la location. Nous ne vendons pas d'appareils et nous ne louons pas d'autres électroménagers.",
-      "Les appareils sont usagés, vérifiés et en bon état de marche. La marque et le modèle dépendent de ce qui est disponible.",
-      "La location coûte {setPrice} par semaine pour un ensemble ou {singlePrice} par semaine pour un appareil, réparations et reprise de l'ancien appareil incluses.",
+      "Nous faisons seulement de la location. Nous ne vendons pas d'appareils et ne louons pas d'autres électroménagers.",
+      "Nos appareils sont usagés, vérifiés et en bon état de marche. La marque et le modèle dépendent de ce qui est disponible.",
+      "La location coûte {setPrice} par semaine pour un ensemble, {singlePrice} par semaine pour un appareil. Réparations et reprise de l'ancien appareil incluses.",
     ],
     readMore: "En savoir plus",
     links: {
@@ -1574,7 +1574,7 @@ const fr: DeepPartial<Dictionary> = {
   contact: {
     eyebrow: "Appel ou texto",
     title: "Nous joindre",
-    lead: "Le plus rapide, c'est un appel ou un texto. Ou envoyez le formulaire de demande ci-dessous et nous vous répondons avec l'appareil, le total et la date de début.",
+    lead: "Un appel ou un texto, c'est le plus rapide. Ou envoyez le formulaire ci-dessous. Nous répondons avec l'appareil, le total et la date de début.",
     reachLabel: "Comment nous joindre",
     phoneTitle: "Téléphone et texto",
     hours: "Heures d'ouverture",
@@ -1583,24 +1583,24 @@ const fr: DeepPartial<Dictionary> = {
     whereTitle: "Où nous livrons",
     somethingElse: "Autre chose?",
     other: [
-      { title: "Un appareil que vous louez a besoin d'une réparation", label: "Demander une réparation" },
+      { title: "Votre appareil loué a besoin d'une réparation", label: "Demander une réparation" },
       { title: "Vous êtes propriétaire", label: "Soumission pour propriétaires" },
-      { title: "Vous avez d'abord une question", label: "Questions et réponses" },
+      { title: "D'abord une question", label: "Questions et réponses" },
     ],
   },
 
   repair: {
     eyebrow: "Pour les clients qui louent chez nous",
     title: "Demander une réparation",
-    lead: "Un appareil que vous louez chez nous ne fonctionne pas bien? Les réparations sont incluses pendant la location : nous le réparons ou le remplaçons sans frais.",
+    lead: "Un appareil ne fonctionne pas bien? Les réparations sont incluses pendant la location. Nous le réparons ou le remplaçons sans frais.",
     sectionLabel: "Demande de réparation",
     photoTitle: "Envoyez une photo du problème",
-    photoText: "Une photo ou une courte vidéo du problème nous aide à voir ce qui ne va pas avant de venir.",
+    photoText: "Une photo ou une courte vidéo nous aide à voir ce qui ne va pas avant de venir.",
     photoButton: "Envoyer une photo par texto",
     photoBody: "Demande de réparation – mon adresse : ",
     fastest: "Le plus rapide : appel ou texto",
     leakTitle: "Une fuite d'eau?",
-    leakText: "Fermez les robinets d'eau derrière la laveuse si vous pouvez les atteindre sans danger, puis appelez-nous.",
+    leakText: "Fermez les robinets derrière la laveuse si vous pouvez les atteindre sans danger. Puis appelez-nous.",
     helpsTitle: "Ce qui nous aide",
     helps: [
       "Ce que l'appareil fait, ou ne fait pas",
@@ -1643,13 +1643,13 @@ const fr: DeepPartial<Dictionary> = {
     lead: "Les paiements par carte passent par Stripe. Nous ne voyons jamais votre numéro de carte complet.",
     sectionLabel: "Votre location",
     payTitle: "Payer par carte",
-    payText: "Utilisez le lien de paiement Stripe envoyé avec votre soumission. Vous ne le trouvez pas? Écrivez-nous par texto.",
+    payText: "Utilisez le lien de paiement Stripe de votre soumission. Vous ne le trouvez pas? Écrivez-nous par texto.",
     portalTitle: "Votre carte et vos reçus",
-    portalText: "Changez de carte et consultez vos reçus dans le portail client Stripe.",
+    portalText: "Changez de carte et consultez les reçus dans le portail client Stripe.",
     portalButton: "Ouvrir le portail client",
     endTitle: "Mettre fin à une location",
     endText:
-      "Écrivez-nous par texto au {phone}. Après le minimum de {minWeeks} semaines, chaque partie peut mettre fin à la location avec un préavis de {noticeDays} jours, et nous venons reprendre l'appareil.",
+      "Écrivez-nous par texto au {phone}. Après le minimum de {minWeeks} semaines, chaque partie peut mettre fin à la location avec un préavis de {noticeDays} jours. Nous venons reprendre l'appareil.",
     textUs: "Nous écrire par texto",
   },
 
@@ -1669,13 +1669,13 @@ const fr: DeepPartial<Dictionary> = {
 
   notFound: {
     title: "Page introuvable",
-    text: "Cette page n'existe pas. La location de laveuse et sécheuse à Toronto et dans le GTA coûte {setPrice} par semaine pour un ensemble, {singlePrice} pour un appareil.",
+    text: "Cette page n'existe pas. Louez un ensemble laveuse et sécheuse pour {setPrice} par semaine, ou un appareil pour {singlePrice}.",
     home: "Aller à la page d'accueil",
   },
 
   error: {
     title: "Une erreur s'est produite",
-    text: "Veuillez réessayer, ou appelez ou écrivez par texto au {phoneLink}.",
+    text: "Réessayez, ou appelez ou écrivez par texto au {phoneLink}.",
   },
 
   start: {
@@ -1708,7 +1708,7 @@ const fr: DeepPartial<Dictionary> = {
     machine: {
       title: "De quel appareil avez-vous besoin?",
       intro:
-        "Vous hésitez? Choisissez « Je ne sais pas encore » : nous vous aidons à choisir selon la taille du placard et les raccordements. {link}",
+        "Vous hésitez? Choisissez « Je ne sais pas encore ». Nous vous aidons à choisir selon la taille du placard et les raccordements. {link}",
       legend: "Type d'appareil",
       setNote: "{setPrice}/sem. pour l'ensemble",
       singleNote: "{singlePrice}/sem.",
@@ -1721,7 +1721,7 @@ const fr: DeepPartial<Dictionary> = {
     },
     details: {
       title: "Parlez-nous de votre espace",
-      intro: "Votre choix : {machine}. Maintenant l'espace, pour que nous apportions un appareil qui entre.",
+      intro: "Votre choix : {machine}. Maintenant votre espace, pour que nous apportions un appareil qui entre.",
       postal: "Code postal",
       postalPlaceholder: "p. ex. M5V 2T6",
       width: "Largeur du placard ou de l'espace",
@@ -1775,7 +1775,7 @@ const fr: DeepPartial<Dictionary> = {
     done: {
       title: "Demande envoyée.",
       thanks:
-        "Merci, {name}. Nous vous appellerons ou vous écrirons par texto au {customerPhone} avec l'appareil, le total et la date de début.",
+        "Merci, {name}. Nous appellerons ou écrirons par texto au {customerPhone} avec l'appareil, le total et la date de début.",
       photo: "Une photo de l'espace nous aide. Envoyez-la par texto au {phoneLink}.",
       textPhoto: "Envoyer une photo par texto",
       nextTitle: "La suite",
