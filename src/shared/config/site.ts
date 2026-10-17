@@ -36,7 +36,7 @@ export const siteConfig = {
   // public IDs, safe in the page. An empty one turns that tool off; all three empty, no banner.
   // Here, not in the environment, for the same reason as the portal link above.
   analytics: {
-    ga4Id: "" as string,
+    ga4Id: "G-QHW9RPN2C1" as string,
     clarityId: "" as string,
     posthogKey: "" as string,
     posthogHost: "https://us.i.posthog.com",
