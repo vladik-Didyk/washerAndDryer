@@ -1,8 +1,11 @@
-name: Deploy to GitHub Pages
+# NOT the real deploy any more. The site runs on Cloudflare Workers and is deployed with
+# `pnpm run deploy` (README.md). This workflow is from the old GitHub Pages build: it expects
+# dist/, which the build no longer makes, so it ran on every push to main only to fail. It now
+# runs only when started by hand.
+name: Deploy to GitHub Pages (old build, manual only)
 
 on:
-  push:
-    branches: [main]
+  # Manual runs only, from the Actions tab
   workflow_dispatch:
 
 permissions:
