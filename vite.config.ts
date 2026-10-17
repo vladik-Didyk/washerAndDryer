@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => ({
   server: { port: 8790, strictPort: true },
   preview: { port: 8791, strictPort: true },
   test: {
-    include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+    include: ["src/**/*.test.ts", "src/**/*.test.tsx", "workers/**/*.test.ts"],
     environment: "node",
   },
 }));

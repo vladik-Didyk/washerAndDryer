@@ -1,5 +1,6 @@
 import { createRequestHandler } from "react-router";
 import type { SiteEnv } from "../src/shared/config/env";
+import { canonicalRedirect } from "./canonical";
 
 declare module "react-router" {
   export interface AppLoadContext {
@@ -20,20 +21,6 @@ declare module "react-router" {
 const serverBuild = await import("virtual:react-router/server-build");
 
 const requestHandler = createRequestHandler(serverBuild, import.meta.env.MODE);
-
-// Every page URL ends with a slash, as on the old static site: "/toronto" and
-// "/toronto/index.html" redirect to "/toronto/". Files (a dot in the last segment) and
-// React Router data requests are left alone.
-function canonicalRedirect(url: URL): Response | null {
-  const { pathname } = url;
-  let target: string | null = null;
-  if (pathname.endsWith("/index.html")) target = pathname.slice(0, -"index.html".length);
-  else if (!pathname.endsWith("/") && !pathname.split("/").at(-1)?.includes(".")) {
-    target = `${pathname}/`;
-  }
-  if (!target) return null;
-  return Response.redirect(`${url.origin}${target}${url.search}`, 301);
-}
 
 // On washerrent.com, browsers are told to use https only (six months, subdomains too). Not on
 // the workers.dev previews or locally.
