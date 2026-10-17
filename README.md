@@ -272,6 +272,14 @@ The published pages are built without any of these settings (next section), so
 Worker renders (the rental request, the 404 page, drafts in `pnpm dev`). A value every page
 needs, like the analytics token, belongs in `siteConfig` instead.
 
+Visit statistics beyond Cloudflare's cookie-free counter are behind a cookie banner:
+`siteConfig.analytics` (src/shared/config/site.ts) holds the public IDs of Google Analytics 4
+(`ga4Id`, G-...), Microsoft Clarity (`clarityId`) and PostHog (`posthogKey`, phc_...). Each runs
+only with its ID and only after the visitor clicks Accept (src/shared/lib/analytics.ts, adapted
+from the `analytics-stack` package); with all three empty there is no banner, and the privacy
+policy keeps its "no tracking cookies" wording. Sent forms record a `generate_lead` event (the
+form's name only). In Clarity, set masking to Strict.
+
 ## Pages built ahead of time
 
 The Workers free plan allows 10 ms of CPU per request, and rendering a page takes more: on
