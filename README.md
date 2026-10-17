@@ -1,8 +1,8 @@
 # GTA Washer & Dryer Rentals — washerrent.com (branch `remix-ssr`)
 
 Status: live at washerrent.com since 2026-10-15, served by the Cloudflare Worker
-`washerrent` and deployed from this branch. `main` is an archive of the old static site
-(Vite + prerender); GitHub Pages is off.
+`washerrent` and deployed from this branch. `main` was fast-forwarded to it on 2026-10-17;
+the old static site (Vite + prerender) ends at commit `120bdd8`. GitHub Pages is off.
 
 This branch renders every page on Cloudflare Workers with React Router v7 (framework mode,
 the successor of Remix), in strict TypeScript, organised with Feature-Sliced Design. Same
@@ -364,5 +364,5 @@ privacy line under every form, http → https redirect and HSTS from the Worker.
 in the header and phone menu). Accounts are not built yet: the form answers "opening soon" and
 links the Stripe billing portal and a text (src/pages/account/action.ts keeps no address).
 
-`main` keeps the old static site as an archive; GitHub Pages and its workflows are off. Ask
-before merging this branch into `main`.
+`main` was fast-forwarded to this branch on 2026-10-17 (the old static site is its history up
+to `120bdd8`); GitHub Pages and its workflows are off.
