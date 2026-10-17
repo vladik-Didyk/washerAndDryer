@@ -122,7 +122,7 @@ const fr: DeepPartial<Dictionary> = {
     },
     consent: {
       label: "Témoins",
-      text: "Nous aimerions utiliser des témoins (cookies) pour compter les visites et voir comment le site est utilisé (Google Analytics, Microsoft Clarity et PostHog). Rien ne se charge sans votre accord.",
+      text: "Nous aimerions utiliser des témoins (cookies) pour compter les visites et voir comment le site est utilisé (Google Analytics et Microsoft Clarity). Rien ne se charge sans votre accord.",
       privacyLink: "Politique de confidentialité",
       accept: "Accepter",
       decline: "Refuser",

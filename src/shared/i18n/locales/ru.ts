@@ -117,7 +117,7 @@ const ru: DeepPartial<Dictionary> = {
     },
     consent: {
       label: "Файлы cookie",
-      text: "Мы хотим использовать файлы cookie, чтобы считать посещения и видеть, как пользуются сайтом (Google Analytics, Microsoft Clarity и PostHog). Без вашего согласия ничего не загружается.",
+      text: "Мы хотим использовать файлы cookie, чтобы считать посещения и видеть, как пользуются сайтом (Google Analytics и Microsoft Clarity). Без вашего согласия ничего не загружается.",
       privacyLink: "Политика конфиденциальности",
       accept: "Принять",
       decline: "Отклонить",

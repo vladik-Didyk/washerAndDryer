@@ -117,7 +117,7 @@ const es: DeepPartial<Dictionary> = {
     },
     consent: {
       label: "Cookies",
-      text: "Queremos usar cookies para contar las visitas y ver cómo se usa el sitio (Google Analytics, Microsoft Clarity y PostHog). No se carga nada si usted no acepta.",
+      text: "Queremos usar cookies para contar las visitas y ver cómo se usa el sitio (Google Analytics y Microsoft Clarity). No se carga nada si usted no acepta.",
       privacyLink: "Política de privacidad",
       accept: "Aceptar",
       decline: "Rechazar",

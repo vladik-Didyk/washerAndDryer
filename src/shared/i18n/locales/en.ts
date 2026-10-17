@@ -134,7 +134,7 @@ const en = {
     // The cookie banner (widgets/cookie-consent), shown only when siteConfig.analytics has an ID.
     consent: {
       label: "Cookie choice",
-      text: "We'd like to use cookies to count visits and see how the site is used (Google Analytics, Microsoft Clarity and PostHog). Nothing loads unless you accept.",
+      text: "We'd like to use cookies to count visits and see how the site is used (Google Analytics and Microsoft Clarity). Nothing loads unless you accept.",
       privacyLink: "Privacy policy",
       accept: "Accept",
       decline: "Decline",

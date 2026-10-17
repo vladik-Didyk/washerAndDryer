@@ -37,7 +37,7 @@ export const siteConfig = {
   // Here, not in the environment, for the same reason as the portal link above.
   analytics: {
     ga4Id: "G-QHW9RPN2C1" as string,
-    clarityId: "" as string,
+    clarityId: "yz6nd3hbnm" as string,
     posthogKey: "" as string,
     posthogHost: "https://us.i.posthog.com",
   },
