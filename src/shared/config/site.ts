@@ -32,6 +32,15 @@ export const siteConfig = {
   // The Stripe customer portal's sign-in page (card, invoices): linked from /account/. Here,
   // not in the environment, because the pages are built ahead of time (react-router.config.ts).
   stripePortalUrl: "https://billing.stripe.com/p/login/8x24gyfyRaszdBB3DW2Ji00",
+  // Visit statistics behind the cookie banner (shared/lib/analytics, widgets/cookie-consent):
+  // public IDs, safe in the page. An empty one turns that tool off; all three empty, no banner.
+  // Here, not in the environment, for the same reason as the portal link above.
+  analytics: {
+    ga4Id: "" as string,
+    clarityId: "" as string,
+    posthogKey: "" as string,
+    posthogHost: "https://us.i.posthog.com",
+  },
   // Languages we answer calls in (ISO codes, for JSON-LD).
   spokenLanguages: ["en", "es", "ru"],
   // Where we deliver, in this order: the cities (one page each, entities/area) and Toronto's

@@ -120,6 +120,13 @@ const fr: DeepPartial<Dictionary> = {
       repairForm: "Réparation",
       textUs: "Texto",
     },
+    consent: {
+      label: "Témoins",
+      text: "Nous aimerions utiliser des témoins (cookies) pour compter les visites et voir comment le site est utilisé (Google Analytics, Microsoft Clarity et PostHog). Rien ne se charge sans votre accord.",
+      privacyLink: "Politique de confidentialité",
+      accept: "Accepter",
+      decline: "Refuser",
+    },
     draft: {
       label: "Avis de brouillon",
       title: "Brouillon — non publié",
@@ -170,6 +177,7 @@ const fr: DeepPartial<Dictionary> = {
     account: "Se connecter",
     privacy: "Confidentialité",
     terms: "Conditions de location",
+    cookieSettings: "Paramètres des témoins",
     copyright: "© {year} {company}",
   },
 

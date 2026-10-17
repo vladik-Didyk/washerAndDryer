@@ -1,5 +1,5 @@
 // The frame around every page: skip link, draft ribbon, offer bar, header, breadcrumbs,
-// footer, the phone bar and the loader. What changes per page comes from the page loader's `head`
+// footer, the phone bar, the loader and the cookie banner (with the page views it allows). What changes per page comes from the page loader's `head`
 // (kind, breadcrumbs, draft) and its `chrome` (the rental request asks for "Text us" in
 // the phone bar). Words and links follow the page's language (shared/i18n), all of it.
 import type { ReactNode } from "react";
@@ -7,6 +7,7 @@ import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n, type Dictionary } from "~/shared/i18n";
 import type { PageHead } from "~/shared/seo";
 import { Breadcrumbs } from "~/widgets/breadcrumbs";
+import { AnalyticsTracker, CookieConsent } from "~/widgets/cookie-consent";
 import { DraftRibbon } from "~/widgets/draft-ribbon";
 import { Footer } from "~/widgets/footer";
 import { Header } from "~/widgets/header";
@@ -66,6 +67,8 @@ export function SiteChrome({
       <Footer />
       <RouteLoader />
       <MobileActionBar action={mobileActionFor(head?.kind, chrome, d.chrome.mobileBar)} />
+      <CookieConsent />
+      <AnalyticsTracker path={currentPath} />
     </>
   );
 }

@@ -482,10 +482,15 @@ const enServer = {
       title: "Privacy policy",
       summary:
         "What we collect through this website and by phone, what we do with it, and how to ask us to delete it, in plain language.",
-      // The "Visit statistics" text follows the deployment: on once CF_ANALYTICS_TOKEN is set.
+      // "Visit statistics" and "Cookies" follow the deployment (pages/legal/content.server.ts):
+      // the consent sentences appear once siteConfig.analytics has an ID.
       visitStatistics: {
-        on: "We count visits to this site with Cloudflare Web Analytics. It doesn't use cookies. It shows us totals, such as how many times a page was viewed, not who you are.",
-        off: "This site doesn't collect visit statistics at the moment. If we turn them on, we'll use Cloudflare Web Analytics, which counts visits without cookies and shows us totals, such as how many times a page was viewed, not who you are.",
+        cloudflare: "We count visits to this site with Cloudflare Web Analytics. It doesn't use cookies. It shows us totals, such as how many times a page was viewed, not who you are.",
+        withConsent: "If you click Accept on the cookie banner, we also use Google Analytics, Microsoft Clarity and PostHog to see how visitors use the site: which pages are viewed, where visits come from (for example a search or a Google ad), and which forms are sent, without what you wrote in them. Clarity also records clicks and scrolling on a page, with what you type into forms hidden. These services receive your IP address and details about your device and browser, and store the data outside Canada, mainly in the United States. We use the results to improve the site and to see which of our ads lead to requests; we don't use them to show you ads. If you click Decline, none of them load. To change your choice, use Cookie settings at the bottom of any page.",
+      },
+      cookies: {
+        withoutConsent: "This site sets one cookie of its own, and only while you use the rental request: it holds your answers between the steps and is cleared when the request is sent. There are no advertising or tracking cookies.",
+        withConsent: "This site sets one cookie of its own, and only while you use the rental request: it holds your answers between the steps and is cleared when the request is sent. If you accept on the cookie banner, Google Analytics, Microsoft Clarity and PostHog set their own cookies to recognize repeat visits; if you decline, they don't. Your choice itself is kept in your browser, so the banner doesn't ask again. There are no advertising cookies.",
       },
       sections: [
         {
@@ -538,9 +543,7 @@ const enServer = {
         },
         {
           heading: "Cookies",
-          blocks: [
-            "This site sets one cookie of its own, and only while you use the rental request: it holds your answers between the steps and is cleared when the request is sent. There are no advertising or tracking cookies.",
-          ],
+          blocks: [{ include: "cookies" }],
         },
         {
           heading: "Sharing",

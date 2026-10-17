@@ -7,6 +7,7 @@
 import { useEffect, useRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { siteConfig } from "../config/site";
 import { useI18n, type I18n } from "../i18n";
+import { trackEvent } from "../lib/analytics";
 import { describedBy } from "../lib/format";
 import { useSite } from "../lib/site-context";
 import { Button, LangLink } from "../ui/actions";
@@ -124,13 +125,25 @@ export function SubmitButton({
 }
 
 // Shown in place of the form once it's sent. Focus moves to the heading so screen readers
-// announce it. "Send another" reloads the page with an empty form.
-export function SentPanel({ title, note, resetHref }: { title?: string; note?: string; resetHref: string }) {
+// announce it. "Send another" reloads the page with an empty form. With consent, the visit
+// statistics get a "generate_lead" event naming the form (shared/lib/analytics).
+export function SentPanel({
+  title,
+  note,
+  resetHref,
+  form,
+}: {
+  title?: string;
+  note?: string;
+  resetHref: string;
+  form: "repair" | "landlord-quote";
+}) {
   const { d } = useI18n();
   const headingRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     headingRef.current?.focus();
-  }, []);
+    trackEvent("generate_lead", { form });
+  }, [form]);
 
   return (
     <Card padding="none" className="px-6 py-12 text-center sm:px-10">

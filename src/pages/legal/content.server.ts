@@ -4,11 +4,13 @@
 // deployment. Sections use the same blocks as the guides (widgets/article-body); a section
 // `id` is its anchor (e.g. /terms/#referral).
 //
-// When the text changes, change `updated` too. The privacy text follows the deployment: it
-// describes visit statistics as on once CF_ANALYTICS_TOKEN is set; the terms list each running
-// promotion as a section of its own.
+// When the text changes, change its `updated` date too. The privacy text follows the
+// deployment: "Visit statistics" always names Cloudflare Web Analytics (on for the zone, it
+// needs no cookie), and both it and "Cookies" describe the cookie banner once
+// siteConfig.analytics has an ID; the terms list each running promotion as a section of its own.
 import { activePromotions, promotionText } from "~/entities/offer";
 import type { I18n } from "~/shared/i18n";
+import { analyticsConfigured } from "~/shared/lib";
 import { serverText } from "~/shared/i18n/index.server";
 import type { ArticleSection } from "~/shared/lib";
 
@@ -30,24 +32,30 @@ export interface LegalContext {
   analyticsOn: boolean;
 }
 
-const UPDATED = "2026-10-16";
+const PRIVACY_UPDATED = "2026-10-17";
+const TERMS_UPDATED = "2026-10-16";
 
-function privacy(i18n: I18n, { analyticsOn }: LegalContext): LegalPage {
+function privacy(i18n: I18n, _context: LegalContext): LegalPage {
   const text = serverText(i18n).legal.privacy;
-  const statistics = analyticsOn ? text.visitStatistics.on : text.visitStatistics.off;
+  const included: Record<string, ArticleSection["blocks"]> = {
+    visitStatistics: analyticsConfigured
+      ? [text.visitStatistics.cloudflare, text.visitStatistics.withConsent]
+      : [text.visitStatistics.cloudflare],
+    cookies: [analyticsConfigured ? text.cookies.withConsent : text.cookies.withoutConsent],
+  };
   return {
     path: "/privacy/",
     kind: "privacy",
     draft: false,
-    updated: UPDATED,
+    updated: PRIVACY_UPDATED,
     metaTitle: text.metaTitle,
     metaDescription: text.metaDescription,
     title: text.title,
     summary: text.summary,
     sections: text.sections.map((section) => ({
       ...section,
-      blocks: section.blocks.map((block) =>
-        typeof block === "object" && "include" in block && block.include === "visitStatistics" ? statistics : block,
+      blocks: section.blocks.flatMap((block) =>
+        typeof block === "object" && "include" in block && included[block.include] ? included[block.include] : [block],
       ),
     })),
   };
@@ -60,7 +68,7 @@ function terms(i18n: I18n, { now }: LegalContext): LegalPage {
     path: "/terms/",
     kind: "terms",
     draft: false,
-    updated: UPDATED,
+    updated: TERMS_UPDATED,
     metaTitle: text.metaTitle,
     metaDescription: text.metaDescription,
     title: text.title,

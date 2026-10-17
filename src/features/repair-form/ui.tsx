@@ -22,7 +22,7 @@ export function RepairForm({ result }: { result?: FormActionData }) {
   const { repair } = i18n.d;
 
   if (result?.status === "sent") {
-    return <SentPanel title={repair.sent} note={repair.sentNote} resetHref={`${pagePaths.repair}#repair-request`} />;
+    return <SentPanel form="repair" title={repair.sent} note={repair.sentNote} resetHref={`${pagePaths.repair}#repair-request`} />;
   }
 
   return (

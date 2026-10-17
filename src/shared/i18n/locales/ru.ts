@@ -115,6 +115,13 @@ const ru: DeepPartial<Dictionary> = {
       repairForm: "Заявка на ремонт",
       textUs: "Написать нам",
     },
+    consent: {
+      label: "Файлы cookie",
+      text: "Мы хотим использовать файлы cookie, чтобы считать посещения и видеть, как пользуются сайтом (Google Analytics, Microsoft Clarity и PostHog). Без вашего согласия ничего не загружается.",
+      privacyLink: "Политика конфиденциальности",
+      accept: "Принять",
+      decline: "Отклонить",
+    },
     draft: {
       label: "Черновик",
       title: "Черновик — не опубликовано",
@@ -165,6 +172,7 @@ const ru: DeepPartial<Dictionary> = {
     account: "Войти",
     privacy: "Конфиденциальность",
     terms: "Условия аренды",
+    cookieSettings: "Настройки cookie",
     copyright: "© {year} {company}",
   },
 

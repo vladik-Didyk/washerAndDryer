@@ -2,11 +2,14 @@ import { useEffect, useRef } from "react";
 import { useLoaderData } from "react-router";
 import { pagePaths, siteConfig } from "~/shared/config";
 import { useI18n } from "~/shared/i18n";
+import { trackEvent } from "~/shared/lib";
 import { Button, Card, CircleCheck, Heading, PhoneButton } from "~/shared/ui";
 import type { doneLoader } from "../loaders.server";
 import { StepShell } from "./StepShell";
 
 // After sending: thanks, the three steps that follow, and a way to send a photo. Focus moves to the message so screen readers announce it.
+// With consent, the visit statistics get a "generate_lead" event (shared/lib/analytics); the
+// customer's name and phone are masked from Clarity's recordings.
 export function DoneStep() {
   const { sent } = useLoaderData<typeof doneLoader>();
   const { phone } = siteConfig;
@@ -15,13 +18,14 @@ export function DoneStep() {
   const noteRef = useRef<HTMLParagraphElement>(null);
   useEffect(() => {
     noteRef.current?.focus();
+    trackEvent("generate_lead", { form: "rental-request" });
   }, []);
 
   return (
     <StepShell step="done" title={text.title}>
       <Card padding="none" className="px-6 py-10 text-center sm:px-10">
         <CircleCheck className="mx-auto h-12 w-12 text-brand" strokeWidth={1.75} aria-hidden="true" />
-        <p ref={noteRef} tabIndex={-1} className="lead mt-4 outline-none">
+        <p ref={noteRef} tabIndex={-1} data-clarity-mask="true" className="lead mt-4 outline-none">
           {rich(text.thanks, {
             name: sent.name,
             customerPhone: <span className="whitespace-nowrap font-semibold text-ink">{sent.phone}</span>,

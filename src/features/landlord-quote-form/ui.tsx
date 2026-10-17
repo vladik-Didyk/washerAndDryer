@@ -23,7 +23,7 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData }) {
   const { quote } = i18n.d.landlords;
 
   if (result?.status === "sent") {
-    return <SentPanel title={quote.sent} resetHref={`${pagePaths.landlordQuote}#landlord-quote`} />;
+    return <SentPanel form="landlord-quote" title={quote.sent} resetHref={`${pagePaths.landlordQuote}#landlord-quote`} />;
   }
 
   return (

@@ -2,7 +2,7 @@ import { cityPath, districtPath, getCities, getDistricts } from "~/entities/area
 import { getMachineTypes, machinePath } from "~/entities/machine";
 import { pagePaths, siteConfig } from "~/shared/config";
 import { LANGUAGES, useI18n, type Dictionary } from "~/shared/i18n";
-import { useSite, type Site } from "~/shared/lib";
+import { analyticsConfigured, openCookieSettings, useSite, type Site } from "~/shared/lib";
 import { Clock, Container, Facebook, Heading, LangLink, Logo, MapPin, MessageSquare, Nest, Phone } from "~/shared/ui";
 
 const footerLink =
@@ -200,8 +200,14 @@ export function Footer() {
           so it never covers the end of the page. */}
       <div className="border-t border-white/15 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
         {/* The year comes from the server (Toronto time), so the hydrated page always agrees. */}
-        <Container as="p" className="py-6 text-sm text-white/70">
-          {format(footer.copyright, { year: String(site.year) })}
+        <Container className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-6 text-sm text-white/70">
+          <p>{format(footer.copyright, { year: String(site.year) })}</p>
+          {/* Only when a statistics tool is set up (shared/config siteConfig.analytics). */}
+          {analyticsConfigured && (
+            <button type="button" onClick={openCookieSettings} className={footerLink}>
+              {footer.cookieSettings}
+            </button>
+          )}
         </Container>
       </div>
     </footer>

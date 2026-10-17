@@ -115,6 +115,13 @@ const es: DeepPartial<Dictionary> = {
       repairForm: "Reparación",
       textUs: "Escribir",
     },
+    consent: {
+      label: "Cookies",
+      text: "Queremos usar cookies para contar las visitas y ver cómo se usa el sitio (Google Analytics, Microsoft Clarity y PostHog). No se carga nada si usted no acepta.",
+      privacyLink: "Política de privacidad",
+      accept: "Aceptar",
+      decline: "Rechazar",
+    },
     draft: {
       label: "Aviso de borrador",
       title: "Borrador: no publicado",
@@ -165,6 +172,7 @@ const es: DeepPartial<Dictionary> = {
     account: "Iniciar sesión",
     privacy: "Privacidad",
     terms: "Condiciones del alquiler",
+    cookieSettings: "Configurar cookies",
     copyright: "© {year} {company}",
   },
 

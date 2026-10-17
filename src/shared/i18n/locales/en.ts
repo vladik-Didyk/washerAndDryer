@@ -131,6 +131,14 @@ const en = {
       repairForm: "Repair form",
       textUs: "Text us",
     },
+    // The cookie banner (widgets/cookie-consent), shown only when siteConfig.analytics has an ID.
+    consent: {
+      label: "Cookie choice",
+      text: "We'd like to use cookies to count visits and see how the site is used (Google Analytics, Microsoft Clarity and PostHog). Nothing loads unless you accept.",
+      privacyLink: "Privacy policy",
+      accept: "Accept",
+      decline: "Decline",
+    },
     draft: {
       label: "Draft notice",
       title: "Draft — not published",
@@ -182,6 +190,7 @@ const en = {
     account: "Sign in",
     privacy: "Privacy",
     terms: "Rental terms",
+    cookieSettings: "Cookie settings",
     copyright: "© {year} {company}",
   },
 
