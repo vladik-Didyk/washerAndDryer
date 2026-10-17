@@ -76,7 +76,7 @@ export default function AccountPage() {
           ) : (
             <>
               <p className="lead mt-3">{text.lead}</p>
-              <Form method="post" noValidate aria-label={text.formLabel} className="mt-6">
+              <Form method="post" noValidate data-clarity-mask="true" aria-label={text.formLabel} className="mt-6">
                 <label htmlFor="account-email" className="label">
                   {text.emailLabel}
                 </label>

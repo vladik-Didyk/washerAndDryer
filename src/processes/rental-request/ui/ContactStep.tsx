@@ -26,7 +26,7 @@ export function ContactStep() {
     >
       <div className="mb-6 rounded-3xl border border-brand-mint-strong bg-white/70 p-5 sm:p-6">
         <Heading variant="item">{text.summaryTitle}</Heading>
-        <dl className="mt-3 grid gap-x-6 gap-y-1.5 text-[15px] sm:grid-cols-[auto_1fr]">
+        <dl data-clarity-mask="true" className="mt-3 grid gap-x-6 gap-y-1.5 text-[15px] sm:grid-cols-[auto_1fr]">
           {summary.map((row) => (
             <div key={row.label} className="contents">
               <dt className="text-ink-muted">{row.label}</dt>
@@ -39,7 +39,7 @@ export function ContactStep() {
         )}
       </div>
 
-      <Card as={Form} method="post" noValidate padding="form">
+      <Card as={Form} method="post" noValidate padding="form" data-clarity-mask="true">
         <RequiredNote />
         <div className="mt-5 grid gap-5 sm:grid-cols-2">
           <FormFields form="startContact" values={values} errors={errors} today={today} />

@@ -25,7 +25,7 @@ export function DetailsStep() {
       intro={<p>{rich(text.intro, { machine: <strong className="font-semibold text-ink">{machine}</strong> })}</p>}
       backHref={STEP_PATHS.machine}
     >
-      <Card as={Form} method="post" noValidate padding="form">
+      <Card as={Form} method="post" noValidate padding="form" data-clarity-mask="true">
         <div className="grid gap-5 sm:grid-cols-2">
           <FormFields form="startDetails" values={values} errors={errors} />
         </div>

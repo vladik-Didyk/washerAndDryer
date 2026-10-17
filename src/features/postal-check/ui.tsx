@@ -46,7 +46,7 @@ export function PostalCodeChecker({
   const Icon = result ? ICONS[result.status] : null;
 
   return (
-    <form noValidate onSubmit={onSubmit} className={className}>
+    <form noValidate data-clarity-mask="true" onSubmit={onSubmit} className={className}>
       <Field
         form="postalCheck"
         name="postal"

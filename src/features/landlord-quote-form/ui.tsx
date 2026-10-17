@@ -29,6 +29,7 @@ export function LandlordQuoteForm({ result }: { result?: FormActionData }) {
   return (
     <Card
       as={Form}
+      data-clarity-mask="true"
       method="post"
       noValidate
       padding="form"

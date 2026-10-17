@@ -34,7 +34,7 @@ export function MachineStep() {
         </p>
       }
     >
-      <Card as={Form} method="post" noValidate padding="form">
+      <Card as={Form} method="post" noValidate padding="form" data-clarity-mask="true">
         <FormFields form="startMachine" values={values} errors={errors} />
         <SubmitButton sending={busy} next icon={ArrowRight}>
           {text.next}

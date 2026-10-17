@@ -4,10 +4,10 @@
 // choice is kept in localStorage. Each tool runs only when its ID is set in
 // siteConfig.analytics. Every function is a no-op on the server, so pages import it freely.
 //
-// What visitors type stays out: Clarity masks form fields (and, with the project's masking set
-// to Strict in the Clarity dashboard, all text; elements that show a customer's details also
-// carry data-clarity-mask), PostHog records no sessions, and events carry the page path,
-// never form contents.
+// What visitors type stays out: every form, and every element that shows back what a visitor
+// entered, carries data-clarity-mask (masked whatever the dashboard setting; the project is
+// also set to Strict), PostHog records no sessions, and events carry the page path, never
+// form contents.
 import { siteConfig } from "../config";
 
 const { ga4Id, clarityId, posthogKey, posthogHost } = siteConfig.analytics;
